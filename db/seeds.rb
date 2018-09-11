@@ -6,18 +6,78 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Season.create!(
-  name: 'Summer 2018',
-  start_date: '2018-06-25',
-  playoff_date: '2018-08-26',
-  banquet_date: '2018-08-27'
+seasons = []
+
+seasons.push(
+  Season.create!(
+    name: 'Spring 2018',
+    start_date: '2018-04-09',
+    playoff_date: '2018-06-10',
+    banquet_date: '2018-06-11'
+  )
 )
 
-Division.create!(
-  name: 'Monday Hammer',
-  day_of_week: 1,
-  time: '20:30:00'
+seasons.push(
+  Season.create!(
+    name: 'Summer 2018',
+    start_date: '2018-06-25',
+    playoff_date: '2018-08-26',
+    banquet_date: '2018-08-27'
+  )
 )
+
+seasons.push(
+  Season.create!(
+    name: 'Fall 2018',
+    start_date: '2018-09-10',
+    playoff_date: '2018-11-11',
+    banquet_date: '2018-11-12'
+  )
+)
+
+seasons.each do |s|
+  Division.create!(
+    name: 'Monday Pilot',
+    day_of_week: 1,
+    time: '18:30:00',
+    season: s
+  )
+
+  Division.create!(
+    name: 'Monday Cherry',
+    day_of_week: 1,
+    time: '19:30:00',
+    season: s
+  )
+
+  Division.create!(
+    name: 'Monday Hammer',
+    day_of_week: 1,
+    time: '20:30:00',
+    season: s
+  )
+
+  Division.create!(
+    name: 'Tuesday Pilot',
+    day_of_week: 2,
+    time: '18:30:00',
+    season: s
+  )
+
+  Division.create!(
+    name: 'Tuesday Cherry',
+    day_of_week: 2,
+    time: '19:30:00',
+    season: s
+  )
+
+  Division.create!(
+    name: 'Tuesday Hammer',
+    day_of_week: 2,
+    time: '20:30:00',
+    season: s
+  )
+end
 
 # Monday Pilot
 Team.create!(
