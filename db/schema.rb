@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180823222751) do
+ActiveRecord::Schema.define(version: 2018_08_23_222751) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "divisions", force: :cascade do |t|
     t.string "name"
@@ -26,9 +29,9 @@ ActiveRecord::Schema.define(version: 20180823222751) do
     t.integer "forfeit", default: 0
     t.boolean "counts_toward_elo", default: true
     t.boolean "league_play", default: false
-    t.integer "teams_id"
-    t.integer "home_team_id"
-    t.integer "away_team_id"
+    t.bigint "teams_id"
+    t.bigint "home_team_id"
+    t.bigint "away_team_id"
   end
 
   create_table "seasons", force: :cascade do |t|
