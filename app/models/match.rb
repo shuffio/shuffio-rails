@@ -1,13 +1,13 @@
 class Match < ApplicationRecord
   require 'elo'
-  
+
   belongs_to :home_team, class_name: 'Team'
   belongs_to :away_team, class_name: 'Team'
 
   after_create :calculate_elo
-  
+
   # TODO: home team and away team must be different
-  # TODO: if league, validate something or other
+  # TODO: if league, validate both teams in same division
 
   def calculate_elo
     return unless counts_toward_elo
