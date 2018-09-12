@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_222751) do
+ActiveRecord::Schema.define(version: 2018_09_11_192527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2018_08_23_222751) do
     t.string "name"
     t.integer "day_of_week"
     t.time "time"
+    t.bigint "season_id"
+    t.index ["season_id"], name: "index_divisions_on_season_id"
+  end
+
+  create_table "divisions_teams", id: false, force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "division_id", null: false
+    t.index ["division_id", "team_id"], name: "index_divisions_teams_on_division_id_and_team_id"
+    t.index ["team_id", "division_id"], name: "index_divisions_teams_on_team_id_and_division_id"
   end
 
   create_table "matches", force: :cascade do |t|
@@ -45,6 +54,8 @@ ActiveRecord::Schema.define(version: 2018_08_23_222751) do
     t.string "name"
     t.string "former_names"
     t.integer "elo_cache"
+    t.string "captain"
   end
 
+  add_foreign_key "divisions", "seasons"
 end
