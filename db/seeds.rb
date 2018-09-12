@@ -512,3 +512,120 @@ t.divisions << divisions[:fall][:mp]
 t = Team.create!(name: 'VSOP', captain: 'Simon Le Conservateur Kristak')
 t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mc]
+
+
+# Tuesday Pilot
+t = Team.create!(name: 'Assisted Living', captain: 'Maxwell Lindell')
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Curling Wannabes', captain: 'Leslie Norgren')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Excuse My Tang', captain: 'Angela Haleem', former_names: 'Disco Biscuits')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Flamingo Fliers', captain: 'Anna Binstein')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Harry Donuts', captain: 'Ryne Crawford')
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Karen from Finance', captain: 'Stefanie Skaggs')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Orca Sliders', captain: 'Charlie Bromann')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'SaaSy Shuffle', captain: 'Kevin Kurasch')
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Shia LeShuff', captain: 'Rae Berg')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'ShufflePuffs', captain: 'Matt Ligurotis', former_names: 'Shuff Shuff Pass')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Shuffshank Redemption', captain: 'Britt Calvert', former_names: 'Board AF')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Summer Shufflerz', captain: 'Andy Norton')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Swift Biscuits', captain: 'Susan Rosero')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: "Team Bell's Beer", captain: 'Aaron Hultgren')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'The Biscuit Bangers', captain: 'Adrian Gonzalez', former_names: 'JumpShuffle')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'The Eggplants', captain: 'Brendan Yoshimoto')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'The Not Its', captain: 'Alicia Karcher')
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Whalers', captain: 'Daniel Coughlin')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tp]
+
+t = Team.create!(name: 'Hammer time', captain: 'Alex Sibincic', former_names: 'The Freds and Ethels')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+
+t = Team.create!(name: 'Highway to the Tanger Zone', captain: 'Sue Stock')
+t.divisions << divisions[:summer][:tp]
+t.divisions << divisions[:fall][:tc]
+
+t = Team.create!(name: 'Six-inch Disks', captain: 'Jack Lowey')
+t.divisions << divisions[:summer][:tp]
+
+t = Team.create!(name: 'Stick Party', captain: 'Kelsey Gilbert-Kreiling')
+t.divisions << divisions[:spring][:tp]
+t.divisions << divisions[:summer][:tp]
+
+t = Team.create!(name: 'Air Biscuit', captain: 'Cheri Byrd')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'Bacardi Party', captain: 'Chuck Polette')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'Excuse My Tang', captain: 'Riley Carrier')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'Flashdance', captain: 'John Martin')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: "Hangin' Tang", captain: 'Kevin McCaskey')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'Miami Curling Club', captain: 'Jon Werderits')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'The Squirming Coil', captain: 'Robert Pirrello')
+t.divisions << divisions[:spring][:tp]
+
+t = Team.create!(name: 'Tropical Bros', captain: 'Megan Maslanka')
+t.divisions << divisions[:spring][:tp]
