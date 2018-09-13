@@ -1,4 +1,4 @@
-class MatchController < ApplicationController
+class MatchesController < ApplicationController
   def new
     @match = Match.new
     @tames = Team.all.order('name')
