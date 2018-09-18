@@ -378,7 +378,7 @@ t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mc]
 t.divisions << divisions[:fall][:mh]
 
-t = Team.create!(name: 'Nothing but Pepp', captain: 'Rob OMahoney')
+t = Team.create!(name: 'Nothing But Pepp', captain: 'Rob OMahoney')
 t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mh]
 t.divisions << divisions[:fall][:mh]
@@ -482,7 +482,7 @@ t = Team.create!(name: 'Tangy Biscuits', captain: 'Kathleen OConnor')
 t.divisions << divisions[:summer][:mh]
 t.divisions << divisions[:fall][:mc]
 
-t = Team.create!(name: 'We thought this was curling', captain: 'Kylie Martineau')
+t = Team.create!(name: 'We Thought This Was Curling', captain: 'Kylie Martineau')
 t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mh]
 
