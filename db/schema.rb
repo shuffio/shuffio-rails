@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_160737) do
+ActiveRecord::Schema.define(version: 2018_09_18_164609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_09_18_160737) do
   create_table "divisions", force: :cascade do |t|
     t.string "name"
     t.integer "day_of_week"
-    t.time "time"
+    t.string "time"
     t.bigint "season_id"
     t.index ["season_id"], name: "index_divisions_on_season_id"
   end
