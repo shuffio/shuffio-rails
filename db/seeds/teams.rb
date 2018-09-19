@@ -512,7 +512,7 @@ t.divisions << divisions[:summer][:mc]
 t = Team.create!(name: 'Assisted Living', captain: 'Maxwell Lindell')
 t.divisions << divisions[:fall][:tp]
 
-t = Team.create!(name: 'Curling Wannabes', captain: 'Leslie Norgren')
+t = Team.create!(name: 'Curling Wannabees', captain: 'Leslie Norgren')
 t.divisions << divisions[:spring][:tp]
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
@@ -546,7 +546,7 @@ t = Team.create!(name: 'Shia LeShuff', captain: 'Rae Berg')
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
 
-t = Team.create!(name: 'ShufflePuffs', captain: 'Matt Ligurotis', former_names: 'Shuff Shuff Pass')
+t = Team.create!(name: 'The Unshuffables ', captain: 'Matt Ligurotis', former_names: 'Shuff Shuff Pass')
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
 
@@ -772,7 +772,7 @@ t.divisions << divisions[:fall][:th]
 t = Team.create!(name: 'Risky Biscuits', captain: 'Kathy Lucas')
 t.divisions << divisions[:fall][:th]
 
-t = Team.create!(name: 'Space Force', captain: 'Abby Andrick')
+t = Team.create!(name: 'Space Force', captain: 'Abby Andrick', former_names: 'Abby-Normal')
 t.divisions << divisions[:summer][:th]
 t.divisions << divisions[:fall][:th]
 
