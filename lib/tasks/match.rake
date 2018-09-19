@@ -99,7 +99,7 @@ namespace :match do
 
     # For each Court
     courts.each do |c|
-      STDOUT.puts "\nLet's dig into Court #{c}!"
+      STDOUT.puts "\n\e[36mLet's dig into Court #{c}!\e[0m"
 
       # Get Teams
       begin
@@ -114,10 +114,10 @@ namespace :match do
           away_team = Team.basic_search(away_team_input).first
 
           if away_team
-            STDOUT.puts "Found team '#{away_team.name}' Is that correct (y/n)?"
+            STDOUT.puts "\e[33mFound team '#{away_team.name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
           else
-            STDOUT.puts "Didn't find team '#{away_team_input}'. Please try again."
+            STDOUT.puts "\e[31mDidn't find team '#{away_team_input}'. Please try again.\e[0m"
             verify = 'n'
           end
         end
@@ -135,10 +135,10 @@ namespace :match do
           home_team = Team.basic_search(home_team_input).first
 
           if home_team
-            STDOUT.puts "Found team '#{home_team.name}' Is that correct (y/n)?"
+            STDOUT.puts "\e[33mFound team '#{home_team.name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
           else
-            STDOUT.puts "Didn't find team '#{home_team_input}'. Please try again."
+            STDOUT.puts "\e[31mDidn't find team '#{home_team_input}'. Please try again.\e[0m"
             verify = 'n'
           end
         end
@@ -175,7 +175,7 @@ namespace :match do
     end
 
     # Print Results
-    output = "Results (winner underlined):\n"
+    output = "\e[36mResults (winner underlined):\e[0m\n"
     output += "#{division.season.name} - #{division.name}" if division
     output += matches.first.time.in_time_zone('America/Chicago').to_s + "\n\n"
 
