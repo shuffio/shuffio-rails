@@ -69,13 +69,13 @@ namespace :match do
       end until [*1..8].include?(week_input.to_i)
 
       match_day = season.start_date
-      match_day += 1.day if day_of_week == 2
+      match_day += 1.day if division.day_of_week == 2
 
       (week_input.to_i - 1).times do
         match_day += 1.week
       end
 
-      match_time = Time.find_zone('America/Chicago').parse("#{match_day.to_s} #{time}"),
+      match_time = Time.find_zone('America/Chicago').parse("#{match_day.to_s} #{time}")
 
       courts = [*1..10]
     else
