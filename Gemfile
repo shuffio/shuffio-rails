@@ -55,3 +55,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'elo'
+gem 'textacular', '~> 5.0'
