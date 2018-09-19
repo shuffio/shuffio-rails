@@ -1,3 +1,5 @@
+# TODO: rename 2x super board shuffle teams
+
 seasons = {}
 
 seasons[:spring] = Season.create!(
@@ -161,7 +163,7 @@ t.divisions << divisions[:summer][:mp]
 t = Team.create!(name: 'RecruiTang', captain: 'Allison Leverenz')
 t.divisions << divisions[:summer][:mp]
 
-t = Team.create!(name: 'Risky Biscuits', captain: 'Annie Barry')
+t = Team.create!(name: 'Risky Biscuits (summer)', captain: 'Annie Barry')
 t.divisions << divisions[:summer][:mp]
 
 t = Team.create!(name: 'Send Us Your Disk Pics', captain: 'Kristin Tanabe')
@@ -424,7 +426,7 @@ t.divisions << divisions[:fall][:mh]
 t = Team.create!(name: 'Super Board Shuffle (change?)', captain: 'Ethan Simonds')
 t.divisions << divisions[:fall][:mh]
 
-t = Team.create!(name: 'The Chicago Butts', captain: 'Craig Sutton', former_names: 'The Risky Biscuits')
+t = Team.create!(name: 'The Chicago Butts', captain: 'Craig Sutton', former_names: 'The Risky Biscuits (spring)')
 t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mh]
 t.divisions << divisions[:fall][:mh]
@@ -518,7 +520,7 @@ t.divisions << divisions[:spring][:tp]
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
 
-t = Team.create!(name: 'Excuse My Tang', captain: 'Angela Haleem', former_names: 'Disco Biscuits')
+t = Team.create!(name: "Nuthin' But A G Tang", captain: 'Angela Haleem', former_names: 'Excuse My Tang, Disco Biscuits')
 t.divisions << divisions[:spring][:tp]
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
@@ -606,9 +608,6 @@ t = Team.create!(name: 'Air Biscuit', captain: 'Cheri Byrd')
 t.divisions << divisions[:spring][:tp]
 
 t = Team.create!(name: 'Bacardi Party', captain: 'Chuck Polette')
-t.divisions << divisions[:spring][:tp]
-
-t = Team.create!(name: 'Excuse My Tang', captain: 'Riley Carrier')
 t.divisions << divisions[:spring][:tp]
 
 t = Team.create!(name: 'Flashdance', captain: 'John Martin')
@@ -770,7 +769,7 @@ t.divisions << divisions[:spring][:th]
 t.divisions << divisions[:summer][:th]
 t.divisions << divisions[:fall][:th]
 
-t = Team.create!(name: 'Risky Biscuits', captain: 'Kathy Lucas')
+t = Team.create!(name: 'Risky Biscuits (fall)', captain: 'Kathy Lucas')
 t.divisions << divisions[:fall][:th]
 
 t = Team.create!(name: 'Space Force', captain: 'Abby Andrick', former_names: 'Abby-Normal')
