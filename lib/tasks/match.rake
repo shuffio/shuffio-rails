@@ -176,7 +176,7 @@ namespace :match do
 
     # Print Results
     output = "\e[36mResults (winner underlined):\e[0m\n"
-    output += "#{division.season.name} - #{division.name}" if division
+    output += "#{division.season.name} - #{division.name}\n" if division
     output += matches.first.time.in_time_zone('America/Chicago').to_s + "\n\n"
 
     matches.each do |m|
