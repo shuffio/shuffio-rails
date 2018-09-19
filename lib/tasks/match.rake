@@ -163,7 +163,7 @@ namespace :match do
 
       matches.push(
         Match.create!(
-          time: Time.find_zone('America/Chicago').parse('2018-06-25 20:30:00'),
+          time: match_time,
           division: division,
           location: "Court #{"%02d" % c}",
           away_team: away_team,
