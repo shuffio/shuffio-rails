@@ -808,7 +808,7 @@ t.divisions << divisions[:summer][:th]
 t = Team.create!(name: 'Must Tang Sally', captain: 'Jill Florence')
 t.divisions << divisions[:summer][:th]
 
-t = Team.create!(name: "No Sleep 'til Boca'", captain: 'Jake Mills')
+t = Team.create!(name: "No Sleep 'til Boca", captain: 'Jake Mills')
 t.divisions << divisions[:spring][:th]
 t.divisions << divisions[:summer][:th]
 
