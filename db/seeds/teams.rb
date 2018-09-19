@@ -83,6 +83,7 @@ t.divisions << divisions[:fall][:mp]
 
 t = Team.create!(name: 'Butter Yo Biscuit', captain: 'Christina Brown')
 t.divisions << divisions[:spring][:mp]
+t.divisions << divisions[:summer][:mp]
 t.divisions << divisions[:fall][:mp]
 
 t = Team.create!(name: 'Future Snowbirds', captain: 'Amanda Braslow')
@@ -122,7 +123,7 @@ t.divisions << divisions[:fall][:mp]
 t = Team.create!(name: 'The Puck Stops Here', captain: '?')
 t.divisions << divisions[:fall][:mp]
 
-t = Team.create!(name: 'The Shuffleupagusses', captain: 'Kate McManus')
+t = Team.create!(name: 'The Shuffleupaguses', captain: 'Kate McManus')
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:mp]
 
@@ -432,7 +433,7 @@ t = Team.create!(name: 'The Hard Sticks', captain: 'Amber Lenstrom')
 t.divisions << divisions[:fall][:mh]
 
 t = Team.create!(name: 'Tangy Millies', captain: 'Buddy', former_names: 'Somethin... Also maybe Spring')
-t.divisions << divisions[:summer][:mp]
+# This might be Short & Tangy // Beergeeks
 t.divisions << divisions[:fall][:mh]
 
 t = Team.create!(name: 'The Shufflebaes', captain: 'Jennifer Yip')
