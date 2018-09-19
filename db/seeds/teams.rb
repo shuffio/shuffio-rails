@@ -772,7 +772,7 @@ t.divisions << divisions[:fall][:th]
 t = Team.create!(name: 'Risky Biscuits', captain: 'Kathy Lucas')
 t.divisions << divisions[:fall][:th]
 
-t = Team.create!(name: 'Space Force', captain: 'Abby Andrick')
+t = Team.create!(name: 'Space Force', captain: 'Abby Andrick', former_names: 'Abby-Normal')
 t.divisions << divisions[:summer][:th]
 t.divisions << divisions[:fall][:th]
 

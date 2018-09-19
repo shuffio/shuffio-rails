@@ -115,7 +115,7 @@ namespace :match do
 
           if away_team
             name = away_team.name
-            name += ", formerally " + away_team.former_names if away_team.former_names
+            name += ", formerly " + away_team.former_names if away_team.former_names
 
             STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
@@ -139,7 +139,7 @@ namespace :match do
 
           if home_team
             name = home_team.name
-            name += ", formerally " + home_team.former_names if home_team.former_names
+            name += ", formerly " + home_team.former_names if home_team.former_names
 
             STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
