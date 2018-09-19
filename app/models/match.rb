@@ -10,6 +10,14 @@ class Match < ApplicationRecord
   # TODO: home team and away team must be different
   # TODO: if league, validate both teams in same division
 
+  def teams
+    [away_team, home_team]
+  end
+
+  def season
+    division.season
+  end
+
   def calculate_elo
     return unless counts_toward_elo
     throw 'score required for match' unless home_score && away_score
