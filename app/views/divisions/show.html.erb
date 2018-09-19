@@ -1,0 +1,17 @@
+<table border=1>
+  <tr>
+    <td>Team</td>
+    <td>Win</td>
+    <td>Loss</td>
+    <td>ELO</td>
+  </tr>
+
+  <% @teams.each do |t| %>
+    <tr>
+      <td><%= t.name %></td>
+      <td><%= t.league_record(@division)[:wins] %></td>
+      <td><%= t.league_record(@division)[:losses] %></td>
+      <td><%= t.elo_cache %></td>
+    </tr>
+  <% end %>
+</table>

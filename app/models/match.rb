@@ -18,6 +18,10 @@ class Match < ApplicationRecord
     division.season
   end
 
+  def winner
+    home_score > away_score ? home_team : away_team
+  end
+
   def calculate_elo
     return unless counts_toward_elo
     throw 'score required for match' unless home_score && away_score
