@@ -25,7 +25,7 @@ class Match < ApplicationRecord
     # TODO: if date < latest match, calculate all of those ELOs as well, as this busts cache
 
     home_elo = ::Elo::Player.new(rating: home_team.elo_cache)
-    away_elo = ::Elo::Player.new(rating: home_team.elo_cache)
+    away_elo = ::Elo::Player.new(rating: away_team.elo_cache)
 
     if home_score > away_score
       home_elo.wins_from(away_elo)
