@@ -114,7 +114,10 @@ namespace :match do
           away_team = Team.basic_search(away_team_input).first
 
           if away_team
-            STDOUT.puts "\e[33mFound team '#{away_team.name}' Is that correct (y/n)?\e[0m"
+            name = away_team.name
+            name += ", formerally " + away_team.former_names if away_team.former_names
+
+            STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
           else
             STDOUT.puts "\e[31mDidn't find team '#{away_team_input}'. Please try again.\e[0m"
@@ -135,7 +138,10 @@ namespace :match do
           home_team = Team.basic_search(home_team_input).first
 
           if home_team
-            STDOUT.puts "\e[33mFound team '#{home_team.name}' Is that correct (y/n)?\e[0m"
+            name = home_team.name
+            name += ", formerally " + home_team.former_names if home_team.former_names
+
+            STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
           else
             STDOUT.puts "\e[31mDidn't find team '#{home_team_input}'. Please try again.\e[0m"
