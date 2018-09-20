@@ -36,12 +36,12 @@ class Match < ApplicationRecord
       home_elo.wins_from(away_elo)
     elsif away_score > home_score
       away_elo.wins_from(home_elo)
-    else
-      throw 'score cannot be equal' if home_score == away_score
     end
 
-    home_team.update(elo_cache: home_elo.rating)
-    away_team.update(elo_cache: away_elo.rating)
+    unless home_score == away_score
+      home_team.update(elo_cache: home_elo.rating)
+      away_team.update(elo_cache: away_elo.rating)
+    end
   end
 
   def self.recalculate_all_elo
