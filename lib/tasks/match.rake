@@ -65,17 +65,10 @@ namespace :match do
       # Determine Match time based on week
       begin
         STDOUT.puts 'What Week (1-8)?'
-        week_input = STDIN.gets.strip
-      end until [*1..8].include?(week_input.to_i)
+        week = STDIN.gets.strip.to_i
+      end until [*1..8].include?(week)
 
-      match_day = season.start_date
-      match_day += 1.day if division.day_of_week == 2
-
-      (week_input.to_i - 1).times do
-        match_day += 1.week
-      end
-
-      match_time = Time.find_zone('America/Chicago').parse("#{match_day.to_s} #{time}")
+      match_time = division.match_time_for_week(week)
 
       courts = [*1..10]
     else
@@ -152,19 +145,29 @@ namespace :match do
 
       # Get Winner
       begin
-        STDOUT.puts "\nWho won, away (a) or home (h)?"
+        STDOUT.puts "\nWho won, away (a), home (h), or tie (t)?"
         winner_input = STDIN.gets.strip.downcase
-      end until ['away', 'a', 'home', 'h'].include?(winner_input)
+      end until ['away', 'a', 'home', 'h', 'tie', 't'].include?(winner_input)
 
       case winner_input
       when 'away'
-        winner = 'away'
+        away_score = 1
+        home_score = 0
       when 'a'
-        winner = 'away'
+        away_score = 1
+        home_score = 0
       when 'home'
-        winner = 'home'
+        away_score = 0
+        home_score = 1
       when 'h'
-        winner = 'home'
+        away_score = 0
+        home_score = 1
+      when 'tie'
+        away_score = 0
+        home_score = 0
+      when 't'
+        away_score = 0
+        home_score = 0
       end
 
       matches.push(
@@ -174,30 +177,17 @@ namespace :match do
           location: "Court #{"%02d" % c}",
           away_team: away_team,
           home_team: home_team,
-          away_score: (winner == 'away') ? 1 : 0,
-          home_score: (winner == 'home') ? 1 : 0
+          away_score: away_score,
+          home_score: home_score
         )
       )
     end
 
     # Print Results
-    output = "\e[36mResults (winner underlined):\e[0m\n"
-    output += "#{division.season.name} - #{division.name}\n" if division
-    output += matches.first.time.in_time_zone('America/Chicago').to_s + "\n\n"
-
-    matches.each do |m|
-      output += "#{m.id}\t"
-      output += "#{m.location}\t"
-      output += "\e[4m" if m.away_score > m.home_score
-      output += m.away_team.name + ' (A)'
-      output += "\e[24m" if m.away_score > m.home_score
-      output += ' vs. '
-      output += "\e[4m" if m.home_score > m.away_score
-      output += m.home_team.name + ' (H)'
-      output += "\e[24m" if m.home_score > m.away_score
-      output += "\n"
+    if division
+      STDOUT.puts division.report_for_week(week)
+    else
+      STDOUT.puts matches.first.inspect
     end
-
-    STDOUT.puts output
   end
 end
