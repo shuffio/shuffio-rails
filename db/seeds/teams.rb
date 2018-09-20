@@ -172,6 +172,7 @@ t.divisions << divisions[:summer][:mp]
 t = Team.create!(name: 'Short & Tangy', captain: 'Jon Klein', former_names: 'Beergeeks', starting_elo: 1062)
 t.divisions << divisions[:spring][:mp]
 t.divisions << divisions[:summer][:mp]
+t.divisions << divisions[:fall][:mh]
 
 t = Team.create!(name: 'The Ruffled Horde', captain: 'Alanna Sosenko')
 t.divisions << divisions[:summer][:mp]
@@ -432,10 +433,6 @@ t.divisions << divisions[:summer][:mh]
 t.divisions << divisions[:fall][:mh]
 
 t = Team.create!(name: 'The Hard Sticks', captain: 'Amber Lenstrom')
-t.divisions << divisions[:fall][:mh]
-
-t = Team.create!(name: 'Tangy Millies', captain: 'Buddy', former_names: 'Somethin... Also maybe Spring')
-# This might be Short & Tangy // Beergeeks
 t.divisions << divisions[:fall][:mh]
 
 t = Team.create!(name: 'The Shufflebaes', captain: 'Jennifer Yip')
