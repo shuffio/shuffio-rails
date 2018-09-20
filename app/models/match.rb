@@ -43,4 +43,12 @@ class Match < ApplicationRecord
     home_team.update(elo_cache: home_elo.rating)
     away_team.update(elo_cache: away_elo.rating)
   end
+
+  def self.recalculate_all_elo
+    Team.reset_all_elo
+
+    Match.all.order(:time, :id).each do |m|
+      m.calculate_elo
+    end
+  end
 end

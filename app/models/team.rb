@@ -36,4 +36,10 @@ class Team < ApplicationRecord
     # Else, return record from _all_ division games
     division ? record(matches.where(division: division)) : record(matches.where.not(division: nil))
   end
+
+  def self.reset_all_elo
+    Team.all.each do |t|
+      t.set_default_elo
+    end
+  end
 end
