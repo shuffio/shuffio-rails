@@ -19,6 +19,7 @@ class Match < ApplicationRecord
   end
 
   def winner
+    return nil if home_score == away_score
     home_score > away_score ? home_team : away_team
   end
 

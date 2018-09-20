@@ -19,7 +19,9 @@ class Team < ApplicationRecord
     return record unless team_matches.any?
 
     team_matches.each do |m|
-      if self == m.winner
+      if m.winner.nil?
+        # do nothing
+      elsif m.winner == self
         record[:wins] += 1
       else
         record[:losses] +=1
