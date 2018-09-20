@@ -553,6 +553,9 @@ t = Team.create!(name: 'The Unshuffables ', captain: 'Matt Ligurotis', former_na
 t.divisions << divisions[:summer][:tp]
 t.divisions << divisions[:fall][:tp]
 
+t = Team.create!(name: 'Shuffle Butter (spring-only)', captain: 'Corey Rutledge', starting_elo: 1517)
+t.divisions << divisions[:spring][:tp]
+
 t = Team.create!(name: 'Shuffshank Redemption', captain: 'Britt Calvert', former_names: 'Board AF', starting_elo: 1474)
 t.divisions << divisions[:spring][:tp]
 t.divisions << divisions[:summer][:tp]
