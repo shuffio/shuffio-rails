@@ -7,7 +7,7 @@ namespace :oneoff do
     Team.find_by(name: 'Astronaut Juice').update(starting_elo: 1017)
     Team.find_by(name: 'Binnies Biscuits').update(starting_elo: 1041)
     Team.find_by(name: 'Murderburgers 2.0').update(starting_elo: 1084)
-    Team.find_by(name: 'Short & Tangy').update(starting_elo: 1062)
+    Team.find_by(name: 'Tangy Millies').update(starting_elo: 1062)
     Team.find_by(name: 'Cannon Shufflers').update(starting_elo: 1017)
     Team.find_by(name: 'Grubhub').update(starting_elo: 997)
     Team.find_by(name: 'I Hate Work').update(starting_elo: 973)
