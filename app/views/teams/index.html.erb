@@ -1,11 +1,13 @@
 <table border=1>
   <tr>
+    <td>Rank</td>
     <td>Team</td>
     <td>ELO</td>
   </tr>
 
-  <% @teams.first(20).each do |t| %>
+  <% @teams.first(50).each_with_index do |t, i| %>
     <tr>
+      <td><%= i+1 %></td>
       <td><%= t.name %></td>
       <td><%= t.elo_cache %></td>
     </tr>

@@ -18,6 +18,11 @@ class Match < ApplicationRecord
     division.season
   end
 
+  def winner
+    return nil if home_score == away_score
+    home_score > away_score ? home_team : away_team
+  end
+
   def calculate_elo
     return unless counts_toward_elo
     throw 'score required for match' unless home_score && away_score
@@ -31,11 +36,19 @@ class Match < ApplicationRecord
       home_elo.wins_from(away_elo)
     elsif away_score > home_score
       away_elo.wins_from(home_elo)
-    else
-      throw 'score cannot be equal' if home_score == away_score
     end
 
-    home_team.update(elo_cache: home_elo.rating)
-    away_team.update(elo_cache: away_elo.rating)
+    unless home_score == away_score
+      home_team.update(elo_cache: home_elo.rating)
+      away_team.update(elo_cache: away_elo.rating)
+    end
+  end
+
+  def self.recalculate_all_elo
+    Team.reset_all_elo
+
+    Match.all.order(:time, :id).each do |m|
+      m.calculate_elo
+    end
   end
 end
