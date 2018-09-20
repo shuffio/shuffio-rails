@@ -5,7 +5,7 @@ class Team < ApplicationRecord
   has_many :seasons, through: :divisions
 
   def set_default_elo
-    self.elo_cache = starting_elo || 1500
+    self.elo_cache = starting_elo || 1000
     save
   end
 
