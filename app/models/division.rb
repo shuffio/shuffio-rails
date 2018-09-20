@@ -15,7 +15,7 @@ class Division < ApplicationRecord
   end
 
   def matches_for_week(week)
-    matches.where(time: match_time_for_week(week))
+    matches.where(time: match_time_for_week(week)).order(:location)
   end
 
   def report_for_week(week)
