@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :divisions
   resources :matches
   resources :teams, only: [:index, :show]
 

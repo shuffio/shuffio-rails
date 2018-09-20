@@ -1,0 +1,15 @@
+<table border=1>
+  <tr>
+    <td>Season</td>
+    <td>Division</td>
+    <td>Matches</td>
+  </tr>
+
+  <% @divisions.each do |d| %>
+    <tr>
+      <td><%= d.season.name %></td>
+      <td><%= link_to d.name, division_path(d.id) %></td>
+      <td><%= d.matches.count %></td>
+    </tr>
+  <% end %>
+</table>
