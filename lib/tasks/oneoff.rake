@@ -122,4 +122,696 @@ namespace :oneoff do
     Team.find_by(name: 'The Grundles').update(starting_elo: 1017)
     Team.find_by(name: 'Too Legit 2 Biscuit').update(starting_elo: 931)
   end
+
+  desc 'Add Summer Playoffs'
+  task summer_playoffs: :environment do
+    comment = 'Summer Playoffs - Group Play'
+
+    # Group Play A
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 01'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Fashion Police'),
+      home_team: Team.find_by(name: 'Shuff It, Shuff It Real Good!'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Resting Biscuit Face'),
+      home_team: Team.find_by(name: 'All Day I Dream About Shuffling'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Fashion Police'),
+      home_team: Team.find_by(name: 'All Day I Dream About Shuffling'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Resting Biscuit Face'),
+      home_team: Team.find_by(name: 'Shuff It, Shuff It Real Good!'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Fashion Police'),
+      home_team: Team.find_by(name: 'Resting Biscuit Face'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'All Day I Dream About Shuffling'),
+      home_team: Team.find_by(name: 'Shuff It, Shuff It Real Good!'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    # Group Play B
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 02'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Mr. Dr. Nut'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Biscuit Boiz'),
+      home_team: Team.find_by(name: 'Whiskey Tang Foxtrot'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Mr. Dr. Nut'),
+      home_team: Team.find_by(name: 'Whiskey Tang Foxtrot'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Biscuit Boiz'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Mr. Dr. Nut'),
+      home_team: Team.find_by(name: 'Biscuit Boiz'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Whiskey Tang Foxtrot'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    # Group Play C
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 03'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Boca Breeze'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Tang Bang'),
+      home_team: Team.find_by(name: 'Swift Biscuits'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Swift Biscuits'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Tang Bang'),
+      home_team: Team.find_by(name: 'Boca Breeze'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Tang Bang'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Swift Biscuits'),
+      home_team: Team.find_by(name: 'Boca Breeze'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    # Group Play D
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 04'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Biscuit Buddies'),
+      home_team: Team.find_by(name: 'Honey, Butter My Biscuit'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Team Bell\'s Beer'),
+      home_team: Team.find_by(name: 'Strictly Biscuits'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Biscuit Buddies'),
+      home_team: Team.find_by(name: 'Strictly Biscuits'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Team Bell\'s Beer'),
+      home_team: Team.find_by(name: 'Honey, Butter My Biscuit'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Biscuit Buddies'),
+      home_team: Team.find_by(name: 'Team Bell\'s Beer'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Strictly Biscuits'),
+      home_team: Team.find_by(name: 'Honey, Butter My Biscuit'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    # Group Play E
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 07'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Orca Sliders'),
+      home_team: Team.find_by(name: 'Truffle Shuffle'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Butter Yo Biscuit'),
+      home_team: Team.find_by(name: 'The Cupid Shufflers'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Orca Sliders'),
+      home_team: Team.find_by(name: 'The Cupid Shufflers'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Butter Yo Biscuit'),
+      home_team: Team.find_by(name: 'Truffle Shuffle'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Orca Sliders'),
+      home_team: Team.find_by(name: 'Butter Yo Biscuit'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'The Cupid Shufflers'),
+      home_team: Team.find_by(name: 'Truffle Shuffle'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    # Group Play F
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 08'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Grandma Ain\'t No Floozy'),
+      home_team: Team.find_by(name: 'Summer Shufflerz'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'The Chicago Butts'),
+      home_team: Team.find_by(name: 'Shufflepuff'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Grandma Ain\'t No Floozy'),
+      home_team: Team.find_by(name: 'Shufflepuff'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'The Chicago Butts'),
+      home_team: Team.find_by(name: 'Summer Shufflerz'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Grandma Ain\'t No Floozy'),
+      home_team: Team.find_by(name: 'The Chicago Butts'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Shufflepuff'),
+      home_team: Team.find_by(name: 'Summer Shufflerz'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    # Group Play G
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 09'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Itstimeforyourkiss'),
+      home_team: Team.find_by(name: 'Highway to the Tanger Zone'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Slippery Biscuits'),
+      home_team: Team.find_by(name: 'Binnies Biscuits'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 40.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Itstimeforyourkiss'),
+      home_team: Team.find_by(name: 'Binnies Biscuits'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 60.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Slippery Biscuits'),
+      home_team: Team.find_by(name: 'Highway to the Tanger Zone'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 80.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Itstimeforyourkiss'),
+      home_team: Team.find_by(name: 'Slippery Biscuits'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: first_match_time + 100.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Binnies Biscuits'),
+      home_team: Team.find_by(name: 'Highway to the Tanger Zone'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    # Group Play H
+    first_match_time = Time.find_zone('America/Chicago').parse('2018-08-26 13:00')
+    location = 'Court 10'
+
+    Match.create!(
+      time: first_match_time,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Curling Wannabees'),
+      home_team: Team.find_by(name: 'Fancy Pants'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'DDIR'),
+      home_team: Team.find_by(name: 'Shuffleboard of Directors'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Curling Wannabees'),
+      home_team: Team.find_by(name: 'Shuffleboard of Directors'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'DDIR'),
+      home_team: Team.find_by(name: 'Fancy Pants'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Curling Wannabees'),
+      home_team: Team.find_by(name: 'DDIR'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: first_match_time + 20.minutes,
+      location: location,
+      comment: comment,
+      away_team: Team.find_by(name: 'Shuffleboard of Directors'),
+      home_team: Team.find_by(name: 'Fancy Pants'),
+      away_score: 0,
+      home_score: 0
+    )
+
+    # Round of 16
+    comment = 'Summer Playoffs - Round of 16'
+    match_time = Time.find_zone('America/Chicago').parse('2018-08-26 15:30')
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 01',
+      comment: comment,
+      away_team: Team.find_by(name: 'Orca Sliders'),
+      home_team: Team.find_by(name: 'Biscuit Buddies'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 02',
+      comment: comment,
+      away_team: Team.find_by(name: 'Summer Shufflerz'),
+      home_team: Team.find_by(name: 'Tang Bang'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 03',
+      comment: comment,
+      away_team: Team.find_by(name: 'Binnies Biscuits'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 04',
+      comment: comment,
+      away_team: Team.find_by(name: 'Shuffleboard of Directors'),
+      home_team: Team.find_by(name: 'Fashion Police'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 07',
+      comment: comment,
+      away_team: Team.find_by(name: 'Honey, Butter My Biscuit'),
+      home_team: Team.find_by(name: 'Curling Wannabees'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 08',
+      comment: comment,
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Slippery Biscuits'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 09',
+      comment: comment,
+      away_team: Team.find_by(name: 'Mr. Dr. Nut'),
+      home_team: Team.find_by(name: 'Shufflepuff'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 10',
+      comment: comment,
+      away_team: Team.find_by(name: 'Shuff It, Shuff It Real Good!'),
+      home_team: Team.find_by(name: 'The Cupid Shufflers'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    # Round of 8
+    comment = 'Summer Playoffs - Round of 8'
+    match_time = Time.find_zone('America/Chicago').parse('2018-08-26 16:30')
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 01',
+      comment: comment,
+      away_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      home_team: Team.find_by(name: 'Shuffleboard of Directors'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 02',
+      comment: comment,
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Curling Wannabees'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 03',
+      comment: comment,
+      away_team: Team.find_by(name: 'Orca Sliders'),
+      home_team: Team.find_by(name: 'Summer Shufflerz'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 04',
+      comment: comment,
+      away_team: Team.find_by(name: 'Shuff It, Shuff It Real Good!'),
+      home_team: Team.find_by(name: 'Shufflepuff'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    # Semi-Finals
+    comment = 'Summer Playoffs - Semi-Finals'
+    match_time = Time.find_zone('America/Chicago').parse('2018-08-27 19:00')
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 01',
+      comment: comment,
+      away_team: Team.find_by(name: 'Shufflepuff'),
+      home_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 02',
+      comment: comment,
+      away_team: Team.find_by(name: 'Summer Shufflerz'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 1,
+      home_score: 0
+    )
+
+    # Finals
+    match_time = Time.find_zone('America/Chicago').parse('2018-08-27 20:00')
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 01',
+      comment: 'Summer Playoffs - 3rd Place Game',
+      away_team: Team.find_by(name: 'Get Rich or Die Shufflin'),
+      home_team: Team.find_by(name: 'Tang You For Being A Friend'),
+      away_score: 0,
+      home_score: 1
+    )
+
+    Match.create!(
+      time: match_time,
+      location: 'Court 02',
+      comment: 'Summer Playoffs - Finals',
+      away_team: Team.find_by(name: 'Shufflepuff'),
+      home_team: Team.find_by(name: 'Summer Shufflerz'),
+      away_score: 1,
+      home_score: 0
+    )
+  end
 end
