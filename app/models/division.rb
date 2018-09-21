@@ -38,4 +38,28 @@ class Division < ApplicationRecord
 
     output
   end
+
+  def sorted_teams
+    output = []
+
+    # Group and Sort teams by # of wins descending
+    # teams_by_win = {2: [], 1: [], 0: []}
+    teams_by_win = teams.group_by { |t| t.league_record(self)[:wins] }.sort_by { |k, v| k }.reverse
+    teams_by_win.each do |win, win_team_array|
+
+      # Now group and sort the "win" group by # of losses
+      teams_by_loss = win_team_array.group_by { |t| t.league_record(self)[:losses] }.sort_by { |k, v| k }
+      teams_by_loss.each do |loss, loss_team_array|
+
+        # Now sort within win/loss group by ELO descending
+        teams_by_elo = loss_team_array.sort_by { |t| t.elo_cache }.reverse
+
+        teams_by_elo.each do |t|
+          output.push(t)
+        end
+      end
+    end
+
+    output
+  end
 end
