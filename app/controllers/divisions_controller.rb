@@ -5,6 +5,6 @@ class DivisionsController < ApplicationController
 
   def show
     @division = Division.find(params[:id])
-    @teams = @division.teams.order('elo_cache DESC')
+    @teams = @division.sorted_teams
   end
 end
