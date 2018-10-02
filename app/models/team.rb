@@ -6,6 +6,7 @@ class Team < ApplicationRecord
 
   def set_default_elo
     self.elo_cache = starting_elo || 1000
+    self.previous_elo = starting_elo || 1000
     save
   end
 
