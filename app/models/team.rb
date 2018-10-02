@@ -32,6 +32,13 @@ class Team < ApplicationRecord
     record
   end
 
+  def reset_previous_elo
+    return if seasons.last == Season.all.last
+
+    self.previous_elo = elo_cache
+    save
+  end
+
   def league_record(division = nil)
     # If Division specified, return record from this division
     # Else, return record from _all_ division games
