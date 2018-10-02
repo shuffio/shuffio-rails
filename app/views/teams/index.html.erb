@@ -1,6 +1,6 @@
 <table border=1>
   <tr>
-    <td>Rank</td>
+    <td>#</td>
     <td>Team</td>
     <td>ELO</td>
   </tr>
@@ -9,7 +9,16 @@
     <tr>
       <td><%= i+1 %></td>
       <td><%= t.name %></td>
-      <td><%= t.elo_cache %></td>
+      <td>
+        <%= t.elo_cache %>
+        <% if t.elo_cache > t.previous_elo %>
+          <font color="green">⬆<%= t.elo_cache - t.previous_elo %></font>
+        <% elsif t.elo_cache < t.previous_elo %>
+          <font color="red">⬇<%= t.previous_elo - t.elo_cache %></font>
+        <% else %>
+          ⬌ 0
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
