@@ -39,6 +39,8 @@ class Match < ApplicationRecord
     end
 
     unless home_score == away_score
+      home_team.update(previous_elo: home_team.elo_cache)
+      away_team.update(previous_elo: away_team.elo_cache)
       home_team.update(elo_cache: home_elo.rating)
       away_team.update(elo_cache: away_elo.rating)
     end
