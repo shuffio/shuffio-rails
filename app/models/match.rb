@@ -52,5 +52,7 @@ class Match < ApplicationRecord
     Match.all.order(:time, :id).each do |m|
       m.calculate_elo
     end
+
+    Team.all.each { |t| t.reset_previous_elo }
   end
 end
