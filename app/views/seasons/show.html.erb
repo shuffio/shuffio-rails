@@ -1,5 +1,5 @@
 <div class="row">
-  <% @monday.each do |d| %>
+  <% @monday_divisions.each do |d| %>
     <div class="col-md-4">
       <%= render partial: 'divisions/division_rank', locals: { division: d } %>
     </div>
@@ -7,7 +7,7 @@
 </div>
 
 <div class="row">
-  <% @tuesday.each do |d| %>
+  <% @tuesday_divisions.each do |d| %>
     <div class="col-md-4">
       <%= render partial: 'divisions/division_rank', locals: { division: d } %>
     </div>
