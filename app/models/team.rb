@@ -25,7 +25,7 @@ class Team < ApplicationRecord
       elsif m.winner == self
         record[:wins] += 1
       else
-        record[:losses] +=1
+        record[:losses] += 1
       end
     end
 
@@ -46,8 +46,6 @@ class Team < ApplicationRecord
   end
 
   def self.reset_all_elo
-    Team.all.each do |t|
-      t.set_default_elo
-    end
+    Team.all.find_each(&:set_default_elo)
   end
 end

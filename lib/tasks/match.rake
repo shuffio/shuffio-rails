@@ -27,7 +27,7 @@ namespace :match do
       begin
         STDOUT.puts 'What Day: Monday (m) or Tuesday (t)?'
         day_input = STDIN.gets.strip.downcase
-      end until ['m', 'monday', 't', 'tuesday'].include?(day_input)
+      end until %w[m monday t tuesday].include?(day_input)
 
       begin
         STDOUT.puts 'What Time: 6:30 (6), 7:30 (7), or 8:30 (8)?'
@@ -108,7 +108,7 @@ namespace :match do
 
           if away_team
             name = away_team.name
-            name += ", formerly " + away_team.former_names if away_team.former_names
+            name += ', formerly ' + away_team.former_names if away_team.former_names
 
             STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
@@ -132,7 +132,7 @@ namespace :match do
 
           if home_team
             name = home_team.name
-            name += ", formerly " + home_team.former_names if home_team.former_names
+            name += ', formerly ' + home_team.former_names if home_team.former_names
 
             STDOUT.puts "\e[33mFound team '#{name}' Is that correct (y/n)?\e[0m"
             verify = STDIN.gets.strip.downcase
@@ -147,7 +147,7 @@ namespace :match do
       begin
         STDOUT.puts "\nWho won, away (a), home (h), or tie (t)?"
         winner_input = STDIN.gets.strip.downcase
-      end until ['away', 'a', 'home', 'h', 'tie', 't'].include?(winner_input)
+      end until %w[away a home h tie t].include?(winner_input)
 
       case winner_input
       when 'away'
@@ -174,7 +174,7 @@ namespace :match do
         Match.create!(
           time: match_time,
           division: division,
-          location: "Court #{"%02d" % c}",
+          location: "Court #{format('%02d', c)}",
           away_team: away_team,
           home_team: home_team,
           away_score: away_score,
