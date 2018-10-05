@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'divisions#current_season'
+  get 'divisions/current_season'
+
   resources :divisions
   resources :matches
   resources :teams, only: [:index, :show]

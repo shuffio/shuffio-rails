@@ -7,4 +7,8 @@ class DivisionsController < ApplicationController
     @division = Division.find(params[:id])
     @teams = @division.sorted_teams
   end
+
+  def current_season
+    @divisions = Season.last.divisions
+  end
 end
