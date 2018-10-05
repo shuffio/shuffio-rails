@@ -14,9 +14,7 @@ class Match < ApplicationRecord
     [away_team, home_team]
   end
 
-  def season
-    division.season
-  end
+  delegate :season, to: :division
 
   def winner
     return nil if home_score == away_score
@@ -49,10 +47,8 @@ class Match < ApplicationRecord
   def self.recalculate_all_elo
     Team.reset_all_elo
 
-    Match.all.order(:time, :id).each do |m|
-      m.calculate_elo
-    end
+    Match.all.order(:time, :id).each(&:calculate_elo)
 
-    Team.all.each { |t| t.reset_previous_elo }
+    Team.all.find_each(&:reset_previous_elo)
   end
 end
