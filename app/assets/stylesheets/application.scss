@@ -1,1 +1,61 @@
-@import "bootstrap"; 
+@import "bootstrap";
+
+$black: #000000;
+$almost-black: #111111;
+$white: #ffffff;
+$teal: #8edcd7;
+$wood: #ffdda1;
+$red: #cc0000;
+$green: #00cc00;
+
+.board-bg {
+  background-color: $wood;
+}
+
+.board-row {
+  background-color: $black;
+}
+
+.board-title-row {
+  background-color: $teal;
+}
+
+.board-rank {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-name {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-wins {
+  background-color: $teal;
+  color: $white;
+}
+
+.board-losses {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-elo {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-elo-up {
+  background-color: $green;
+  color: $white;
+}
+
+.board-elo-down {
+  background-color: $red;
+  color: $white;
+}
+
+.board-elo-same {
+  background-color: $almost-black;
+  color: $white;
+}

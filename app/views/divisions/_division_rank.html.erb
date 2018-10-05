@@ -1,28 +1,31 @@
-<table border=1>
-  <tr>
-    <td>#</td>
-    <td>Team</td>
-    <td>Win</td>
-    <td>Loss</td>
-    <td>ELO</td>
-  </tr>
-
-  <% division.sorted_teams.each_with_index do |t, i| %>
-    <tr>
-      <td><%= i + 1 %></td>
-      <td><%= t.name %></td>
-      <td><%= t.league_record(division)[:wins] %></td>
-      <td><%= t.league_record(division)[:losses] %></td>
-      <td>
-        <%= t.elo_cache %>
-        <% if t.elo_cache > t.previous_elo %>
-          <font color="green">⬆<%= t.elo_cache - t.previous_elo %></font>
-        <% elsif t.elo_cache < t.previous_elo %>
-          <font color="red">⬇<%= t.previous_elo - t.elo_cache %></font>
-        <% else %>
-          ⬌ 0
-        <% end %>
-      </td>
+<table class="table board-bg">
+  <thead>
+    <tr class="board-title-row">
+      <th scope="col">#</th>
+      <th scope="col">Team</th>
+      <th scope="col">Win</th>
+      <th scope="col">Loss</th>
+      <th scope="col">ELO</th>
+      <th scope="col">Diff</th>
     </tr>
-  <% end %>
+  </thead>
+
+  <tbody>
+    <% division.sorted_teams.each_with_index do |t, i| %>
+      <tr class="board-row">
+        <td class="board-rank"><%= i + 1 %></td>
+        <td class="board-name"><%= t.name %></td>
+        <td class="board-wins"><%= t.league_record(division)[:wins] %></td>
+        <td class="board-losses"><%= t.league_record(division)[:losses] %></td>
+        <td class="board-elo"><%= t.elo_cache %></td>
+        <% if t.elo_cache > t.previous_elo %>
+          <td class="board-elo-up">⬆<%= t.elo_cache - t.previous_elo %></td>
+        <% elsif t.elo_cache < t.previous_elo %>
+          <td class="board-elo-down">⬇<%= t.previous_elo - t.elo_cache %></td>
+        <% else %>
+          <td class="board-elo-same">0</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
