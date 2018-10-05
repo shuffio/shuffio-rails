@@ -9,6 +9,7 @@ class DivisionsController < ApplicationController
   end
 
   def current_season
-    @divisions = Season.last.divisions
+    @monday = Season.last.divisions.where(day_of_week: 1)
+    @tuesday = Season.last.divisions.where(day_of_week: 1)
   end
 end
