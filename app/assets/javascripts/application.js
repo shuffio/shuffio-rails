@@ -16,3 +16,15 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+
+function resize_board_elements() {
+  $('.board').each(function() {
+    var height = $(this).height();
+    $(this).css({
+        'font-size': (height * .6) + 'px',
+        'line-height': height + 'px'
+    })
+  });
+}
+document.addEventListener("turbolinks:load", resize_board_elements);
+window.addEventListener("resize", resize_board_elements);

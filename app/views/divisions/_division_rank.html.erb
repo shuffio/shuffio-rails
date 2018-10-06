@@ -52,9 +52,9 @@
       <div class="col-1">
         <div class="dummy"></div>
         <% if t.elo_cache > t.previous_elo %>
-          <div class="in board board-elo-up"><%= t.elo_cache - t.previous_elo %></div>
+          <div class="in board board-elo-up">+<%= t.elo_cache - t.previous_elo %></div>
         <% elsif t.elo_cache < t.previous_elo %>
-          <div class="in board board-elo-down"><%= t.previous_elo - t.elo_cache %></div>
+          <div class="in board board-elo-down">-<%= t.previous_elo - t.elo_cache %></div>
         <% else %>
           <div class="in board board-elo-same">0</div>
         <% end %>
