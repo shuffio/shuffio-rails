@@ -29,76 +29,53 @@ $green: #00cc00;
   margin-bottom: 1px;
 }
 
-.board-rank {
-  background-color: $almost-black;
-  color: $white;
+.board {
   margin-left: 2px;
   margin-right: 2px;
   margin-top: 4px;
   margin-bottom: 4px;
+  font-size: 5vw;
+}
+
+.board-rank {
+  background-color: $almost-black;
+  color: $white;
 }
 
 .board-name {
   color: $white;
   text-align: left;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .board-wins {
   background-color: $teal;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .board-losses {
   background-color: $almost-black;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .board-elo {
   background-color: $almost-black;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .board-elo-up {
   background-color: $green;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .board-elo-down {
   background-color: $red;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .board-elo-same {
   background-color: $almost-black;
   color: $white;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 }
 
 .dummy {
