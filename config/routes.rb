@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  resources :divisions
+  root 'seasons#show_current'
+
+  resources :divisions, only: [:index, :show]
   resources :matches
+  resources :seasons, only: [:index, :show]
   resources :teams, only: [:index, :show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

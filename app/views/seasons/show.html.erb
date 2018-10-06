@@ -1,0 +1,25 @@
+<h3><%= @season.name %></h3>
+
+<div class="row">
+  <% @monday_divisions.each do |d| %>
+    <div class="col-lg-4">
+      <%= render partial: 'layouts/rank_board', locals: {
+        title: "#{d.name} Division",
+        teams: d.sorted_teams,
+        division: d
+      } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <% @tuesday_divisions.each do |d| %>
+    <div class="col-lg-4">
+      <%= render partial: 'layouts/rank_board', locals: {
+        title: "#{d.name} Division",
+        teams: d.sorted_teams,
+        division: d
+      } %>
+    </div>
+  <% end %>
+</div>

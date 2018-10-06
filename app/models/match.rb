@@ -18,11 +18,13 @@ class Match < ApplicationRecord
 
   def winner
     return nil if home_score == away_score
+
     home_score > away_score ? home_team : away_team
   end
 
   def calculate_elo
     return unless counts_toward_elo
+
     throw 'score required for match' unless home_score && away_score
 
     # TODO: if date < latest match, calculate all of those ELOs as well, as this busts cache

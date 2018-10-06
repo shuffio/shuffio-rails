@@ -1,24 +1,9 @@
-<table border=1>
-  <tr>
-    <td>#</td>
-    <td>Team</td>
-    <td>ELO</td>
-  </tr>
-
-  <% @teams.first(50).each_with_index do |t, i| %>
-    <tr>
-      <td><%= i+1 %></td>
-      <td><%= t.name %></td>
-      <td>
-        <%= t.elo_cache %>
-        <% if t.elo_cache > t.previous_elo %>
-          <font color="green">⬆<%= t.elo_cache - t.previous_elo %></font>
-        <% elsif t.elo_cache < t.previous_elo %>
-          <font color="red">⬇<%= t.previous_elo - t.elo_cache %></font>
-        <% else %>
-          ⬌ 0
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <%= render partial: 'layouts/rank_board', locals: {
+      title: "Team",
+      teams: @teams.first(50),
+      division: nil
+    } %>
+  </div>
+</div>

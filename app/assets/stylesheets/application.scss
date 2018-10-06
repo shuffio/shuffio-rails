@@ -1,0 +1,132 @@
+@import "bootstrap";
+
+$black: #000000;
+$almost-black: #181818;
+$white: #ffffff;
+$teal: #8edcd7;
+$wood: #ffdda1;
+$red: #cc0000;
+$green: #00cc00;
+$orange: #e35130;
+
+.yield {
+  padding-top: 25px;
+}
+
+.nav-bg {
+  background-color: $teal;
+}
+
+h3 {
+  text-align: center;
+}
+
+.board-table {
+  background-color: $wood;
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-bottom: 32px;
+}
+
+.board-row {
+  background-color: $black;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+.board-title-row {
+  background-color: $teal;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.board {
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.board-rank {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-name {
+  color: $white;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.board-wins {
+  background-color: $teal;
+  color: $white;
+  font-weight: bold;
+}
+
+.board-losses {
+  background-color: $almost-black;
+  color: $white;
+  font-weight: bold;
+}
+
+.board-elo {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.board-elo-up {
+  background-color: $green;
+  color: $white;
+}
+
+.board-elo-down {
+  background-color: $red;
+  color: $white;
+}
+
+.board-elo-same {
+  background-color: $almost-black;
+  color: $white;
+}
+
+.dummy {
+  margin-top: 100%;
+}
+
+.dummy-2 {
+  margin-top: 50%;
+}
+
+.dummy-3 {
+  margin-top: 33%;
+}
+
+.dummy-6 {
+  margin-top: 17%;
+}
+
+.dummy-7 {
+  margin-top: 14%;
+}
+
+.dummy-8 {
+  margin-top: 12%;
+}
+
+.dummy-9 {
+  margin-top: 11%;
+}
+
+.in {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
