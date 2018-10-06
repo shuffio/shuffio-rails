@@ -51,11 +51,13 @@ $green: #00cc00;
 .board-wins {
   background-color: $teal;
   color: $white;
+  font-weight: bold;
 }
 
 .board-losses {
   background-color: $almost-black;
   color: $white;
+  font-weight: bold;
 }
 
 .board-elo {
@@ -86,8 +88,16 @@ $green: #00cc00;
   margin-top: 50%;
 }
 
+.dummy-3 {
+  margin-top: 33%;
+}
+
 .dummy-6 {
   margin-top: 17%;
+}
+
+.dummy-7 {
+  margin-top: 14%;
 }
 
 .in {
