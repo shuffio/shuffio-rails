@@ -11,6 +11,8 @@ $green: #00cc00;
 .board-table {
   background-color: $wood;
   text-align: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .board-row {
@@ -25,8 +27,7 @@ $green: #00cc00;
   background-color: $teal;
   margin-left: 4px;
   margin-right: 4px;
-  margin-top: 1px;
-  margin-bottom: 1px;
+  margin-bottom: 4px;
 }
 
 .board {
