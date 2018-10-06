@@ -1,15 +1,21 @@
-<table border=1>
-  <tr>
-    <td>Season</td>
-    <td>Start</td>
-    <td>Banquet</td>
-  </tr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <table class="table">
+        <tr>
+          <td>Season</td>
+          <td>Start</td>
+          <td>Banquet</td>
+        </tr>
 
-  <% @seasons.each do |s| %>
-    <tr>
-      <td><%= link_to s.name, season_path(s.id) %></td>
-      <td><%= s.start_date %></td>
-      <td><%= s.banquet_date %></td>
-    </tr>
-  <% end %>
-</table>
+        <% @seasons.each do |s| %>
+          <tr>
+            <td><%= link_to s.name, season_path(s.id) %></td>
+            <td><%= s.start_date %></td>
+            <td><%= s.banquet_date %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

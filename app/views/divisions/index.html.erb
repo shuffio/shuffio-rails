@@ -1,15 +1,21 @@
-<table border=1>
-  <tr>
-    <td>Season</td>
-    <td>Division</td>
-    <td>Matches</td>
-  </tr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <table class="table">
+        <tr>
+          <td>Season</td>
+          <td>Division</td>
+          <td>Matches</td>
+        </tr>
 
-  <% @divisions.each do |d| %>
-    <tr>
-      <td><%= d.season.name %></td>
-      <td><%= link_to d.name, division_path(d.id) %></td>
-      <td><%= d.matches.count %></td>
-    </tr>
-  <% end %>
-</table>
+        <% @divisions.each do |d| %>
+          <tr>
+            <td><%= d.season.name %></td>
+            <td><%= link_to d.name, division_path(d.id) %></td>
+            <td><%= d.matches.count %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
