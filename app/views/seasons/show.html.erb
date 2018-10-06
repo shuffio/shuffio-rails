@@ -1,17 +1,15 @@
 <div class="container-fluid">
   <div class="row">
     <% @monday_divisions.each do |d| %>
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <%= render partial: 'divisions/division_rank', locals: { division: d } %>
       </div>
     <% end %>
   </div>
 
-  <div class="row">&nbsp</div>
-
   <div class="row">
     <% @tuesday_divisions.each do |d| %>
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <%= render partial: 'divisions/division_rank', locals: { division: d } %>
       </div>
     <% end %>
