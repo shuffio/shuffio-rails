@@ -2,7 +2,7 @@
   <div class="row">
     <% @monday_divisions.each do |d| %>
       <div class="col-lg-4">
-        <%= render partial: 'divisions/division_rank', locals: {
+        <%= render partial: 'layouts/rank_board', locals: {
           title: "#{d.name} Division",
           teams: d.sorted_teams,
           division: d
@@ -14,7 +14,7 @@
   <div class="row">
     <% @tuesday_divisions.each do |d| %>
       <div class="col-lg-4">
-        <%= render partial: 'divisions/division_rank', locals: {
+        <%= render partial: 'layouts/rank_board', locals: {
           title: "#{d.name} Division",
           teams: d.sorted_teams,
           division: d

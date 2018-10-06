@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-6 offset-lg-3">
-      <%= render partial: 'divisions/division_rank', locals: {
+      <%= render partial: 'layouts/rank_board', locals: {
         title: "Team",
         teams: @teams.first(50),
         division: nil
