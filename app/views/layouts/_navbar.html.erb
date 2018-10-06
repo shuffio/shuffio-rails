@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md nav-bg navbar-light">
+  <!-- Brand -->
+  <a class="navbar-brand" href="/">Shuff.io</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= link_to 'Divisions', divisions_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Seasons', seasons_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Top Teams', teams_path, class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+</nav>
