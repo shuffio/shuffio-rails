@@ -1,6 +1,9 @@
 namespace :match do
   desc 'Interactive task/report for data entry of a week in a division'
   task report: :environment do
+    # Turn off ActiveRecord logs
+    ActiveRecord::Base.logger.level = 1
+
     # Get Season
     season = nil
 
