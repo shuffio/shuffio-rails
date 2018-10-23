@@ -48,4 +48,8 @@ class Team < ApplicationRecord
   def self.reset_all_elo
     Team.all.find_each(&:set_default_elo)
   end
+
+  def short_name
+    name.truncate(28)
+  end
 end
