@@ -1,5 +1,9 @@
 <% provide :title, 'Top Teams' %>
 <div class="row">
+  <div class="col-lg-2 offset-lg-5">
+    <%= render partial: 'layouts/button' %>
+  </div>
+
   <div class="col-lg-6 offset-lg-3">
     <%= render partial: 'layouts/rank_board', locals: {
       title: "Team",
