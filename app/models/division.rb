@@ -2,6 +2,7 @@ class Division < ApplicationRecord
   belongs_to :season
   has_and_belongs_to_many :teams
   has_many :matches
+  serialize :final_standings
 
   def match_time_for_week(week)
     day = season.start_date
@@ -40,6 +41,8 @@ class Division < ApplicationRecord
   end
 
   def sorted_teams
+    return final_standings if final_standings
+
     output = []
 
     # Group and Sort teams by # of wins descending
