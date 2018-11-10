@@ -1,7 +1,20 @@
 <% provide :title, 'Top Teams' %>
 <div class="row">
   <div class="col-lg-2 offset-lg-5">
-    <%= render partial: 'layouts/button' %>
+    <% if params[:current_season] %>
+      <%= button_to 'All Teams',
+                    teams_path,
+                    method: :get,
+                    class: 'btn btn-info',
+                    id: 'season-btn' %>
+    <% else  %>
+      <%= button_to 'Current Season',
+                    teams_path,
+                    method: :get,
+                    class: 'btn btn-info',
+                    id: 'season-btn',
+                    params: { current_season: true } %>
+    <% end %>
   </div>
 
   <div class="col-lg-6 offset-lg-3">
