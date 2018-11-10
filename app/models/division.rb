@@ -2,6 +2,7 @@ class Division < ApplicationRecord
   belongs_to :season
   has_and_belongs_to_many :teams
   has_many :matches
+  serialize :final_standings
 
   def match_time_for_week(week)
     day = season.start_date
@@ -40,24 +41,35 @@ class Division < ApplicationRecord
   end
 
   def sorted_teams
+    return final_standings if final_standings
+
     output = []
 
     # Group and Sort teams by # of wins descending
     # teams_by_win = {2: [], 1: [], 0: []}
     teams_by_win = teams.group_by { |t| t.league_record(self)[:wins] }.sort_by { |k, _v| k }.reverse
-    teams_by_win.each do |_win, win_team_array|
+    teams_by_win.each do |win, win_team_array|
       # Now group and sort the "win" group by # of losses
       teams_by_loss = win_team_array.group_by { |t| t.league_record(self)[:losses] }.sort_by { |k, _v| k }
-      teams_by_loss.each do |_loss, loss_team_array|
+      teams_by_loss.each do |loss, loss_team_array|
         # Now sort within win/loss group by ELO descending
         teams_by_elo = loss_team_array.sort_by(&:elo_cache).reverse
 
         teams_by_elo.each do |t|
-          output.push(t)
+          output.push(
+            team: t,
+            wins: win,
+            losses: loss
+          )
         end
       end
     end
 
     output
+  end
+
+  def freeze!
+    self.final_standings = sorted_teams
+    save
   end
 end

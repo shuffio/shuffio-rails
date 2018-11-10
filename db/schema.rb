@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_25_215021) do
+ActiveRecord::Schema.define(version: 2018_11_09_052231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2018_10_25_215021) do
     t.integer "day_of_week"
     t.string "time"
     t.bigint "season_id"
+    t.text "final_standings"
     t.index ["season_id"], name: "index_divisions_on_season_id"
   end
 

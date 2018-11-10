@@ -49,21 +49,21 @@
         <div class="col">
           <div class="dummy-6"></div>
           <div class="in board board-name">
-            <%= t.display_name %>
+            <%= t[:team].display_name %>
           </div>
         </div>
 
         <div class="col-1">
           <div class="dummy"></div>
           <div class="in board board-wins">
-            <%= t.league_record(division)[:wins] %>
+            <%= t[:wins] %>
           </div>
         </div>
 
         <div class="col-1">
           <div class="dummy"></div>
           <div class="in board board-losses">
-            <%= t.league_record(division)[:losses] %>
+            <%= t[:losses] %>
           </div>
         </div>
 
@@ -72,7 +72,7 @@
         <div class="col">
           <div class="dummy-8"></div>
           <div class="in board board-name">
-            <%= t.display_name %>
+            <%= t[:team].display_name %>
           </div>
         </div>
 
@@ -81,16 +81,16 @@
       <div class="col-2">
         <div class="dummy-2"></div>
         <div class="in board board-elo">
-          <%= t.elo_cache %>
+          <%= t[:team].elo_cache %>
         </div>
       </div>
 
       <div class="col-1">
         <div class="dummy"></div>
-        <% if t.elo_cache > t.previous_elo %>
-          <div class="in board board-elo-up">+<%= t.elo_cache - t.previous_elo %></div>
-        <% elsif t.elo_cache < t.previous_elo %>
-          <div class="in board board-elo-down">-<%= t.previous_elo - t.elo_cache %></div>
+        <% if t[:team].elo_cache > t[:team].previous_elo %>
+          <div class="in board board-elo-up">+<%= t[:team].elo_cache - t[:team].previous_elo %></div>
+        <% elsif t[:team].elo_cache < t[:team].previous_elo %>
+          <div class="in board board-elo-down">-<%= t[:team].previous_elo - t[:team].elo_cache %></div>
         <% else %>
           <div class="in board board-elo-same">0</div>
         <% end %>
