@@ -67,4 +67,9 @@ class Division < ApplicationRecord
 
     output
   end
+
+  def freeze!
+    self.final_standings = sorted_teams
+    save
+  end
 end
