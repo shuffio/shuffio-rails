@@ -814,4 +814,9 @@ namespace :oneoff do
       home_score: 0
     )
   end
+
+  desc 'Add Starting Match Counts to Spring teams'
+  task starting_match_count: :environment do
+    Team.where.not(starting_elo: nil).update_all(starting_match_count: 8)
+  end
 end

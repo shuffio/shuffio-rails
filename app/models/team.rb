@@ -14,6 +14,12 @@ class Team < ApplicationRecord
     Match.where(away_team_id: id).or(Match.where(home_team_id: id))
   end
 
+  def match_count
+    return matches.count unless starting_match_count
+
+    matches.count + starting_match_count
+  end
+
   def record(team_matches = matches)
     record = { wins: 0, losses: 0 }
 

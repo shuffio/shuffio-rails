@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_09_052231) do
+ActiveRecord::Schema.define(version: 2018_11_11_052319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_11_09_052231) do
     t.integer "starting_elo"
     t.integer "previous_elo"
     t.string "short_name"
+    t.integer "starting_match_count"
   end
 
   add_foreign_key "divisions", "seasons"
