@@ -1,24 +1,27 @@
-# README
+![Shuff.io](app/assets/images/shuffio-logo-128px.png)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/kevinreedy/shuffio.svg?style=svg)](https://circleci.com/gh/kevinreedy/shuffio)
 
-Things you may want to cover:
+# What is Shuff.io?
+Shuff.io is a record and stat tracking system developed for the [Royal Palms Chicago](https://www.royalpalmschicago.com/) Shuffleboard League.
 
-* Ruby version
+For more information about the site itself, visit [its FAQ](https://royalpalms.shuff.io/faq).
 
-* System dependencies
+# Architecture
+Shuff.io is a pretty standard Rails application that runs on Heroku and PostgeSQL.
 
-* Configuration
+## Git Workflow
+When working on a feature, start a new branch on your own fork of the project. You cannot push directly to the master branch.
 
-* Database creation
+When your work is complete, open a Pull Request. Once tests are passing, and someone reviews your code, you can merge to the master branch.
 
-* Database initialization
+## Running Locally
+You should run the site locally to test your changes before opening up pull requests. You will need PostgeSQL installed.
 
-* How to run the test suite
+1. run `rake db:setup` to create your database and load seed data
+1. run `rails s` to start a local server
 
-* Services (job queues, cache servers, search engines, etc.)
+## Deploying
+**Do not push changes directly to Heroku!**
 
-* Deployment instructions
-
-* ...
+After a pull request is merged, the site will automatically deploy (assuming tests are passing).
