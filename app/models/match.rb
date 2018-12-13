@@ -55,10 +55,17 @@ class Match < ApplicationRecord
   end
 
   def self.recalculate_all_elo
+    # Disable logging
+    old_logger = ActiveRecord::Base.logger
+    ActiveRecord::Base.logger.level = 1
+
     Team.reset_all_elo
 
     Match.all.order(:time, :id).each(&:calculate_elo)
 
     Team.all.find_each(&:reset_previous_elo)
+
+    # Set logging back to old level
+    ActiveRecord::Base.logger = old_logger
   end
 end
