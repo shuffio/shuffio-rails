@@ -68,6 +68,8 @@ class Division < ApplicationRecord
   end
 
   def freeze!
+    self.final_standings = nil
+    save
     self.final_standings = JSON.pretty_generate(Division.frozen_team_to_id(sorted_teams))
     save
   end
