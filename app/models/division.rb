@@ -2,7 +2,6 @@ class Division < ApplicationRecord
   belongs_to :season
   has_and_belongs_to_many :teams
   has_many :matches
-  serialize :final_standings
 
   def match_time_for_week(week)
     day = season.start_date
@@ -41,7 +40,7 @@ class Division < ApplicationRecord
   end
 
   def sorted_teams
-    return final_standings if final_standings
+    return Division.frozen_id_to_team(JSON.parse(final_standings)) if final_standings
 
     output = []
 
@@ -69,7 +68,35 @@ class Division < ApplicationRecord
   end
 
   def freeze!
-    self.final_standings = sorted_teams
+    self.final_standings = JSON.pretty_generate(Division.frozen_team_to_id(sorted_teams))
     save
+  end
+
+  def self.frozen_id_to_team(input)
+    output = []
+
+    input.each do |t|
+      output.push(
+        team: Team.find(t['team_id']),
+        wins: t['wins'],
+        losses: t['losses']
+      )
+    end
+
+    output
+  end
+
+  def self.frozen_team_to_id(input)
+    output = []
+
+    input.each do |t|
+      output.push(
+        team_id: t[:team].id,
+        wins: t[:wins],
+        losses: t[:losses]
+      )
+    end
+
+    output
   end
 end
