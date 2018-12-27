@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_221657) do
+ActiveRecord::Schema.define(version: 2018_12_27_191424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2018_11_21_221657) do
     t.integer "starting_match_count"
     t.string "image_uri"
     t.string "instagram_user"
+    t.integer "starting_wins", default: 0
+    t.integer "starting_losses", default: 0
   end
 
   add_foreign_key "divisions", "seasons"
