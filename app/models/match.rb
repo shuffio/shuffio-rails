@@ -54,6 +54,48 @@ class Match < ApplicationRecord
     end
   end
 
+  def formatted_date
+    time.in_time_zone('America/Chicago').strftime("%b #{time.in_time_zone('America/Chicago').day.ordinalize} %Y")
+  end
+
+  def formatted_time
+    time.in_time_zone('America/Chicago').strftime("%b #{time.in_time_zone('America/Chicago').day.ordinalize} %Y, %-l:%M%P")
+  end
+
+  def team_result(id)
+    return nil unless [home_team_id, away_team_id].include?(id)
+
+    return 'tied' if home_score == away_score
+
+    return 'won' if home_team_id == id && home_score > away_score
+    return 'won' if away_team_id == id && away_score > home_score
+
+    return 'lost' if home_team_id == id && home_score < away_score
+    return 'lost' if away_team_id == id && away_score < home_score
+  end
+
+  def team_info(id)
+    if home_team_id == id
+      {
+        opponent: away_team,
+        result: team_result(id),
+        old_elo: home_old_elo,
+        new_elo: home_new_elo
+      }
+    elsif away_team_id == id
+      {
+        opponent: home_team,
+        result: team_result(id),
+        old_elo: away_old_elo,
+        new_elo: away_new_elo
+      }
+    end
+  end
+
+  def tied?
+    home_score == away_score
+  end
+
   def self.recalculate_all_elo
     Team.reset_all_elo
 

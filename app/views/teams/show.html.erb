@@ -1,0 +1,44 @@
+<% provide :title, @team.name %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="row">
+      <img class="team-logo" src="<%= @team.logo_uri %>" />
+
+      <div class="team-stats">
+        <span class="team-name"><%= @team.name %></span><br />
+        <% if @team.former_names %>
+          <span class="font-weight-light font-italic">Formally known as <%= @team.former_names %></span><br />
+        <% end %>
+        ELO Rating: <%= @team.elo_cache %><br />
+        Record: <%= @team.record[:wins] %>-<%= @team.record[:losses] %><br />
+        <%= pluralize(@team.seasons.count, 'season') %><br />
+        <% if @team.instagram_user %>
+          <a href="https://www.instagram.com/<%= @team.instagram_user %>/">Instagram</a>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <table class="table table-striped">
+        <% @matches.each do |m| %>
+          <tr>
+            <td><%= m.formatted_date %></td>
+            <td><%= m.team_info(@team.id)[:opponent].name %></td>
+            <td>
+              <%= m.team_info(@team.id)[:result] %>
+              <%= m.team_info(@team.id)[:new_elo] %>
+              (<%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %>)
+            </td>
+            <td>
+              <% if m.comment || m.team_info(@team.id)[:result] == 'tied' %>
+                <span data-toggle="tooltip" data-placement="top" title="<%= [m.comment, m.tied? ? 'Result of match is unknown' : nil].compact.join('; ') %>">Ⓘ</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

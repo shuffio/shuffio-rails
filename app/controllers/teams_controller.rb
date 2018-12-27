@@ -6,4 +6,9 @@ class TeamsController < ApplicationController
                Team.all.order('elo_cache DESC').map { |t| { team: t } }
              end
   end
+
+  def show
+    @team = Team.find(params[:id])
+    @matches = @team.matches.order('time DESC')
+  end
 end
