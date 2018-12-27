@@ -53,6 +53,25 @@
               </td>
             </tr>
           <% end %>
+          <% if @team.starting_elo %>
+            <tr>
+              <td class="align-middle">Spring 2018</td>
+              <td class="align-middle">Spring 2018 Season</td>
+              <td class="align-middle text-nowrap">
+                <%= @team.starting_elo %>
+                <% if @team.starting_elo > 1000 %>
+                  <span class="board-elo-up pad">+<%= @team.starting_elo - 1000 %></span>
+                <% elsif @team.starting_elo < 1000 %>
+                  <span class="board-elo-down pad"><%= @team.starting_elo - 1000 %></span>
+                <% else %>
+                  <span class="board-elo-same pad">0</span>
+                <% end %>
+              </td>
+              <td class="align-middle">
+                <span data-toggle="tooltip" data-placement="top" title="Spring 2018 Season ELO estimated based on team record"><i class="fas fa-info-circle"></i></span>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
