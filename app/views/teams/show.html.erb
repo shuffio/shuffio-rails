@@ -33,7 +33,7 @@
         <tbody>
           <% @matches.each do |m| %>
             <tr>
-              <td class="align-middle"><%= m.formatted_date %></td>
+              <td class="align-middle"><span data-toggle="tooltip" data-placement="top" title="<%= m.formatted_time %><%= " on #{ m.location }" if m.location%>"><%= m.formatted_date %></span></td>
               <td class="align-middle"><%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %></td>
               <td class="align-middle text-nowrap">
                 <%= m.team_info(@team.id)[:new_elo] %>
