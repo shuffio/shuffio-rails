@@ -20,6 +20,7 @@ class Team < ApplicationRecord
     matches.count + starting_match_count
   end
 
+  # TODO: bring in spring record
   def record(team_matches = matches)
     record = { wins: 0, losses: 0 }
 
@@ -57,5 +58,13 @@ class Team < ApplicationRecord
 
   def display_name
     short_name || name
+  end
+
+  def logo_uri
+    image_uri || ActionController::Base.helpers.image_url('tangs-biscuit-padded.png')
+  end
+
+  def color
+    ColorGenerator.new(saturation: 0.75, value: 1.0, seed: id).create_hex
   end
 end

@@ -393,7 +393,7 @@ t.divisions << divisions[:fall][:mh]
 t = Team.create!(name: 'Quite The Kershuffle')
 t.divisions << divisions[:fall][:mh]
 
-t = Team.create!(name: 'Shuff It, Shuff It Real Good!', starting_elo: 1017, starting_match_count: 8)
+t = Team.create!(name: 'Shuff It, Shuff It Real Good!', starting_elo: 1017, starting_match_count: 8, image_uri: 'https://scontent-ort2-1.cdninstagram.com/vp/1e48edbe279b6402c7f7891768ad1ef2/5C730728/t51.2885-19/s320x320/42825758_205976053632792_6948660934877380608_n.jpg', instagram_user: 'shuffitrealgood')
 t.divisions << divisions[:spring][:mh]
 t.divisions << divisions[:summer][:mh]
 t.divisions << divisions[:fall][:mh]

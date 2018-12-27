@@ -1,0 +1,79 @@
+<% provide :title, @team.name %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="row">
+      <img class="team-logo" style="background-color: #<%= @team.color %>" src="<%= @team.logo_uri %>" />
+
+      <div class="team-stats">
+        <span class="team-name"><%= @team.name %></span><br />
+        <% if @team.former_names %>
+          <span class="font-weight-light font-italic">Formally known as <%= @team.former_names %></span><br />
+        <% end %>
+        ELO Rating: <%= @team.elo_cache %><br />
+        Record: <%= @team.record[:wins] %>-<%= @team.record[:losses] %><br />
+        <%= pluralize(@team.seasons.count, 'season') %><br />
+        <% if @team.instagram_user %>
+          <a href="https://www.instagram.com/<%= @team.instagram_user %>/">Instagram</a>
+        <% end %>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th colspan=2>ELO after match</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @matches.each do |m| %>
+            <tr>
+              <td class="align-middle"><%= m.formatted_date %></td>
+              <td class="align-middle"><%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %></td>
+              <td class="align-middle text-nowrap">
+                <%= m.team_info(@team.id)[:new_elo] %>
+
+                <% if m.team_info(@team.id)[:new_elo] > m.team_info(@team.id)[:old_elo] %>
+                  <span class="board-elo-up pad">+<%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %></span>
+                <% elsif m.team_info(@team.id)[:new_elo] < m.team_info(@team.id)[:old_elo] %>
+                  <span class="board-elo-down pad"><%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %></span>
+                <% else %>
+                  <span class="pad text-danger" data-toggle="tooltip" data-placement="top" title="Result of match is unknown"><i class="fas fa-exclamation-circle"></i></span>
+                <% end %>
+              </td>
+              <td class="align-middle">
+                <% if m.comment %>
+                  <span data-toggle="tooltip" data-placement="top" title="<%= m.comment %>"><i class="fas fa-info-circle"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          <% if @team.starting_elo %>
+            <tr>
+              <td class="align-middle">Spring 2018</td>
+              <td class="align-middle">Spring 2018 Season</td>
+              <td class="align-middle text-nowrap">
+                <%= @team.starting_elo %>
+                <% if @team.starting_elo > 1000 %>
+                  <span class="board-elo-up pad">+<%= @team.starting_elo - 1000 %></span>
+                <% elsif @team.starting_elo < 1000 %>
+                  <span class="board-elo-down pad"><%= @team.starting_elo - 1000 %></span>
+                <% else %>
+                  <span class="board-elo-same pad">0</span>
+                <% end %>
+              </td>
+              <td class="align-middle">
+                <span data-toggle="tooltip" data-placement="top" title="Spring 2018 Season ELO estimated based on team record"><i class="fas fa-info-circle"></i></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
