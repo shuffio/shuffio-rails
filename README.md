@@ -16,8 +16,9 @@ When working on a feature, start a new branch on your own fork of the project. Y
 When your work is complete, open a Pull Request. Once tests are passing, and someone reviews your code, you can merge to the master branch.
 
 ## Running Locally
-You should run the site locally to test your changes before opening up pull requests. You will need PostgeSQL installed.
+You should run the site locally to test your changes before opening up pull requests. You will need Ruby and PostgeSQL installed.
 
+1. run `bundle install` to install dependant gems
 1. run `rake db:setup` to create your database and load seed data
 1. run `rails s` to start a local server
 
