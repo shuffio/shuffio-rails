@@ -29,6 +29,6 @@ function resize_board_elements() {
 document.addEventListener("turbolinks:load", resize_board_elements);
 window.addEventListener("resize", resize_board_elements);
 
-$(function () {
+$(document).on('turbolinks:load', function() {
   $('[data-toggle="tooltip"]').tooltip()
 })

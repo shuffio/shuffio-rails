@@ -18,29 +18,42 @@
       </div>
     </div>
 
-    <hr>
+    <br />
 
     <div class="row">
       <table class="table table-striped">
-        <% @matches.each do |m| %>
+        <thead>
           <tr>
-            <td><%= m.formatted_date %></td>
-            <td><%= m.team_info(@team.id)[:opponent].name %></td>
-            <td>
-              <%= m.team_info(@team.id)[:result] %>
-              <%= m.team_info(@team.id)[:new_elo] %>
-              (<%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %>)
-            </td>
-            <td>
-              <% if m.comment %>
-                <span data-toggle="tooltip" data-placement="top" title="<%= m.comment %>"><i class="fas fa-info-circle"></i></span>
-              <% end %>
-              <% if m.team_info(@team.id)[:result] == 'tied' %>
-                <span data-toggle="tooltip" data-placement="top" title="Result of match is unknown"><i class="fas fa-exclamation-circle"></i></span>
-              <% end %>
-            </td>
+            <th>Date</th>
+            <th>Opponent</th>
+            <th colspan=2>ELO after match</th>
           </tr>
-        <% end %>
+        </thead>
+
+        <tbody>
+          <% @matches.each do |m| %>
+            <tr>
+              <td class="align-middle"><%= m.formatted_date %></td>
+              <td class="align-middle"><%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %></td>
+              <td class="align-middle text-nowrap">
+                <%= m.team_info(@team.id)[:new_elo] %>
+
+                <% if m.team_info(@team.id)[:new_elo] > m.team_info(@team.id)[:old_elo] %>
+                  <span class="board-elo-up pad">+<%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %></span>
+                <% elsif m.team_info(@team.id)[:new_elo] < m.team_info(@team.id)[:old_elo] %>
+                  <span class="board-elo-down pad"><%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %></span>
+                <% else %>
+                  <span class="pad text-danger" data-toggle="tooltip" data-placement="top" title="Result of match is unknown"><i class="fas fa-exclamation-circle"></i></span>
+                <% end %>
+              </td>
+              <td class="align-middle">
+                <% if m.comment %>
+                  <span data-toggle="tooltip" data-placement="top" title="<%= m.comment %>"><i class="fas fa-info-circle"></i></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>
