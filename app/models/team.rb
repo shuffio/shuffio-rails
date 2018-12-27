@@ -63,4 +63,8 @@ class Team < ApplicationRecord
   def logo_uri
     image_uri || ActionController::Base.helpers.image_url('tangs-biscuit-padded.png')
   end
+
+  def color
+    ColorGenerator.new(saturation: 0.75, value: 1.0, seed: id).create_hex
+  end
 end
