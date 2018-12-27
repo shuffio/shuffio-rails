@@ -32,8 +32,11 @@
               (<%= m.team_info(@team.id)[:new_elo] - m.team_info(@team.id)[:old_elo] %>)
             </td>
             <td>
-              <% if m.comment || m.team_info(@team.id)[:result] == 'tied' %>
-                <span data-toggle="tooltip" data-placement="top" title="<%= [m.comment, m.tied? ? 'Result of match is unknown' : nil].compact.join('; ') %>">Ⓘ</span>
+              <% if m.comment %>
+                <span data-toggle="tooltip" data-placement="top" title="<%= m.comment %>"><i class="fas fa-info-circle"></i></span>
+              <% end %>
+              <% if m.team_info(@team.id)[:result] == 'tied' %>
+                <span data-toggle="tooltip" data-placement="top" title="Result of match is unknown"><i class="fas fa-exclamation-circle"></i></span>
               <% end %>
             </td>
           </tr>
