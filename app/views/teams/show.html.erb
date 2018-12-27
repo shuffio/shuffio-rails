@@ -56,7 +56,7 @@
           <% if @team.starting_elo %>
             <tr>
               <td class="align-middle">Spring 2018</td>
-              <td class="align-middle">Spring 2018 Season</td>
+              <td class="align-middle"><%= "#{ @team.starting_wins }-#{ @team.starting_losses }" %> Record in Spring 2018 Season</td>
               <td class="align-middle text-nowrap">
                 <%= @team.starting_elo %>
                 <% if @team.starting_elo > 1000 %>
