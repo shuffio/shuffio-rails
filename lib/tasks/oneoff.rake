@@ -819,4 +819,17 @@ namespace :oneoff do
   task starting_match_count: :environment do
     Team.where.not(starting_elo: nil).update_all(starting_match_count: 8)
   end
+
+  desc 'Add Starting Record to Spring teams'
+  task starting_record: :environment do
+    Team.where(starting_elo: 1084).update_all(starting_wins: 8, starting_losses: 0)
+    Team.where(starting_elo: 1062).update_all(starting_wins: 7, starting_losses: 1)
+    Team.where(starting_elo: 1041).update_all(starting_wins: 6, starting_losses: 2)
+    Team.where(starting_elo: 1017).update_all(starting_wins: 5, starting_losses: 3)
+    Team.where(starting_elo: 997).update_all(starting_wins: 4, starting_losses: 4)
+    Team.where(starting_elo: 973).update_all(starting_wins: 3, starting_losses: 5)
+    Team.where(starting_elo: 951).update_all(starting_wins: 2, starting_losses: 6)
+    Team.where(starting_elo: 931).update_all(starting_wins: 1, starting_losses: 7)
+    Team.where(starting_elo: 909).update_all(starting_wins: 0, starting_losses: 8)
+  end
 end

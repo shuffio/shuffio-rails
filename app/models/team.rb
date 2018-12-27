@@ -20,9 +20,13 @@ class Team < ApplicationRecord
     matches.count + starting_match_count
   end
 
-  # TODO: bring in spring record
-  def record(team_matches = matches)
-    record = { wins: 0, losses: 0 }
+  def record(team_matches = nil)
+    if team_matches
+      record = { wins: 0, losses: 0 }
+    else
+      record = { wins: starting_wins, losses: starting_losses }
+      team_matches = matches
+    end
 
     return record unless team_matches.any?
 
