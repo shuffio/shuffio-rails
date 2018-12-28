@@ -109,8 +109,6 @@ class Match < ApplicationRecord
 
     Match.all.order(:time, :id).each(&:calculate_elo)
 
-    Team.all.find_each(&:reset_previous_elo)
-
     # Set logging back to old level
     ActiveRecord::Base.logger = old_logger
   end
