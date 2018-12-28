@@ -7,7 +7,7 @@
       <%= render partial: 'layouts/rank_board', locals: {
         title: "#{d.name} Division",
         teams: d.sorted_teams,
-        division: d
+        rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
       } %>
     </div>
   <% end %>
@@ -19,7 +19,7 @@
       <%= render partial: 'layouts/rank_board', locals: {
         title: "#{d.name} Division",
         teams: d.sorted_teams,
-        division: d
+        rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
       } %>
     </div>
   <% end %>

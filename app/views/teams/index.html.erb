@@ -18,7 +18,7 @@
     <%= render partial: 'layouts/rank_board', locals: {
       title: "Team",
       teams: @teams.first(50),
-      division: nil
+      rank_widths: rank_board_width(true, false)
     } %>
   </div>
 </div>
