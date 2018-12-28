@@ -1,15 +1,15 @@
 <% provide :title, 'Top Teams' %>
 <div class="row">
   <div class="col-lg-6 offset-lg-3 team-season-toggle btn-group btn-group-toggle" data-toggle="buttons">
-    <%= link_to 'All Teams',
+
+    <%= link_to 'Active Teams',
                   teams_path,
                   method: :get,
-                  class: "btn btn-info #{ params[:current_season] ? '' : 'active' }" %>
-
-    <%= link_to 'Current Season Only',
-                  teams_path(current_season: true),
+                  class: "btn btn-info #{ params[:all_teams] ? 'active' : '' }" %>
+    <%= link_to 'All Teams',
+                  teams_path(all_teams: true),
                   method: :get,
-                  class: "btn btn-info #{ params[:current_season] ? 'active' : '' }" %>
+                  class: "btn btn-info #{ params[:all_teams] ? '' : 'active' }" %>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
     <%= render partial: 'layouts/rank_board', locals: {
       title: "Team",
       teams: @teams.first(50),
-      division: nil
+      rank_widths: rank_board_width(true, false)
     } %>
   </div>
 </div>

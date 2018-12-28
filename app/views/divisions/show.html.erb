@@ -6,7 +6,7 @@
     <%= render partial: 'layouts/rank_board', locals: {
       title: "#{@division.name} Division",
       teams: @teams,
-      division: @division
+      rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
     } %>
   </div>
 </div>

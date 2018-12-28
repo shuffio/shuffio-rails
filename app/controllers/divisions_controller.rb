@@ -6,5 +6,7 @@ class DivisionsController < ApplicationController
   def show
     @division = Division.find(params[:id])
     @teams = @division.sorted_teams
+    @show_elo = @division.season.latest?
+    @show_elo_change = @division.season.latest? && @division.season.started?
   end
 end
