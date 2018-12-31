@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12 bracket">
+    <div id="minimal"></div>
+    <script>
+      var sizeParameters = {
+      };
+
+      var minimalData = {
+        teams : <%= @bracket.teams.to_json.html_safe %>,
+        results : <%= @bracket.results.to_json.html_safe %>
+      };
+
+    $(function() {
+        $('#minimal').bracket({
+          init: minimalData,
+          centerConnectors: true,
+          teamWidth: 160,
+          scoreWidth: 20
+        });
+      });
+    </script>
+  </div>
+</div>

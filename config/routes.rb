@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root 'seasons#show_current'
 
+  resources :brackets, only: [:index, :show]
   resources :divisions, only: [:index, :show]
   get '/divisions/:id/week/:week', to: 'divisions#week', as: :division_week
   post '/divisions/:id/week/:week/report', to: 'divisions#week_report', as: :division_week_report
@@ -15,7 +16,6 @@ Rails.application.routes.draw do
   resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]
   resources :teams, only: [:index, :show]
-  get '/playoffs', to: 'seasons#playoffs'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
