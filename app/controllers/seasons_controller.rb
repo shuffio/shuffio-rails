@@ -22,4 +22,8 @@ class SeasonsController < ApplicationController
 
     render template: 'seasons/show'
   end
+
+  def playoffs
+    @all_matches = Match.all
+  end
 end

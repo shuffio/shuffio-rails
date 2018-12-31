@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]
   resources :teams, only: [:index, :show]
+  get '/playoffs', to: 'seasons#playoffs'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "jquery.bracket.min";
 
 $black: #000000;
 $almost-black: #181818;
@@ -214,4 +215,8 @@ h3 {
 
 .messages {
   border-radius: 0px;
+}
+
+.bracket {
+  overflow: scroll
 }

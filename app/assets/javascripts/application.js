@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require_tree .
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require_tree .
 
 function resize_board_elements() {
   $('.board').each(function() {
