@@ -11,7 +11,7 @@
         <% end %>
         ELO Rating: <%= @team.elo_cache %><br />
         Record: <%= @team.record[:wins] %>-<%= @team.record[:losses] %><br />
-        <%= pluralize(@team.seasons.count, 'season') %><br />
+        <span data-toggle="tooltip" data-placement="top" title="<%= @team.seasons.map { |s| s.name }.join(', ') %>"><%= pluralize(@team.seasons.count, 'season') %></span><br />
         <% if @team.instagram_user %>
           <a href="https://www.instagram.com/<%= @team.instagram_user %>/">Instagram</a>
         <% end %>
