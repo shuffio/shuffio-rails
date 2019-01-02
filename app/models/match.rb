@@ -5,7 +5,7 @@ class Match < ApplicationRecord
   belongs_to :away_team, class_name: 'Team'
   belongs_to :division, optional: true
 
-  after_create :calculate_elo
+  after_save :calculate_elo
 
   # TODO: home team and away team must be different
   # TODO: if league, validate both teams in same division
