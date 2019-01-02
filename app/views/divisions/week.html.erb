@@ -39,10 +39,20 @@
             <tr>
               <td><%= m.location %></td>
               <td class="<%= 'font-weight-bold' if m.away_score > m.home_score %>">
-                <%= m.away_team.display_name %>
+                <span class="d-print-none">
+                  <%= link_to m.away_team.display_name, team_path(m.away_team) %>
+                </span>
+                <span class="d-none d-print-block">
+                  <%= m.away_team.display_name %>
+                </span>
               </td>
               <td class="<%= 'font-weight-bold' if m.home_score > m.away_score %>">
-                <%= m.home_team.display_name %>
+                <span class="d-print-none">
+                  <%= link_to m.home_team.display_name, team_path(m.home_team) %>
+                </span>
+                <span class="d-none d-print-block">
+                  <%= m.home_team.display_name %>
+                </span>
               </td>
             </tr>
           <% end %>
