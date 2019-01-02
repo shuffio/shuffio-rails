@@ -5,6 +5,7 @@
     <div class="row">
       <div class="col-12">
         <div class="week-arrows float-right d-print-none">
+          <%= link_to "Rankings", division_path(params[:id]) %> |
           <% if @week > 1 %>
             <%= link_to '<i class="fas fa-arrow-left"></i>'.html_safe, division_week_path(params[:id], @week - 1) %>
           <% else %>
