@@ -8,9 +8,9 @@ namespace :match do
     season = nil
 
     begin
-      STDOUT.puts 'What Season is this: none, spring, summer, or fall (default)?'
+      STDOUT.puts 'What Season is this: none, spring, summer, fall, or winter (default)?'
       season_input = STDIN.gets.strip.downcase
-    end until ['none', 'spring', 'summer', 'fall', ''].include?(season_input)
+    end until ['none', 'spring', 'summer', 'fall', 'winter', ''].include?(season_input)
 
     case season_input
     when 'spring'
@@ -19,8 +19,10 @@ namespace :match do
       season = Season.find_by(name: 'Summer 2018')
     when 'fall'
       season = Season.find_by(name: 'Fall 2018')
+    when 'winter'
+      season = Season.find_by(name: 'Winter 2019')
     when ''
-      season = Season.find_by(name: 'Fall 2018')
+      season = Season.find_by(name: 'Winter 2019')
     end
 
     # Get Division if Season was set

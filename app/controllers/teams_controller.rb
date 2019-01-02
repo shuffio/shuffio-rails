@@ -9,6 +9,12 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @matches = @team.matches.order('time DESC')
+    @show_toggle = @team.matches.where('time > ?', DateTime.now).any?
+
+    @matches = if params[:all_matches]
+                 @team.matches.order('time DESC')
+               else
+                 @team.matches.where('time < ?', DateTime.now).order('time DESC')
+               end
   end
 end

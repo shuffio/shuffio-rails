@@ -1,0 +1,63 @@
+<% provide :title, "Week #{ @week }, #{ @division.name } Division" %>
+
+<div class="row">
+  <div class="col-lg-10 offset-lg-1">
+    <div class="row">
+      <div class="col-12">
+        <div class="week-arrows float-right d-print-none">
+          <% if @week > 1 %>
+            <%= link_to '<i class="fas fa-arrow-left"></i>'.html_safe, division_week_path(params[:id], @week - 1) %>
+          <% else %>
+            <i class="fas fa-arrow-left"></i>
+          <% end %>
+          <% if @week < 8 %>
+            <%= link_to '<i class="fas fa-arrow-right"></i>'.html_safe, division_week_path(params[:id], @week + 1) %>
+          <% else %>
+            <i class="fas fa-arrow-right"></i>
+          <% end %>
+        </div>
+        <div class="week-details float-left">
+          <%= "Week #{ @week } - #{ @division.name } Division - #{ @division.season.name }" %><br />
+          <%= @time.in_time_zone('America/Chicago').strftime("%A, %B #{ @time.in_time_zone('America/Chicago').day.ordinalize } %Y, %-l:%M%P") %><br />
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Location</td>
+            <td>Away Team</td>
+            <td>Home Team</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @matches.each do |m| %>
+            <tr>
+              <td><%= m.location %></td>
+              <td class="<%= 'font-weight-bold' if m.away_score > m.home_score %>">
+                <span class="d-print-none">
+                  <%= link_to m.away_team.display_name, team_path(m.away_team) %>
+                </span>
+                <span class="d-none d-print-block">
+                  <%= m.away_team.display_name %>
+                </span>
+              </td>
+              <td class="<%= 'font-weight-bold' if m.home_score > m.away_score %>">
+                <span class="d-print-none">
+                  <%= link_to m.home_team.display_name, team_path(m.home_team) %>
+                </span>
+                <span class="d-none d-print-block">
+                  <%= m.home_team.display_name %>
+                </span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
