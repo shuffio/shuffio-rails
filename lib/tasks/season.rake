@@ -61,4 +61,38 @@ namespace :season do
       end
     end
   end
+
+  desc 'Report on uneven bye weeks'
+  task bye_report: :environment do
+    season = Season.find_by(name: 'Winter 2019')
+
+    season.divisions.each do |d|
+      away_teams = d.matches_for_week(1).map(&:away_team)
+      home_teams = d.matches_for_week(1).map(&:home_team)
+      combos = away_teams.map(&:id).product(home_teams.map(&:id))
+
+      # Remove matches that are scheduled
+      d.matches.each do |m|
+        combos.reject! { |z| z[0] == m.away_team_id && z[1] == m.home_team_id }
+      end
+
+      bye_teams = d.teams.map { |t| [t.display_name, 0] }.to_h
+
+      combos.each do |m|
+        away_team = Team.find(m[0])
+        home_team = Team.find(m[1])
+
+        if away_team.match_count == 8 && home_team.match_count > 8
+          bye_teams[home_team.display_name] = bye_teams[home_team.display_name] + 1
+        elsif home_team.match_count == 8 && away_team.match_count > 8
+          bye_teams[away_team.display_name] = bye_teams[away_team.display_name] + 1
+        end
+      end
+
+      puts d.name
+      bye_teams.reject! { |_t, c| c.zero? }
+      bye_teams.each { |t, c| puts "#{c}\t#{t}" }
+      puts '-----------------------'
+    end
+  end
 end
