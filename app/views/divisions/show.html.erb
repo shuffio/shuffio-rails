@@ -3,6 +3,8 @@
 
 <div class="row">
   <div class="col-lg-6 offset-lg-3">
+    <span class="week-link"><%= link_to "Schedule", division_week_path(params[:id], 1) %></span>
+
     <%= render partial: 'layouts/rank_board', locals: {
       title: "#{@division.name} Division",
       teams: @teams,

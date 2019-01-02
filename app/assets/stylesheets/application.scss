@@ -56,6 +56,13 @@ h3 {
   }
 }
 
+.board-title {
+  #{$a-tags} {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
 .board-rank {
   background-color: $almost-black;
   color: $white;
@@ -189,5 +196,9 @@ h3 {
 }
 
 .week-arrows {
+  font-size: 24px;
+}
+
+.week-link {
   font-size: 24px;
 }

@@ -3,8 +3,12 @@
 
     <div class="col-<%= rank_widths[:rank] + rank_widths[:name] %>">
       <div class="dummy-<%= rank_widths[:rank] + rank_widths[:name] %>"></div>
-      <div class="in board">
-        <%= title %>
+      <div class="in board board-title">
+        <% if defined?(link) %>
+          <%= link_to title, link %>
+        <% else %>
+          <%= title %>
+        <% end %>
       </div>
     </div>
 
