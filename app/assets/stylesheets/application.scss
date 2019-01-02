@@ -56,6 +56,13 @@ h3 {
   }
 }
 
+.board-title {
+  #{$a-tags} {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
 .board-rank {
   background-color: $almost-black;
   color: $white;

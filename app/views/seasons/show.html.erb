@@ -6,6 +6,7 @@
     <div class="col-lg-4">
       <%= render partial: 'layouts/rank_board', locals: {
         title: "#{d.name} Division",
+        link: division_path(d),
         teams: d.sorted_teams,
         rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
       } %>
@@ -18,6 +19,7 @@
     <div class="col-lg-4">
       <%= render partial: 'layouts/rank_board', locals: {
         title: "#{d.name} Division",
+        link: division_path(d),
         teams: d.sorted_teams,
         rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
       } %>
