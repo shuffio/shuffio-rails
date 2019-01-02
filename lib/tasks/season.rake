@@ -1,6 +1,7 @@
 namespace :season do
   desc 'Set up Schedule for a Season'
   task schedule: :environment do
+    ActiveRecord::Base.logger.level = 1
     season = Season.find_by(name: 'Winter 2019')
 
     abort 'Season already has matches scheduled, aborting' if season.matches.any?
@@ -64,6 +65,7 @@ namespace :season do
 
   desc 'Report on uneven bye weeks'
   task bye_report: :environment do
+    ActiveRecord::Base.logger.level = 1
     season = Season.find_by(name: 'Winter 2019')
 
     season.divisions.each do |d|
