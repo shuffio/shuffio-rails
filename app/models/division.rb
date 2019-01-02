@@ -20,7 +20,7 @@ class Division < ApplicationRecord
 
   def report_for_week(week)
     output = "\e[36mResults (winner underlined):\e[0m\n"
-    output += "#{season.name} - #{name}\n"
+    output += "#{season.name} - #{name} Division\n"
     output += match_time_for_week(week).in_time_zone('America/Chicago').to_s + "\n\n"
 
     matches_for_week(week).each do |m|
