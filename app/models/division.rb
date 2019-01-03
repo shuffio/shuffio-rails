@@ -74,6 +74,52 @@ class Division < ApplicationRecord
     save
   end
 
+  def la_name
+    output = season.name
+    output += ' ' + (day_of_week == 1 ? 'Monday' : 'Tuesday')
+    output += ' (' + Time.parse(time).strftime('%-l:%M%P') + ')'
+    output += ' ' + name.split.last + ' Division'
+    output
+  end
+
+  def la_csv
+    require 'csv'
+
+    attributes = %w[
+      SUB_PROGRAM
+      HOME_TEAM
+      AWAY_TEAM
+      DATE
+      START_TIME
+      END_TIME
+      LOCATION
+      SUB_LOCATION
+      TYPE
+      NOTES
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      matches.order(:time, :location).each do |m|
+        row = []
+        row << 'NONE'
+        row << m.home_team.name
+        row << m.away_team.name
+        row << m.time.in_time_zone('America/Chicago').strftime('%m/%d/%Y')
+        row << m.time.in_time_zone('America/Chicago').strftime('%H:%M')
+        row << (m.time + 1.hour).in_time_zone('America/Chicago').strftime('%H:%M')
+        row << 'the royal palms shuffleboard club'
+        row << "Court #{m.location.split.last.to_i}"
+        row << 'REGULAR_SEASON'
+        row << ''
+        csv << row
+        # require 'pry'
+        # binding.pry
+      end
+    end
+  end
+
   def self.frozen_id_to_team(input)
     output = []
 

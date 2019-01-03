@@ -5,9 +5,15 @@ class DivisionsController < ApplicationController
 
   def show
     @division = Division.find(params[:id])
+
     @teams = @division.sorted_teams
     @show_elo = @division.season.latest?
     @show_elo_change = @division.season.latest? && @division.season.started?
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @division.la_csv, filename: "league-schedule-#{@division.id}.csv" }
+    end
   end
 
   def week
