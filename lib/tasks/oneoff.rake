@@ -832,4 +832,16 @@ namespace :oneoff do
     Team.where(starting_elo: 931).update_all(starting_wins: 1, starting_losses: 7)
     Team.where(starting_elo: 909).update_all(starting_wins: 0, starting_losses: 8)
   end
+
+  desc 'Add Existing Brackets'
+  task bracket: :environment do
+    match_ids = [
+        [1181, 1180, 1179, 1178, 1174, 1175, 1176, 1177],
+        [1185, 1183, 1184, 1182],
+        [1195, 1196],
+        [1198, 1197]
+    ]
+    b = Bracket.create(name: 'Fall Playoffs', match_id_blob: match_ids.to_json)
+    Match.where.not(comment:'Fall Playoffs - Group Play').where.not(comment: 'Fall Playoffs - Consolation Bracket').where('comment LIKE ?', 'Fall Playoffs - %').update_all(bracket_id: b.id)
+  end
 end
