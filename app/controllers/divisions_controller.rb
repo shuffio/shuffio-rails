@@ -12,7 +12,7 @@ class DivisionsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @division.la_csv, filename: "league-schedule-#{@division.id}.csv" }
+      format.csv { send_data @division.la_csv, filename: "league-schedule-#{@division.name.parameterize}.csv" }
     end
   end
 

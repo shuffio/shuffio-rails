@@ -103,19 +103,17 @@ class Division < ApplicationRecord
 
       matches.order(:time, :location).each do |m|
         row = []
-        row << 'NONE'
+        row << nil
         row << m.home_team.name
         row << m.away_team.name
-        row << m.time.in_time_zone('America/Chicago').strftime('%m/%d/%Y')
+        row << m.time.in_time_zone('America/Chicago').strftime('%-m/%-d/%Y')
         row << m.time.in_time_zone('America/Chicago').strftime('%H:%M')
         row << (m.time + 1.hour).in_time_zone('America/Chicago').strftime('%H:%M')
         row << 'the royal palms shuffleboard club'
         row << "Court #{m.location.split.last.to_i}"
         row << 'REGULAR_SEASON'
-        row << ''
+        row << nil
         csv << row
-        # require 'pry'
-        # binding.pry
       end
     end
   end
