@@ -147,8 +147,8 @@ class Division < ApplicationRecord
   end
 
   def next_division
-    d = Division.find(id + 1)
-    return d if season_id == d.season_id
+    d = Division.find_by(id: id + 1)
+    return d if d && season_id == d.season_id
 
     nil
   end
