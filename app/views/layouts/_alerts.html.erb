@@ -1,0 +1,7 @@
+
+  <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %> messages" role="alert">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <%= (value.class == Array) ? value.join('<br>').html_safe : value %>
+    </div>
+  <% end %>
