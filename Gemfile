@@ -60,6 +60,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootstrap', '~> 4.1.3'
 gem 'color-generator'
+gem 'devise'
+gem 'dotenv-rails'
 gem 'elo'
 gem 'jquery-rails'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 gem 'textacular', '~> 5.0'
