@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :faq, only: [:index]
   resources :matches
+  resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]
   resources :teams, only: [:index, :show]
 
