@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_191424) do
+ActiveRecord::Schema.define(version: 2019_01_20_011908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brackets", force: :cascade do |t|
+    t.string "name"
+    t.text "match_id_blob"
+  end
 
   create_table "divisions", force: :cascade do |t|
     t.string "name"
@@ -45,6 +50,8 @@ ActiveRecord::Schema.define(version: 2018_12_27_191424) do
     t.integer "home_new_elo"
     t.integer "away_old_elo"
     t.integer "away_new_elo"
+    t.bigint "bracket_id"
+    t.index ["bracket_id"], name: "index_matches_on_bracket_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
 
@@ -53,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_191424) do
     t.date "start_date"
     t.date "playoff_date"
     t.date "banquet_date"
+    t.integer "champion_id"
   end
 
   create_table "teams", force: :cascade do |t|
