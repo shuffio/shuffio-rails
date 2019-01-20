@@ -22,6 +22,13 @@
       <li class="nav-item">
         <%= link_to 'FAQ', faq_index_path, class: 'nav-link' %>
       </li>
+      <li class="nav-item">
+        <% if current_user %>
+          <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'nav-link') %>
+        <% else %>
+          <%= link_to('<i class="fab fa-google"></i> Sign in'.html_safe, user_google_oauth2_omniauth_authorize_path, class: 'nav-link') %>
+        <% end %>
+      </li>
     </ul>
   </div>
 </nav>
