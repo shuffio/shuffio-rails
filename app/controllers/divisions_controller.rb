@@ -17,6 +17,8 @@ class DivisionsController < ApplicationController
   end
 
   def week
+    admin? if params[:report]
+
     @division = Division.find(params[:id])
 
     @week = params[:week].to_i
@@ -24,5 +26,36 @@ class DivisionsController < ApplicationController
 
     @matches = @division.matches_for_week(@week)
     @time = @division.match_time_for_week(@week)
+  end
+
+  def week_report
+    admin?
+
+    division = Division.find(params[:id])
+    week = params[:week].to_i
+
+    params.each do |param, value|
+      next unless param.starts_with?('Court ')
+
+      m = Match.find_by(location: param, division: division, time: division.match_time_for_week(week))
+
+      m.update(home_score: 1, away_score: 0) if value == 'home'
+      m.update(home_score: 0, away_score: 1) if value == 'away'
+
+      m.calculate_elo
+    end
+
+    flash[:success] = 'Results Saved!'
+
+    redirect_to(division_week_path(division.next_division, week, report: true)) and return if division.next_division
+
+    redirect_to root_path
+  end
+
+  def admin?
+    return if current_user && current_user.is_admin?
+
+    flash[:error] = 'You are not authorized to view that page'
+    redirect_to root_path
   end
 end

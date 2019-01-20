@@ -26,9 +26,17 @@
 
   <body>
     <%= render "layouts/navbar" %>
+    <%= render "layouts/alerts" %>
 
     <div class="container-fluid yield">
       <%= yield %>
     </div>
+
+    <footer class="page-footer">
+      <div class="container-fluid text-muted">
+        &copy; <%= Date.today.year %> Shuff.io |
+        <%= link_to 'Privacy Policy', privacy_index_path %>
+      </div>
+    </footer>
   </body>
 </html>
