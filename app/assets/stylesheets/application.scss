@@ -8,6 +8,7 @@ $wood: #ffdda1;
 $red: #cc0000;
 $green: #00cc00;
 $orange: #e35130;
+$gold: #d4af37;
 
 $a-tags: 'a, a:active, a:hover, a:visited';
 
@@ -201,4 +202,12 @@ h3 {
 
 .week-link {
   font-size: 24px;
+}
+
+.champion {
+  color: $gold;
+
+  #{$a-tags} {
+    color: $gold;
+  }
 }

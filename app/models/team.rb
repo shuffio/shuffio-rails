@@ -3,6 +3,7 @@ class Team < ApplicationRecord
 
   has_and_belongs_to_many :divisions
   has_many :seasons, through: :divisions
+  has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
 
   def set_default_elo
     self.elo_cache = starting_elo || 1000
@@ -63,5 +64,9 @@ class Team < ApplicationRecord
 
   def color
     ColorGenerator.new(saturation: 0.75, value: 1.0, seed: id).create_hex
+  end
+
+  def champion?
+    championships.any?
   end
 end

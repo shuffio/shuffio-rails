@@ -46,7 +46,7 @@
 
       <div class="col">
         <div class="dummy-<%= rank_widths[:name] %>"></div>
-        <div class="in board board-name">
+        <div class="in board board-name<%= ' champion' if t[:team].champion? %>">
           <%= link_to t[:team].display_name, team_path(t[:team]) %>
         </div>
       </div>
