@@ -49,7 +49,11 @@
           <% @matches.each do |m| %>
             <tr>
               <td class="align-middle"><span data-toggle="tooltip" data-placement="top" title="<%= m.formatted_time %><%= " on #{ m.location }" if m.location%>"><%= m.formatted_date %></span></td>
-              <td class="align-middle"><%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %></td>
+              <td class="align-middle">
+                <span data-toggle="tooltip" data-placement="top" title="Current ELO: <%= m.team_info(@team.id)[:opponent].elo_cache %>">
+                  <%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %>
+                </span>
+              </td>
               <td class="align-middle text-nowrap">
                 <% if m.time.past? %>
                   <%= m.team_info(@team.id)[:new_elo] %>
