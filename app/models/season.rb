@@ -11,4 +11,10 @@ class Season < ApplicationRecord
   def started?
     start_date.past?
   end
+
+  def self.current
+    Season.order(start_date: :desc).each do |s|
+      return s unless s.start_date.future?
+    end
+  end
 end

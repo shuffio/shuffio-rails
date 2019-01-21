@@ -152,4 +152,17 @@ class Division < ApplicationRecord
 
     nil
   end
+
+  def date_time
+    Time.find_zone('America/Chicago').parse("#{season.start_time} #{time}")
+  end
+
+  def self.last_complete_week
+    day = season.start_date
+    day += 1.day # for Tuesday
+
+    (week - 1).times do
+      day += 1.week
+    end
+  end
 end
