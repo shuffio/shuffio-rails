@@ -7,7 +7,7 @@
       <div class="team-stats">
         <span class="team-name"><%= @team.name %></span><br />
         <% if @team.former_names %>
-          <span class="font-weight-light font-italic">Formally known as <%= @team.former_names %></span><br />
+          <span class="font-weight-light font-italic">Formerly known as <%= @team.former_names %></span><br />
         <% end %>
         ELO Rating: <%= @team.elo_cache %><br />
         Record: <%= @team.record[:wins] %>-<%= @team.record[:losses] %><br />
