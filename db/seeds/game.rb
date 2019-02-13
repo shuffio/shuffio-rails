@@ -1,0 +1,27 @@
+m = Match.where(home_team_id: 87, away_team_id: 83).first
+g1 = Game.create(match: m, number: 1)
+g2 = Game.create(match: m, number: 2)
+g3 = Game.create(match: m, number: 3)
+
+Frame.create(game: g1, number: 1, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 15)
+Frame.create(game: g1, number: 2, yellow_player: nil, black_player: nil, yellow_score: 6, black_score: 0)
+Frame.create(game: g1, number: 3, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 7)
+Frame.create(game: g1, number: 4, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 0)
+Frame.create(game: g1, number: 5, yellow_player: nil, black_player: nil, yellow_score: 8, black_score: 7)
+Frame.create(game: g1, number: 6, yellow_player: nil, black_player: nil, yellow_score: 16, black_score: 0)
+Frame.create(game: g1, number: 7, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 15)
+Frame.create(game: g1, number: 8, yellow_player: nil, black_player: nil, yellow_score: 7, black_score: 0)
+
+Frame.create(game: g2, number: 1, yellow_player: nil, black_player: nil, yellow_score: -2, black_score: 16)
+Frame.create(game: g2, number: 2, yellow_player: nil, black_player: nil, yellow_score: 16, black_score: 0)
+Frame.create(game: g2, number: 3, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 7)
+Frame.create(game: g2, number: 4, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 7)
+Frame.create(game: g2, number: 5, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 8)
+Frame.create(game: g2, number: 6, yellow_player: nil, black_player: nil, yellow_score: -13, black_score: 7)
+Frame.create(game: g2, number: 7, yellow_player: nil, black_player: nil, yellow_score: 10, black_score: 0)
+Frame.create(game: g2, number: 8, yellow_player: nil, black_player: nil, yellow_score: 23, black_score: 0)
+
+Frame.create(game: g3, number: 1, yellow_player: nil, black_player: nil, yellow_score: 16, black_score: 0)
+Frame.create(game: g3, number: 2, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 0)
+Frame.create(game: g3, number: 3, yellow_player: nil, black_player: nil, yellow_score: 0, black_score: 0)
+Frame.create(game: g3, number: 4, yellow_player: nil, black_player: nil, yellow_score: 7, black_score: 0)

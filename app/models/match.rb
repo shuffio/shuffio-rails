@@ -4,6 +4,7 @@ class Match < ApplicationRecord
   belongs_to :home_team, class_name: 'Team'
   belongs_to :away_team, class_name: 'Team'
   belongs_to :division, optional: true
+  has_many :games
 
   # TODO: Fix callback to work on updates
   after_create :calculate_elo
