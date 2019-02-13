@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'seasons#show_current'
 
   resources :divisions, only: [:index, :show]
+  get '/divisions/:id/playoff', to: 'divisions#show_playoff', as: :division_playoff
   get '/divisions/:id/week/:week', to: 'divisions#week', as: :division_week
   post '/divisions/:id/week/:week/report', to: 'divisions#week_report', as: :division_week_report
 

@@ -16,6 +16,23 @@ class DivisionsController < ApplicationController
     end
   end
 
+  def show_playoff
+    @division = Division.find(params[:id])
+
+    if @division.final_standings
+      flash[:alert] = 'Rankings are final, no prediction needed'
+      redirect_to division_path(params[:id]) and return
+    end
+
+    @teams = @division.playoff_prediction
+    @show_elo = true
+    @show_elo_change = false
+
+    respond_to do |format|
+      format.html { render template: 'divisions/show' }
+    end
+  end
+
   def week
     admin? if params[:report]
 

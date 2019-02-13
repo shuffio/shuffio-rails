@@ -136,4 +136,38 @@ class Division < ApplicationRecord
 
     nil
   end
+
+  def playoff_prediction
+    output = []
+
+    teams.each do |t|
+      record = t.league_record(self)
+
+      matches = t.matches.where(division: self, away_score: 0, home_score: 0)
+
+      matches.each do |m|
+        estimate = if m.home_team_id == t.id
+                     ::Elo::Rating.new(old_rating: m.home_team.elo_cache, other_rating: m.away_team.elo_cache).send(:expected)
+                   else
+                     ::Elo::Rating.new(old_rating: m.away_team.elo_cache, other_rating: m.home_team.elo_cache).send(:expected)
+                   end
+
+        record[:wins] += estimate
+        record[:losses] += (1 - estimate)
+      end
+      output.push(
+        team: t,
+        wins: record[:wins],
+        losses: record[:losses]
+      )
+    end
+
+    Team.sort_by_rank(output).map do |t|
+      {
+        team: t[:team],
+        wins: t[:wins].round,
+        losses: t[:losses].round
+      }
+    end
+  end
 end
