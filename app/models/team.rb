@@ -69,4 +69,32 @@ class Team < ApplicationRecord
   def champion?
     championships.any?
   end
+
+  # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }
+  # It returns in the same format
+  def self.sort_by_rank(teams)
+    output = []
+
+    # Group and Sort teams by # of wins descending
+    # teams_by_win = {2: [], 1: [], 0: []}
+    teams_by_win = teams.group_by { |t| t[:wins] }.sort_by { |k, _v| k }.reverse
+    teams_by_win.each do |win, win_team_array|
+      # Now group and sort the "win" group by # of losses
+      teams_by_loss = win_team_array.group_by { |t| t[:losses] }.sort_by { |k, _v| k }
+      teams_by_loss.each do |loss, loss_team_array|
+        # Now sort within win/loss group by ELO descending
+        teams_by_elo = loss_team_array.sort_by { |t| t[:team].elo_cache }.reverse
+
+        teams_by_elo.each do |t|
+          output.push(
+            team: t[:team],
+            wins: win,
+            losses: loss
+          )
+        end
+      end
+    end
+
+    output
+  end
 end
