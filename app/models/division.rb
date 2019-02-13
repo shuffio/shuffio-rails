@@ -42,29 +42,13 @@ class Division < ApplicationRecord
   def sorted_teams
     return Division.frozen_id_to_team(JSON.parse(final_standings)) if final_standings
 
-    output = []
-
-    # Group and Sort teams by # of wins descending
-    # teams_by_win = {2: [], 1: [], 0: []}
-    teams_by_win = teams.group_by { |t| t.league_record(self)[:wins] }.sort_by { |k, _v| k }.reverse
-    teams_by_win.each do |win, win_team_array|
-      # Now group and sort the "win" group by # of losses
-      teams_by_loss = win_team_array.group_by { |t| t.league_record(self)[:losses] }.sort_by { |k, _v| k }
-      teams_by_loss.each do |loss, loss_team_array|
-        # Now sort within win/loss group by ELO descending
-        teams_by_elo = loss_team_array.sort_by(&:elo_cache).reverse
-
-        teams_by_elo.each do |t|
-          output.push(
-            team: t,
-            wins: win,
-            losses: loss
-          )
-        end
-      end
-    end
-
-    output
+    Team.sort_by_rank(teams.map do |t|
+                        {
+                          team: t,
+                          wins: t.league_record(self)[:wins],
+                          losses: t.league_record(self)[:losses]
+                        }
+                      end)
   end
 
   def freeze!
