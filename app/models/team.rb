@@ -70,6 +70,17 @@ class Team < ApplicationRecord
     championships.any?
   end
 
+  def rename(new_name)
+    if former_names
+      self.former_names = "#{name}, #{former_names}"
+    else
+      self.former_names = name
+    end
+
+    self.name = new_name
+    save
+  end
+
   # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }
   # It returns in the same format
   def self.sort_by_rank(teams)
