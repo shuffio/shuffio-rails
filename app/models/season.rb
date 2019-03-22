@@ -11,4 +11,8 @@ class Season < ApplicationRecord
   def started?
     start_date.past?
   end
+
+  def self.latest
+    Season.order(:start_date).last
+  end
 end

@@ -71,14 +71,26 @@ class Team < ApplicationRecord
   end
 
   def rename(new_name)
-    if former_names
-      self.former_names = "#{name}, #{former_names}"
-    else
-      self.former_names = name
-    end
+    self.former_names = if former_names
+                          "#{name}, #{former_names}"
+                        else
+                          name
+                        end
 
     self.name = new_name
     save
+  end
+
+  def current_division
+    divisions.find_by(season: Season.latest)
+  end
+
+  def missing_results
+    matches.where(home_score: 0, away_score: 0).where('time < ?', 1.day.ago)
+  end
+
+  def missing_results?
+    missing_results.any?
   end
 
   # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }

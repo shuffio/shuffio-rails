@@ -215,3 +215,8 @@ h3 {
 .messages {
   border-radius: 0px;
 }
+
+.name-break {
+  word-wrap: break-word;
+  max-width: 250px;
+}
