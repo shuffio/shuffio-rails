@@ -1,0 +1,39 @@
+<% provide :title, '[Admin] Teams' %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="col-lg-6 offset-lg-3 team-toggle btn-group btn-group-toggle" data-toggle="buttons">
+      <%= link_to 'Active Teams',
+                    admin_teams_path,
+                    method: :get,
+                    class: "btn btn-info #{ params[:all_teams] ? 'active' : '' }" %>
+      <%= link_to 'All Teams',
+                    admin_teams_path(all_teams: true),
+                    method: :get,
+                    class: "btn btn-info #{ params[:all_teams] ? '' : 'active' }" %>
+    </div>
+
+    <table class="table">
+      <tr>
+        <td>Name</td>
+        <td>Captain</td>
+        <td>Division</td>
+        <td></td>
+      </tr>
+
+      <% @teams.each do |t| %>
+        <tr>
+          <td class="name-break"><%= link_to t.name, team_path(t.id) %></td>
+          <td><%= t.captain %></td>
+          <td><%= t.current_division ? t.current_division.name : '' %></td>
+          <td>
+            <% if t.missing_results? %>
+              <span class="pad text-danger" data-toggle="tooltip" data-placement="top" title="Missing Match Results">
+                <i class="fas fa-exclamation-circle"></i>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -5,6 +5,11 @@ class Team < ApplicationRecord
   has_many :seasons, through: :divisions
   has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
 
+  validates :name, presence: true
+  validates :captain, presence: true
+
+  around_update :check_for_rename
+
   def set_default_elo
     self.elo_cache = starting_elo || 1000
     self.previous_elo = starting_elo || 1000
@@ -70,6 +75,18 @@ class Team < ApplicationRecord
     championships.any?
   end
 
+  def current_division
+    divisions.find_by(season: Season.latest)
+  end
+
+  def missing_results
+    matches.where(home_score: 0, away_score: 0).where('time < ?', 1.day.ago)
+  end
+
+  def missing_results?
+    missing_results.any?
+  end
+
   # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }
   # It returns in the same format
   def self.sort_by_rank(teams)
@@ -96,5 +113,19 @@ class Team < ApplicationRecord
     end
 
     output
+  end
+
+  private
+
+  def check_for_rename
+    if name_changed?
+      self.former_names = if former_names
+                            "#{name_was}, #{former_names}"
+                          else
+                            name_was
+                          end
+    end
+
+    yield
   end
 end
