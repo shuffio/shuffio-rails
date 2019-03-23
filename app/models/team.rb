@@ -5,6 +5,11 @@ class Team < ApplicationRecord
   has_many :seasons, through: :divisions
   has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
 
+  validates :name, presence: true
+  validates :captain, presence: true
+
+  around_update :check_for_rename
+
   def set_default_elo
     self.elo_cache = starting_elo || 1000
     self.previous_elo = starting_elo || 1000
@@ -70,17 +75,6 @@ class Team < ApplicationRecord
     championships.any?
   end
 
-  def rename(new_name)
-    self.former_names = if former_names
-                          "#{name}, #{former_names}"
-                        else
-                          name
-                        end
-
-    self.name = new_name
-    save
-  end
-
   def current_division
     divisions.find_by(season: Season.latest)
   end
@@ -119,5 +113,19 @@ class Team < ApplicationRecord
     end
 
     output
+  end
+
+  private
+
+  def check_for_rename
+    if name_changed?
+      self.former_names = if former_names
+                            "#{name_was}, #{former_names}"
+                          else
+                            name_was
+                          end
+    end
+
+    yield
   end
 end

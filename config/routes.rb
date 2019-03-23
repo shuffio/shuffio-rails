@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
-    resources 'teams', only: [:index]
+    resources 'teams'
   end
 
   resources :divisions, only: [:index, :show]

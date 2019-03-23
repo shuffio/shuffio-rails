@@ -1,0 +1,9 @@
+<% if @team.errors.any? %>
+  <% flash.now[:error] = @team.errors.full_messages %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <%= render partial: 'admin/teams/form', locals: { url: admin_team_path(@team), method: :patch } %>
+  </div>
+</div>

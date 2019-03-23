@@ -20,6 +20,12 @@
 
     <br />
 
+    <% if current_user && current_user.is_admin? %>
+      <%= link_to '<i class="fa fa-pencil"></i> Edit Team'.html_safe, edit_admin_team_path(@team), class: 'btn btn-primary' %>
+
+      <br /><br />
+    <% end %>
+
     <% if @show_toggle %>
       <div class="row">
         <div class="team-toggle btn-group btn-group-toggle" data-toggle="buttons">
