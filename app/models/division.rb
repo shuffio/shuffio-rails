@@ -20,7 +20,7 @@ class Division < ApplicationRecord
 
   def report_for_week(week)
     output = "\e[36mResults (winner underlined):\e[0m\n"
-    output += "#{season.name} - #{name}\n"
+    output += "#{season.name} - #{name} Division\n"
     output += match_time_for_week(week).in_time_zone('America/Chicago').to_s + "\n\n"
 
     matches_for_week(week).each do |m|
@@ -40,24 +40,134 @@ class Division < ApplicationRecord
   end
 
   def sorted_teams
+    return Division.frozen_id_to_team(JSON.parse(final_standings)) if final_standings
+
+    Team.sort_by_rank(teams.map do |t|
+                        {
+                          team: t,
+                          wins: t.league_record(self)[:wins],
+                          losses: t.league_record(self)[:losses]
+                        }
+                      end)
+  end
+
+  def freeze!
+    self.final_standings = nil
+    save
+    self.final_standings = JSON.pretty_generate(Division.frozen_team_to_id(sorted_teams))
+    save
+  end
+
+  def la_name
+    output = season.name
+    output += ' ' + (day_of_week == 1 ? 'Monday' : 'Tuesday')
+    output += ' (' + Time.parse(time).strftime('%-l:%M%P') + ')'
+    output += ' ' + name.split.last + ' Division'
+    output
+  end
+
+  def la_csv
+    require 'csv'
+
+    attributes = %w[
+      SUB_PROGRAM
+      HOME_TEAM
+      AWAY_TEAM
+      DATE
+      START_TIME
+      END_TIME
+      LOCATION
+      SUB_LOCATION
+      TYPE
+      NOTES
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      matches.order(:time, :location).each do |m|
+        row = []
+        row << nil
+        row << m.home_team.name
+        row << m.away_team.name
+        row << m.time.in_time_zone('America/Chicago').strftime('%-m/%-d/%Y')
+        row << m.time.in_time_zone('America/Chicago').strftime('%H:%M')
+        row << (m.time + 1.hour).in_time_zone('America/Chicago').strftime('%H:%M')
+        row << 'the royal palms shuffleboard club'
+        row << "Court #{m.location.split.last.to_i}"
+        row << 'REGULAR_SEASON'
+        row << nil
+        csv << row
+      end
+    end
+  end
+
+  def self.frozen_id_to_team(input)
     output = []
 
-    # Group and Sort teams by # of wins descending
-    # teams_by_win = {2: [], 1: [], 0: []}
-    teams_by_win = teams.group_by { |t| t.league_record(self)[:wins] }.sort_by { |k, _v| k }.reverse
-    teams_by_win.each do |_win, win_team_array|
-      # Now group and sort the "win" group by # of losses
-      teams_by_loss = win_team_array.group_by { |t| t.league_record(self)[:losses] }.sort_by { |k, _v| k }
-      teams_by_loss.each do |_loss, loss_team_array|
-        # Now sort within win/loss group by ELO descending
-        teams_by_elo = loss_team_array.sort_by(&:elo_cache).reverse
-
-        teams_by_elo.each do |t|
-          output.push(t)
-        end
-      end
+    input.each do |t|
+      output.push(
+        team: Team.find(t['team_id']),
+        wins: t['wins'],
+        losses: t['losses']
+      )
     end
 
     output
+  end
+
+  def self.frozen_team_to_id(input)
+    output = []
+
+    input.each do |t|
+      output.push(
+        team_id: t[:team].id,
+        wins: t[:wins],
+        losses: t[:losses]
+      )
+    end
+
+    output
+  end
+
+  def next_division
+    d = Division.find_by(id: id + 1)
+    return d if d && season_id == d.season_id
+
+    nil
+  end
+
+  def playoff_prediction
+    output = []
+
+    teams.each do |t|
+      record = t.league_record(self)
+
+      matches = t.matches.where(division: self, away_score: 0, home_score: 0)
+
+      matches.each do |m|
+        estimate = if m.home_team_id == t.id
+                     ::Elo::Rating.new(old_rating: m.home_team.elo_cache, other_rating: m.away_team.elo_cache).send(:expected)
+                   else
+                     ::Elo::Rating.new(old_rating: m.away_team.elo_cache, other_rating: m.home_team.elo_cache).send(:expected)
+                   end
+
+        record[:wins] += estimate
+        record[:losses] += (1 - estimate)
+      end
+      output.push(
+        team: t,
+        wins: record[:wins],
+        losses: record[:losses]
+      )
+    end
+
+    Team.sort_by_rank(output).map do |t|
+      {
+        team: t[:team],
+        wins: t[:wins].round,
+        losses: t[:losses].round
+      }
+    end
   end
 end

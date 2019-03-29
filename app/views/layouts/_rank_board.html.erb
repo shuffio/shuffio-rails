@@ -1,100 +1,93 @@
 <div class="board-table">
   <div class="row board-title-row">
-    <% if division %>
-      <div class="col-7">
-        <div class="dummy-7"></div>
-        <div class="in board">
-          <%= title %>
-        </div>
-      </div>
 
-      <div class="col-2">
-        <div class="dummy-2"></div>
+    <div class="col-<%= rank_widths[:rank] + rank_widths[:name] %>">
+      <div class="dummy-<%= rank_widths[:rank] + rank_widths[:name] %>"></div>
+      <div class="in board board-title">
+        <% if defined?(link) %>
+          <%= link_to title, link %>
+        <% else %>
+          <%= title %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if rank_widths[:record].positive? %>
+      <div class="col-<%= rank_widths[:record] %>">
+        <div class="dummy-<%= rank_widths[:record] %>"></div>
         <div class="in board">
           Record
         </div>
       </div>
-
-    <% else %>
-
-      <div class="col-9">
-        <div class="dummy-9"></div>
-        <div class="in board">
-          <%= title %>
-        </div>
-      </div>
-
     <% end %>
 
-    <div class="col-3">
-      <div class="dummy-3"></div>
-      <div class="in board">
-        ELO
+    <% if (rank_widths[:elo] + rank_widths[:elo_change]).positive? %>
+      <div class="col-<%= rank_widths[:elo] + rank_widths[:elo_change] %>">
+        <div class="dummy-<%= rank_widths[:elo] + rank_widths[:elo_change] %>"></div>
+        <div class="in board">
+          ELO
+        </div>
       </div>
-    </div>
+    <% end %>
 
   </div>
 
   <% teams.each_with_index do |t, i| %>
     <div class="row board-row">
 
-      <div class="col-1">
-        <div class="dummy"></div>
-        <div class="in board board-rank">
-          <%= i + 1 %>
-        </div>
-      </div>
-
-      <% if division %>
-        <div class="col">
-          <div class="dummy-6"></div>
-          <div class="in board board-name">
-            <%= t.display_name %>
+      <% if rank_widths[:rank].positive? %>
+        <div class="col-<%= rank_widths[:rank] %>">
+          <div class="dummy-<%= rank_widths[:rank] %>"></div>
+          <div class="in board board-rank">
+            <%= i + 1 %>
           </div>
         </div>
-
-        <div class="col-1">
-          <div class="dummy"></div>
-          <div class="in board board-wins">
-            <%= t.league_record(division)[:wins] %>
-          </div>
-        </div>
-
-        <div class="col-1">
-          <div class="dummy"></div>
-          <div class="in board board-losses">
-            <%= t.league_record(division)[:losses] %>
-          </div>
-        </div>
-
-      <% else %>
-
-        <div class="col">
-          <div class="dummy-8"></div>
-          <div class="in board board-name">
-            <%= t.display_name %>
-          </div>
-        </div>
-
       <% end %>
 
-      <div class="col-2">
-        <div class="dummy-2"></div>
-        <div class="in board board-elo">
-          <%= t.elo_cache %>
+      <div class="col">
+        <div class="dummy-<%= rank_widths[:name] %>"></div>
+        <div class="in board board-name<%= ' champion' if t[:team].champion? %>">
+          <%= link_to t[:team].display_name, team_path(t[:team]) %>
         </div>
       </div>
 
-      <div class="col-1">
-        <div class="dummy"></div>
-        <% if t.elo_cache > t.previous_elo %>
-          <div class="in board board-elo-up">+<%= t.elo_cache - t.previous_elo %></div>
-        <% elsif t.elo_cache < t.previous_elo %>
-          <div class="in board board-elo-down">-<%= t.previous_elo - t.elo_cache %></div>
-        <% else %>
-          <div class="in board board-elo-same">0</div>
-        <% end %>
-      </div>
+      <% if rank_widths[:record] >= 2 %>
+        <div class="col-<%= (rank_widths[:record] / 2).floor %>">
+          <div class="dummy-<%= (rank_widths[:record] / 2).floor %>"></div>
+          <div class="in board board-wins">
+            <%= t[:wins] %>
+          </div>
+        </div>
+
+        <div class="col-<%= (rank_widths[:record] / 2).floor %>">
+          <div class="dummy-<%= (rank_widths[:record] / 2).floor %>"></div>
+          <div class="in board board-losses">
+            <%= t[:losses] %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if rank_widths[:elo].positive? %>
+        <div class="col-<%= rank_widths[:elo] %>">
+          <div class="dummy-<%= rank_widths[:elo] %>"></div>
+          <div class="in board board-elo">
+            <%= t[:team].elo_cache %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if rank_widths[:elo_change].positive? %>
+        <div class="col-<%= rank_widths[:elo_change] %>">
+          <div class="dummy-<%= rank_widths[:elo_change] %>"></div>
+          <% if t[:team].elo_cache > t[:team].previous_elo %>
+            <div class="in board board-elo-up">+<%= t[:team].elo_cache - t[:team].previous_elo %></div>
+          <% elsif t[:team].elo_cache < t[:team].previous_elo %>
+            <div class="in board board-elo-down">-<%= t[:team].previous_elo - t[:team].elo_cache %></div>
+          <% else %>
+            <div class="in board board-elo-same">0</div>
+          <% end %>
+        </div>
+      <% end %>
 
     </div>
   <% end %>

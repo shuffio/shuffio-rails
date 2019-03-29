@@ -1,18 +1,20 @@
 <% provide :title, 'Divisions' %>
 <div class="row">
-  <div class="col-lg-6 offset-lg-3">
+  <div class="col-lg-8 offset-lg-2">
     <table class="table">
       <tr>
         <td>Season</td>
         <td>Division</td>
-        <td>Matches</td>
+        <td></td>
+        <td></td>
       </tr>
 
       <% @divisions.each do |d| %>
         <tr>
           <td><%= d.season.name %></td>
-          <td><%= link_to d.name, division_path(d.id) %></td>
-          <td><%= d.matches.count %></td>
+          <td><%= d.name %></td>
+          <td><%= link_to 'Rankings', division_path(d.id) %></td>
+          <td><%= link_to 'Schedule', division_week_path(d.id, 1) %></td>
         </tr>
       <% end %>
     </table>

@@ -1,10 +1,24 @@
 <% provide :title, 'Top Teams' %>
 <div class="row">
+  <div class="col-lg-6 offset-lg-3 team-toggle btn-group btn-group-toggle" data-toggle="buttons">
+
+    <%= link_to 'Active Teams',
+                  teams_path,
+                  method: :get,
+                  class: "btn btn-info #{ params[:all_teams] ? 'active' : '' }" %>
+    <%= link_to 'All Teams',
+                  teams_path(all_teams: true),
+                  method: :get,
+                  class: "btn btn-info #{ params[:all_teams] ? '' : 'active' }" %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-lg-6 offset-lg-3">
     <%= render partial: 'layouts/rank_board', locals: {
       title: "Team",
       teams: @teams.first(50),
-      division: nil
+      rank_widths: rank_board_width(true, false)
     } %>
   </div>
 </div>

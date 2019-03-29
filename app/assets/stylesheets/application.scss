@@ -8,6 +8,9 @@ $wood: #ffdda1;
 $red: #cc0000;
 $green: #00cc00;
 $orange: #e35130;
+$gold: #d4af37;
+
+$a-tags: 'a, a:active, a:hover, a:visited';
 
 .yield {
   padding-top: 25px;
@@ -49,6 +52,16 @@ h3 {
   margin-right: 2px;
   margin-top: 4px;
   margin-bottom: 4px;
+  #{$a-tags} {
+    color: $white;
+  }
+}
+
+.board-title {
+  #{$a-tags} {
+    color: $black;
+    text-decoration: none;
+  }
 }
 
 .board-rank {
@@ -99,12 +112,24 @@ h3 {
   margin-top: 100%;
 }
 
+.dummy-1 {
+  margin-top: 100%;
+}
+
 .dummy-2 {
   margin-top: 50%;
 }
 
 .dummy-3 {
   margin-top: 33%;
+}
+
+.dummy-4 {
+  margin-top: 25%;
+}
+
+.dummy-5 {
+  margin-top: 20%;
 }
 
 .dummy-6 {
@@ -123,10 +148,75 @@ h3 {
   margin-top: 11%;
 }
 
+.dummy-10 {
+  margin-top: 10%;
+}
+
+.dummy-11 {
+  margin-top: 9%;
+}
+
+.dummy-12 {
+  margin-top: 8%;
+}
+
 .in {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.team-toggle {
+  margin-bottom: 1em;
+}
+
+.team-logo {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.team-name {
+  font-size: 24pt;
+}
+
+.team-stats {
+  margin-left: 16px;
+}
+
+.pad {
+  padding: 4px;
+}
+
+.week-details {
+  font-size: 18px;
+}
+
+.week-arrows {
+  font-size: 24px;
+}
+
+.week-link {
+  font-size: 24px;
+}
+
+.champion {
+  color: $gold;
+
+  #{$a-tags} {
+    color: $gold;
+  }
+}
+
+.messages {
+  border-radius: 0px;
+}
+
+.name-break {
+  word-wrap: break-word;
+  max-width: 250px;
 }
