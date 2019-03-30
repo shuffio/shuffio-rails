@@ -1,4 +1,43 @@
 namespace :season do
+  desc 'Create Spring 2019'
+  task create_spring_2019: :environment do
+    spring = Season.find_or_create_by(name: 'Spring 2019') do |s|
+      s.start_date = '2019-04-01'
+      s.playoff_date = '2019-06-02'
+      s.banquet_date = '2019-06-03'
+    end
+
+    Division.find_or_create_by(name: 'Monday Pilot', season: spring) do |d|
+      d.day_of_week = 1
+      d.time = '18:30'
+    end
+
+    Division.find_or_create_by(name: 'Monday Cherry', season: spring) do |d|
+      d.day_of_week = 1
+      d.time = '19:30'
+    end
+
+    Division.find_or_create_by(name: 'Monday Hammer', season: spring) do |d|
+      d.day_of_week = 1
+      d.time = '20:30'
+    end
+
+    Division.find_or_create_by(name: 'Tuesday Pilot', season: spring) do |d|
+      d.day_of_week = 2
+      d.time = '18:30'
+    end
+
+    Division.find_or_create_by(name: 'Tuesday Cherry', season: spring) do |d|
+      d.day_of_week = 2
+      d.time = '19:30'
+    end
+
+    Division.find_or_create_by(name: 'Tuesday Hammer', season: spring) do |d|
+      d.day_of_week = 2
+      d.time = '20:30'
+    end
+  end
+
   desc 'Set up Schedule for a Season'
   task schedule: :environment do
     ActiveRecord::Base.logger.level = 1
