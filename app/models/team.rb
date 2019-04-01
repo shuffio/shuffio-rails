@@ -115,6 +115,25 @@ class Team < ApplicationRecord
     output
   end
 
+  def self.find_from_la_csv(csv_data)
+    require 'csv'
+
+    # Parse CSV data
+    csv = CSV.new(csv_data, headers: true, header_converters: :symbol)
+    teams = csv.to_a.map { |row| row.to_hash.slice(:name, :captain) }
+
+    # Find existing team
+    teams.each do |t|
+      if (existing_team = Team.find_by(captain: t[:captain]))
+        t[:existing_team_id] = existing_team.id
+      elsif (existing_team = Team.find_by(name: t[:name]))
+        t[:existing_team_id] = existing_team.id
+      end
+    end
+
+    teams
+  end
+
   private
 
   def check_for_rename
