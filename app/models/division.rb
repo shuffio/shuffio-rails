@@ -171,8 +171,7 @@ class Division < ApplicationRecord
     end
   end
 
-  # Returns array of Matches, but doesn't save them
-  def setup_matches
+  def create_matches
     output_matches = []
 
     # Sort teams into away and home via snake order
@@ -210,7 +209,7 @@ class Division < ApplicationRecord
     8.times do |w|
       # Set up week 1
       10.times do |i|
-        output_matches.push(Match.new(
+        output_matches.push(Match.create!(
                               time: match_time_for_week(w + 1),
                               division: self,
                               location: "Court #{format('%02d', i + 1)}",
