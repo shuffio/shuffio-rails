@@ -1,0 +1,39 @@
+<% provide :title, '[Admin] Teams Import' %>
+<div class="row">
+  <div class="col-lg-12">
+    <%= form_tag(import_selection_admin_teams_path, method: 'post') do %>
+      <%= collection_select(:division, :division_id,  Division.all.order('season_id DESC', :day_of_week, :time), :id, :la_name, { prompt: "Select Division to Import to" }, required: true ) %>
+
+      <table class="table">
+        <tr>
+          <td>Name</td>
+          <td>Captain</td>
+          <td>Existing Team</td>
+          <td>Action</td>
+        </tr>
+
+        <% @teams.each_with_index do |t, i| %>
+          <tr>
+            <td class="name-break"><%= t[:name] %></td>
+            <td><%= t[:captain] %></td>
+            <td class="name-break">
+              <% if t[:existing_team_id] %>
+                <%= link_to Team.find(t[:existing_team_id]).name, team_path(t[:existing_team_id]) %>
+              <% end %>
+            </td>
+            <td>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="!team<%= i %>" value="nothing" checked="checked">Do Nothing<br>
+                <input class="form-check-input" type="radio" name="!team<%= i %>" value="<%= { action: 'new', name: t[:name], captain: t[:captain] }.to_json %>">Create New Team<br>
+                <% if t[:existing_team_id] %>
+                  <input class="form-check-input" type="radio" name="!team<%= i %>" value="<%= { action: 'existing', id: t[:existing_team_id] }.to_json %>">Existing Team, New Season<br>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <%= submit_tag "Submit", class: 'btn btn-info' %>
+    <% end %>
+  </div>
+</div>

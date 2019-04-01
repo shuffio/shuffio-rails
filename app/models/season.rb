@@ -2,7 +2,7 @@ class Season < ApplicationRecord
   has_many :divisions
   has_many :teams, through: :divisions
   has_many :matches, through: :divisions
-  belongs_to :champion, class_name: 'Team'
+  belongs_to :champion, class_name: 'Team', optional: true
 
   def latest?
     Season.order(:start_date).last == self
