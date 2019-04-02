@@ -231,4 +231,17 @@ class Division < ApplicationRecord
 
     output_matches
   end
+
+  def schedule_balance
+    output = {}
+    teams.each do |t|
+      output[t.name] = -8000
+
+      t.matches.where(division: self).each do |m|
+        output[t.name] = output[t.name] + m.team_info(t.id)[:opponent].elo_cache
+      end
+    end
+
+    output
+  end
 end
