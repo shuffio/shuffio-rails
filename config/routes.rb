@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources 'teams' do
       collection do
-        get :challenge
+        get :summary
         post :import
         post :import_selection
       end

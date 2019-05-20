@@ -7,9 +7,9 @@ class Admin::TeamsController < Admin::BaseController
              end
   end
 
-  def challenge
+  def summary
     respond_to do |format|
-      format.csv { send_data Team.challenge_csv, filename: 'challenge-teams.csv' }
+      format.csv { send_data Team.summary_csv, filename: 'teams-summary.csv' }
     end
   end
 

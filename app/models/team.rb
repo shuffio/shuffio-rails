@@ -122,19 +122,18 @@ class Team < ApplicationRecord
     rounds[furthest_round]
   end
 
-  def challenge_info
+  def summary_info
     [
       name,
       elo_cache,
       seasons.count,
       "#{season_record[:wins]}-#{season_record[:losses]}",
       playoff_appearances.count,
-      furthest_playoff_run,
-      '' # TODO: Florida
+      furthest_playoff_run
     ]
   end
 
-  def self.challenge_csv
+  def self.summary_csv
     require 'csv'
 
     attributes = [
@@ -143,17 +142,15 @@ class Team < ApplicationRecord
       'Number of Seasons',
       'Current Season Record',
       'Number of Playoffs',
-      'Furthest Playoff Run',
-      'Can-Am Tournament'
+      'Furthest Playoff Run'
     ]
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
       Team.all.order('elo_cache DESC').each do |t|
-        csv << t.challenge_info
+        csv << t.summary_info
       end
-      # csv << Team.all.order(:elo_cache).map{ |t| t.challenge_info }
     end
   end
 
