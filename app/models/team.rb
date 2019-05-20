@@ -54,6 +54,10 @@ class Team < ApplicationRecord
     division ? record(matches.where(division: division)) : record(matches.where.not(division: nil))
   end
 
+  def season_record(season = Season.latest)
+    record(matches.where('division_id IN (?)', season.divisions.ids))
+  end
+
   def self.reset_all_elo
     Team.all.find_each(&:set_default_elo)
   end
@@ -84,6 +88,73 @@ class Team < ApplicationRecord
 
   def missing_results?
     missing_results.any?
+  end
+
+  def playoff_appearances
+    # TODO: we need to finish the brackets branch and make this relational
+    playoffs = []
+    matches.where('comment LIKE ? AND comment NOT LIKE ?', '%Playoffs%', '%Consolation Bracket').find_each do |m|
+      season = m.comment.split(/ - /)[0]
+      playoffs.push(season) unless playoffs.include?(season)
+    end
+
+    playoffs
+  end
+
+  def furthest_playoff_run
+    rounds = [
+      '',
+      'Group Play',
+      'Round of 16',
+      'Round of 8',
+      'Semi-Finals',
+      '3rd Place Game',
+      'Finals'
+    ]
+
+    furthest_round = 0
+
+    matches.where('comment LIKE ?', '%Playoffs%').find_each do |m|
+      round_num = rounds.index(m.comment.split(/ - /)[1])
+      furthest_round = round_num if round_num && round_num > furthest_round
+    end
+
+    rounds[furthest_round]
+  end
+
+  def challenge_info
+    [
+      name,
+      elo_cache,
+      seasons.count,
+      "#{season_record[:wins]}-#{season_record[:losses]}",
+      playoff_appearances.count,
+      furthest_playoff_run,
+      '' # TODO: Florida
+    ]
+  end
+
+  def self.challenge_csv
+    require 'csv'
+
+    attributes = [
+      'Name',
+      'ELO',
+      'Number of Seasons',
+      'Current Season Record',
+      'Number of Playoffs',
+      'Furthest Playoff Run',
+      'Can-Am Tournament'
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      Team.all.order('elo_cache DESC').each do |t|
+        csv << t.challenge_info
+      end
+      # csv << Team.all.order(:elo_cache).map{ |t| t.challenge_info }
+    end
   end
 
   # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }

@@ -7,6 +7,12 @@ class Admin::TeamsController < Admin::BaseController
              end
   end
 
+  def challenge
+    respond_to do |format|
+      format.csv { send_data Team.challenge_csv, filename: 'challenge-teams.csv' }
+    end
+  end
+
   def new
     @team = Team.new
   end
