@@ -6,7 +6,7 @@ class Team < ApplicationRecord
   has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
 
   validates :name, presence: true
-  validates :captain, presence: true
+  validates :captain
 
   around_update :check_for_rename
 
