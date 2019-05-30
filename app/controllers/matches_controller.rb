@@ -1,4 +1,11 @@
 class MatchesController < ApplicationController
+  def show
+    @match = Match.find(params[:id])
+
+    # TODO: non-json view as well
+    render json: @match, include: [:games]
+  end
+
   def new
     @match = Match.new
     @tames = Team.all.order('name')

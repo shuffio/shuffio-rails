@@ -10,15 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_20_021156) do
+ActiveRecord::Schema.define(version: 2019_05_13_031941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "brackets", force: :cascade do |t|
-    t.string "name"
-    t.text "match_id_blob"
-  end
 
   create_table "divisions", force: :cascade do |t|
     t.string "name"
@@ -36,6 +31,17 @@ ActiveRecord::Schema.define(version: 2019_01_20_021156) do
     t.index ["team_id", "division_id"], name: "index_divisions_teams_on_team_id_and_division_id"
   end
 
+  create_table "games", force: :cascade do |t|
+    t.bigint "match_id"
+    t.integer "number"
+    t.bigint "yellow_team_id"
+    t.bigint "black_team_id"
+    t.json "frames"
+    t.index ["black_team_id"], name: "index_games_on_black_team_id"
+    t.index ["match_id"], name: "index_games_on_match_id"
+    t.index ["yellow_team_id"], name: "index_games_on_yellow_team_id"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.string "location"
     t.datetime "time"
@@ -50,8 +56,6 @@ ActiveRecord::Schema.define(version: 2019_01_20_021156) do
     t.integer "home_new_elo"
     t.integer "away_old_elo"
     t.integer "away_new_elo"
-    t.bigint "bracket_id"
-    t.index ["bracket_id"], name: "index_matches_on_bracket_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
 

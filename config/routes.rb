@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post '/divisions/:id/week/:week/report', to: 'divisions#week_report', as: :division_week_report
 
   resources :faq, only: [:index]
+  resources :games, only: [:update]
+  resources :live, only: [:index]
   resources :matches
   resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]
