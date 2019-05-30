@@ -5,7 +5,7 @@
 function onEdit(e) {
   re = new RegExp("^Game", "i");
   if(e.range.getSheet().getName().match(re)) {
-    var game_sheet = e.getSheet();
+    var game_sheet = e.range.getSheet();
     var game_number = getGameFromRange(e.range);
     updateServer(game_sheet, game_number);
   }
