@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :faq, only: [:index]
   resources :games, only: [:update]
   resources :live, only: [:index]
+  resources :live_events, only: [:update]
   resources :matches
   resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]

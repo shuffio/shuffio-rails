@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_13_031941) do
+ActiveRecord::Schema.define(version: 2019_06_01_155530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 2019_05_13_031941) do
     t.index ["black_team_id"], name: "index_games_on_black_team_id"
     t.index ["match_id"], name: "index_games_on_match_id"
     t.index ["yellow_team_id"], name: "index_games_on_yellow_team_id"
+  end
+
+  create_table "live_events", force: :cascade do |t|
+    t.boolean "show_bracket", default: false
+    t.bigint "left_game_id"
+    t.bigint "right_game_id"
+    t.index ["left_game_id"], name: "index_live_events_on_left_game_id"
+    t.index ["right_game_id"], name: "index_live_events_on_right_game_id"
   end
 
   create_table "matches", force: :cascade do |t|
