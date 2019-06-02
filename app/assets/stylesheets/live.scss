@@ -40,14 +40,19 @@ body {
 }
 
 .rp-logo {
-  width: 200px;
-  padding-top: 100px;
-}
-
-.court-text {
+  width: 175px;
   padding-top: 50px;
 }
 
 .court-number {
   font-size: 200px;
+  line-height: 150px;
+}
+
+.court-divider {
+  background-color: $white;
+}
+
+.inverted {
+	filter: invert(100%);
 }
