@@ -23,16 +23,49 @@
       <% end %>
     </table>
   </div>
-  <div class="col-lg-2 offset-lg-1 live-description">
+
+  <div class="col-lg-2 offset-lg-1 live-description d-none d-lg-block">
     <img class="rp-logo" src="https://static1.squarespace.com/static/5a733ffdf6576ec0595d419e/t/5a746c939140b7e05611c436/1517579417533/RP+CHICAGO.png"/>
-    <br>
+
+    <hr class="court-divider">
+
     <div class="court-text">
-      <span class="court-number"><%= @live_event.left_court_number %></span><br>
-      <span class="court-number"><%= @live_event.right_court_number %></span><br>
+      <i class="fas fa-arrow-left fa-2x"></i>
+      <br><br>
+
+      Court<br>
+      <span class="court-number"><%= @live_event.left_court_number %></span><br><br>
+      <%= @live_event.left_description %><br><br>
+
+      <br>
+      <i class="fas fa-arrow-left fa-2x"></i>
+      <hr class="court-divider">
+      <i class="fas fa-arrow-right fa-2x"></i>
+      <br><br>
+
+      Court<br>
+      <span class="court-number"><%= @live_event.right_court_number %></span><br><br>
+      <%= @live_event.right_description %><br><br>
+
+      <br>
+      <i class="fas fa-arrow-right fa-2x"></i>
+
+      <br><hr class="court-divider"><br>
+
+      <span class="inverted"><%= image_tag "tangs-biscuit.png", height: "100px" %></span><br>
+      royalpalms.shuff.io/live
     </div>
-
-
   </div>
+
+  <div class="live-description d-lg-none">
+    &nbsp
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
   <div class="col-lg-4 offset-lg-1 live-score">
     <table class="table">
       <tr class="team-box">
