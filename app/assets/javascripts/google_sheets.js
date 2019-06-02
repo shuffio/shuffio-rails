@@ -8,7 +8,41 @@ function onEdit(e) {
     var game_sheet = e.range.getSheet();
     var game_number = getGameFromRange(e.range);
     updateServer(game_sheet, game_number);
+  } else if (e.range.getSheet().getName() == "Options") {
+    updateOptions(e.range.getSheet());
   }
+}
+
+function updateOptions(options_sheet) {
+  var host = options_sheet.getRange("B15").getValue();
+  var secret = options_sheet.getRange("B16").getValue();
+  var live_event_id = options_sheet.getRange("B1").getValue();
+
+  // Post update to live_event
+  url = host + '/live_events/' + live_event_id + '.json';
+
+  var data = {
+    'show_bracket': false, // TODO: Parse bool in B2
+    'left_match_id': options_sheet.getRange("B4").getValue(),
+    'left_game_number': options_sheet.getRange("B5").getValue(),
+    'left_court_number': options_sheet.getRange("B6").getValue(),
+    'left_description': options_sheet.getRange("B7").getValue(),
+    'right_match_id': options_sheet.getRange("B9").getValue(),
+    'right_game_number': options_sheet.getRange("B10").getValue(),
+    'right_court_number': options_sheet.getRange("B11").getValue(),
+    'right_description': options_sheet.getRange("B12").getValue()
+  };
+
+  var options = {
+    'method': 'put',
+    'contentType': 'application/json',
+    'muteHttpExceptions': true,
+    'headers': { 'live-secret': secret },
+    'payload': JSON.stringify(data)
+  };
+
+  resp = UrlFetchApp.fetch(url, options);
+  updateStatus(resp);
 }
 
 // Updates a game object on the backend from a sheet, game_number
@@ -41,7 +75,12 @@ function updateServer(game_sheet, game_number) {
   };
 
   resp = UrlFetchApp.fetch(url, options);
-  options_sheet.getRange("B19").setValue(new Date().toISOString())
+  updateStatus(resp);
+}
+
+function updateStatus(resp) {
+  var options_sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Options");
+  options_sheet.getRange("B19").setValue(new Date().toISOString());
   options_sheet.getRange("B20").setValue(resp.getResponseCode());
   options_sheet.getRange("B21").setValue(resp.getContentText());
 }
