@@ -11,8 +11,8 @@
       </tr>
 
       <tr>
-        <td class="yellow-head"><%= @team1.display_name %></td>
-        <td class="black-head"><%= @team2.display_name %></td>
+        <td class="yellow-head">&nbsp</td>
+        <td class="black-head">&nbsp</td>
       </tr>
 
       <% @left_game.frames.each do |f| %>
@@ -30,30 +30,27 @@
     <hr class="court-divider">
 
     <div class="court-text">
-      <i class="fas fa-arrow-left fa-2x"></i>
-      <br><br>
+      <i class="fas fa-arrow-left fa-2x"></i><br>
 
-      Court<br>
-      <span class="court-number"><%= @live_event.left_court_number %></span><br><br>
-      <%= @live_event.left_description %><br><br>
+      <span class="court-title">Court</span><br>
+      <span class="court-number"><%= @live_event.left_court_number %></span><br>
+      <%= @live_event.left_description %><br>
 
-      <br>
       <i class="fas fa-arrow-left fa-2x"></i>
       <hr class="court-divider">
       <i class="fas fa-arrow-right fa-2x"></i>
-      <br><br>
-
-      Court<br>
-      <span class="court-number"><%= @live_event.right_court_number %></span><br><br>
-      <%= @live_event.right_description %><br><br>
-
       <br>
+
+      <span class="court-title">Court</span><br>
+      <span class="court-number"><%= @live_event.right_court_number %></span><br>
+      <%= @live_event.right_description %><br>
+
       <i class="fas fa-arrow-right fa-2x"></i>
 
-      <br><hr class="court-divider"><br>
+      <br><hr class="court-divider">
 
       <span class="inverted"><%= image_tag "tangs-biscuit.png", height: "100px" %></span><br>
-      royalpalms.shuff.io/live
+      https://shuff.io/live
     </div>
   </div>
 
@@ -78,8 +75,8 @@
       </tr>
 
       <tr>
-        <td class="yellow-head"><%= @team3.display_name %></td>
-        <td class="black-head"><%= @team4.display_name %></td>
+        <td class="yellow-head">&nbsp</td>
+        <td class="black-head">&nbsp</td>
       </tr>
 
       <% @right_game.frames.each do |f| %>
