@@ -1,0 +1,41 @@
+<% provide :title, '[Admin] Matches' %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Away Team</th>
+          <th>Home Team</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @matches.each do |m| %>
+          <tr>
+            <td class="align-middle"><span data-toggle="tooltip" data-placement="top" title="<%= "#{ m.location }" if m.location %>"><%= m.formatted_datetime %></span></td>
+
+            <td class="align-middle <%= 'font-weight-bold' if m.away_score > m.home_score %>">
+              <%= link_to m.away_team.display_name, team_path(m.away_team) %>
+            </td>
+
+            <td class="align-middle <%= 'font-weight-bold' if m.home_score > m.away_score %>">
+              <%= link_to m.home_team.display_name, team_path(m.home_team) %>
+            </td>
+
+            <td class="align-middle">
+              <button class="btn btn-warning">Edit</button>
+              <% if m.comment %>
+                <span data-toggle="tooltip" data-placement="top" title="<%= m.comment %>"><i class="fas fa-info-circle"></i></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @matches, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+  </div>
+</div>

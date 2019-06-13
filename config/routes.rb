@@ -15,6 +15,8 @@ Rails.application.routes.draw do
         post :import_selection
       end
     end
+
+    resources :matches, only: [:index]
   end
 
   resources :divisions, only: [:index, :show]
