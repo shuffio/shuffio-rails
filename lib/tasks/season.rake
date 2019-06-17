@@ -1,38 +1,38 @@
 namespace :season do
-  desc 'Create Spring 2019'
-  task create_spring_2019: :environment do
-    spring = Season.find_or_create_by(name: 'Spring 2019') do |s|
+  desc 'Create Summer 2019'
+  task create_summer_2019: :environment do
+    summer = Season.find_or_create_by(name: 'Summer 2019') do |s|
       s.start_date = '2019-04-01'
       s.playoff_date = '2019-06-02'
       s.banquet_date = '2019-06-03'
     end
 
-    Division.find_or_create_by(name: 'Monday Pilot', season: spring) do |d|
+    Division.find_or_create_by(name: 'Monday Pilot', season: summer) do |d|
       d.day_of_week = 1
       d.time = '18:30'
     end
 
-    Division.find_or_create_by(name: 'Monday Cherry', season: spring) do |d|
+    Division.find_or_create_by(name: 'Monday Cherry', season: summer) do |d|
       d.day_of_week = 1
       d.time = '19:30'
     end
 
-    Division.find_or_create_by(name: 'Monday Hammer', season: spring) do |d|
+    Division.find_or_create_by(name: 'Monday Hammer', season: summer) do |d|
       d.day_of_week = 1
       d.time = '20:30'
     end
 
-    Division.find_or_create_by(name: 'Tuesday Pilot', season: spring) do |d|
+    Division.find_or_create_by(name: 'Tuesday Pilot', season: summer) do |d|
       d.day_of_week = 2
       d.time = '18:30'
     end
 
-    Division.find_or_create_by(name: 'Tuesday Cherry', season: spring) do |d|
+    Division.find_or_create_by(name: 'Tuesday Cherry', season: summer) do |d|
       d.day_of_week = 2
       d.time = '19:30'
     end
 
-    Division.find_or_create_by(name: 'Tuesday Hammer', season: spring) do |d|
+    Division.find_or_create_by(name: 'Tuesday Hammer', season: summer) do |d|
       d.day_of_week = 2
       d.time = '20:30'
     end
@@ -41,7 +41,7 @@ namespace :season do
   desc 'Set up Schedule for a Season'
   task schedule: :environment do
     ActiveRecord::Base.logger.level = 1
-    season = Season.find_by(name: 'Spring 2019')
+    season = Season.find_by(name: 'Summer 2019')
 
     abort 'Season already has matches scheduled, aborting' if season.matches.any?
 
@@ -57,7 +57,7 @@ namespace :season do
   desc 'Report on uneven bye weeks'
   task bye_report: :environment do
     ActiveRecord::Base.logger.level = 1
-    season = Season.find_by(name: 'Spring 2019')
+    season = Season.find_by(name: 'Summer 2019')
 
     season.divisions.each do |d|
       away_teams = d.matches_for_week(1).map(&:away_team)

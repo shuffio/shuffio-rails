@@ -177,6 +177,9 @@ class Division < ApplicationRecord
 
     # Sort teams into away and home via snake order
     s_teams = teams.order(:elo_cache)
+
+    raise 'Automatic schedule requires 16, 18, or 20 teams' unless teams.count >= 16 && teams.count <= 20 && teams.count.even?
+
     away_teams = [
       s_teams[0],
       s_teams[3],
@@ -185,9 +188,7 @@ class Division < ApplicationRecord
       s_teams[8],
       s_teams[11],
       s_teams[12],
-      s_teams[15],
-      s_teams[16],
-      s_teams[19]
+      s_teams[15]
     ]
     home_teams = [
       s_teams[1],
@@ -197,10 +198,22 @@ class Division < ApplicationRecord
       s_teams[9],
       s_teams[10],
       s_teams[13],
-      s_teams[14],
-      s_teams[17],
-      s_teams[18]
+      s_teams[14]
     ]
+
+    court_count = 8
+
+    if teams.count >= 18
+      away_teams.push(s_teams[16])
+      home_teams.push(s_teams[17])
+      court_count = 9
+    end
+
+    if teams.count == 20
+      away_teams.push(s_teams[19])
+      home_teams.push(s_teams[18])
+      court_count = 10
+    end
 
     # Randomize teams
     away_teams.shuffle!
@@ -209,7 +222,7 @@ class Division < ApplicationRecord
     # Set up 8 weeks
     8.times do |w|
       # Set up week 1
-      10.times do |i|
+      court_count.times do |i|
         output_matches.push(Match.new(
                               time: match_time_for_week(w + 1),
                               division: self,
@@ -226,7 +239,7 @@ class Division < ApplicationRecord
       # Home teams decreate court # (2,1,10,9,etc)
       home_teams.rotate!(1)
       # In week 5, home moves twice
-      home_teams.rotate!(1) if w == 3
+      home_teams.rotate!(1) if w == 3 && teams.count != 18
     end
 
     output_matches
