@@ -177,6 +177,8 @@ class Division < ApplicationRecord
 
     # Sort teams into away and home via snake order
     s_teams = teams.order(:elo_cache)
+    # TODO: programatically snake, as the size may not be 20
+    # TODO: die if uneven or below 16?
     away_teams = [
       s_teams[0],
       s_teams[3],
@@ -209,6 +211,7 @@ class Division < ApplicationRecord
     # Set up 8 weeks
     8.times do |w|
       # Set up week 1
+      # TODO: 8, 9, or 10 times
       10.times do |i|
         output_matches.push(Match.new(
                               time: match_time_for_week(w + 1),
@@ -226,6 +229,7 @@ class Division < ApplicationRecord
       # Home teams decreate court # (2,1,10,9,etc)
       home_teams.rotate!(1)
       # In week 5, home moves twice
+      # TODO: does this cause repeats in schedule if 16 teams?
       home_teams.rotate!(1) if w == 3
     end
 
