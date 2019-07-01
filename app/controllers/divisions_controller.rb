@@ -43,6 +43,11 @@ class DivisionsController < ApplicationController
 
     @matches = @division.matches_for_week(@week)
     @time = @division.match_time_for_week(@week)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @division.matchup_csv(@week), filename: "matchup-#{@division.name.parameterize}-week#{@week}.csv" }
+    end
   end
 
   def week_report

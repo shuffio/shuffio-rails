@@ -102,6 +102,17 @@ class Match < ApplicationRecord
     home_score == away_score
   end
 
+  def matchup_summary
+    away_record = away_team.record
+    home_record = home_team.record
+
+    [
+      [location, away_team.name, home_team.name],
+      ['ELO', away_team.elo_cache, home_team.elo_cache],
+      ['Record', "#{away_record[:wins]}-#{away_record[:losses]}", "#{home_record[:wins]}-#{home_record[:losses]}"]
+    ]
+  end
+
   def self.recalculate_all_elo
     # Disable logging
     old_logger = ActiveRecord::Base.logger
