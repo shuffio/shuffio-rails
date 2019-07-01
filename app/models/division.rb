@@ -244,4 +244,24 @@ class Division < ApplicationRecord
 
     output_matches
   end
+
+  # CSV of the weeks matchups
+  def matchup_csv(week)
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ["#{season.name} - #{name}"]
+      csv << ["Week #{week}"]
+
+      # Leave space at top
+      4.times { csv << [] }
+
+      matches_for_week(week).each do |m|
+        m.matchup_summary.each { |r| csv << r }
+
+        # Leave room for manual info
+        5.times { csv << [] }
+      end
+    end
+  end
 end
