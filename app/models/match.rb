@@ -109,7 +109,7 @@ class Match < ApplicationRecord
     [
       [location, away_team.name, home_team.name],
       ['ELO', away_team.elo_cache, home_team.elo_cache],
-      ['Record', "#{away_record[:wins]}-#{away_record[:losses]}", "#{home_record[:wins]}-#{home_record[:losses]}"]
+      ['Record', "#{away_record[:wins]}-#{away_record[:losses]}\t", "#{home_record[:wins]}-#{home_record[:losses]}\t"]
     ]
   end
 
