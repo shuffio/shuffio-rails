@@ -94,7 +94,7 @@ class Team < ApplicationRecord
     # TODO: we need to finish the brackets branch and make this relational
     playoffs = []
     matches.where('comment LIKE ? AND comment NOT LIKE ?', '%Playoffs%', '%Consolation Bracket').find_each do |m|
-      season = m.comment.split(/ - /)[0]
+      season = "#{m.comment.split(/ Playoffs - /)[0]} #{m.time.year}"
       playoffs.push(season) unless playoffs.include?(season)
     end
 
