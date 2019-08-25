@@ -113,6 +113,25 @@ class Match < ApplicationRecord
     ]
   end
 
+  def export_summary
+    [
+      id,
+      time.in_time_zone('America/Chicago').iso8601,
+      location,
+      division ? division.name : '',
+      comment,
+      home_team.name,
+      away_team.name,
+      winner ? winner.name : '',
+      home_score,
+      away_score,
+      home_old_elo,
+      home_new_elo,
+      away_old_elo,
+      away_new_elo
+    ]
+  end
+
   def self.recalculate_all_elo
     # Disable logging
     old_logger = ActiveRecord::Base.logger

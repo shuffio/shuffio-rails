@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
+    resources 'seasons', only: [:show]
     resources 'teams' do
       collection do
         post :import
