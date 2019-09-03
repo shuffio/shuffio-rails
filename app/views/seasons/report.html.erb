@@ -1,0 +1,12 @@
+<% provide :title, "#{@season.name} Season Report" %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <h1><%= @season.name %> Season Report</h1>
+
+    <% if @season.report %>
+      <%= @season.report.html_safe %>
+    <% else %>
+      No report written
+    <% end %>
+  </div>
+</div>

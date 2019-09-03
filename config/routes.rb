@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :matches
   resources :privacy, only: [:index]
   resources :seasons, only: [:index, :show]
+  get '/seasons/:id/report', to: 'seasons#report', as: :season_report
   resources :teams, only: [:index, :show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

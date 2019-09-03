@@ -22,4 +22,8 @@ class SeasonsController < ApplicationController
 
     render template: 'seasons/show'
   end
+
+  def report
+    @season = Season.find(params[:id])
+  end
 end

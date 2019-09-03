@@ -6,6 +6,7 @@
         <td>Season</td>
         <td>Start</td>
         <td>Banquet</td>
+        <td></td>
       </tr>
 
       <% @seasons.each do |s| %>
@@ -13,6 +14,7 @@
           <td><%= link_to s.name, season_path(s.id) %></td>
           <td><%= s.start_date %></td>
           <td><%= s.banquet_date %></td>
+          <td><%= s.report? ? link_to('<i class="fas fa-file-alt"></i> Report'.html_safe, season_report_path(s.id)) : '' %></td>
         </tr>
       <% end %>
     </table>
