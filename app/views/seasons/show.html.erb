@@ -1,6 +1,11 @@
 <% provide :title, @season.name %>
 <h3><%= @season.name %></h3>
 
+<% if @season.report? %>
+  <%= link_to '<i class="fas fa-file-alt"></i> Report'.html_safe, season_report_path(@season.id), class: 'btn btn-primary' %>
+  <br><br>
+<% end %>
+
 <div class="row">
   <% @monday_divisions.each do |d| %>
     <div class="col-lg-4">

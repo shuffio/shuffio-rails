@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_155530) do
+ActiveRecord::Schema.define(version: 2019_09_03_032159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_06_01_155530) do
     t.date "playoff_date"
     t.date "banquet_date"
     t.integer "champion_id"
+    t.text "report"
   end
 
   create_table "teams", force: :cascade do |t|
