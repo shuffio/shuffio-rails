@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/kevinreedy/elo.git
+  revision: 71862f496977fce9b36d1d0bb35058748a5c7947
+  ref: 71862f496977fce9b36d1d0bb35058748a5c7947
+  specs:
+    elo (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -87,7 +94,6 @@ GEM
     dotenv-rails (2.6.0)
       dotenv (= 2.6.0)
       railties (>= 3.2, < 6.0)
-    elo (0.1.0)
     erubi (1.8.0)
     execjs (2.7.0)
     faraday (0.15.4)
@@ -298,7 +304,7 @@ DEPENDENCIES
   color-generator
   devise
   dotenv-rails
-  elo
+  elo!
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
