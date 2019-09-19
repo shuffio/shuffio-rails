@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   get '/seasons/:id/report', to: 'seasons#report', as: :season_report
   resources :teams, only: [:index, :show]
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
