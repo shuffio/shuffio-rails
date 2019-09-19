@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  belongs_to :player, optional: true
+
   def self.from_omniauth(access_token)
     data = access_token.info
     User.find_or_create_by!(email: access_token.info['email']) do |user|

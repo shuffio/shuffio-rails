@@ -4,6 +4,8 @@ class Team < ApplicationRecord
   has_and_belongs_to_many :divisions
   has_many :seasons, through: :divisions
   has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
+  has_and_belongs_to_many :players
+  # TODO: move Captains to Player objects
 
   validates :name, presence: true
 

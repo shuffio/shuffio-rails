@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_040326) do
+ActiveRecord::Schema.define(version: 2019_09_19_051858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,21 @@ ActiveRecord::Schema.define(version: 2019_09_19_040326) do
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
+  create_table "players_teams", id: false, force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "team_id", null: false
+    t.boolean "primary", default: true
+    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id"
+    t.index ["team_id", "player_id"], name: "index_players_teams_on_team_id_and_player_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -109,7 +124,9 @@ ActiveRecord::Schema.define(version: 2019_09_19_040326) do
     t.boolean "is_admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "player_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["player_id"], name: "index_users_on_player_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
