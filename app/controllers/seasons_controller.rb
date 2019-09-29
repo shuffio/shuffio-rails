@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = Season.all
+    @seasons = Season.all.order(start_date: :desc)
   end
 
   def show
