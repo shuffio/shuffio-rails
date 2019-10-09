@@ -20,9 +20,11 @@ class Team < ApplicationRecord
   end
 
   def match_count
-    return matches.count unless starting_match_count
+    count = matches.where('time <= ?', Time.now).count
 
-    matches.count + starting_match_count
+    return count unless starting_match_count
+
+    count + starting_match_count
   end
 
   def record(team_matches = nil)
