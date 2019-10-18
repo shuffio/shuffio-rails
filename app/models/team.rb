@@ -136,7 +136,7 @@ class Team < ApplicationRecord
   end
 
   def short_name=(value)
-    super(value.blank? ? nil : value)
+    super(value.presence)
   end
 
   private
