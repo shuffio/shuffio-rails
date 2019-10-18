@@ -82,8 +82,8 @@
           <% end %>
           <% if @team.starting_elo %>
             <tr>
-              <td class="align-middle">Spring 2018</td>
-              <td class="align-middle"><%= "#{ @team.starting_wins }-#{ @team.starting_losses }" %> Record in Spring 2018 Season</td>
+              <td class="align-middle">Former Season</td>
+              <td class="align-middle"><%= "#{ @team.starting_wins }-#{ @team.starting_losses }" %> Record in Former Season</td>
               <td class="align-middle text-nowrap">
                 <%= @team.starting_elo %>
                 <% if @team.starting_elo > 1000 %>
@@ -95,7 +95,7 @@
                 <% end %>
               </td>
               <td class="align-middle">
-                <span data-toggle="tooltip" data-placement="top" title="Spring 2018 Season ELO estimated based on team record"><i class="fas fa-info-circle"></i></span>
+                <span data-toggle="tooltip" data-placement="top" title="Former Season ELO estimated based on team record"><i class="fas fa-info-circle"></i></span>
               </td>
             </tr>
           <% end %>

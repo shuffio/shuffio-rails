@@ -6,7 +6,6 @@ class Team < ApplicationRecord
   has_many :championships, class_name: 'Season', foreign_key: 'champion_id'
 
   validates :name, presence: true
-  validates :captain, presence: true
 
   around_update :check_for_rename
 
@@ -21,9 +20,11 @@ class Team < ApplicationRecord
   end
 
   def match_count
-    return matches.count unless starting_match_count
+    count = matches.where('time <= ?', Time.now).count
 
-    matches.count + starting_match_count
+    return count unless starting_match_count
+
+    count + starting_match_count
   end
 
   def record(team_matches = nil)
@@ -113,6 +114,25 @@ class Team < ApplicationRecord
     end
 
     output
+  end
+
+  def self.find_from_la_csv(csv_data)
+    require 'csv'
+
+    # Parse CSV data
+    csv = CSV.new(csv_data, headers: true, header_converters: :symbol)
+    teams = csv.to_a.map { |row| row.to_hash.slice(:name, :captain) }
+
+    # Find existing team
+    teams.each do |t|
+      if (existing_team = Team.find_by(captain: t[:captain]))
+        t[:existing_team_id] = existing_team.id
+      elsif (existing_team = Team.find_by(name: t[:name]))
+        t[:existing_team_id] = existing_team.id
+      end
+    end
+
+    teams
   end
 
   private

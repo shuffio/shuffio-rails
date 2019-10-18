@@ -170,4 +170,98 @@ class Division < ApplicationRecord
       }
     end
   end
+
+  # Returns array of Matches, but doesn't save them
+  def setup_matches
+    output_matches = []
+
+    # Sort teams into away and home via snake order
+    s_teams = teams.order(:elo_cache)
+
+    raise 'Automatic schedule requires 16, 18, or 20 teams' unless teams.count >= 16 && teams.count <= 20 && teams.count.even?
+
+    away_teams = [
+      s_teams[0],
+      s_teams[3],
+      s_teams[4],
+      s_teams[7],
+      s_teams[8],
+      s_teams[11],
+      s_teams[12],
+      s_teams[15]
+    ]
+    home_teams = [
+      s_teams[1],
+      s_teams[2],
+      s_teams[5],
+      s_teams[6],
+      s_teams[9],
+      s_teams[10],
+      s_teams[13],
+      s_teams[14]
+    ]
+
+    court_count = 8
+
+    if teams.count >= 18
+      away_teams.push(s_teams[16])
+      home_teams.push(s_teams[17])
+      court_count = 9
+    end
+
+    if teams.count == 20
+      away_teams.push(s_teams[19])
+      home_teams.push(s_teams[18])
+      court_count = 10
+    end
+
+    # Randomize teams
+    away_teams.shuffle!
+    home_teams.shuffle!
+
+    # Set up 8 weeks
+    8.times do |w|
+      # Set up week 1
+      court_count.times do |i|
+        output_matches.push(Match.new(
+                              time: match_time_for_week(w + 1),
+                              division: self,
+                              location: "Court #{format('%02d', i + 1)}",
+                              away_team: away_teams[i],
+                              home_team: home_teams[i],
+                              away_score: 0,
+                              home_score: 0
+                            ))
+      end
+
+      # Away teams increase court # (1,2,3,4,etc)
+      away_teams.rotate!(-1)
+      # Home teams decreate court # (2,1,10,9,etc)
+      home_teams.rotate!(1)
+      # In week 5, home moves twice
+      home_teams.rotate!(1) if w == 3 && teams.count != 18
+    end
+
+    output_matches
+  end
+
+  # CSV of the weeks matchups
+  def matchup_csv(week)
+    require 'csv'
+
+    CSV.generate(headers: true) do |csv|
+      csv << ["#{season.name} - #{name}"]
+      csv << ["Week #{week}"]
+
+      # Leave space at top
+      4.times { csv << [] }
+
+      matches_for_week(week).each do |m|
+        m.matchup_summary.each { |r| csv << r }
+
+        # Leave room for manual info
+        5.times { csv << [] }
+      end
+    end
+  end
 end

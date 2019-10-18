@@ -4,6 +4,7 @@ class Match < ApplicationRecord
   belongs_to :home_team, class_name: 'Team'
   belongs_to :away_team, class_name: 'Team'
   belongs_to :division, optional: true
+  has_many :games, dependent: :nullify
 
   # TODO: Fix callback to work on updates
   after_create :calculate_elo
@@ -99,6 +100,36 @@ class Match < ApplicationRecord
 
   def tied?
     home_score == away_score
+  end
+
+  def matchup_summary
+    away_record = away_team.record
+    home_record = home_team.record
+
+    [
+      [location, away_team.name, home_team.name],
+      ['ELO', away_team.elo_cache, home_team.elo_cache],
+      ['Record', "#{away_record[:wins]}-#{away_record[:losses]}\t", "#{home_record[:wins]}-#{home_record[:losses]}\t"]
+    ]
+  end
+
+  def export_summary
+    [
+      id,
+      time.in_time_zone('America/Chicago').iso8601,
+      location,
+      division ? division.name : '',
+      comment,
+      home_team.name,
+      away_team.name,
+      winner ? winner.name : '',
+      home_score,
+      away_score,
+      home_old_elo,
+      home_new_elo,
+      away_old_elo,
+      away_new_elo
+    ]
   end
 
   def self.recalculate_all_elo

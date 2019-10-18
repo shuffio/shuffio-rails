@@ -1,0 +1,61 @@
+@import "bootstrap";
+@import "application";
+
+body {
+  background-color: $black;
+  color: $white;
+}
+
+.live-score {
+  // background-color: $teal;
+  background-color: $black;
+  text-align: center;
+}
+
+.live-description {
+  background-color: $black;
+  text-align: center;
+  color: $white;
+}
+
+.yellow-head {
+  background-color: $yellow;
+  color: $black;
+  font-size: 16px;
+}
+
+.black-head {
+  background-color: $almost-black;
+  color: $white;
+  font-size: 16px;
+}
+
+.score-box {
+  color: $white;
+  font-size: 80px;
+}
+
+.score-box td {
+  padding: 0px;
+}
+
+.rp-logo {
+  width: 175px;
+}
+
+.court-text {
+  font-size: 32px;
+}
+
+.court-number {
+  font-size: 200px;
+  line-height: 150px;
+}
+
+.court-divider {
+  background-color: $white;
+}
+
+.inverted {
+	filter: invert(100%);
+}

@@ -1,15 +1,30 @@
 <% provide :title, '[Admin] Teams' %>
 <div class="row">
   <div class="col-lg-8 offset-lg-2">
-    <div class="col-lg-6 offset-lg-3 team-toggle btn-group btn-group-toggle" data-toggle="buttons">
-      <%= link_to 'Active Teams',
-                    admin_teams_path,
-                    method: :get,
-                    class: "btn btn-info #{ params[:all_teams] ? 'active' : '' }" %>
-      <%= link_to 'All Teams',
-                    admin_teams_path(all_teams: true),
-                    method: :get,
-                    class: "btn btn-info #{ params[:all_teams] ? '' : 'active' }" %>
+    <div class="row">
+      <div class="col-lg-6 team-toggle btn-group btn-group-toggle" data-toggle="buttons">
+        <%= link_to 'Active Teams',
+                      admin_teams_path,
+                      method: :get,
+                      class: "btn btn-info #{ params[:all_teams] ? 'active' : '' }" %>
+        <%= link_to 'All Teams',
+                      admin_teams_path(all_teams: true),
+                      method: :get,
+                      class: "btn btn-info #{ params[:all_teams] ? '' : 'active' }" %>
+      </div>
+
+      <div class="col-lg-4 offset-lg-2 d-inline">
+
+        <%= form_tag import_admin_teams_path, method: :upload, multipart: true, id: 'import_admin_teams_form' do %>
+          <span>
+            <%= link_to '<i class="fas fa-plus"></i> Add'.html_safe, new_admin_team_path, class: 'btn btn-success' %>
+          </span>
+          <span class="btn btn-success btn-file">
+            <i class="fas fa-file-import"></i> Import
+            <%= file_field_tag :file, id: 'import_admin_teams_file' %>
+          </span>
+        <% end %>
+      </div>
     </div>
 
     <table class="table">

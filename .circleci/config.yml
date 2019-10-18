@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-       - image: circleci/ruby:2.6.1-node-browsers
+       - image: circleci/ruby:2.6.5-node-browsers
          environment:
            RAILS_ENV: test
            PGHOST: 127.0.0.1
@@ -54,7 +54,7 @@ jobs:
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
 
-            bundle exec rubocop -R
+            bundle exec rubocop
             bundle exec rspec --format progress \
                             --format RspecJunitFormatter \
                             --out /tmp/test-results/rspec.xml \

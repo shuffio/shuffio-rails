@@ -195,4 +195,44 @@ namespace :match do
       STDOUT.puts matches.first.inspect
     end
   end
+
+  desc 'Look at some of the best matches of the upcoming week'
+  task of_the_week: :environment do
+    ActiveRecord::Base.logger.level = 1
+
+    season = Season.last
+
+    begin
+      STDOUT.puts 'What Week (1-8)?'
+      week = STDIN.gets.strip.to_i
+    end until [*1..8].include?(week)
+
+    begin
+      STDOUT.puts 'What is the max ELO diff? (50 is a good default)'
+      elo_diff = STDIN.gets.strip.to_i
+    end until elo_diff.positive?
+
+    begin
+      STDOUT.puts 'What is the ELO floor? (1000 is a good default)'
+      elo_floor = STDIN.gets.strip.to_i
+    end until elo_floor.positive?
+
+    season.divisions.each do |d|
+      STDOUT.puts d.name
+      STDOUT.puts '==========='
+
+      d.matches_for_week(week).each do |m|
+        # skip if ELO is low
+        next if m.home_team.elo_cache <= elo_floor
+        next if m.away_team.elo_cache <= elo_floor
+
+        # skip if ELO difference is high
+        next if (m.home_team.elo_cache - m.away_team.elo_cache).abs > elo_diff
+
+        STDOUT.puts "#{m.location} - #{m.home_team.name} (#{m.home_team.elo_cache}) vs #{m.away_team.name} (#{m.away_team.elo_cache})"
+      end
+
+      STDOUT.puts ''
+    end
+  end
 end

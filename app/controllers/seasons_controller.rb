@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def index
-    @seasons = Season.all
+    @seasons = Season.all.order(start_date: :desc)
   end
 
   def show
@@ -21,5 +21,9 @@ class SeasonsController < ApplicationController
     @tuesday_divisions = @season.divisions.where(day_of_week: 2)
 
     render template: 'seasons/show'
+  end
+
+  def report
+    @season = Season.find(params[:id])
   end
 end
