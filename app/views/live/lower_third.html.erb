@@ -1,149 +1,141 @@
 <div class="row">
-  <div class="col-lg-4 live-score">
+  <div class="col-lg-4 lower-third">
     <table class="table">
         <tr class="l3-player-one">
-            <td class="l3-biscuits" rowspan=2>
+            <td class="l3-player-flag <%= "l3-yellow" %>">
+                &#58636;
             </td>
-            <td class="l3-player-flag">
-                FL
-            </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-yellow" %>">
                 <%= @team1.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-yellow" %>">
                 <%= @left_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer">
-                HAM
+            <td class="l3-hammer <%= "l3-yellow" %>">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
             <td class="l3-frame" rowspan=2>
-                4
+                <%= 4.ordinalize %>
             </td>
             
-            <td class="l3-divider">
+            <td class="l3-divider" rowspan=3>
             </td>
-            <td class="l3-player-flag">
-                FL
+            <td class="l3-player-flag <%= "l3-black" %>">
+                &#58636;
             </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-black" %>">
                 <%= @team3.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-black" %>">
                 <%= @right_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer">
-                HAM
+            <td class="l3-hammer <%= "l3-black" %>">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
             <td class="l3-frame" rowspan=2>
-                4
+                <%= 4.ordinalize %>
             </td>
 
-            <td class="l3-divider">
+            <td class="l3-divider" rowspan=3>
             </td>
-            <td class="l3-player-flag">
-                FL
+            <td class="l3-player-flag <%= "l3-yellow" %>">
+                &#127463;
             </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-yellow" %>">
                 <%= @team1.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-yellow" %>">
                 <%= @left_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer">
-                HAM
+            <td class="l3-hammer <%= "l3-yellow" %>">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
             <td class="l3-frame" rowspan=2>
-                4
+            <%= 4.ordinalize %>
             </td>
 
-            <td class="l3-divider">
+            <td class="l3-divider" rowspan=3>
             </td>
-            <td class="l3-player-flag">
-                FL
+            <td class="l3-player-flag <%= "l3-yellow" %>">
+                &#58638;
             </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-yellow" %>">
                 <%= @team3.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-yellow" %>">
             <%= @right_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer">
-                HAM
+            <td class="l3-hammer <%= "l3-yellow" %>">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
             <td class="l3-frame" rowspan=2>
-                4
+                <%= 4.ordinalize %>
             </td>
         </tr>
         <tr class="l3-player-two">
-            <td class="l3-player-flag">
-                FL
+            <td class="l3-player-flag <%= "l3-black" %>">
+                &#127462;
             </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-black" %>">
                 <%= @team2.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-black" %>">
                 <%= @left_game.eight_frames.last[1] %>
             </td>
-            <td class="l3-hammer">
+            <td class="l3-hammer <%= "l3-black" %>">
             
             </td>
 
-            <td class="l3-divider">
+            <td class="l3-player-flag <%= "l3-yellow" %>">
+                &#58635;
             </td>
-            <td class="l3-player-flag">
-                FL
-            </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-yellow" %>">
                 <%= @team4.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-yellow" %>">
                 <%= @right_game.eight_frames.last[1] %>
             </td>
-            <td class="l3-hammer">
+            <td class="l3-hammer <%= "l3-yellow" %>">
             
             </td>
 
-            <td class="l3-divider">
+            <td class="l3-player-flag <%= "l3-black" %>">
+                &#58636;
             </td>
-            <td class="l3-player-flag">
-                FL
-            </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-black" %>">
                 <%= @team2.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-black" %>">
                 <%= @left_game.eight_frames.last[1] %>
             </td>
-            <td class="l3-hammer">
+            <td class="l3-hammer <%= "l3-black" %>">
             
             </td>
 
-            <td class="l3-divider">
+            <td class="l3-player-flag <%= "l3-black" %>">
+                &#127462;
             </td>
-            <td class="l3-player-flag">
-                FL
-            </td>
-            <td class="l3-player-name">
+            <td class="l3-player-name <%= "l3-black" %>">
                 <%= @team4.name %>
             </td>
-            <td class="l3-score">
+            <td class="l3-score <%= "l3-black" %>">
                 <%= @right_game.eight_frames.last[1] %>
             </td>
-            <td class="l3-hammer">
+            <td class="l3-hammer <%= "l3-black" %>">
             
             </td>
         </tr>
         <tr class="l3-match">
-            <td colspan=6>
+            <td colspan=5>
                 Men's Finals
             </td>
-            <td colspan=6>
+            <td colspan=5>
                 Men's Semi-finals
             </td>
-            <td colspan=6>
+            <td colspan=5>
                 Women's Finals
             </td>
-            <td colspan=6>
+            <td colspan=5>
                 Women's Semi-finals
             </td>
         </tr>

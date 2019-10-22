@@ -1,0 +1,79 @@
+@import "bootstrap";
+@import "application";
+
+body {
+  background-color: $black;
+  color: $white;
+}
+
+.lower-third{
+  // background-color: $teal;
+  background-color: $black;
+  text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+  border-color: transparent;
+}
+
+.l3-player-one > td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.l3-player-two > td{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.l3-player-name{
+  text-align: left;
+  white-space:  nowrap;
+  font-weight: 600;
+}
+
+.l3-player-flag{
+
+}
+
+.l3-score{
+  font-weight: 900;
+  padding-right: 2px !important;
+}
+
+.l3-hammer{
+  text-align: left;
+  padding-left: 0px !important;
+}
+
+.l3-frame{
+  vertical-align: middle !important;
+  text-align: center;
+  font-weight: 600;
+  background-color: #c1f7dc;
+  border-top-right-radius: 25px;
+}
+
+.l3-divider{
+  padding: 10px !important;
+  background-color: black;
+}
+
+.l3-match{
+  font-style: italic;
+  font-weight: 600;
+  background-color: #c1f7dc;
+}
+
+.l3-match > td {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.l3-yellow{
+  background-color: #ffff8b;
+}
+
+.l3-black{
+  background-color: #A9A9A9;
+}

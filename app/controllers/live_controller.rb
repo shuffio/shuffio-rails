@@ -28,6 +28,6 @@ class LiveController < ApplicationController
     @team3 = @right_game.yellow_team || default_team
     @team4 = @right_game.black_team || default_team
 
-    render layout: 'live'
+    render layout: 'lower_third'
   end
 end
