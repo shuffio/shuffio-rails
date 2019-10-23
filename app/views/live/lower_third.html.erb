@@ -4,21 +4,21 @@
         <tr class="l3-match">       
             <td class="l3-match-gap" rowspan=1>
             </td>
-            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+            <td class="l3-game-name <%= "l3-black" %>" colspan=1>
                 Men's Finals
             </td>
-            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+            <td class="l3-frame <%= "l3-black" %>" colspan=2>
             <%= 4.ordinalize %> Frame
             </td>            
             <td class="l3-divider" rowspan=3>
             </td>     
             <td class="l3-match-gap" rowspan=1>
             </td>
-            <td class="l3-game-name <%= "l3-black" %>" colspan=1>
+            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
                 Men's Semi-finals
             </td>       
-            <td class="l3-frame <%= "l3-black" %>" colspan=2>
-            <%= 5.ordinalize %> Frame
+            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+            <%= 9.ordinalize %> Frame
             </td>            
             <td class="l3-divider" rowspan=3>
             </td>     
@@ -28,7 +28,7 @@
                 Women's Finals
             </td>
             <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
-            <%= 4.ordinalize %> Frame
+            <%= 5.ordinalize %> Frame
             </td>            
             <td class="l3-divider" rowspan=3>
             </td>     
@@ -38,45 +38,45 @@
                 Women's Semi-finals
             </td>
             <td class="l3-frame <%= "l3-yellow" %>" colspan=3>
-            <%= 4.ordinalize %> Frame
+            <%= 8.ordinalize %> Frame
             </td>       
         </tr>
 
         <tr class="l3-player-one">
             <td class="l3-player-flag">
-                &#58636;
+                🇺🇸
             </td>
             <td class="l3-player-name">
                 <%= @team1.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
+                <%= image_tag "yellow_disc_hammer.svg", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @left_game.eight_frames.last[0] %>
             </td>
 
             <td class="l3-player-flag">
-                &#58636;
+                🇧🇷
             </td>
             <td class="l3-player-name">
                 <%= @team3.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
+                <%= image_tag "black_disc_hammer.svg", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @right_game.eight_frames.last[0] %>
             </td>
 
             <td class="l3-player-flag">
-                &#127463;
+                🇯🇵
             </td>
             <td class="l3-player-name">
                 <%= @team1.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
+                <%= image_tag "yellow_disc.svg", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @left_game.eight_frames.last[0] %>
@@ -84,13 +84,13 @@
 
 
             <td class="l3-player-flag">
-                &#58638;
+                🇺🇸
             </td>
             <td class="l3-player-name">
                 <%= @team3.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
+                <%= image_tag "yellow_disc", height: "40px" %>
             </td>
             <td class="l3-score">
             <%= @right_game.eight_frames.last[0] %>
@@ -98,52 +98,52 @@
         </tr>
         <tr class="l3-player-two">
             <td class="l3-player-flag">
-                &#127462;
+                🇦🇹
             </td>
             <td class="l3-player-name">
                 <%= @team2.name %>
             </td>
             <td class="l3-hammer">
-            
+                <%= image_tag "black_disc", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @left_game.eight_frames.last[1] %>
             </td>
 
             <td class="l3-player-flag">
-                &#58635;
+                🇺🇸
             </td>
             <td class="l3-player-name">
                 <%= @team4.name %>
             </td>
             <td class="l3-hammer">
-            
+                <%= image_tag "yellow_disc", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @right_game.eight_frames.last[1] %>
             </td>
 
             <td class="l3-player-flag">
-                &#58636;
+                🇦🇺
             </td>
             <td class="l3-player-name">
                 <%= @team2.name %>
             </td>
             <td class="l3-hammer">
-            
+                <%= image_tag "black_disc_hammer", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @left_game.eight_frames.last[1] %>
             </td>
 
             <td class="l3-player-flag">
-                &#127462;
+                🇩🇪
             </td>
             <td class="l3-player-name">
                 <%= @team4.name %>
             </td>
             <td class="l3-hammer">
-            
+                <%= image_tag "black_disc_hammer", height: "40px" %>
             </td>
             <td class="l3-score">
                 <%= @right_game.eight_frames.last[1] %>
