@@ -19,6 +19,12 @@ body {
   padding-bottom: 10px;
 }
 
+.l3-player-one > .l3-player-flag{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top-left-radius: 25px;
+}
+
 .l3-player-two > td{
   padding-top: 10px;
   padding-bottom: 10px;
@@ -48,7 +54,6 @@ body {
   vertical-align: middle !important;
   text-align: center;
   font-weight: 600;
-  background-color: #c1f7dc;
   border-top-right-radius: 25px;
 }
 
