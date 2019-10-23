@@ -1,145 +1,154 @@
 <div class="row">
   <div class="col-lg-4 lower-third">
     <table class="table">
+        <tr class="l3-match">       
+            <td class="l3-match-gap" rowspan=1>
+            </td>
+            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+                Men's Finals
+            </td>
+            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+            <%= 4.ordinalize %> Frame
+            </td>            
+            <td class="l3-divider" rowspan=3>
+            </td>     
+            <td class="l3-match-gap" rowspan=1>
+            </td>
+            <td class="l3-game-name <%= "l3-black" %>" colspan=1>
+                Men's Semi-finals
+            </td>       
+            <td class="l3-frame <%= "l3-black" %>" colspan=2>
+            <%= 5.ordinalize %> Frame
+            </td>            
+            <td class="l3-divider" rowspan=3>
+            </td>     
+            <td class="l3-match-gap" rowspan=1>
+            </td>
+            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+                Women's Finals
+            </td>
+            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+            <%= 4.ordinalize %> Frame
+            </td>            
+            <td class="l3-divider" rowspan=3>
+            </td>     
+            <td class="l3-match-gap" rowspan=1>
+            </td>
+            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+                Women's Semi-finals
+            </td>
+            <td class="l3-frame <%= "l3-yellow" %>" colspan=3>
+            <%= 4.ordinalize %> Frame
+            </td>       
+        </tr>
+
         <tr class="l3-player-one">
-            <td class="l3-player-flag <%= "l3-yellow" %>">
+            <td class="l3-player-flag">
                 &#58636;
             </td>
-            <td class="l3-player-name <%= "l3-yellow" %>">
+            <td class="l3-player-name">
                 <%= @team1.name %>
             </td>
-            <td class="l3-score <%= "l3-yellow" %>">
-                <%= @left_game.eight_frames.last[0] %>
-            </td>
-            <td class="l3-hammer <%= "l3-yellow" %>">
+            <td class="l3-hammer">
                 <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
-            <td class="l3-frame" rowspan=2>
-                <%= 4.ordinalize %>
+            <td class="l3-score">
+                <%= @left_game.eight_frames.last[0] %>
             </td>
-            
-            <td class="l3-divider" rowspan=3>
-            </td>
-            <td class="l3-player-flag <%= "l3-black" %>">
+
+            <td class="l3-player-flag">
                 &#58636;
             </td>
-            <td class="l3-player-name <%= "l3-black" %>">
+            <td class="l3-player-name">
                 <%= @team3.name %>
             </td>
-            <td class="l3-score <%= "l3-black" %>">
+            <td class="l3-hammer">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
+            </td>
+            <td class="l3-score">
                 <%= @right_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer <%= "l3-black" %>">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
-            </td>
-            <td class="l3-frame" rowspan=2>
-                <%= 4.ordinalize %>
-            </td>
 
-            <td class="l3-divider" rowspan=3>
-            </td>
-            <td class="l3-player-flag <%= "l3-yellow" %>">
+            <td class="l3-player-flag">
                 &#127463;
             </td>
-            <td class="l3-player-name <%= "l3-yellow" %>">
+            <td class="l3-player-name">
                 <%= @team1.name %>
             </td>
-            <td class="l3-score <%= "l3-yellow" %>">
+            <td class="l3-hammer">
+                <%= image_tag "l3_hammer.svg", height: "15px" %>
+            </td>
+            <td class="l3-score">
                 <%= @left_game.eight_frames.last[0] %>
             </td>
-            <td class="l3-hammer <%= "l3-yellow" %>">
-                <%= image_tag "l3_hammer.svg", height: "15px" %>
-            </td>
-            <td class="l3-frame" rowspan=2>
-            <%= 4.ordinalize %>
-            </td>
 
-            <td class="l3-divider" rowspan=3>
-            </td>
-            <td class="l3-player-flag <%= "l3-yellow" %>">
+
+            <td class="l3-player-flag">
                 &#58638;
             </td>
-            <td class="l3-player-name <%= "l3-yellow" %>">
+            <td class="l3-player-name">
                 <%= @team3.name %>
             </td>
-            <td class="l3-score <%= "l3-yellow" %>">
-            <%= @right_game.eight_frames.last[0] %>
-            </td>
-            <td class="l3-hammer <%= "l3-yellow" %>">
+            <td class="l3-hammer">
                 <%= image_tag "l3_hammer.svg", height: "15px" %>
             </td>
-            <td class="l3-frame" rowspan=2>
-                <%= 4.ordinalize %>
+            <td class="l3-score">
+            <%= @right_game.eight_frames.last[0] %>
             </td>
         </tr>
         <tr class="l3-player-two">
-            <td class="l3-player-flag <%= "l3-black" %>">
+            <td class="l3-player-flag">
                 &#127462;
             </td>
-            <td class="l3-player-name <%= "l3-black" %>">
+            <td class="l3-player-name">
                 <%= @team2.name %>
             </td>
-            <td class="l3-score <%= "l3-black" %>">
-                <%= @left_game.eight_frames.last[1] %>
-            </td>
-            <td class="l3-hammer <%= "l3-black" %>">
+            <td class="l3-hammer">
             
             </td>
+            <td class="l3-score">
+                <%= @left_game.eight_frames.last[1] %>
+            </td>
 
-            <td class="l3-player-flag <%= "l3-yellow" %>">
+            <td class="l3-player-flag">
                 &#58635;
             </td>
-            <td class="l3-player-name <%= "l3-yellow" %>">
+            <td class="l3-player-name">
                 <%= @team4.name %>
             </td>
-            <td class="l3-score <%= "l3-yellow" %>">
-                <%= @right_game.eight_frames.last[1] %>
-            </td>
-            <td class="l3-hammer <%= "l3-yellow" %>">
+            <td class="l3-hammer">
             
             </td>
+            <td class="l3-score">
+                <%= @right_game.eight_frames.last[1] %>
+            </td>
 
-            <td class="l3-player-flag <%= "l3-black" %>">
+            <td class="l3-player-flag">
                 &#58636;
             </td>
-            <td class="l3-player-name <%= "l3-black" %>">
+            <td class="l3-player-name">
                 <%= @team2.name %>
             </td>
-            <td class="l3-score <%= "l3-black" %>">
+            <td class="l3-hammer">
+            
+            </td>
+            <td class="l3-score">
                 <%= @left_game.eight_frames.last[1] %>
             </td>
-            <td class="l3-hammer <%= "l3-black" %>">
-            
-            </td>
 
-            <td class="l3-player-flag <%= "l3-black" %>">
+            <td class="l3-player-flag">
                 &#127462;
             </td>
-            <td class="l3-player-name <%= "l3-black" %>">
+            <td class="l3-player-name">
                 <%= @team4.name %>
             </td>
-            <td class="l3-score <%= "l3-black" %>">
-                <%= @right_game.eight_frames.last[1] %>
-            </td>
-            <td class="l3-hammer <%= "l3-black" %>">
+            <td class="l3-hammer">
             
             </td>
-        </tr>
-        <tr class="l3-match">
-            <td colspan=5>
-                Men's Finals
-            </td>
-            <td colspan=5>
-                Men's Semi-finals
-            </td>
-            <td colspan=5>
-                Women's Finals
-            </td>
-            <td colspan=5>
-                Women's Semi-finals
+            <td class="l3-score">
+                <%= @right_game.eight_frames.last[1] %>
             </td>
         </tr>
-
     </table>
   </div>
 </div>
