@@ -7,7 +7,7 @@ body {
 }
 
 .lower-third{
-  background-color: $black;
+  background-color: transparent;
   text-align: center;
   font-family: 'Nunito Sans', sans-serif;
 }
@@ -19,22 +19,23 @@ body {
 .l3-player-one{
   background: linear-gradient(to bottom, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%); 
   color: white;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .l3-player-two{
   background: linear-gradient(to top, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%); 
   color: white;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
 
 .l3-match{
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .l3-game-name {
   font-style: italic;
   font-weight: 600;
+  white-space:  nowrap;
   color: white;
 }
 
@@ -106,7 +107,7 @@ body {
 
 .l3-divider{
   padding: 10px !important;
-  background-color: black !important;
+  background-color: transparent !important;
 }
 
 .l3-match > td {
