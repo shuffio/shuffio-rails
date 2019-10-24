@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-lg-4 lower-third">
+    <table class="table">
+        <tr class="l3-match">       
+            <td class="l3-match-gap" rowspan=1>
+            </td>
+            <td class="l3-game-name <%= "l3-black" %>" colspan=7>
+                ISA Championship Finals
+            </td> 
+        </tr>
+
+        <tr class="l3-match-one">
+            <td class="l3-game-name <%= "l3-black" %>" colspan=1>
+                M FINALS
+            </td>
+            <td class="l3-frame <%= "l3-black" %>" colspan=2>
+            <%= 4.ordinalize%>
+            </td> 
+            <td class="l3-player-flag">
+                🇺🇸
+            </td>
+            <td class="l3-player-name">
+                <%= @team1.name %>
+            </td>
+            <td class="l3-hammer">
+                <%= image_tag "yellow_disc_hammer.svg", height: "30px" %>
+            </td>
+            <td class="l3-score">
+                <%= @left_game.eight_frames.last[0] %>
+            </td>
+
+            <td class="l3-player-flag">
+                🇧🇷
+            </td>
+            <td class="l3-player-name">
+                <%= @team3.name %>
+            </td>
+            <td class="l3-hammer">
+                <%= image_tag "black_disc_hammer.svg", height: "30px" %>
+            </td>
+            <td class="l3-score">
+                <%= @right_game.eight_frames.last[0] %>
+            </td>
+        </tr>
+
+        <tr class="l3-match-two">
+            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+                W FINALS
+            </td>
+            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+            <%= 4.ordinalize%>
+            </td> 
+            <td class="l3-player-flag">
+                🇺🇸
+            </td>
+            <td class="l3-player-name">
+                <%= @team1.name %>
+            </td>
+            <td class="l3-hammer">
+                <%= image_tag "yellow_disc_hammer.svg", height: "30px" %>
+            </td>
+            <td class="l3-score">
+                <%= @left_game.eight_frames.last[0] %>
+            </td>
+
+            <td class="l3-player-flag">
+                🇧🇷
+            </td>
+            <td class="l3-player-name">
+                <%= @team3.name %>
+            </td>
+            <td class="l3-hammer">
+                <%= image_tag "black_disc_hammer.svg", height: "30px" %>
+            </td>
+            <td class="l3-score">
+                <%= @right_game.eight_frames.last[0] %>
+            </td>
+        </tr>
+        <tr class="l3-match-three">
+        <td class="l3-game-name <%= "l3-black" %>" colspan=1>
+            M CONSOL
+        </td>
+        <td class="l3-frame <%= "l3-black" %>" colspan=2>
+        <%= 4.ordinalize%>
+        </td> 
+        <td class="l3-player-flag">
+            🇺🇸
+        </td>
+        <td class="l3-player-name">
+            <%= @team1.name %>
+        </td>
+        <td class="l3-hammer">
+            <%= image_tag "yellow_disc_hammer.svg", height: "30px" %>
+        </td>
+        <td class="l3-score">
+            <%= @left_game.eight_frames.last[0] %>
+        </td>
+
+        <td class="l3-player-flag">
+            🇧🇷
+        </td>
+        <td class="l3-player-name">
+            <%= @team3.name %>
+        </td>
+        <td class="l3-hammer">
+            <%= image_tag "black_disc_hammer.svg", height: "30px" %>
+        </td>
+        <td class="l3-score">
+            <%= @right_game.eight_frames.last[0] %>
+        </td>
+    </tr>
+
+    <tr class="l3-match-four">
+        <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
+            W CONSOL
+        </td>
+        <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
+        <%= 4.ordinalize%>
+        </td> 
+        <td class="l3-player-flag">
+            🇺🇸
+        </td>
+        <td class="l3-player-name">
+            <%= @team1.name %>
+        </td>
+        <td class="l3-hammer">
+            <%= image_tag "yellow_disc_hammer.svg", height: "30px" %>
+        </td>
+        <td class="l3-score">
+            <%= @left_game.eight_frames.last[0] %>
+        </td>
+
+        <td class="l3-player-flag">
+            🇧🇷
+        </td>
+        <td class="l3-player-name">
+            <%= @team3.name %>
+        </td>
+        <td class="l3-hammer">
+            <%= image_tag "black_disc_hammer.svg", height: "30px" %>
+        </td>
+        <td class="l3-score">
+            <%= @right_game.eight_frames.last[0] %>
+        </td>
+    </tr>
+    </table>
+  </div>
+</div>
