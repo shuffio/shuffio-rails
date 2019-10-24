@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_040326) do
+ActiveRecord::Schema.define(version: 2019_10_24_233000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_040326) do
     t.string "instagram_user"
     t.integer "starting_wins", default: 0
     t.integer "starting_losses", default: 0
+    t.string "country"
   end
 
   create_table "users", force: :cascade do |t|
