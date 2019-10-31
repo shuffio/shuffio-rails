@@ -25,9 +25,10 @@ Rails.application.routes.draw do
 
   resources :faq, only: [:index]
   resources :games, only: [:update]
+  get 'live/summary', to: 'live#summary', as: :summary
+  resources :isa, only: [:index]
   resources :live, only: [:index, :lower_third]
   get 'live/lower_third', to: 'live#lower_third', as: :lower_third
-  get 'live/summary', to: 'live#summary', as: :summary
   resources :live_events, only: [:update]
   resources :matches
   resources :privacy, only: [:index]
