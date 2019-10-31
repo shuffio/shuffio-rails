@@ -26,4 +26,15 @@ class LiveController < ApplicationController
 
     render layout: 'lower_third'
   end
+
+  def summary
+    @games = [
+      LiveEvent.all.last(2).first.left_game,
+      LiveEvent.all.last(2).first.right_game,
+      LiveEvent.all.last(2).last.left_game,
+      LiveEvent.all.last(2).last.right_game
+    ]
+
+    render layout: 'summary'
+  end
 end

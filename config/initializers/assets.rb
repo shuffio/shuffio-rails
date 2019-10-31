@@ -14,3 +14,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile += %w[live.css]
 
 Rails.application.config.assets.precompile += %w[lower_third.css]
+
+Rails.application.config.assets.precompile += %w[summary.css]
