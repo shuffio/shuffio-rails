@@ -16,7 +16,7 @@ class LiveController < ApplicationController
   end
 
   def lower_third
-    # TODO: add a view for show(id), but for now only expect one LiveEvent
+    # This may need to be updated day-of once we see the camera views
     @games = [
       LiveEvent.all.last(2).first.left_game,
       LiveEvent.all.last(2).first.right_game,

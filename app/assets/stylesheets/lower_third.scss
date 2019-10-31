@@ -75,6 +75,8 @@ body {
   text-align: left;
   white-space:  nowrap;
   font-weight: 600;
+  max-width: 320px;
+  min-width: 320px;
 }
 
 .l3-frame{
@@ -88,6 +90,8 @@ body {
 .l3-score{
   font-weight: 900;
   padding-left: 0px !important;
+  max-width: 75px;
+  min-width: 75px;
 }
 
 .l3-hammer{
