@@ -17,13 +17,13 @@ body {
 }
 
 .l3-player-one{
-  background: linear-gradient(to bottom, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%); 
+  background: linear-gradient(to bottom, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
   color: white;
   font-size: 2rem;
 }
 
 .l3-player-two{
-  background: linear-gradient(to top, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%); 
+  background: linear-gradient(to top, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
   color: white;
   font-size: 2rem;
 }
@@ -63,11 +63,11 @@ body {
   border-top-style: none;
 }
 
-.l3-player-one > .l3-player-flag{
+.l3-player-one > .l3-player-name{
   border-top-left-radius: 25px;
 }
 
-.l3-player-two > .l3-player-flag{
+.l3-player-two > .l3-player-name{
   border-bottom-left-radius: 25px;
 }
 
@@ -75,6 +75,8 @@ body {
   text-align: left;
   white-space:  nowrap;
   font-weight: 600;
+  max-width: 320px;
+  min-width: 320px;
 }
 
 .l3-frame{
@@ -88,6 +90,8 @@ body {
 .l3-score{
   font-weight: 900;
   padding-left: 0px !important;
+  max-width: 75px;
+  min-width: 75px;
 }
 
 .l3-hammer{
