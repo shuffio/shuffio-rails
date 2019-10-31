@@ -1,153 +1,51 @@
 <div class="row">
   <div class="col-lg-4 lower-third">
     <table class="table">
-        <tr class="l3-match">       
+        <tr class="l3-match">
+          <% @games.each do |g| %>
             <td class="l3-match-gap" rowspan=1>
             </td>
             <td class="l3-game-name <%= "l3-black" %>" colspan=1>
-                Men's Finals
+              <%= g.match.comment %>
             </td>
-            <td class="l3-frame <%= "l3-black" %>" colspan=2>
-            <%= 4.ordinalize %> Frame
-            </td>            
+            <!-- TODO: black/yellow here -->
+            <td class="l3-frame <%= g.frames.count.odd? ? "l3-black" : "l3-yellow" %>" colspan=2>
+              <!-- TODO: real frame -->
+              <%= (g.frames.count+1).ordinalize %> Frame
+            </td>
             <td class="l3-divider" rowspan=3>
-            </td>     
-            <td class="l3-match-gap" rowspan=1>
             </td>
-            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
-                Men's Semi-finals
-            </td>       
-            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
-            <%= 9.ordinalize %> Frame
-            </td>            
-            <td class="l3-divider" rowspan=3>
-            </td>     
-            <td class="l3-match-gap" rowspan=1>
-            </td>
-            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
-                Women's Finals
-            </td>
-            <td class="l3-frame <%= "l3-yellow" %>" colspan=2>
-            <%= 5.ordinalize %> Frame
-            </td>            
-            <td class="l3-divider" rowspan=3>
-            </td>     
-            <td class="l3-match-gap" rowspan=1>
-            </td>
-            <td class="l3-game-name <%= "l3-yellow" %>" colspan=1>
-                Women's Semi-finals
-            </td>
-            <td class="l3-frame <%= "l3-yellow" %>" colspan=3>
-            <%= 8.ordinalize %> Frame
-            </td>       
+          <% end %>
         </tr>
 
         <tr class="l3-player-one">
-            <td class="l3-player-flag">
-                🇺🇸
-            </td>
-            <td class="l3-player-name">
-                <%= @team1.name %>
+          <% @games.each do |g| %>
+            <td class="l3-player-name" colspan=2>
+              <%= g.yellow_team.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "yellow_disc_hammer.svg", height: "40px" %>
+              <!-- TODO: correct icon -->
+              <%= image_tag g.frames.count.odd? ? "yellow_disc_hammer" : "yellow_disc", height: "40px" %>
             </td>
             <td class="l3-score">
-                <%= @left_game.eight_frames.last[0] %>
+              <%= g.frames.last[0] %>
             </td>
-
-            <td class="l3-player-flag">
-                🇧🇷
-            </td>
-            <td class="l3-player-name">
-                <%= @team3.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "black_disc_hammer.svg", height: "40px" %>
-            </td>
-            <td class="l3-score">
-                <%= @right_game.eight_frames.last[0] %>
-            </td>
-
-            <td class="l3-player-flag">
-                🇯🇵
-            </td>
-            <td class="l3-player-name">
-                <%= @team1.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "yellow_disc.svg", height: "40px" %>
-            </td>
-            <td class="l3-score">
-                <%= @left_game.eight_frames.last[0] %>
-            </td>
-
-
-            <td class="l3-player-flag">
-                🇺🇸
-            </td>
-            <td class="l3-player-name">
-                <%= @team3.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "yellow_disc", height: "40px" %>
-            </td>
-            <td class="l3-score">
-            <%= @right_game.eight_frames.last[0] %>
-            </td>
+          <% end %>
         </tr>
+
         <tr class="l3-player-two">
-            <td class="l3-player-flag">
-                🇦🇹
-            </td>
-            <td class="l3-player-name">
-                <%= @team2.name %>
+          <% @games.each do |g| %>
+            <td class="l3-player-name" colspan=2>
+              <%= g.black_team.name %>
             </td>
             <td class="l3-hammer">
-                <%= image_tag "black_disc", height: "40px" %>
+              <!-- TODO: correct icon -->
+              <%= image_tag g.frames.count.odd? ? "black_disc" : "black_disc_hammer", height: "40px" %>
             </td>
             <td class="l3-score">
-                <%= @left_game.eight_frames.last[1] %>
+              <%= g.frames.last[1] %>
             </td>
-
-            <td class="l3-player-flag">
-                🇺🇸
-            </td>
-            <td class="l3-player-name">
-                <%= @team4.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "yellow_disc", height: "40px" %>
-            </td>
-            <td class="l3-score">
-                <%= @right_game.eight_frames.last[1] %>
-            </td>
-
-            <td class="l3-player-flag">
-                🇦🇺
-            </td>
-            <td class="l3-player-name">
-                <%= @team2.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "black_disc_hammer", height: "40px" %>
-            </td>
-            <td class="l3-score">
-                <%= @left_game.eight_frames.last[1] %>
-            </td>
-
-            <td class="l3-player-flag">
-                🇩🇪
-            </td>
-            <td class="l3-player-name">
-                <%= @team4.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag "black_disc_hammer", height: "40px" %>
-            </td>
-            <td class="l3-score">
-                <%= @right_game.eight_frames.last[1] %>
-            </td>
+          <% end %>
         </tr>
     </table>
   </div>
