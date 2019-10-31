@@ -1,0 +1,19 @@
+<div class="row">
+  <% @games.each do |g| %>
+    <div class="col-lg-3 live-score">
+      <table class="table four-game-table">
+        <tr>
+          <td class="yellow-head"><%= g.frames.count > 8 ? g.black_team.isa_name : g.yellow_team.isa_name %></td>
+          <td class="black-head"><%= g.frames.count >8 ? g.yellow_team.isa_name : g.black_team.isa_name %></td>
+        </tr>
+
+        <% g.isa_frames.each do |f| %>
+          <tr class="score-box">
+            <td><%= f[0] %></td>
+            <td><%= f[1] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% end %>
+</div>

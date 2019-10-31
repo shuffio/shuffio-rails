@@ -18,6 +18,12 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 1).last(8)
   end
 
+  def isa_frames
+    return frames.fill(['​', '​'], frames.length, 9 - frames.length) if frames.size <= 8
+
+    frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
+  end
+
   private
 
   def default_values

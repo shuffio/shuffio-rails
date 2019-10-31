@@ -21,13 +21,20 @@ body {
 .yellow-head {
   background-color: $yellow;
   color: $black;
-  font-size: 16px;
+  font-size: 24px;
+  width: 50%;
 }
 
 .black-head {
   background-color: $almost-black;
   color: $white;
-  font-size: 16px;
+  font-size: 24px;
+  width: 50%;
+}
+
+.four-game-table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 .score-box {

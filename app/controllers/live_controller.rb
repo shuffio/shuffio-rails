@@ -28,13 +28,24 @@ class LiveController < ApplicationController
   end
 
   def summary
+    # This may need to be updated day-of once we see the camera views
     @games = [
       LiveEvent.all.last(2).first.left_game,
       LiveEvent.all.last(2).first.right_game,
       LiveEvent.all.last(2).last.left_game,
       LiveEvent.all.last(2).last.right_game
     ]
-
     render layout: 'summary'
+  end
+
+  def four_game
+    # This may need to be updated day-of once we see the camera views
+    @games = [
+      LiveEvent.all.last(2).first.left_game,
+      LiveEvent.all.last(2).first.right_game,
+      LiveEvent.all.last(2).last.left_game,
+      LiveEvent.all.last(2).last.right_game
+    ]
+    render layout: 'live'
   end
 end
