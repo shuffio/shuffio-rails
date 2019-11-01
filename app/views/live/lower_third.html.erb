@@ -22,7 +22,7 @@
               <%= g.frames.count > 8 ? g.black_team.name : g.yellow_team.name %>
             </td>
             <td class="l3-hammer">
-              <%= image_tag g.frames.count.odd? ? "yellow_disc_hammer" : "yellow_disc", height: "40px" %>
+              <%= image_tag g.frames.count.odd? ? "yellow_disc_hammer.svg" : "yellow_disc.svg", height: "40px" %>
             </td>
             <td class="l3-score">
               <%= g.frames.count > 8 ? g.frames.last[1] : g.frames.last[0] %>
@@ -36,7 +36,7 @@
               <%= g.frames.count > 8 ? g.yellow_team.name : g.black_team.name %>
             </td>
             <td class="l3-hammer">
-              <%= image_tag g.frames.count.odd? ? "black_disc" : "black_disc_hammer", height: "40px" %>
+              <%= image_tag g.frames.count.odd? ? "black_disc.svg" : "black_disc_hammer.svg", height: "40px" %>
             </td>
             <td class="l3-score">
               <%= g.frames.count > 8 ? g.frames.last[0] : g.frames.last[1] %>
