@@ -18,10 +18,10 @@ class LiveController < ApplicationController
   def lower_third
     # This may need to be updated day-of once we see the camera views
     @games = [
-      LiveEvent.all.last(2).first.left_game,
-      LiveEvent.all.last(2).first.right_game,
-      LiveEvent.all.last(2).last.left_game,
-      LiveEvent.all.last(2).last.right_game
+      LiveEvent.all.last(2).first.right_game, # Dieter/Evan
+      LiveEvent.all.last(2).last.right_game, # Sach /Eil
+      LiveEvent.all.last(2).last.left_game, # Fab / Deb
+      LiveEvent.all.last(2).first.left_game # Mats/Torben
     ]
 
     render layout: 'lower_third'
@@ -30,10 +30,10 @@ class LiveController < ApplicationController
   def summary
     # This may need to be updated day-of once we see the camera views
     @games = [
-      LiveEvent.all.last(2).first.left_game,
-      LiveEvent.all.last(2).first.right_game,
-      LiveEvent.all.last(2).last.left_game,
-      LiveEvent.all.last(2).last.right_game
+      LiveEvent.all.last(2).first.right_game, # Dieter/Evan
+      LiveEvent.all.last(2).last.right_game, # Sach /Eil
+      LiveEvent.all.last(2).last.left_game, # Fab / Deb
+      LiveEvent.all.last(2).first.left_game # Mats/Torben
     ]
     render layout: 'summary'
   end
@@ -41,10 +41,10 @@ class LiveController < ApplicationController
   def four_game
     # This may need to be updated day-of once we see the camera views
     @games = [
-      LiveEvent.all.last(2).first.left_game,
-      LiveEvent.all.last(2).first.right_game,
-      LiveEvent.all.last(2).last.left_game,
-      LiveEvent.all.last(2).last.right_game
+      LiveEvent.all.last(2).first.right_game, # Dieter/Evan
+      LiveEvent.all.last(2).last.right_game, # Sach /Eil
+      LiveEvent.all.last(2).last.left_game, # Fab / Deb
+      LiveEvent.all.last(2).first.left_game # Mats/Torben
     ]
     render layout: 'live'
   end
