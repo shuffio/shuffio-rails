@@ -104,12 +104,12 @@ namespace :match do
         STDOUT.puts "\nWho was the Away Team?"
         away_team_input = STDIN.gets.strip
 
-        away_team = Team.find_by(name: away_team_input)
+        away_team = Season.latest.teams.find_by(name: away_team_input)
         verify = 'y'
 
         # do a fuzzy search if we don't find an exact tname
         unless away_team
-          away_team = Team.basic_search(away_team_input).first
+          away_team = Season.latest.teams.basic_search(away_team_input).first
 
           if away_team
             name = away_team.name
@@ -128,12 +128,12 @@ namespace :match do
         STDOUT.puts "\nWho was the Home Team?"
         home_team_input = STDIN.gets.strip
 
-        home_team = Team.find_by(name: home_team_input)
+        home_team = Season.latest.teams.find_by(name: home_team_input)
         verify = 'y'
 
         # do a fuzzy search if we don't find an exact tname
         unless home_team
-          home_team = Team.basic_search(home_team_input).first
+          home_team = Season.latest.teams.basic_search(home_team_input).first
 
           if home_team
             name = home_team.name
