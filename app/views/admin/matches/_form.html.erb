@@ -1,0 +1,20 @@
+<%= form_for [:admin, @match], url: url, method: method do |f| %>
+  <div class="form-group">
+    <%= f.label 'Away Team:' %>
+    <%= f.text_field :away_team, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Home Team:' %>
+    <%= f.text_field :home_team, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Winner:' %>
+    <%= f.text_field :winner, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Create', class: 'btn btn-primary' %>
+  </div>
+<% end %>

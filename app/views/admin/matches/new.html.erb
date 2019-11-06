@@ -1,0 +1,9 @@
+<% if @match.errors.any? %>
+  <% flash.now[:error] = @match.errors.full_messages %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <%= render partial: 'admin/matches/form', locals: { url: admin_matches_path, method: :post } %>
+  </div>
+</div>

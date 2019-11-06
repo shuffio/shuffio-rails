@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
-    resources 'seasons', only: [:show]
+    resources 'matches'
     resources 'teams' do
       collection do
         post :import
         post :import_selection
       end
     end
+    resources 'seasons', only: [:show]
   end
 
   resources :divisions, only: [:index, :show]
