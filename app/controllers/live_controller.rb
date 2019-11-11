@@ -1,5 +1,6 @@
 class LiveController < ApplicationController
   def index
+    render layout: 'application'
   end
 
   def lower_third
