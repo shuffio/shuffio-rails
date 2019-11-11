@@ -15,6 +15,17 @@ class LiveController < ApplicationController
     render layout: 'lower_third'
   end
 
+  def lower_third_doubles
+
+    # This may need to be updated day-of once we see the camera views
+    @games = [
+      LiveEvent.last.left_game,
+      LiveEvent.last.right_game
+    ]
+
+    render layout: 'lower_third_doubles'
+  end
+
   def summary
     # This may need to be updated day-of once we see the camera views
     @games = [
@@ -24,6 +35,15 @@ class LiveController < ApplicationController
       LiveEvent.all.last(2).first.left_game # Mats/Torben
     ]
     render layout: 'summary'
+  end
+
+  def summary_doubles
+    # This may need to be updated day-of once we see the camera views
+    @games = [
+      LiveEvent.last.left_game,
+      LiveEvent.last.right_game
+    ]
+    render layout: 'summary_doubles'
   end
 
   def four_game
