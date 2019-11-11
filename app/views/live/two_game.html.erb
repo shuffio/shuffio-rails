@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-lg-4 live-score">
+    <table class="table">
+      <tr class="team-box">
+        <td>
+          <img class="team-logo" style="background-color: #<%= @team1.color %>" src="<%= @team1.logo_uri %>" />
+        </td>
+        <td>
+          <img class="team-logo" style="background-color: #<%= @team2.color %>" src="<%= @team2.logo_uri %>" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="yellow-head">&nbsp</td>
+        <td class="black-head">&nbsp</td>
+      </tr>
+
+      <% @left_game.eight_frames.each do |f| %>
+        <tr class="score-box">
+          <td><%= f[0] %></td>
+          <td><%= f[1] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-lg-2 offset-lg-1 live-description d-none d-lg-block">
+    <img class="rp-logo" src="https://static1.squarespace.com/static/5a733ffdf6576ec0595d419e/t/5a746c939140b7e05611c436/1517579417533/RP+CHICAGO.png"/>
+
+    <hr class="court-divider">
+
+    <div class="court-text">
+      <i class="fas fa-arrow-left fa-2x"></i><br>
+
+      <span class="court-title">Court</span><br>
+      <span class="court-number"><%= @live_event.left_court_number %></span><br>
+      <%= @live_event.left_description %><br>
+
+      <i class="fas fa-arrow-left fa-2x"></i>
+      <hr class="court-divider">
+      <i class="fas fa-arrow-right fa-2x"></i>
+      <br>
+
+      <span class="court-title">Court</span><br>
+      <span class="court-number"><%= @live_event.right_court_number %></span><br>
+      <%= @live_event.right_description %><br>
+
+      <i class="fas fa-arrow-right fa-2x"></i>
+
+      <br><hr class="court-divider">
+
+      <span class="inverted"><%= image_tag "tangs-biscuit.png", height: "100px" %></span><br>
+      <span class="live-link">https://shuff.io/live</span>
+    </div>
+  </div>
+
+  <div class="live-description d-lg-none">
+    &nbsp
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
+  <div class="col-lg-4 offset-lg-1 live-score">
+    <table class="table">
+      <tr class="team-box">
+        <td>
+          <img class="team-logo" style="background-color: #<%= @team3.color %>" src="<%= @team3.logo_uri %>" />
+        </td>
+        <td>
+          <img class="team-logo" style="background-color: #<%= @team4.color %>" src="<%= @team4.logo_uri %>" />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="yellow-head">&nbsp</td>
+        <td class="black-head">&nbsp</td>
+      </tr>
+
+      <% @right_game.eight_frames.each do |f| %>
+        <tr class="score-box">
+          <td><%= f[0] %></td>
+          <td><%= f[1] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
