@@ -24,6 +24,37 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
+  def completed?(game_frames = 8, allow_ties = false)
+    return false unless frames # return quickly if frames is nil
+    return false if frames.count < game_frames # false if
+    return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
+    return false if frames.count.odd? # false if there are still frames remaining
+
+    true
+  end
+
+  def hammer(type = 'palms')
+    # TODO: move the type to the model and do validations
+
+    if type == 'isa'
+      return 'black' if frames.count.even?
+      return 'yellow' if frames.count.odd?
+    elsif type == 'palms'
+      case frames.count % 4
+      when 0
+        'black'
+      when 1
+        'yellow'
+      when 2
+        'yellow'
+      when 3
+        'black'
+      end
+    else
+      raise 'invalid game type'
+    end
+  end
+
   private
 
   def default_values
