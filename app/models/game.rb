@@ -33,6 +33,28 @@ class Game < ApplicationRecord
     true
   end
 
+  def hammer(type = 'palms')
+    # TODO: move the type to the model and do validations
+
+    if type == 'isa'
+      return 'black' if frames.count.even?
+      return 'yellow' if frames.count.odd?
+    elsif type == 'palms'
+      case frames.count % 4
+      when 0
+        'black'
+      when 1
+        'yellow'
+      when 2
+        'yellow'
+      when 3
+        'black'
+      end
+    else
+      raise 'invalid game type'
+    end
+  end
+
   private
 
   def default_values
