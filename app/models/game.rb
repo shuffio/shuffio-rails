@@ -24,6 +24,15 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
+  def completed?(game_frames = 8, allow_ties = false)
+    return false unless frames # return quickly if frames is nil
+    return false if frames.count < game_frames # false if
+    return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
+    return false if frames.count.odd? # false if there are still frames remaining
+
+    true
+  end
+
   private
 
   def default_values
