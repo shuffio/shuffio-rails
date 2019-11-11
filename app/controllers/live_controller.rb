@@ -16,7 +16,6 @@ class LiveController < ApplicationController
   end
 
   def lower_third_doubles
-
     # This may need to be updated day-of once we see the camera views
     @games = [
       LiveEvent.last.left_game,
