@@ -170,7 +170,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -315,7 +315,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg
   pry
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 6.0.0)
   rspec
   rspec-rails
