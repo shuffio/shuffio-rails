@@ -175,11 +175,24 @@ class Division < ApplicationRecord
   def setup_matches
     output_matches = []
 
-    # Sort teams into away and home via snake order
-    s_teams = teams.order(:elo_cache)
+    # Rank teams by ELO, but put new teams randomly at the bottom
+    new_teams = []
+    existing_teams = []
+    teams.each do |t|
+      if t.match_count.zero?
+        new_teams.push(t)
+      else
+        existing_teams.push(t)
+      end
+    end
+
+    new_teams.shuffle!
+    existing_teams.sort! { |a, b| b.elo_cache <=> a.elo_cache }
+    s_teams = existing_teams + new_teams
 
     raise 'Automatic schedule requires 16, 18, or 20 teams' unless teams.count >= 16 && teams.count <= 20 && teams.count.even?
 
+    # Sort teams into away and home via snake order
     away_teams = [
       s_teams[0],
       s_teams[3],
