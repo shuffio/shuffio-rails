@@ -116,12 +116,57 @@ class Schedule < ApplicationRecord
     {
       min_opponent_elo_total: min_opponent_elo_total,
       max_opponent_elo_total: max_opponent_elo_total,
-      diff: max_opponent_elo_total - min_opponent_elo_total
+      diff: max_opponent_elo_total - min_opponent_elo_total,
+      best_matchups: best_matchups?(opponents_hash)
     }
   end
 
   def self.stats_string(stats)
-    "min:#{stats[:min_opponent_elo_total]} max:#{stats[:max_opponent_elo_total]} diff:#{stats[:diff]}"
+    "min:#{stats[:min_opponent_elo_total]} max:#{stats[:max_opponent_elo_total]} diff:#{stats[:diff]} best:#{stats[:best_matchups]}"
+  end
+
+  # Ugly but works
+  def self.best_matchups?(opponents_hash)
+    # Sort teams, best first
+    sorted = opponents_hash.sort { |a, b| Team.find(b.first).elo_cache <=> Team.find(a.first).elo_cache }
+
+    first_id = sorted[0][0]
+    second_id = sorted[1][0]
+    third_id = sorted[2][0]
+    fourth_id = sorted[3][0]
+
+    one_two = false
+    one_three = false
+    four_two = false
+    four_three = false
+
+    opponents_hash[first_id].each do |t|
+      one_two = true if t.id == second_id
+      one_three = true if t.id == third_id
+    end
+
+    opponents_hash[fourth_id].each do |t|
+      four_two = true if t.id == second_id
+      four_three = true if t.id == third_id
+    end
+
+    return true if one_two && one_three && four_two && four_three
+
+    false
+  end
+
+  def self.first_week(schedule)
+    Rails.logger.info stats_string(match_stats(schedule[:opponents_hash]))
+    Rails.logger.info 'Home'
+
+    schedule[:initial_home_teams].each do |t|
+      Rails.logger.info t.name
+    end
+
+    Rails.logger.info 'Away'
+    schedule[:initial_away_teams].each do |t|
+      Rails.logger.info t.name
+    end
   end
 
   def self.run_simulation(num_times = 1)
@@ -132,7 +177,7 @@ class Schedule < ApplicationRecord
       schedule = Schedule.setup_matches
       stats = match_stats(schedule[:opponents_hash])
 
-      if best_diff.nil? || stats[:diff] < best_diff
+      if stats[:best_matchups] && (best_diff.nil? || stats[:diff] < best_diff)
         best_case = schedule
         best_diff = stats[:diff]
       end
