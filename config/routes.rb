@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   resources :live_events, only: [:update]
   resources :matches
   resources :privacy, only: [:index]
+  resources :royal_palms_calendar, only: [:index]
+  post 'rpc_events', to: 'royal_palms_calendar#index', as: :rpc_events
   resources :seasons, only: [:index, :show]
   get '/seasons/:id/report', to: 'seasons#report', as: :season_report
   resources :teams, only: [:index, :show]
