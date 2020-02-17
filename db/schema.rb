@@ -82,8 +82,12 @@ ActiveRecord::Schema.define(version: 2020_02_17_235122) do
     t.integer "home_new_elo"
     t.integer "away_old_elo"
     t.integer "away_new_elo"
+<<<<<<< HEAD
     t.bigint "court_id"
     t.index ["court_id"], name: "index_matches_on_court_id"
+=======
+    t.float "multiplier", default: 1.0, null: false
+>>>>>>> adds multiplier column to matches via migration. migrates schema accordingly.
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
 
