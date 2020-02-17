@@ -242,12 +242,7 @@ namespace :match do
       Match.where("comment like ?", "%Group Play%").each do |m|
         m.update_attribute(:multiplier, 0.5)
       end
-      Match.where(multiplier: 0.5).each do |m|
-        print(m.comment)
-        print(": ")
-        print(m.multiplier)
-        print("\n")
-      end
+      Match.recalculate_all_elo
     STDOUT.puts "done."
   end
 end
