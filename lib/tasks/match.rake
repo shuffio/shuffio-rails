@@ -238,11 +238,11 @@ namespace :match do
 
   desc 'Update the Match\'s multiplier to 0.5 if it is a \'Group Play\' match'
   task update_match_multiplier_if_is_group_play: :environment do
-    STDOUT.puts "updating group play match multipliers..."
-      Match.where("comment like ?", "%Group Play%").each do |m|
-        m.update_attribute(:multiplier, 0.5)
-      end
-      Match.recalculate_all_elo
-    STDOUT.puts "done."
+    STDOUT.puts 'updating group play match multipliers...'
+    Match.where('comment like ?', '%Group Play%').each do |m|
+      m.update(multiplier: 0.5)
+    end
+    Match.recalculate_all_elo
+    STDOUT.puts 'done.'
   end
 end
