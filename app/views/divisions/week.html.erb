@@ -43,7 +43,7 @@
           <tbody>
             <% @matches.each do |m| %>
               <tr>
-                <td><%= m.location %></td>
+                <td><%= m.court.name %></td>
                 <td class="<%= 'font-weight-bold' if m.away_score > m.home_score %>">
                   <span class="d-print-none">
                     <span data-toggle="tooltip" data-placement="top" title="Current ELO: <%= m.away_team.elo_cache %>">
@@ -58,8 +58,8 @@
                 <% if params[:report] %>
                   <td>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input position-static" type="radio" name="<%= m.location %>" value="away">
-                      <input class="form-check-input position-static" type="radio" name="<%= m.location %>" value="home">
+                      <input class="form-check-input position-static" type="radio" name="<%= m.court.name %>" value="away">
+                      <input class="form-check-input position-static" type="radio" name="<%= m.court.name %>" value="home">
                     </div>
                   </td>
                 <% end %>

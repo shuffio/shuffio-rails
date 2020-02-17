@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_220013) do
+ActiveRecord::Schema.define(version: 2020_02_17_235122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_courts_on_location_id"
+  end
 
   create_table "divisions", force: :cascade do |t|
     t.string "name"
@@ -50,6 +56,18 @@ ActiveRecord::Schema.define(version: 2020_02_17_220013) do
     t.index ["right_game_id"], name: "index_live_events_on_right_game_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.string "address_line1"
+    t.string "address_line2"
+    t.string "address_city"
+    t.string "address_state"
+    t.string "address_zip"
+    t.string "address_country"
+    t.string "timezone"
+    t.string "uri"
+  end
+
   create_table "matches", force: :cascade do |t|
     t.string "location"
     t.datetime "time"
@@ -64,6 +82,8 @@ ActiveRecord::Schema.define(version: 2020_02_17_220013) do
     t.integer "home_new_elo"
     t.integer "away_old_elo"
     t.integer "away_new_elo"
+    t.bigint "court_id"
+    t.index ["court_id"], name: "index_matches_on_court_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
 

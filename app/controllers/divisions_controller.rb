@@ -59,7 +59,10 @@ class DivisionsController < ApplicationController
     params.each do |param, value|
       next unless param.starts_with?('Court ')
 
-      m = Match.find_by(location: param, division: division, time: division.match_time_for_week(week))
+      # TODO: fix this to work for multiple locations
+      l = Location.find_by(name: 'Royal Palms Chicago')
+      c = Court.find_by(name: param, location: l)
+      m = Match.find_by(court: c, division: division, time: division.match_time_for_week(week))
 
       m.update(home_score: 1, away_score: 0) if value == 'home'
       m.update(home_score: 0, away_score: 1) if value == 'away'
