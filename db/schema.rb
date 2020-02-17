@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_233000) do
+ActiveRecord::Schema.define(version: 2020_02_17_220013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,25 @@ ActiveRecord::Schema.define(version: 2019_10_24_233000) do
     t.string "country"
   end
 
+  create_table "tournament_groups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "tournament_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tournament_id"], name: "index_tournament_groups_on_tournament_id"
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string "uri"
+    t.string "format"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -115,4 +134,5 @@ ActiveRecord::Schema.define(version: 2019_10_24_233000) do
   end
 
   add_foreign_key "divisions", "seasons"
+  add_foreign_key "tournament_groups", "tournaments"
 end
