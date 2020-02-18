@@ -1,16 +1,21 @@
 <div class="row">
-  <% @games.each do |g| %>
+  <% @games.each.each_with_index do |g, i| %>
     <div class="col-lg-3 live-score">
       <table class="table four-game-table">
         <tr>
-          <td class="yellow-head"><%= g.frames.count > 8 ? g.black_team.isa_name : g.yellow_team.isa_name %></td>
-          <td class="black-head"><%= g.frames.count >8 ? g.yellow_team.isa_name : g.black_team.isa_name %></td>
+          <td class="yellow-head"><%= g.frames.count > 8 ? g.black_team.name : g.yellow_team.name %></td>
+          <td class="black-head"><%= g.frames.count >8 ? g.yellow_team.name : g.black_team.name %></td>
         </tr>
 
-        <% g.isa_frames.each do |f| %>
+        <% g.eight_frames.each do |f| %>
           <tr class="score-box">
-            <td><%= f[0] %></td>
-            <td><%= f[1] %></td>
+            <% if i == 0 %>
+              <td><%= f[0] %></td>
+              <td><%= f[1] %></td>
+            <% else %>
+              <td><%= f[1] %></td>
+              <td><%= f[0] %></td>
+            <% end %>
           </tr>
         <% end %>
       </table>
