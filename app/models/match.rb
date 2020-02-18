@@ -55,9 +55,9 @@ class Match < ApplicationRecord
 
     # Save ELO to Teams
     unless home_score == away_score
-      home_team.update(previous_elo: home_team.elo_cache) # or self.home_old_elo?
+      home_team.update(previous_elo: home_team.elo_cache)
       away_team.update(previous_elo: away_team.elo_cache)
-      home_team.update(elo_cache: home_team.elo_cache + home_elo_change) # or self.home_new_elo?
+      home_team.update(elo_cache: home_team.elo_cache + home_elo_change)
       away_team.update(elo_cache: away_team.elo_cache + away_elo_change)
     end
   end
