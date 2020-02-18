@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_235122) do
+ActiveRecord::Schema.define(version: 2020_02_17_235123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2020_02_17_235122) do
     t.integer "away_old_elo"
     t.integer "away_new_elo"
     t.bigint "court_id"
+    t.float "multiplier", default: 1.0, null: false
     t.index ["court_id"], name: "index_matches_on_court_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
   end
@@ -114,10 +115,16 @@ ActiveRecord::Schema.define(version: 2020_02_17_235122) do
 
   create_table "tournament_groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "tournament_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tournament_id"
     t.index ["tournament_id"], name: "index_tournament_groups_on_tournament_id"
+  end
+
+  create_table "tournament_rounds", force: :cascade do |t|
+    t.integer "number"
+    t.string "name"
+    t.bigint "tournament_group_id"
+    t.string "format"
+    t.index ["tournament_group_id"], name: "index_tournament_rounds_on_tournament_group_id"
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -127,8 +134,6 @@ ActiveRecord::Schema.define(version: 2020_02_17_235122) do
     t.string "uri"
     t.string "format"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -154,5 +159,4 @@ ActiveRecord::Schema.define(version: 2020_02_17_235122) do
   end
 
   add_foreign_key "divisions", "seasons"
-  add_foreign_key "tournament_groups", "tournaments"
 end

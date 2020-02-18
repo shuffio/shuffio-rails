@@ -41,19 +41,24 @@ class Match < ApplicationRecord
       away_elo.wins_from(home_elo)
     end
 
-    # Save ELO to Match
+    # apply the Match's Multiplier to scale the change in elo
+    #  expects self::Multiplier to never be nil
+    home_elo_change = multiplier * (home_elo.rating - home_team.elo_cache)
+    away_elo_change = multiplier * (away_elo.rating - away_team.elo_cache)
+
+    # Save ELO to Match, applying the change in elo
     self.home_old_elo = home_team.elo_cache
     self.away_old_elo = away_team.elo_cache
-    self.home_new_elo = home_elo.rating
-    self.away_new_elo = away_elo.rating
+    self.home_new_elo = home_team.elo_cache + home_elo_change
+    self.away_new_elo = away_team.elo_cache + away_elo_change
     save
 
     # Save ELO to Teams
     unless home_score == away_score
       home_team.update(previous_elo: home_team.elo_cache)
       away_team.update(previous_elo: away_team.elo_cache)
-      home_team.update(elo_cache: home_elo.rating)
-      away_team.update(elo_cache: away_elo.rating)
+      home_team.update(elo_cache: home_team.elo_cache + home_elo_change)
+      away_team.update(elo_cache: away_team.elo_cache + away_elo_change)
     end
   end
 
