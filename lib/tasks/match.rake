@@ -236,7 +236,7 @@ namespace :match do
     end
   end
 
-  desc "Update the Match\'s multiplier to 0.5 if it is a \'Group Play\' match"
+  desc "Update the Match's multiplier to 0.5 if it is a 'Group Play' match"
   task update_match_multiplier_if_is_group_play: :environment do
     STDOUT.puts 'updating group play match multipliers...'
     Match.where('comment like ?', '%Group Play%').each do |m|
