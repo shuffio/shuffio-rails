@@ -15,10 +15,9 @@ ActiveRecord::Schema.define(version: 2020_02_17_235123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "courts", force: :cascade do |t|
-    t.string "name"
-    t.bigint "location_id"
-    t.index ["location_id"], name: "index_courts_on_location_id"
+  create_table "courts_tournament_rounds", id: false, force: :cascade do |t|
+    t.bigint "tournament_round_id", null: false
+    t.bigint "court_id", null: false
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -115,7 +114,9 @@ ActiveRecord::Schema.define(version: 2020_02_17_235123) do
 
   create_table "tournament_groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "tournament_id"
+    t.bigint "tournament_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["tournament_id"], name: "index_tournament_groups_on_tournament_id"
   end
 
@@ -134,6 +135,10 @@ ActiveRecord::Schema.define(version: 2020_02_17_235123) do
     t.string "uri"
     t.string "format"
     t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_tournaments_on_location_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -159,4 +164,5 @@ ActiveRecord::Schema.define(version: 2020_02_17_235123) do
   end
 
   add_foreign_key "divisions", "seasons"
+  add_foreign_key "tournament_groups", "tournaments"
 end
