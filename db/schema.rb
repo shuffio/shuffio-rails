@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_235123) do
+ActiveRecord::Schema.define(version: 2020_02_18_001948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courts", force: :cascade do |t|
+    t.string "name"
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_courts_on_location_id"
+  end
 
   create_table "courts_tournament_rounds", id: false, force: :cascade do |t|
     t.bigint "tournament_round_id", null: false
