@@ -120,9 +120,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_001948) do
 
   create_table "tournament_groups", force: :cascade do |t|
     t.string "name"
-    t.bigint "tournament_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tournament_id"
     t.index ["tournament_id"], name: "index_tournament_groups_on_tournament_id"
   end
 
@@ -141,8 +139,6 @@ ActiveRecord::Schema.define(version: 2020_02_18_001948) do
     t.string "uri"
     t.string "format"
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.bigint "location_id"
     t.index ["location_id"], name: "index_tournaments_on_location_id"
   end
@@ -170,5 +166,4 @@ ActiveRecord::Schema.define(version: 2020_02_18_001948) do
   end
 
   add_foreign_key "divisions", "seasons"
-  add_foreign_key "tournament_groups", "tournaments"
 end
