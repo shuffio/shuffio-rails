@@ -1,0 +1,36 @@
+<% provide :title, '[Admin] Can-Am' %>
+<div class="row">
+  <div class="col-lg-6 offset-lg-3">
+    <h2><%= @tr.tournament.name %> - <%= @tr.tournament_group.name %></h2>
+
+    <h4>Round <%= @tr.number %></h4>
+    <%= form_tag admin_canam_process_courts_path, method: :post do %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Court</th>
+            <th>Use?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @location_courts.each do |c| %>
+            <tr>
+              <td><%= c[:name] %></td>
+              <td>
+                <div class="form-check form-check-inline">
+                  <%= check_box_tag "court_id_#{ c[:id] }", 'use', c[:used], class: 'form-check-input' %>
+                  <% if c[:other_group] %>
+                    <span data-toggle="tooltip" data-placement="top" title="In use by another group this round">
+                      <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                  <% end %>
+                </div>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= button_tag '<i class="fas fa-edit"></i> Submit'.html_safe, type: 'submit', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

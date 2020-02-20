@@ -5,6 +5,7 @@ class Match < ApplicationRecord
   belongs_to :away_team, class_name: 'Team'
   belongs_to :division, optional: true
   belongs_to :court, optional: true
+  belongs_to :tournament_round, optional: true
   has_many :games, dependent: :nullify
 
   # TODO: Fix callback to work on updates

@@ -1,0 +1,35 @@
+<% provide :title, 'Tournament Round' %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <h2><%= @tr.tournament.name %> - <%= @tr.tournament_group.name %></h2>
+
+    <h4>Round <%= @tr.number %></h4>
+    <% if @tr.matches.any? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Court</th>
+            <th>Side</th>
+            <th>Yellow</th>
+            <th></th>
+            <th>Black</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @tr.matches.order(:court_id, location: :desc).each do |m| %>
+            <tr>
+              <td><%= m.court.name %></td>
+              <td><%= m.location %></td>
+              <td class="table-warning"><%= m.away_team.name %></td>
+              <td>vs.</td>
+              <td class="table-dark"><%= m.home_team.name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% else %>
+        <p>Matches not yet scheduled</p>
+    <% end %>
+  </div>
+</div>

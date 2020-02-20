@@ -1,0 +1,50 @@
+<% provide :title, '[Admin] Can-Am' %>
+<div class="row">
+  <div class="col-lg-12">
+    <h2><%= @tournament.name %></h2>
+
+
+    <% @tournament.tournament_groups.each do |tg| %>
+      <h3><%= tg.name %></h3>
+      <% tg.teams.each_with_index do |t, i| %>
+        <% if i % 4 == 0 %>
+          <div class="row">
+        <% elsif i % 4 == 2 %>
+          <div class="row page-break">
+        <% end %>
+
+            <div class="col-6">
+              <h4><%= t.name %></h4>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Round</th>
+                    <th>Court</th>
+                    <th>Side</th>
+                    <th>Yellow</th>
+                    <th></th>
+                    <th>Black</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% t.matches.where(tournament_round: tg.tournament_rounds).order(:id).each do |m| %>
+                    <tr>
+                      <td><%= m.tournament_round.number %></td>
+                      <td><%= m.court.name %></td>
+                      <td><%= m.location %></td>
+                      <td class="table-warning"><%= m.away_team.name %></td>
+                      <td>vs.</td>
+                      <td class="table-dark"><%= m.home_team.name %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+        <% if i.odd? %>
+          </div> <!-- row div <%= i %>-->
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

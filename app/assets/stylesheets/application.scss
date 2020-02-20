@@ -12,6 +12,10 @@ $gold: #d4af37;
 
 $a-tags: 'a, a:active, a:hover, a:visited';
 
+.page-break {
+  page-break-after: always;
+}
+
 .yield {
   padding-top: 25px;
 }

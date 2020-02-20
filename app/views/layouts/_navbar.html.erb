@@ -11,6 +11,9 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
+        <%= link_to 'Live Streams', live_index_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
         <%= link_to 'Divisions', divisions_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
@@ -29,6 +32,7 @@
             Admin
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to('Can Am', admin_canam_index_path, class: 'dropdown-item') %>
             <%= link_to('Teams', admin_teams_path, class: 'dropdown-item') %>
             <div class="dropdown-divider"></div>
             <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>
