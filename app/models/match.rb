@@ -113,7 +113,7 @@ class Match < ApplicationRecord
     home_record = home_team.record
 
     [
-      [location, away_team.name, home_team.name],
+      [full_location, away_team.name, home_team.name],
       ['ELO', away_team.elo_cache, home_team.elo_cache],
       ['Record', "#{away_record[:wins]}-#{away_record[:losses]}\t", "#{home_record[:wins]}-#{home_record[:losses]}\t"]
     ]
@@ -123,7 +123,7 @@ class Match < ApplicationRecord
     [
       id,
       time.in_time_zone('America/Chicago').iso8601,
-      location,
+      full_location,
       division ? division.name : '',
       comment,
       home_team.name,
@@ -136,6 +136,14 @@ class Match < ApplicationRecord
       away_old_elo,
       away_new_elo
     ]
+  end
+
+  def full_location
+    return "#{court.full_name} - #{location}" if court && location
+    return court.full_name if court
+    return location if location
+
+    ''
   end
 
   def self.recalculate_all_elo
