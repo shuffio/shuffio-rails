@@ -260,7 +260,7 @@ class Division < ApplicationRecord
         m.matchup_summary.each { |r| csv << r }
 
         # Leave room for manual info
-        5.times { csv << [] }
+        3.times { csv << [] }
       end
     end
   end
