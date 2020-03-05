@@ -1,0 +1,48 @@
+<% provide :title, '[Admin] Can-Am' %>
+<div class="row">
+  <div class="col-lg-10 offset-lg-1">
+    <h2><%= @tournament.name %></h2>
+    <% @tournament.tournament_groups.each do |tg| %>
+      <h3><%= tg.name %></h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Round</th>
+            <th>Matches</th>
+            <th>Completed</th>
+            <th>Assigned Courts</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tg.tournament_rounds.order(:number).each do |tr| %>
+            <tr>
+              <td><%= link_to "Round #{tr.number}", tournament_round_path(tr.id) %></td>
+              <td><%= tr.matches.count %></td>
+              <td><%= tr.completed_matches.count %></td>
+              <td><%= tr.courts.count %></td>
+              <td>
+                <% if tr.matches.count == 0 %>
+                  <% if tr.number == 1 %>
+                    <%= form_tag import_admin_canam_index_path, method: :upload, multipart: true, id: 'import_canam_form' do %>
+                     <%= hidden_field_tag('tournament_round_id', tr.id) %>
+                      <span class="btn btn-success btn-sm btn-file">
+                        <i class="fas fa-file-import"></i> Import Round
+                        <%= file_field_tag :file, id: 'import_canam_file' %>
+                      </span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to '<i class="fas fa-compass"></i> Assign Courts</span>'.html_safe, admin_canam_assign_courts_path(tr.id), class: 'btn btn-sm btn-primary' %>
+                    <%= link_to '<i class="fas fa-cogs"></i> Generate Matches</span>'.html_safe, admin_canam_generate_tournament_round_matches_path(tr.id), method: :post, class: 'btn btn-sm btn-secondary' %>
+                  <% end %>
+                <% else %>
+                  <%= link_to '<i class="fas fa-trash"></i> Delete Matches</span>'.html_safe, admin_canam_tournament_round_matches_path(tr.id), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "Are you sure you want to delete #{tr.matches.count} matches?" } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

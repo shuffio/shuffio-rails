@@ -1,0 +1,35 @@
+<% provide :title, '[Admin] Can-Am' %>
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <h2><%= @tournament.name %></h2>
+    <% @tournament.tournament_groups.each do |tg| %>
+      <h3><%= tg.name %></h3>
+      <% tg.tournament_rounds.order(:number).each do |tr| %>
+        <h4>Round <%= tr.number %></h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Court</th>
+              <th>Side</th>
+              <th>Yellow</th>
+              <th></th>
+              <th>Black</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% tr.matches.order(:court_id, location: :desc).each do |m| %>
+              <tr>
+                <td><%= m.court.name %></td>
+                <td><%= m.location %></td>
+                <td class="table-warning"><%= m.away_team.name %></td>
+                <td>vs.</td>
+                <td class="table-dark"><%= m.home_team.name %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  </div>
+</div>

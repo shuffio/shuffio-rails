@@ -9,6 +9,17 @@ Rails.application.routes.draw do
   resources :admin, only: [:index]
 
   namespace :admin do
+    resources 'canam' do
+      delete :tournament_round_matches
+      post :generate_tournament_round_matches
+      get :assign_courts # need a param here
+      post :process_courts
+      collection do
+        post :import
+        get :player
+        get :summary
+      end
+    end
     resources 'seasons', only: [:show]
     resources 'teams' do
       collection do
@@ -41,6 +52,7 @@ Rails.application.routes.draw do
   resources :seasons, only: [:index, :show]
   get '/seasons/:id/report', to: 'seasons#report', as: :season_report
   resources :teams, only: [:index, :show]
+  resources :tournament_rounds, only: [:index, :show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

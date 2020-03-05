@@ -32,9 +32,16 @@ function form_submit_js() {
   };
 }
 
+function canam_form_submit_js() {
+  document.getElementById("import_canam_file").onchange = function() {
+      document.getElementById("import_canam_form").submit();
+  };
+}
+
 document.addEventListener("DOMContentLoaded", resize_board_elements);
 window.addEventListener("resize", resize_board_elements);
 document.addEventListener("DOMContentLoaded", form_submit_js);
+document.addEventListener("DOMContentLoaded", canam_form_submit_js);
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

@@ -45,6 +45,9 @@ Rails/Date:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
 Rails/TimeZone:
   Enabled: false
 

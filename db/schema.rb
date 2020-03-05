@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_001948) do
+ActiveRecord::Schema.define(version: 2020_03_05_012304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,8 +89,10 @@ ActiveRecord::Schema.define(version: 2020_02_18_001948) do
     t.integer "away_new_elo"
     t.bigint "court_id"
     t.float "multiplier", default: 1.0, null: false
+    t.bigint "tournament_round_id"
     t.index ["court_id"], name: "index_matches_on_court_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
+    t.index ["tournament_round_id"], name: "index_matches_on_tournament_round_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_02_18_001948) do
     t.string "name"
     t.bigint "tournament_group_id"
     t.string "format"
+    t.integer "rotation"
     t.index ["tournament_group_id"], name: "index_tournament_rounds_on_tournament_group_id"
   end
 
