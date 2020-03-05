@@ -47,6 +47,7 @@
           <tr>
             <th>Date</th>
             <th>Opponent</th>
+            <th>Lifetime Record</th>
             <th colspan=2>ELO after match</th>
           </tr>
         </thead>
@@ -60,7 +61,10 @@
                   <%= link_to m.team_info(@team.id)[:opponent].name, team_path(m.team_info(@team.id)[:opponent]) %>
                 </span>
               </td>
-              
+              <td>
+                <%= @team.record(@team.rivalry_matches(m.team_info(@team.id)[:opponent].id))[:wins] %> - 
+                <%= @team.record(@team.rivalry_matches(m.team_info(@team.id)[:opponent].id))[:losses] %>
+              </td>
               <td class="align-middle text-nowrap">
                 <% if m.time.past? %>
                   <%= m.team_info(@team.id)[:new_elo] %>
@@ -91,6 +95,7 @@
             <tr>
               <td class="align-middle">Former Season</td>
               <td class="align-middle"><%= "#{ @team.starting_wins }-#{ @team.starting_losses }" %> Record in Former Season</td>
+              <td></td>
               <td class="align-middle text-nowrap">
                 <%= @team.starting_elo %>
                 <% if @team.starting_elo > 1000 %>

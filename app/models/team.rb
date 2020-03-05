@@ -19,6 +19,10 @@ class Team < ApplicationRecord
     Match.where(away_team_id: id).or(Match.where(home_team_id: id))
   end
 
+  def rivalry_matches (rival_team_id)
+    matches.where(away_team_id: rival_team_id).or(matches.where(home_team_id: rival_team_id))
+  end
+
   def match_count
     count = matches.where('time <= ?', Time.now).count
 
