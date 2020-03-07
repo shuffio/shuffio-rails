@@ -2,6 +2,8 @@
 <div class="row">
   <div class="col-lg-10 offset-lg-1">
     <h2><%= @tournament.name %></h2>
+    <%= link_to 'Player List', player_admin_canam_index_path %> |
+    <%= link_to 'Summary List', summary_admin_canam_index_path %>
     <% @tournament.tournament_groups.each do |tg| %>
       <h3><%= tg.name %></h3>
       <table class="table table-striped">
