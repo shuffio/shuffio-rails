@@ -5,7 +5,7 @@
             <td class="l3-match-gap" rowspan=1>
             </td>
             <td class="l3-game-name <%= "l3-black" %>" colspan=6>
-                Royal Palms Chicago Fall 2019 Championships
+                Can-Am 2020 Final
             </td>
         </tr>
 
@@ -22,25 +22,25 @@
                 <% end %>
             </td>
             <td class="l3-player-name">
-                <%= g.frames.count >= 4 ? g.black_team.name : g.yellow_team.name %>
+                <%= g.yellow_team.name %>
             </td>
             <td class="l3-hammer">
                 <%= image_tag g.hammer=="yellow" ? "yellow_disc_hammer.svg" : "yellow_disc.svg", height: "40px" %>
             </td>
             <td class="l3-score">
               <% if g.frames && g.frames.any? %>
-                <%= g.frames.count >= 4 ? g.frames.last[1] : g.frames.last[0] %>
+                <%= g.frames.last[0] %>
               <% end %>
             </td>
             <td class="l3-player-name">
-              <%= g.frames.count >= 4 ? g.yellow_team.name : g.black_team.name %>
+              <%= g.black_team.name %>
             </td>
             <td class="l3-hammer">
             <%= image_tag g.hammer=="black" ? "black_disc_hammer.svg" : "black_disc.svg", height: "40px" %>
             </td>
             <td class="l3-score">
               <% if g.frames && g.frames.any? %>
-                <%= g.frames.count >= 4 ? g.frames.last[0] : g.frames.last[1] %>
+                <%= g.frames.last[1] %>
               <% end %>
             </td>
         </tr>
