@@ -24,7 +24,7 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
-  def completed?(game_frames = 10, allow_ties = false)
+  def completed?(game_frames = 8, allow_ties = false)
     return false unless frames # return quickly if frames is nil
     return false if frames.count < game_frames # false if
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     true
   end
 
-  def hammer(type = 'isa')
+  def hammer(type = 'palms')
     # TODO: move the type to the model and do validations
     Game.hammer_from_count(frames.count + 1, type)
   end
