@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_012304) do
+ActiveRecord::Schema.define(version: 2020_03_11_025753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(version: 2020_03_05_012304) do
     t.bigint "yellow_team_id"
     t.bigint "black_team_id"
     t.json "frames"
+    t.integer "game_type", default: 0, null: false
+    t.integer "max_frames", default: 8
+    t.integer "max_points"
+    t.boolean "allow_ties", default: false, null: false
     t.index ["black_team_id"], name: "index_games_on_black_team_id"
     t.index ["match_id"], name: "index_games_on_match_id"
     t.index ["yellow_team_id"], name: "index_games_on_yellow_team_id"
