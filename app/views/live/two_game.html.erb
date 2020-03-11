@@ -17,8 +17,8 @@
 
       <% @left_game.eight_frames.each_with_index do |f, i| %>
         <tr class="score-box">
-          <td class="<%= Game.hammer_from_count(i+1+@left_game.extra_frames) == 'black' ? '' : '' %>"><%= f[0] %></td>
-          <td class="<%= Game.hammer_from_count(i+1+@left_game.extra_frames) == 'yellow' ? '' : '' %>"><%= f[1] %></td>
+          <td><%= f[0] %></td>
+          <td><%= f[1] %></td>
         </tr>
       <% end %>
     </table>
@@ -81,8 +81,8 @@
 
       <% @right_game.eight_frames.each_with_index do |f, i| %>
         <tr class="score-box">
-          <td class="<%= Game.hammer_from_count(i+1+@right_game.extra_frames) == 'black' ? '' : '' %>"><%= f[0] %></td>
-          <td class="<%= Game.hammer_from_count(i+1+@right_game.extra_frames) == 'yellow' ? '' : '' %>"><%= f[1] %></td>
+          <td><%= f[0] %></td>
+          <td><%= f[1] %></td>
         </tr>
       <% end %>
     </table>

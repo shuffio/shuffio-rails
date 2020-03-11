@@ -57,13 +57,6 @@ class Game < ApplicationRecord
     Game.hammer_from_count(frames.count + 1, game_type)
   end
 
-  # TODO: re-work views to not need this method, controller again
-  def extra_frames
-    return 0 if frames.count <= 8
-
-    frames.count - 8
-  end
-
   # TODO: rework this to not be needed?
   def self.hammer_from_count(frame_count = 0, type = :standard_singles)
     case type
