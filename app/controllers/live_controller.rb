@@ -36,15 +36,6 @@ class LiveController < ApplicationController
     render layout: 'summary'
   end
 
-  def summary_doubles
-    # This may need to be updated day-of once we see the camera views
-    @games = [
-      LiveEvent.last.left_game,
-      LiveEvent.last.right_game
-    ]
-    render layout: 'summary_doubles'
-  end
-
   def four_game
     # This may need to be updated day-of once we see the camera views
     @games = [
