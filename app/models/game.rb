@@ -2,10 +2,16 @@ class Game < ApplicationRecord
   belongs_to :match
   belongs_to :yellow_team, class_name: 'Team', optional: true
   belongs_to :black_team, class_name: 'Team', optional: true
+
+  # TODO: validate this enum, and everything else
+  enum game_type: { standard_singles: 0, standard_doubles: 1, palms_singles: 2, palms_doubles: 3 }
+
+  validate :frames_or_points?
+  validate :valid_game_number?
+
   after_initialize :default_values
 
-  # TODO: game must be 1-3
-
+  # TODO: re-work views to not need this method, probably in controller?
   def eight_frames
     return frames if frames.size == 8
 
@@ -18,46 +24,73 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 1).last(8)
   end
 
+  # TODO: re-work views to not need this method, probably in controller?
   def isa_frames
     return frames.fill(['​', '​'], frames.length, 9 - frames.length) if frames.size <= 8
 
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
-  def completed?(game_frames = 8, allow_ties = false)
+  def completed?
     return false unless frames # return quickly if frames is nil
-    return false if frames.count < game_frames # false if
+
+    if max_frames && max_points
+      # frame and point game, whichever comes first
+      return false if (frames.count < max_frames) && (frames.last[0] < max_points) && (frames.last[1] < max_points)
+    elsif max_frames
+      # frame game
+      return false if frames.count < max_frames # false if there are frames to go
+    elsif max_points
+      # point game
+      return false if (frames.last[0] < max_points) && (frames.last[1] < max_points)
+    end
+
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
-    return false if frames.count.odd? # false if there are still frames remaining
+
+    # TODO: this makes sense, right? time to write some tests
+    return false unless max_points && at_game_end_boundary? # false if there are still frames remaining
 
     true
   end
 
-  def hammer(type = 'palms')
-    # TODO: move the type to the model and do validations
-    Game.hammer_from_count(frames.count + 1, type)
+  def hammer
+    Game.hammer_from_count(frames.count + 1, game_type)
   end
 
+  # TODO: re-work views to not need this method, controller again
   def extra_frames
     return 0 if frames.count <= 8
 
     frames.count - 8
   end
 
-  def self.hammer_from_count(frame_count = 0, type = 'isa')
-    if type == 'isa'
+  # TODO: rework this to not be needed?
+  def self.hammer_from_count(frame_count = 0, type = :standard_singles)
+    case type
+    when :standard_singles
       return 'yellow' if frame_count.even?
       return 'black' if frame_count.odd?
-    elsif type == 'palms'
+    when :standard_doubles
       case frame_count % 4
-      when 0
+      when 1
         'black'
+      when 2
+        'black'
+      when 3
+        'yellow'
+      when 0
+        'yellow'
+      end
+    when :palms_singles, :palms_doubles
+      case frame_count % 4
       when 1
         'black'
       when 2
         'yellow'
       when 3
         'yellow'
+      when 0
+        'black'
       end
     else
       raise 'invalid game type'
@@ -68,5 +101,30 @@ class Game < ApplicationRecord
 
   def default_values
     self.frames ||= []
+  end
+
+  def frames_or_points?
+    return true if max_points
+    return true if max_frames
+
+    false
+  end
+
+  def valid_game_number?
+    return true if number && number.positive?
+
+    false
+  end
+
+  def game_end_boundary
+    return 4 if Game.last.standard_doubles?
+
+    2
+  end
+
+  def at_game_end_boundary?
+    return false if frames.count.zero?
+
+    (frames.count % Game.last.game_end_boundary).zero?
   end
 end
