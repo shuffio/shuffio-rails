@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     true
   end
 
-  def hammer(type = 'isa')
+  def hammer(type = 'palms')
     # TODO: move the type to the model and do validations
     Game.hammer_from_count(frames.count + 1, type)
   end
