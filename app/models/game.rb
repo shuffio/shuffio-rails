@@ -31,7 +31,7 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
-  def completed?
+  def complete?
     return false unless frames # return quickly if frames is nil
 
     if max_frames && max_points

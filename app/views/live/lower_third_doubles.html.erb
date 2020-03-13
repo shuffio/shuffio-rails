@@ -9,7 +9,7 @@
               <%= g.match.comment %>
             </td>
             <td class="l3-frame <%= g.hammer=="yellow" ? "l3-black" : "l3-yellow" %>" colspan=2>
-              <% if g.completed? %>
+              <% if g.completed %>
                 FINAL
               <% else %>
                 <%= (g.frames.count+1).ordinalize %> Frame
