@@ -15,7 +15,7 @@
             Game <%= g.number %>
           </td>
           <td class="l3-frame <%= g.next_hammer == 'yellow' ? 'l3-black' : 'l3-yellow' %>" colspan=2>
-            <% if g.completed? %>
+            <% if g.complete? %>
               FIN
             <% else %>
               <%= (g.frames.count+1).ordinalize %>
