@@ -47,14 +47,19 @@ class Game < ApplicationRecord
 
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
 
-    # TODO: this makes sense, right? time to write some tests
-    return false unless max_points && at_game_end_boundary? # false if there are still frames remaining
+    unless max_points
+      return false unless at_game_end_boundary? # false if there are still frames remaining
+    end
 
     true
   end
 
+  def frame
+    frames.count + 1
+  end
+
   def next_hammer
-    frame_count = frames.count + 1
+    frame_count = frame
 
     case game_type
     when 'standard_singles'
@@ -87,7 +92,7 @@ class Game < ApplicationRecord
     end
   end
 
-  private
+  # private
 
   def default_values
     self.frames ||= []
@@ -107,7 +112,7 @@ class Game < ApplicationRecord
   end
 
   def game_end_boundary
-    return 4 if Game.last.standard_doubles?
+    return 4 if standard_doubles?
 
     2
   end
@@ -115,6 +120,6 @@ class Game < ApplicationRecord
   def at_game_end_boundary?
     return false if frames.count.zero?
 
-    (frames.count % Game.last.game_end_boundary).zero?
+    (frames.count % game_end_boundary).zero?
   end
 end
