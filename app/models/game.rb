@@ -34,6 +34,8 @@ class Game < ApplicationRecord
   def complete?
     return false unless frames # return quickly if frames is nil
 
+    return false unless at_game_end_boundary? # false if there are not equal hammers
+
     if max_frames && max_points
       # frame and point game, whichever comes first
       return false if (frames.count < max_frames) && (frames.last[0] < max_points) && (frames.last[1] < max_points)
@@ -46,10 +48,6 @@ class Game < ApplicationRecord
     end
 
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
-
-    unless max_points
-      return false unless at_game_end_boundary? # false if there are still frames remaining
-    end
 
     true
   end
