@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Game, type: :model do
   let(:frame_game) { Game.new }
   let(:point_game) { Game.new(max_points: 75, max_frames: nil) }
+  let(:point_or_frame_game) { Game.new(max_points: 75, max_frames: 8) }
 
   describe '#complete?' do
     describe 'frame game' do
@@ -68,7 +69,23 @@ RSpec.describe Game, type: :model do
       end
     end
 
-    # TODO: Frame + Points
+    describe 'point or frame game' do
+      it 'returns false on new game' do
+        expect(point_or_frame_game.complete?).to be_falsey
+      end
+
+      it 'returns true at 75 points' do
+        point_or_frame_game.update(frames: [[75, 74]])
+        expect(point_or_frame_game.complete?).to be_truthy
+      end
+
+      it 'returns true after 8 frames' do
+        point_or_frame_game.update(frames: [[8, 0], [8, 8], [15, 8], [15, 15], [22, 15], [22, 22], [22, 12], [22, 12]])
+        expect(point_or_frame_game.complete?).to be_truthy
+      end
+
+      # TODO: can point/frame games end in a tie?
+    end
   end
 
   # TODO: all validations

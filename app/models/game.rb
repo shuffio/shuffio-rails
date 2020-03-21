@@ -46,6 +46,7 @@ class Game < ApplicationRecord
       return false if frames.count < max_frames # false if there are frames to go
     elsif max_points
       # point game
+      # TODO: there is some complexity around the game ending when above max points, but still being in a tie that we're not accounting for yet
       return false if (frames.last[0] < max_points) && (frames.last[1] < max_points)
     end
 
@@ -123,6 +124,8 @@ class Game < ApplicationRecord
   end
 
   def points_cannot_tie?
+    return if max_frames
+
     errors.add(:base, 'point games cannot tie') if max_points && allow_ties
   end
 end
