@@ -64,14 +64,18 @@ class Game < ApplicationRecord
   end
 
   def next_hammer
-    frame_count = frame
+    Game.hammer_for_frame(frame, game_type)
+  end
 
-    case game_type
+  def self.hammer_for_frame(frame_number = 1, type = 'standard_singles')
+    raise 'invalid frame number' unless frame_number.positive?
+
+    case type
     when 'standard_singles'
-      return 'yellow' if frames.count.odd?
-      return 'black' if frames.count.even?
+      return 'yellow' if frame_number.even?
+      return 'black' if frame_number.odd?
     when 'standard_doubles'
-      case frame_count % 4
+      case frame_number % 4
       when 1
         'black'
       when 2
@@ -82,7 +86,7 @@ class Game < ApplicationRecord
         'yellow'
       end
     when 'palms_singles', 'palms_doubles'
-      case frame_count % 4
+      case frame_number % 4
       when 1
         'black'
       when 2

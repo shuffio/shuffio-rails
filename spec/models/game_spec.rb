@@ -88,6 +88,41 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe '#next_hammer' do
+    it 'returns correct hammer in 2nd frame' do
+      frame_game.update(frames: [[7, 0]])
+      expect(frame_game.next_hammer).to eq('yellow')
+    end
+
+    it 'returns correct hammer in 3rd frame' do
+      frame_game.update(frames: [[7, 0], [7, 0]])
+      expect(frame_game.next_hammer).to eq('black')
+    end
+  end
+
+  describe '#hammer_for_frame' do
+    it 'returns correct hammers for singles' do
+      expect(Game.hammer_for_frame(1, 'standard_singles')).to eq('black')
+      expect(Game.hammer_for_frame(2, 'standard_singles')).to eq('yellow')
+      expect(Game.hammer_for_frame(3, 'standard_singles')).to eq('black')
+      expect(Game.hammer_for_frame(4, 'standard_singles')).to eq('yellow')
+    end
+
+    it 'returns correct hammers for doubles' do
+      expect(Game.hammer_for_frame(1, 'standard_doubles')).to eq('black')
+      expect(Game.hammer_for_frame(2, 'standard_doubles')).to eq('black')
+      expect(Game.hammer_for_frame(3, 'standard_doubles')).to eq('yellow')
+      expect(Game.hammer_for_frame(4, 'standard_doubles')).to eq('yellow')
+    end
+
+    it 'returns correct hammers for palms' do
+      expect(Game.hammer_for_frame(1, 'palms_doubles')).to eq('black')
+      expect(Game.hammer_for_frame(2, 'palms_doubles')).to eq('yellow')
+      expect(Game.hammer_for_frame(3, 'palms_doubles')).to eq('yellow')
+      expect(Game.hammer_for_frame(4, 'palms_doubles')).to eq('black')
+    end
+  end
+
   # TODO: all validations
   xit 'errors if ties allowed' do
     expect { point_game.update(allow_ties: true) }.to raise_error
