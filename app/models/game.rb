@@ -8,8 +8,11 @@ class Game < ApplicationRecord
 
   validate :frames_or_points?
   validate :valid_game_number?
+  validate :points_cannot_tie?
 
   after_initialize :default_values
+
+  # TODO: reject frames with only one score, for example [[0, 0], [8, nil]]
 
   # TODO: re-work views to not need this method, probably in controller?
   def eight_frames
@@ -33,8 +36,7 @@ class Game < ApplicationRecord
 
   def complete?
     return false unless frames # return quickly if frames is nil
-
-    return false unless at_game_end_boundary? # false if there are not equal hammers
+    return false unless frames.size.positive?
 
     if max_frames && max_points
       # frame and point game, whichever comes first
@@ -48,6 +50,10 @@ class Game < ApplicationRecord
     end
 
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
+
+    unless max_points
+      return false unless at_game_end_boundary? # false if there are still frames remaining
+    end
 
     true
   end
@@ -90,25 +96,6 @@ class Game < ApplicationRecord
     end
   end
 
-  # private
-
-  def default_values
-    self.frames ||= []
-  end
-
-  def frames_or_points?
-    return true if max_points
-    return true if max_frames
-
-    false
-  end
-
-  def valid_game_number?
-    return true if number && number.positive?
-
-    false
-  end
-
   def game_end_boundary
     return 4 if standard_doubles?
 
@@ -119,5 +106,23 @@ class Game < ApplicationRecord
     return false if frames.count.zero?
 
     (frames.count % game_end_boundary).zero?
+  end
+
+  private
+
+  def default_values
+    self.frames ||= []
+  end
+
+  def frames_or_points?
+    errors.add(:base, 'must have max_points or max_frames') unless max_points || max_frames
+  end
+
+  def valid_game_number?
+    errors.add(:number, 'must be positive') unless number && number.positive?
+  end
+
+  def points_cannot_tie?
+    errors.add(:base, 'point games cannot tie') if max_points && allow_ties
   end
 end
