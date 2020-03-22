@@ -76,7 +76,7 @@ body {
   background-image: linear-gradient(225deg, white, white 10px, transparent 10px, transparent);
 }
 
-// Lower Third
+// Lower Third with summary sprinkled in
 .lower-third {
   background-color: transparent;
   text-align: center;
@@ -88,8 +88,9 @@ body {
 }
 
 .l3-black {
-  color: white;
   background: linear-gradient(to left, rgba(254,252,234,0) 0%,rgba(91,91,91,1) 10%,rgba(63,63,63,1) 45%,rgba(48,48,48,1) 100%);
+  color: white;
+  font-size: 1.5rem;
 }
 
 .l3-divider {
@@ -105,14 +106,16 @@ body {
 }
 
 .l3-game-name {
+  color: white;
   font-style: italic;
   font-weight: 600;
+  vertical-align: middle !important;
   white-space:  nowrap;
-  color: white;
 }
 
 .l3-game-name.l3-yellow {
   background: linear-gradient(to right, rgba(73,53,54,0) 0%,rgba(73,53,54,0.1) 1%,rgba(73,53,54,1) 10%,rgba(92,66,68,1) 22%,rgba(115,83,84,1) 75%,rgba(156,91,95,1) 95%,rgba(241,218,54,1) 100%);
+  color:  white;
 }
 
 .l3-game-name.l3-black {
@@ -132,6 +135,54 @@ body {
   border-top-style: none;
   padding-top: 1px;
   padding-bottom: 2px;
+}
+
+.l3-match-one {
+  background: linear-gradient(to bottom, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.l3-match-one > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top-style: none;
+}
+
+.l3-match-two {
+  background: linear-gradient(to top, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.l3-match-two > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top-style: none;
+}
+
+.l3-match-three {
+  background: linear-gradient(to bottom, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.l3-match-three > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top-style: none;
+}
+
+.l3-match-four {
+  background: linear-gradient(to top, #2f4f4f 0%,#3b6363 20%,#4a7c7c 95%,#5c9b9b 100%);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.l3-match-four > td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-top-style: none;
 }
 
 .l3-player-name {
@@ -187,4 +238,15 @@ body {
 
 .l3-yellow {
   background: linear-gradient(to left, rgba(254,252,234,0) 0%,rgba(252,242,151,1) 10%,rgba(249,232,102,1) 44%,rgba(249,232,101,1) 45%,rgba(241,218,54,1) 100%);
+  color: black;
+  font-size: 1.5rem;
+}
+
+.summary-game-name {
+  color: white;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 600;
+  vertical-align: middle !important;
+  white-space:  nowrap;
 }
