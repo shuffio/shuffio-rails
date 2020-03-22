@@ -8,17 +8,13 @@ class LiveController < ApplicationController
       LiveEvent.last.left_game,
       LiveEvent.last.right_game
     ]
-
     render layout: 'lower_third'
   end
 
   def summary
-    # This may need to be updated day-of once we see the camera views
     @games = [
-      LiveEvent.all.last(2).first.right_game, # Dieter/Evan
-      LiveEvent.all.last(2).last.right_game, # Sach /Eil
-      LiveEvent.all.last(2).last.left_game, # Fab / Deb
-      LiveEvent.all.last(2).first.left_game # Mats/Torben
+      LiveEvent.last.left_game,
+      LiveEvent.last.right_game
     ]
     render layout: 'summary'
   end
