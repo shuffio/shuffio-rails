@@ -141,6 +141,14 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe '#frames_with_meta' do
+    it 'returns an array of hashes for 8 frames' do
+      expect(frame_game.frames_with_meta.is_a?(Array)).to be_truthy
+      expect(frame_game.frames_with_meta.first.is_a?(Hash)).to be_truthy
+      expect(frame_game.frames_with_meta.size).to eq(8)
+    end
+  end
+
   describe 'validations' do
     it 'errors if game has no max frames or points' do
       expect { Game.create!(match: match, number: 1, max_points: nil, max_frames: nil) }.to raise_error(
