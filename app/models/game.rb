@@ -59,12 +59,12 @@ class Game < ApplicationRecord
     true
   end
 
-  def frame
+  def next_frame
     frames.count + 1
   end
 
   def next_hammer
-    Game.hammer_for_frame(frame, game_type)
+    Game.hammer_for_frame(next_frame, game_type)
   end
 
   def self.hammer_for_frame(frame_number = 1, type = 'standard_singles')

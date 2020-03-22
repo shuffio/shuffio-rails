@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
+  let(:match) { Match.new }
   let(:frame_game) { Game.new }
   let(:point_game) { Game.new(max_points: 75, max_frames: nil) }
   let(:point_or_frame_game) { Game.new(max_points: 75, max_frames: 8) }
@@ -123,16 +124,21 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  # TODO: all validations
-  xit 'errors if ties allowed' do
-    expect { point_game.update(allow_ties: true) }.to raise_error
+  describe 'validations' do
+    it 'errors if game has no max frames or points' do
+      expect { Game.create!(match: match, number: 1, max_points: nil, max_frames: nil) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: must have max_points or max_frames')))
+    end
+
+    it 'errors if game number missing' do
+      expect { Game.create!(match: match, number: nil) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: Number must be positive')))
+    end
+
+    it 'errors if ties allowed in point game' do
+      expect { Game.create!(match: match, number: 1, allow_ties: true, max_frames: nil, max_points: 75) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: point games cannot tie')))
+    end
   end
 
-  it 'is on frame 1' do
+  xit 'is on frame 1' do
     expect(frame_game.frame).to eq(1)
-  end
-
-  it 'black has hammer' do
-    expect(frame_game.next_hammer).to eq('black')
   end
 end
