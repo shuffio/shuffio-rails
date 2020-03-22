@@ -143,15 +143,21 @@ RSpec.describe Game, type: :model do
 
   describe 'validations' do
     it 'errors if game has no max frames or points' do
-      expect { Game.create!(match: match, number: 1, max_points: nil, max_frames: nil) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: must have max_points or max_frames')))
+      expect { Game.create!(match: match, number: 1, max_points: nil, max_frames: nil) }.to raise_error(
+        an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: must have max_points or max_frames'))
+      )
     end
 
     it 'errors if game number missing' do
-      expect { Game.create!(match: match, number: nil) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: Number must be positive')))
+      expect { Game.create!(match: match, number: nil) }.to raise_error(
+        an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: Number must be positive'))
+      )
     end
 
     it 'errors if ties allowed in point game' do
-      expect { Game.create!(match: match, number: 1, allow_ties: true, max_frames: nil, max_points: 75) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: point games cannot tie')))
+      expect { Game.create!(match: match, number: 1, allow_ties: true, max_frames: nil, max_points: 75) }.to raise_error(
+        an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: point games cannot tie'))
+      )
     end
   end
 end
