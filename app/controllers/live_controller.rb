@@ -9,7 +9,7 @@ class LiveController < ApplicationController
       LiveEvent.last.left_game,
       LiveEvent.last.right_game
     ]
-    render layout: 'lower_third'
+    render layout: 'live'
   end
 
   def summary
@@ -17,7 +17,7 @@ class LiveController < ApplicationController
       LiveEvent.last.left_game,
       LiveEvent.last.right_game
     ]
-    render layout: 'summary'
+    render layout: 'live'
   end
 
   def four_game
