@@ -59,14 +59,13 @@ class Game < ApplicationRecord
   end
 
   def frames_with_meta(number_frames = 8)
-    # '' below actually has hidden unicode
     input_frames = frames
 
     # If fewer than needed frames, pad it
-    input_frames = input_frames.fill(['​', '​'], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
+    input_frames = input_frames.fill([nil, nil], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
 
     # If frames odd, pad it once
-    input_frames.push(['​', '​']) if input_frames.size.odd?
+    input_frames.push([nil, nil]) if input_frames.size.odd?
 
     # Inject frame number and hammer
     frames_hash = input_frames.map.with_index do |f, i|

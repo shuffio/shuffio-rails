@@ -18,10 +18,10 @@
       <% @games[0].frames_with_meta.each do |f| %>
         <tr class="score-box">
           <td class="<%= f[:hammer] == 'black' ? 'hammer-mark' : '' %>">
-            <%= f[:yellow_score] %>
+            <%= f[:yellow_score] ? f[:yellow_score] : '​' %>
           </td>
           <td class="<%= f[:hammer] == 'yellow' ? 'hammer-mark' : '' %>">
-            <%= f[:black_score] %>
+            <%= f[:black_score] ? f[:black_score] : '​' %>
           </td>
         </tr>
       <% end %>
@@ -86,10 +86,10 @@
       <% @games[1].frames_with_meta.each do |f| %>
         <tr class="score-box">
           <td class="<%= f[:hammer] == 'black' ? 'hammer-mark' : '' %>">
-            <%= f[:yellow_score] %>
+            <%= f[:yellow_score] ? f[:yellow_score] : '​' %>
           </td>
           <td class="<%= f[:hammer] == 'yellow' ? 'hammer-mark' : '' %>">
-            <%= f[:black_score] %>
+            <%= f[:black_score] ? f[:black_score] : '​' %>
           </td>
         </tr>
       <% end %>
