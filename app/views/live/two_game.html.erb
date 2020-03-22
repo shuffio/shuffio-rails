@@ -3,10 +3,10 @@
     <table class="table">
       <tr class="team-box">
         <td>
-          <img class="team-logo" style="background-color: #<%= @team1.color %>" src="<%= @team1.logo_uri %>" />
+          <img class="team-logo" style="background-color: #<%= @games[0].yellow_team.color %>" src="<%= @games[0].yellow_team.logo_uri %>" />
         </td>
         <td>
-          <img class="team-logo" style="background-color: #<%= @team2.color %>" src="<%= @team2.logo_uri %>" />
+          <img class="team-logo" style="background-color: #<%= @games[0].black_team.color %>" src="<%= @games[0].black_team.logo_uri %>" />
         </td>
       </tr>
 
@@ -15,10 +15,14 @@
         <td class="black-head">&nbsp</td>
       </tr>
 
-      <% @left_game.eight_frames.each_with_index do |f, i| %>
+      <% @games[0].frames_with_meta.each do |f| %>
         <tr class="score-box">
-          <td class="<%= Game.hammer_from_count(i+1+@left_game.extra_frames) == 'black' ? '' : '' %>"><%= f[0] %></td>
-          <td class="<%= Game.hammer_from_count(i+1+@left_game.extra_frames) == 'yellow' ? '' : '' %>"><%= f[1] %></td>
+          <td class="<%= f[:hammer] == 'black' ? 'hammer-mark' : '' %>">
+            <%= f[:yellow_score] ? f[:yellow_score] : '​' %>
+          </td>
+          <td class="<%= f[:hammer] == 'yellow' ? 'hammer-mark' : '' %>">
+            <%= f[:black_score] ? f[:black_score] : '​' %>
+          </td>
         </tr>
       <% end %>
     </table>
@@ -33,8 +37,8 @@
       <i class="fas fa-arrow-left fa-2x"></i><br>
 
       <span class="court-title">Court</span><br>
-      <span class="court-number"><%= @live_event.left_court_number %></span><br>
-      <%= @live_event.left_description %><br>
+      <span class="court-number"><%= @games[0].match.court.number %></span><br>
+      <%= @games[0].match.comment %><br>
 
       <i class="fas fa-arrow-left fa-2x"></i>
       <hr class="court-divider">
@@ -42,8 +46,8 @@
       <br>
 
       <span class="court-title">Court</span><br>
-      <span class="court-number"><%= @live_event.right_court_number %></span><br>
-      <%= @live_event.right_description %><br>
+      <span class="court-number"><%= @games[1].match.court.number %></span><br>
+      <%= @games[1].match.comment %><br>
 
       <i class="fas fa-arrow-right fa-2x"></i>
 
@@ -67,10 +71,10 @@
     <table class="table">
       <tr class="team-box">
         <td>
-          <img class="team-logo" style="background-color: #<%= @team3.color %>" src="<%= @team3.logo_uri %>" />
+          <img class="team-logo" style="background-color: #<%= @games[1].yellow_team.color %>" src="<%= @games[1].yellow_team.logo_uri %>" />
         </td>
         <td>
-          <img class="team-logo" style="background-color: #<%= @team4.color %>" src="<%= @team4.logo_uri %>" />
+          <img class="team-logo" style="background-color: #<%= @games[1].black_team.color %>" src="<%= @games[1].black_team.logo_uri %>" />
         </td>
       </tr>
 
@@ -79,10 +83,14 @@
         <td class="black-head">&nbsp</td>
       </tr>
 
-      <% @right_game.eight_frames.each_with_index do |f, i| %>
+      <% @games[1].frames_with_meta.each do |f| %>
         <tr class="score-box">
-          <td class="<%= Game.hammer_from_count(i+1+@right_game.extra_frames) == 'black' ? '' : '' %>"><%= f[0] %></td>
-          <td class="<%= Game.hammer_from_count(i+1+@right_game.extra_frames) == 'yellow' ? '' : '' %>"><%= f[1] %></td>
+          <td class="<%= f[:hammer] == 'black' ? 'hammer-mark' : '' %>">
+            <%= f[:yellow_score] ? f[:yellow_score] : '​' %>
+          </td>
+          <td class="<%= f[:hammer] == 'yellow' ? 'hammer-mark' : '' %>">
+            <%= f[:black_score] ? f[:black_score] : '​' %>
+          </td>
         </tr>
       <% end %>
     </table>

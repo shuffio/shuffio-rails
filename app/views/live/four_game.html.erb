@@ -3,14 +3,18 @@
     <div class="col-lg-3 live-score">
       <table class="table four-game-table">
         <tr>
-          <td class="yellow-head"><%= g.frames.count > 8 ? g.black_team.isa_name : g.yellow_team.isa_name %></td>
-          <td class="black-head"><%= g.frames.count >8 ? g.yellow_team.isa_name : g.black_team.isa_name %></td>
+          <td class="yellow-head"><%= g.yellow_team.name %></td>
+          <td class="black-head"><%= g.black_team.name %></td>
         </tr>
 
-        <% g.isa_frames.each do |f| %>
+        <% g.frames_with_meta.each do |f| %>
           <tr class="score-box">
-            <td><%= f[0] %></td>
-            <td><%= f[1] %></td>
+            <td class="<%= f[:hammer] == 'black' ? 'hammer-mark' : '' %>">
+              <%= f[:yellow_score] ? f[:yellow_score] : '​' %>
+            </td>
+            <td class="<%= f[:hammer] == 'yellow' ? 'hammer-mark' : '' %>">
+              <%= f[:black_score] ? f[:black_score] : '​' %>
+            </td>
           </tr>
         <% end %>
       </table>

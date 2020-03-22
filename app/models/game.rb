@@ -2,62 +2,113 @@ class Game < ApplicationRecord
   belongs_to :match
   belongs_to :yellow_team, class_name: 'Team', optional: true
   belongs_to :black_team, class_name: 'Team', optional: true
+
+  enum game_type: { standard_singles: 0, standard_doubles: 1, palms_singles: 2, palms_doubles: 3 }
+
+  validate :frames_or_points?
+  validate :valid_game_number?
+  validate :points_cannot_tie?
+
   after_initialize :default_values
 
-  # TODO: game must be 1-3
+  # TODO: reject frames with only one score, for example [[0, 0], [8, nil]]
 
-  def eight_frames
-    return frames if frames.size == 8
-
-    # '' actually has hidden unicode
-    return frames.fill(['​', '​'], frames.length, 8 - frames.length) if frames.size < 8
-
-    # else more than 8 frames, return last 8 if even, last 7 + padding if odd
-    return frames.last(8) if frames.size.even?
-
-    frames.fill(['​', '​'], frames.length, 1).last(8)
-  end
-
-  def isa_frames
-    return frames.fill(['​', '​'], frames.length, 9 - frames.length) if frames.size <= 8
-
-    frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
-  end
-
-  def completed?(game_frames = 8, allow_ties = false)
+  def complete?
     return false unless frames # return quickly if frames is nil
-    return false if frames.count < game_frames # false if
+    return false unless frames.size.positive?
+
+    if max_frames && max_points
+      # frame and point game, whichever comes first
+      return false if (frames.count < max_frames) && (frames.last[0] < max_points) && (frames.last[1] < max_points)
+    elsif max_frames
+      # frame game
+      return false if frames.count < max_frames # false if there are frames to go
+    elsif max_points
+      # point game
+      # TODO: there is some complexity around the game ending when above max points, but still being in a tie that we're not accounting for yet
+      return false if (frames.last[0] < max_points) && (frames.last[1] < max_points)
+    end
+
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
-    return false if frames.count.odd? # false if there are still frames remaining
+
+    unless max_points
+      return false unless at_game_end_boundary? # false if there are still frames remaining
+    end
 
     true
   end
 
-  def hammer(type = 'palms')
-    # TODO: move the type to the model and do validations
-    Game.hammer_from_count(frames.count + 1, type)
+  def next_frame
+    frames.count + 1
   end
 
-  def extra_frames
-    return 0 if frames.count <= 8
-
-    frames.count - 8
+  def next_hammer
+    Game.hammer_for_frame(next_frame, game_type)
   end
 
-  def self.hammer_from_count(frame_count = 0, type = 'isa')
-    if type == 'isa'
-      return 'yellow' if frame_count.even?
-      return 'black' if frame_count.odd?
-    elsif type == 'palms'
-      case frame_count % 4
-      when 0
+  def game_end_boundary
+    return 4 if standard_doubles?
+
+    2
+  end
+
+  def at_game_end_boundary?
+    return false if frames.count.zero?
+
+    (frames.count % game_end_boundary).zero?
+  end
+
+  def frames_with_meta(number_frames = 8)
+    input_frames = frames
+
+    # If fewer than needed frames, pad it
+    input_frames = input_frames.fill([nil, nil], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
+
+    # If frames odd, pad it once
+    input_frames.push([nil, nil]) if input_frames.size.odd?
+
+    # Inject frame number and hammer
+    frames_hash = input_frames.map.with_index do |f, i|
+      {
+        number: i + 1,
+        hammer: Game.hammer_for_frame(i + 1, game_type),
+        yellow_score: f[0],
+        black_score: f[1]
+      }
+    end
+
+    # return last X frames
+    frames_hash.last(number_frames)
+  end
+
+  def self.hammer_for_frame(frame_number = 1, type = 'standard_singles')
+    raise 'invalid frame number' unless frame_number.positive?
+
+    case type
+    when 'standard_singles'
+      return 'yellow' if frame_number.even?
+      return 'black' if frame_number.odd?
+    when 'standard_doubles'
+      case frame_number % 4
+      when 1
         'black'
+      when 2
+        'black'
+      when 3
+        'yellow'
+      when 0
+        'yellow'
+      end
+    when 'palms_singles', 'palms_doubles'
+      case frame_number % 4
       when 1
         'black'
       when 2
         'yellow'
       when 3
         'yellow'
+      when 0
+        'black'
       end
     else
       raise 'invalid game type'
@@ -68,5 +119,19 @@ class Game < ApplicationRecord
 
   def default_values
     self.frames ||= []
+  end
+
+  def frames_or_points?
+    errors.add(:base, 'must have max_points or max_frames') unless max_points || max_frames
+  end
+
+  def valid_game_number?
+    errors.add(:number, 'must be positive') unless number && number.positive?
+  end
+
+  def points_cannot_tie?
+    return if max_frames
+
+    errors.add(:base, 'point games cannot tie') if max_points && allow_ties
   end
 end

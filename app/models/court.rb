@@ -5,4 +5,11 @@ class Court < ApplicationRecord
   def full_name
     "#{location.name} #{name}"
   end
+
+  def number
+    court = name.split(/ /).last.to_i
+    return court if court.positive?
+
+    nil
+  end
 end

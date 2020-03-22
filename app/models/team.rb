@@ -88,10 +88,6 @@ class Team < ApplicationRecord
     missing_results.any?
   end
 
-  def isa_name
-    "#{name.split[1][0]}. #{name.split[2]}"
-  end
-
   # Expects Array of Hashes like { team: team_obj, wins: 7, losses: 1 }
   # It returns in the same format
   def self.sort_by_rank(teams)

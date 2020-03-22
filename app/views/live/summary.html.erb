@@ -1,47 +1,58 @@
 <div class="row">
   <div class="col-lg-4 lower-third">
     <table class="table">
-        <tr class="l3-match">
-            <td class="l3-match-gap" rowspan=1>
-            </td>
-            <td class="l3-game-name <%= "l3-black" %>" colspan=6>
-                ISA Championship Finals
-            </td>
-        </tr>
+      <tr class="l3-match">
+        <td class="l3-match-gap" rowspan=1>
+        </td>
+        <td class="summary-game-name <%= "l3-black" %>" colspan=6>
+          Royal Palms Chicago Winter 2020 Championship
+        </td>
+      </tr>
 
-        <% @games.each do |g| %>
+      <% @games.each do |g| %>
         <tr class="l3-match-one">
-            <td class="l3-game-name <%= g.frames.count.odd? ? "l3-black" : "l3-yellow" %>" colspan=1>
-              <%= g.match.comment[0..10].split.first(2).join(' ').upcase %>
-            </td>
-            <td class="l3-frame <%= g.frames.count.odd? ? "l3-black" : "l3-yellow" %>" colspan=2>
-                <%= (g.frames.count+1).ordinalize %>
-            </td>
-            <td class="l3-player-name">
-                <%= g.frames.count >= 8 ? g.black_team.name : g.yellow_team.name %>
-            </td>
-            <td class="l3-hammer">
-                <%= image_tag g.frames.count.odd? ? "yellow_disc_hammer.svg" : "yellow_disc.svg", height: "40px" %>
-            </td>
-            <td class="l3-score">
-              <% if g.frames && g.frames.any? %>
-                <%= g.frames.count >= 8 ? g.frames.last[1] : g.frames.last[0] %>
-              <% end %>
-            </td>
-            <td class="l3-player-name">
-            <%= g.frames.count >= 8 ? g.yellow_team.name : g.black_team.name %>
-            </td>
-            <td class="l3-hammer">
-            <%= image_tag g.frames.count.odd? ? "black_disc.svg" : "black_disc_hammer.svg", height: "40px" %>
-            </td>
-            <td class="l3-score">
-              <% if g.frames && g.frames.any? %>
-                <%= g.frames.count >= 8 ? g.frames.last[0] : g.frames.last[1] %>
-              <% end %>
-            </td>
+          <td class="l3-game-name <%= g.next_hammer == 'yellow' ? 'l3-black' : 'l3-yellow' %>" colspan=1>
+            Game <%= g.number %>
+          </td>
+          <td class="l3-frame <%= g.next_hammer == 'yellow' ? 'l3-black' : 'l3-yellow' %>" colspan=2>
+            <% if g.complete? %>
+              FIN
+            <% else %>
+              <%= g.next_frame.ordinalize %>
+            <% end %>
+          </td>
+          <td class="l3-player-name">
+            <%= g.yellow_team.name %>
+          </td>
+          <td class="l3-hammer">
+            <% if g.complete? || g.next_hammer == 'black' %>
+              <%= image_tag 'yellow_disc.svg', height: '40px' %>
+            <% else %>
+              <%= image_tag 'yellow_disc_hammer.svg', height: '40px' %>
+            <% end %>
+          </td>
+          <td class="l3-score">
+            <% if g.frames && g.frames.any? %>
+              <%= g.frames.last[0] %>
+            <% end %>
+          </td>
+          <td class="l3-player-name">
+            <%= g.black_team.name %>
+          </td>
+          <td class="l3-hammer">
+            <% if g.complete? || g.next_hammer == 'yellow' %>
+              <%= image_tag 'black_disc.svg', height: '40px' %>
+            <% else %>
+              <%= image_tag 'black_disc_hammer.svg', height: '40px' %>
+            <% end %>
+          </td>
+          <td class="l3-score">
+            <% if g.frames && g.frames.any? %>
+              <%= g.frames.last[1] %>
+            <% end %>
+          </td>
         </tr>
-
-        <% end %>
+      <% end %>
     </table>
   </div>
 </div>
