@@ -13,26 +13,6 @@ class Game < ApplicationRecord
 
   # TODO: reject frames with only one score, for example [[0, 0], [8, nil]]
 
-  # TODO: re-work views to not need this method, probably in controller?
-  def eight_frames
-    return frames if frames.size == 8
-
-    # '' actually has hidden unicode
-    return frames.fill(['​', '​'], frames.length, 8 - frames.length) if frames.size < 8
-
-    # else more than 8 frames, return last 8 if even, last 7 + padding if odd
-    return frames.last(8) if frames.size.even?
-
-    frames.fill(['​', '​'], frames.length, 1).last(8)
-  end
-
-  # TODO: re-work views to not need this method, probably in controller?
-  def isa_frames
-    return frames.fill(['​', '​'], frames.length, 9 - frames.length) if frames.size <= 8
-
-    frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
-  end
-
   def complete?
     return false unless frames # return quickly if frames is nil
     return false unless frames.size.positive?
@@ -64,6 +44,42 @@ class Game < ApplicationRecord
 
   def next_hammer
     Game.hammer_for_frame(next_frame, game_type)
+  end
+
+  def game_end_boundary
+    return 4 if standard_doubles?
+
+    2
+  end
+
+  def at_game_end_boundary?
+    return false if frames.count.zero?
+
+    (frames.count % game_end_boundary).zero?
+  end
+
+  def frames_with_meta(number_frames = 8)
+    # '' below actually has hidden unicode
+    input_frames = frames
+
+    # If fewer than needed frames, pad it
+    input_frames = input_frames.fill(['​', '​'], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
+
+    # If frames odd, pad it once
+    input_frames.push(['​', '​']) if input_frames.size.odd?
+
+    # Inject frame number and hammer
+    frames_hash = input_frames.map.with_index do |f, i|
+      {
+        number: i + 1,
+        hammer: Game.hammer_for_frame(i + 1, game_type),
+        yellow_score: f[0],
+        black_score: f[1]
+      }
+    end
+
+    # return last X frames
+    frames_hash.last(number_frames)
   end
 
   def self.hammer_for_frame(frame_number = 1, type = 'standard_singles')
@@ -98,18 +114,6 @@ class Game < ApplicationRecord
     else
       raise 'invalid game type'
     end
-  end
-
-  def game_end_boundary
-    return 4 if standard_doubles?
-
-    2
-  end
-
-  def at_game_end_boundary?
-    return false if frames.count.zero?
-
-    (frames.count % game_end_boundary).zero?
   end
 
   private
