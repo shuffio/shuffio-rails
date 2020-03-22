@@ -24,7 +24,12 @@ class Game < ApplicationRecord
     frames.fill(['​', '​'], frames.length, 17 - frames.length).drop(8)
   end
 
+<<<<<<< Updated upstream
   def completed?(game_frames = 8, allow_ties = false)
+=======
+  # TODO: yea this is broken
+  def completed?
+>>>>>>> Stashed changes
     return false unless frames # return quickly if frames is nil
     return false if frames.count < game_frames # false if
     return false if (frames.last[0] == frames.last[1]) && !allow_ties # false if game tied and ties not allowed
@@ -33,6 +38,7 @@ class Game < ApplicationRecord
     true
   end
 
+<<<<<<< Updated upstream
   def hammer(type = 'palms')
     # TODO: move the type to the model and do validations
     Game.hammer_from_count(frames.count + 1, type)
@@ -43,6 +49,11 @@ class Game < ApplicationRecord
 
     frames.count - 8
   end
+=======
+  def next_hammer
+    # TODO: update the below case statements to get rid of this
+    frame_count = frames.count + 1
+>>>>>>> Stashed changes
 
   def self.hammer_from_count(frame_count = 0, type = 'isa')
     if type == 'isa'

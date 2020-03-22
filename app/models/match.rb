@@ -120,10 +120,15 @@ class Match < ApplicationRecord
     ]
   end
 
+  def time_with_zone
+    return nil unless time
+    time.in_time_zone('America/Chicago').iso8601
+  end
+
   def export_summary
     [
       id,
-      time.in_time_zone('America/Chicago').iso8601,
+      time_with_zone,
       full_location,
       division ? division.name : '',
       comment,
@@ -158,5 +163,34 @@ class Match < ApplicationRecord
 
     # Set logging back to old level
     ActiveRecord::Base.logger = old_logger
+  end
+
+  def self.export_summary
+    require 'csv'
+
+    attributes = %w[
+      id
+      time
+      court
+      division
+      comment
+      home_team
+      away_team
+      winner
+      home_score
+      away_score
+      home_old_elo
+      home_new_elo
+      away_old_elo
+      away_new_elo
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      Match.all.order(:time, :id).each do |m|
+        csv << m.export_summary
+      end
+    end
   end
 end

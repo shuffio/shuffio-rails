@@ -1,14 +1,20 @@
 <% provide :title, '[Admin] Can-Am' %>
+<% all_chicago = 0 %>
+<% all_brooklyn = 0 %>
 <div class="row">
-  <div class="col-lg-8 offset-lg-2">
+  <div class="col-lg-10 offset-lg-1">
     <h2><%= @tournament.name %></h2>
     <% @tournament.tournament_groups.each do |tg| %>
+      <% next unless tg.name == 'United States' %>
       <h3><%= tg.name %></h3>
       <% tg.tournament_rounds.order(:number).each do |tr| %>
+        <% chicago = 0 %>
+        <% brooklyn = 0 %>
         <h4>Round <%= tr.number %></h4>
         <table class="table table-striped">
           <thead>
             <tr>
+              <th>#</th>
               <th>Court</th>
               <th>Side</th>
               <th>Yellow</th>
@@ -19,17 +25,44 @@
 
           <tbody>
             <% tr.matches.order(:court_id, location: :desc).each do |m| %>
+              <% next unless ((m.away_team.captain == 'Chicago') && (m.home_team.captain == 'Brooklyn')) || ((m.away_team.captain == 'Brooklyn') && (m.home_team.captain == 'Chicago')) %>
               <tr>
+                <td><%= m.id %></td>
                 <td><%= m.court.name %></td>
                 <td><%= m.location %></td>
-                <td class="table-warning"><%= m.away_team.name %></td>
+                <td class="<%= m.away_score.positive? ? 'font-weight-bold' : '' %>">
+                  <% if m.away_team.captain == 'Chicago' %>
+                    <img src="/chicago.png" width='16px' />
+                    <% chicago += m.away_score %>
+                    <% all_chicago += m.away_score %>
+                  <% else %>
+                    <% brooklyn += m.away_score %>
+                    <% all_brooklyn += m.away_score %>
+                  <% end %>
+                  <%= m.away_team.name %>
+                </td>
                 <td>vs.</td>
-                <td class="table-dark"><%= m.home_team.name %></td>
+                <td class="<%= m.home_score.positive? ? 'font-weight-bold' : '' %>">
+                  <% if m.home_team.captain == 'Chicago' %>
+                    <img src="/chicago.png" width='16px' />
+                    <% chicago += m.home_score %>
+                    <% all_chicago += m.home_score %>
+                  <% else %>
+                    <% brooklyn += m.home_score %>
+                    <% all_brooklyn += m.home_score %>
+                  <% end %>
+                  <%= m.home_team.name %>
+                </td>
               </tr>
             <% end %>
           </tbody>
         </table>
+        Chicago: <%= chicago %><br>
+        Brooklyn: <%= brooklyn %><br><br>
       <% end %>
+      <h4>Overall</h4>
+      Chicago: <%= all_chicago %><br>
+      Brooklyn: <%= all_brooklyn %><br><br>
     <% end %>
   </div>
 </div>
