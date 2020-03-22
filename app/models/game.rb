@@ -3,7 +3,6 @@ class Game < ApplicationRecord
   belongs_to :yellow_team, class_name: 'Team', optional: true
   belongs_to :black_team, class_name: 'Team', optional: true
 
-  # TODO: validate this enum, and everything else
   enum game_type: { standard_singles: 0, standard_doubles: 1, palms_singles: 2, palms_doubles: 3 }
 
   validate :frames_or_points?

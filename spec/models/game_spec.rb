@@ -63,10 +63,16 @@ RSpec.describe Game, type: :model do
         expect(point_game.complete?).to be_falsey
       end
 
-      it 'returns false when a game went to 75 but is no longer there' do
-        # TODO: verify this should be incomplete
-        point_game.update(frames: [[72, 65], [80, 80], [60, 70]])
+      xit 'returns false when a game went to 75 but had more frames' do
+        # TODO: there are actually more complications we need to account for once a game hits 75
+        point_game.update(frames: [[72, 65], [80, 80], [60, 80]])
         expect(point_game.complete?).to be_falsey
+      end
+
+      xit 'returns true when a game went to 75, no logner is, but is complete' do
+        # TODO: there are actually more complications we need to account for once a game hits 75
+        point_game.update(frames: [[72, 65], [80, 80], [60, 80], [60, 70]])
+        expect(point_game.complete?).to be_truthy
       end
     end
 
@@ -86,6 +92,17 @@ RSpec.describe Game, type: :model do
       end
 
       # TODO: can point/frame games end in a tie?
+    end
+  end
+
+  describe '#next_frame' do
+    it 'is on frame 1 when no frames completed' do
+      expect(frame_game.next_frame).to eq(1)
+    end
+
+    it 'is on frame 2 when after 1 frame completed' do
+      frame_game.update(frames: [[7, 0]])
+      expect(frame_game.next_frame).to eq(2)
     end
   end
 
@@ -136,9 +153,5 @@ RSpec.describe Game, type: :model do
     it 'errors if ties allowed in point game' do
       expect { Game.create!(match: match, number: 1, allow_ties: true, max_frames: nil, max_points: 75) }.to raise_error(an_instance_of(ActiveRecord::RecordInvalid).and(having_attributes(message: 'Validation failed: point games cannot tie')))
     end
-  end
-
-  xit 'is on frame 1' do
-    expect(frame_game.frame).to eq(1)
   end
 end
