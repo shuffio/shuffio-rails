@@ -2,7 +2,8 @@
 @import "application";
 
 body {
-  background-color: $black;
+  // background-color: $black;
+  background-color: #00ff00;
   color: $white;
 }
 
@@ -249,4 +250,97 @@ body {
   font-weight: 600;
   vertical-align: middle !important;
   white-space:  nowrap;
+}
+
+.overlay-table {
+  table-layout: fixed;
+  width: 700px;
+}
+
+.overlay-title {
+  // text-align: right;
+  // background: #333333;
+  // padding-right: 16px;
+  // text-shadow: 1px 1px 1px #000000;
+  // border-radius: 15px 0px 0px 0px;
+}
+
+.overlay-frame {
+  width: 75px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+.overlay-frame:not(:last-child) {
+  border-right: 2px solid #222222;
+}
+
+.overlay-frame-yellow {
+  @extend .overlay-frame;
+  background-color: #ffcc00;
+}
+
+.overlay-frame-black {
+  @extend .overlay-frame;
+  background-color: #333333;
+}
+
+.overlay-row {
+  height: 50px;
+}
+
+.overlay-row-yellow {
+  @extend .overlay-row;
+  // background-color: #ffcc00;
+  background: linear-gradient(#ffcc00 0%, #ffcc00 50%, #eebb00 51%, #eebb00 100%);
+}
+
+.overlay-row-black {
+  @extend .overlay-row;
+  // background-color: #333333;
+  background: linear-gradient(#333333 0%, #333333 50%, #222222 51%, #222222 100%);
+}
+
+.overlay-series {
+  width: 15px;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+.overlay-name {
+  width: 375px;
+  font-size: 32px;
+  color: white;
+  text-shadow: 2px 2px 2px #000000;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.overlay-name-yellow {
+  @extend .overlay-name;
+  // background-color: #ffcc00;
+}
+
+.overlay-name-black {
+  @extend .overlay-name;
+  // background-color: #333333;
+}
+
+.overlay-score {
+  font-size: 32px;
+  color: white;
+  text-shadow: 2px 2px 2px #000000;
+  text-align: center;
+  background: rgba(0,0,0,0.4);
+}
+
+.overlay-score:not(:last-child) {
+  border-right: 2px solid rgba(0,0,0,0.4);
+}
+
+.overlay-score-yellow {
+  @extend .overlay-score;
+}
+
+.overlay-score-black {
+  @extend .overlay-score;
 }
