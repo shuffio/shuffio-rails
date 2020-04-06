@@ -1,0 +1,34 @@
+<div class="row">
+  <% @games.each do |game| %>
+    <div class="col-lg-6">
+      <table class="table">
+        <tr>
+          <td><%= game.match.comment %></td>
+          <% game.frames_with_meta(4).each do |frame| %>
+            <td class="<%= frame[:hammer] == 'black' ? 'black' : 'yellow' %>">
+              <%= frame[:number] %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td><%= game.yellow_team.name %></td>
+          <% game.frames_with_meta(4).each do |frame| %>
+            <td>
+              <%= frame[:yellow_score] %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td><%= game.black_team.name %></td>
+          <% game.frames_with_meta(4).each do |frame| %>
+            <td>
+              <%= frame[:black_score] %>
+            </td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+  <% end %>
+</div>

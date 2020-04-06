@@ -12,6 +12,15 @@ class LiveController < ApplicationController
     render layout: 'live'
   end
 
+  def new_overlay
+    @games = [
+      LiveEvent.last.left_game,
+      LiveEvent.last.right_game
+    ]
+
+    render layout: 'live'
+  end
+
   def summary
     @games = [
       LiveEvent.last.left_game,
