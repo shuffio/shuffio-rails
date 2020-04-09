@@ -3,7 +3,8 @@
 
 body {
   // background-color: $black;
-  background-color: #00ff00;
+  // background-color: #00ff00;
+  background-color: #000055;
   color: $white;
 }
 
@@ -257,14 +258,6 @@ body {
   width: 700px;
 }
 
-.overlay-title {
-  // text-align: right;
-  // background: #333333;
-  // padding-right: 16px;
-  // text-shadow: 1px 1px 1px #000000;
-  // border-radius: 15px 0px 0px 0px;
-}
-
 .overlay-frame {
   width: 75px;
   text-align: center;
@@ -343,4 +336,14 @@ body {
 
 .overlay-score-black {
   @extend .overlay-score;
+}
+
+.overlay-title {
+  background: linear-gradient(#555555 0%, #555555 50%, #444444 51%, #444444 100%);
+  text-shadow: 1px 1px 1px #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 0px 0px 10px 10px;
 }

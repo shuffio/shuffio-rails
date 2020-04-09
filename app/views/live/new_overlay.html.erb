@@ -4,7 +4,7 @@
       <table class="overlay-table">
         <tr>
           <td class="overlay-series"></td>
-          <td class="overlay-title"></td>
+          <td></td>
           <% game.frames_with_meta(4).each do |frame| %>
             <td class="overlay-frame-<%= frame[:hammer] == 'black' ? 'yellow' : 'black' %>">
               <%= frame[:number] %>
@@ -31,6 +31,14 @@
             </td>
           <% end %>
         </tr>
+
+        <tr>
+          <td></td>
+          <td class="overlay-title">
+            Semi-Finals - Game 2
+          </td>
+        </tr>
+
       </table>
       <br>&nbsp<br>&nbsp<br>&nbsp<br>
     </div>
