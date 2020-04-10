@@ -36,6 +36,9 @@
           <td></td>
           <td class="overlay-title">
             Game <%= game.number %>
+            <% if game.complete? %>
+              - FINAL
+            <% end %>
           </td>
         </tr>
 
