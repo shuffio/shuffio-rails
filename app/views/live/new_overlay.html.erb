@@ -13,7 +13,7 @@
         </tr>
 
         <tr class="overlay-row-yellow">
-          <td class="overlay-series">1</td>
+          <td class="overlay-series"><%= game.series_score[0] %></td>
           <td class="overlay-name-yellow"><%= game.yellow_team.display_name %></td>
           <% game.frames_with_meta(4).each do |frame| %>
             <td class="overlay-score-yellow">
@@ -23,7 +23,7 @@
         </tr>
 
         <tr class=overlay-row-black>
-          <td class="overlay-series">0</td>
+          <td class="overlay-series"><%= game.series_score[1] %></td>
           <td class="overlay-name-black"><%= game.black_team.display_name %></td>
           <% game.frames_with_meta(4).each do |frame| %>
             <td class="overlay-score-black">
@@ -35,7 +35,7 @@
         <tr>
           <td></td>
           <td class="overlay-title">
-            Semi-Finals - Game 2
+            Game <%= game.number %>
           </td>
         </tr>
 

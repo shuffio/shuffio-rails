@@ -115,6 +115,27 @@ class Game < ApplicationRecord
     end
   end
 
+  def winner
+    return nil unless complete?
+
+    return yellow_team if frames.last[0] > frames.last[1]
+    return black_team if frames.last[1] > frames.last[0]
+
+    nil
+  end
+
+  def series_score
+    yellow = 0
+    black = 0
+
+    match.games.each do |g|
+      yellow += 1 if g.winner == yellow_team
+      black += 1 if g.winner == black_team
+    end
+
+    [yellow, black]
+  end
+
   private
 
   def default_values
