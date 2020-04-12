@@ -58,8 +58,11 @@ class Game < ApplicationRecord
     (frames.count % game_end_boundary).zero?
   end
 
-  def frames_with_meta(number_frames = 8)
-    input_frames = frames
+  def frames_with_meta(number_frames = 8, padding = !complete?)
+    input_frames = frames.dup
+
+    # Add padding (so that you see the next frame number)
+    input_frames.push([nil, nil]) if padding
 
     # If fewer than needed frames, pad it
     input_frames = input_frames.fill([nil, nil], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
