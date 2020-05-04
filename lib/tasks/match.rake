@@ -245,4 +245,26 @@ namespace :match do
     Match.recalculate_all_elo
     STDOUT.puts 'done.'
   end
+
+  desc 'Generate Score Overlay Files'
+  task generate_overlays: :environment do
+    game = LiveEvent.last.left_game
+    frames = game.frames
+
+    game.frames.each_with_index do |_f, i|
+      game.update(frames: frames.first(i))
+      kit = IMGKit.new('http://localhost:3000/live/four_frame_summary')
+      kit.to_file("tmp/#{i}.png")
+    end
+
+    game.update(frames: frames)
+    kit = IMGKit.new('http://localhost:3000/live/four_frame_summary')
+    kit.to_file("tmp/#{frames.count}.png")
+  end
+
+  desc 'Generate Final Score Overlay Files'
+  task generate_final_overlays: :environment do
+    kit = IMGKit.new('http://localhost:3000/live/full_game')
+    kit.to_file('tmp/full_game.png')
+  end
 end

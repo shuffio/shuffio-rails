@@ -1,0 +1,30 @@
+<div class="row">
+  <% @games.each do |game| %>
+    <div class="col">
+      <table>
+        <tr>
+          <td></td>
+          <td class="overlay-row-yellow-full"><%= game.yellow_team.initials %></td>
+          <td class="overlay-row-black-full"><%= game.black_team.initials %></td>
+        </tr>
+
+        <% game.frames_with_meta([game.max_frames, game.frames.count].max, false).each do |frame| %>
+          <tr class="overlay-border-row">
+            <td class="overlay-frame-<%= frame[:hammer] == 'black' ? 'yellow' : 'black' %>-slim">
+              <%= frame[:number] %>
+            </td>
+
+            <td class="overlay-score-full">
+              <%= frame[:yellow_score] %>
+            </td>
+
+            <td class="overlay-score-full">
+              <%= frame[:black_score] %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <br>&nbsp<br>&nbsp<br>&nbsp<br>
+    </div>
+  <% end %>
+</div>

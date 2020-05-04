@@ -45,4 +45,13 @@ class LiveController < ApplicationController
     ]
     render layout: 'live'
   end
+
+  def full_game
+    @min_frames = LiveEvent.last.left_game.max_frames || 8
+    @games = [
+      LiveEvent.last.left_game
+    ]
+
+    render layout: 'live'
+  end
 end

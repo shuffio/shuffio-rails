@@ -256,8 +256,15 @@ body {
   width: 700px;
 }
 
+// Yellow Discs
 $yellow-score: #ffcc00;
 $yellow-score-sec: #eebb00;
+
+// Red Discs
+// $yellow-score: #ff0000;
+// $yellow-score-sec: #dd0000;
+
+// Black Discs
 $black-score: #333333;
 $black-score-sec: #222222;
 
@@ -285,6 +292,14 @@ $black-score-sec: #222222;
   height: 50px;
 }
 
+.overlay-row-full {
+  @extend .overlay-row;
+  width: 75px;
+  text-align: center;
+  font-size: 32px;
+  text-shadow: 2px 2px 2px #000000;
+}
+
 .overlay-row-yellow {
   @extend .overlay-row;
   background-image: -webkit-linear-gradient(top, $yellow-score 0%, $yellow-score 50%, $yellow-score-sec 51%, $yellow-score-sec 100%);
@@ -292,6 +307,17 @@ $black-score-sec: #222222;
 
 .overlay-row-black {
   @extend .overlay-row;
+  background-image: -webkit-linear-gradient(top, $black-score 0%, $black-score 50%, $black-score-sec 51%, $black-score-sec 100%);
+}
+
+
+.overlay-row-yellow-full {
+  @extend .overlay-row-full;
+  background-image: -webkit-linear-gradient(top, $yellow-score 0%, $yellow-score 50%, $yellow-score-sec 51%, $yellow-score-sec 100%);
+}
+
+.overlay-row-black-full {
+  @extend .overlay-row-full;
   background-image: -webkit-linear-gradient(top, $black-score 0%, $black-score 50%, $black-score-sec 51%, $black-score-sec 100%);
 }
 
@@ -317,6 +343,11 @@ $black-score-sec: #222222;
   background: rgba(0,0,0,0.4);
 }
 
+.overlay-score-full {
+  @extend .overlay-score;
+  background-color: #3b4d43;
+}
+
 .overlay-score:not(:last-child) {
   border-right: 2px solid rgba(0,0,0,0.4);
 }
@@ -329,4 +360,25 @@ $black-score-sec: #222222;
   padding-left: 16px;
   padding-right: 16px;
   border-radius: 0px 0px 10px 10px;
+}
+
+.overlay-frame-slim {
+  width: 25px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000000;
+
+}
+
+.overlay-border-row:not(:last-child) {
+  border-bottom: 2px solid rgba(0,0,0,0.4);
+}
+
+.overlay-frame-yellow-slim {
+  @extend .overlay-frame-slim;
+  background-color: $yellow-score;
+}
+
+.overlay-frame-black-slim {
+  @extend .overlay-frame-slim;
+  background-color: $black-score;
 }

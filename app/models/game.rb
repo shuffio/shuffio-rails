@@ -62,10 +62,14 @@ class Game < ApplicationRecord
     input_frames = frames.dup
 
     # Add padding (so that you see the next frame number)
-    input_frames.push([nil, nil]) if padding
+    input_frames.push([nil, nil]) if padding # && next_frame != 9 # leaving in code until we make this more configurable
 
     # If fewer than needed frames, pad it
     input_frames = input_frames.fill([nil, nil], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
+
+    # leaving in code until we make this more configurable
+    # input_frames.push([nil, nil]) if next_frame == 9 || next_frame == 10
+    # input_frames.push([nil, nil]) if next_frame == 9 || next_frame == 10
 
     # If frames odd, pad it once
     input_frames.push([nil, nil]) if input_frames.size.odd?
