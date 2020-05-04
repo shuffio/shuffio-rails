@@ -131,7 +131,7 @@ class Game < ApplicationRecord
     yellow = 0
     black = 0
 
-    match.games.each do |g|
+    match.games.where('number <= ?', number).each do |g|
       yellow += 1 if g.winner == yellow_team
       black += 1 if g.winner == black_team
     end
