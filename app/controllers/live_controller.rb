@@ -12,6 +12,14 @@ class LiveController < ApplicationController
     render layout: 'live'
   end
 
+  def four_frame_summary
+    @games = [
+      LiveEvent.last.left_game
+    ]
+
+    render layout: 'live'
+  end
+
   def summary
     @games = [
       LiveEvent.last.left_game,
