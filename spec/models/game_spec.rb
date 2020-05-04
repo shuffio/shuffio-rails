@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do
   let(:match) { Match.new }
-  let(:frame_game) { Game.new }
+  let(:yellow_team) { Team.new }
+  let(:black_team) { Team.new }
+  let(:frame_game) { Game.new(match: match, yellow_team: yellow_team, black_team: black_team) }
   let(:point_game) { Game.new(max_points: 75, max_frames: nil) }
   let(:point_or_frame_game) { Game.new(max_points: 75, max_frames: 8) }
 
@@ -147,6 +149,45 @@ RSpec.describe Game, type: :model do
       expect(frame_game.frames_with_meta.first.is_a?(Hash)).to be_truthy
       expect(frame_game.frames_with_meta.size).to eq(8)
     end
+
+    it 'has padding when needed' do
+      frame_game.update(frames: [[8, 0], [8, 8], [15, 8], [15, 15], [22, 15], [22, 22]])
+      expect(frame_game.frames_with_meta(4).last[:yellow_score]).to be(nil)
+      expect(frame_game.frames_with_meta(4).last[:black_score]).to be(nil)
+      expect(frame_game.frames_with_meta(4, false).last[:yellow_score]).to be(22)
+      expect(frame_game.frames_with_meta(4, false).last[:black_score]).to be(22)
+    end
+  end
+
+  describe '#winner' do
+    it 'returns nil on unfinished game' do
+      expect(frame_game.winner).to be(nil)
+    end
+
+    it 'returns nil on tied game' do
+      frame_game.update(frames: [[8, 0], [8, 8], [15, 8], [15, 15], [22, 15], [22, 22], [22, 12], [12, 12]], allow_ties: true)
+      expect(frame_game.winner).to be(nil)
+    end
+
+    it 'returns yellow_team if they won' do
+      frame_game.update(frames: [[8, 0], [8, 8], [15, 8], [15, 15], [22, 15], [22, 22], [22, 12], [22, 12]])
+      expect(frame_game.winner).to be(yellow_team)
+    end
+
+    it 'returns black_team if they won' do
+      frame_game.update(frames: [[8, 0], [8, 8], [15, 8], [15, 15], [22, 15], [22, 22], [22, 12], [22, 27]])
+      expect(frame_game.winner).to be(black_team)
+    end
+  end
+
+  describe '#series_score' do
+    it 'returns 0-0 for no completed games' do
+      expect(frame_game.series_score).to eq([0, 0])
+    end
+
+    # TODO: need to persist game objects to be able to look at match.games
+    xit 'returns 1-0 if yellow won the only game in the match'
+    xit 'returns 2-0 if yellow won multiple games in the match'
   end
 
   describe 'validations' do
