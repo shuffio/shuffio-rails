@@ -47,7 +47,7 @@ class Admin::TeamsController < Admin::BaseController
     existing_teams = 0
 
     # Filter Params for team selection
-    params.select { |k, _v| k.to_s.match(/^\!team/) }.each do |_id, team_action|
+    params.select { |k, _v| k.to_s.match(/^!team/) }.each do |_id, team_action|
       next if team_action == 'nothing'
 
       action = JSON.parse(team_action)

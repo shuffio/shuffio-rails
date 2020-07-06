@@ -1,7 +1,7 @@
 namespace :location do
   desc 'Seed location information and update Matches to new schema'
   task seed_and_update: :environment do
-    load Rails.root.join('db', 'seeds', 'locations.rb')
+    load Rails.root.join('db/seeds/locations.rb')
 
     chicago = Location.find_by(name: 'Royal Palms Chicago')
 
