@@ -58,8 +58,11 @@ class Game < ApplicationRecord
     (frames.count % game_end_boundary).zero?
   end
 
-  def frames_with_meta(number_frames = 8)
-    input_frames = frames
+  def frames_with_meta(number_frames = 8, padding = !complete?)
+    input_frames = frames.dup
+
+    # Add padding (so that you see the next frame number)
+    input_frames.push([nil, nil]) if padding
 
     # If fewer than needed frames, pad it
     input_frames = input_frames.fill([nil, nil], input_frames.length, number_frames - input_frames.length) if input_frames.size < number_frames
@@ -113,6 +116,27 @@ class Game < ApplicationRecord
     else
       raise 'invalid game type'
     end
+  end
+
+  def winner
+    return nil unless complete?
+
+    return yellow_team if frames.last[0] > frames.last[1]
+    return black_team if frames.last[1] > frames.last[0]
+
+    nil
+  end
+
+  def series_score
+    yellow = 0
+    black = 0
+
+    match.games.where('number <= ?', number).find_each do |g|
+      yellow += 1 if g.winner == yellow_team
+      black += 1 if g.winner == black_team
+    end
+
+    [yellow, black]
   end
 
   private
