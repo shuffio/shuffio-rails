@@ -135,6 +135,10 @@ class Team < ApplicationRecord
     teams
   end
 
+  def short_name=(value)
+    super(value.presence)
+  end
+
   private
 
   def check_for_rename
