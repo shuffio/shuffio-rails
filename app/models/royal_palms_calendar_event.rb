@@ -2,6 +2,7 @@ class RoyalPalmsCalendarEvent
   include ActiveModel::Model
 
   attr_accessor :name, :start_time, :end_time
+
   validates :name, :start_time, :end_time, presence: true
 
   def self.all
