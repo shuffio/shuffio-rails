@@ -1,0 +1,63 @@
+<div class="row">
+  <% @games.each do |game| %>
+    <div class="col">
+      <table class="TODO-overlay-table">
+        <tr>
+          <td></td>
+          <td class="overlay-row-yellow"><%= game.yellow_team.display_name.split.first %></td>
+          <td class="overlay-row-black"><%= game.black_team.display_name.split.first %></td>
+        </tr>
+
+        <% game.frames_with_meta([game.max_frames, game.frames.count].max, false).each do |frame| %>
+          <tr class="overlay-border-row">
+            <td class="overlay-frame-<%= frame[:hammer] == 'black' ? 'yellow' : 'black' %>-slim">
+              <%= frame[:number] %>
+            </td>
+
+            <td class="overlay-score">
+              <%= frame[:yellow_score] %>
+            </td>
+
+            <td class="overlay-score">
+              <%= frame[:black_score] %>
+            </td>
+          </tr>
+        <% end %>
+        <!--
+
+        <tr class="overlay-row-yellow">
+          <td class="overlay-series"><%= game.series_score[0] %></td>
+          <td class="overlay-name"><%= game.yellow_team.display_name %></td>
+          <% game.frames_with_meta(4).each do |frame| %>
+            <td class="overlay-score">
+              <%= frame[:yellow_score] %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr class=overlay-row-black>
+          <td class="overlay-series"><%= game.series_score[1] %></td>
+          <td class="overlay-name"><%= game.black_team.display_name %></td>
+          <% game.frames_with_meta(4).each do |frame| %>
+            <td class="overlay-score">
+              <%= frame[:black_score] %>
+            </td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td class="overlay-title">
+            Game <%= game.number %>
+            <% if game.complete? %>
+              - FINAL
+            <% end %>
+          </td>
+        </tr>
+        -->
+
+      </table>
+      <br>&nbsp<br>&nbsp<br>&nbsp<br>
+    </div>
+  <% end %>
+</div>

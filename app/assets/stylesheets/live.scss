@@ -271,6 +271,17 @@ $black-score-sec: #222222;
   border-right: 2px solid #222222;
 }
 
+.overlay-frame-slim {
+  width: 25px;
+  text-align: center;
+  text-shadow: 1px 1px 1px #000000;
+
+}
+
+.overlay-border-row:not(:last-child) {
+  border-bottom: 2px solid rgba(0,0,0,0.4);
+}
+
 .overlay-frame-yellow {
   @extend .overlay-frame;
   background-color: $yellow-score;
@@ -281,8 +292,22 @@ $black-score-sec: #222222;
   background-color: $black-score;
 }
 
+.overlay-frame-yellow-slim {
+  @extend .overlay-frame-slim;
+  background-color: $yellow-score;
+}
+
+.overlay-frame-black-slim {
+  @extend .overlay-frame-slim;
+  background-color: $black-score;
+}
+
 .overlay-row {
   height: 50px;
+  width: 75px;
+  text-align: center;
+  font-size: 32px;
+  text-shadow: 2px 2px 2px #000000;
 }
 
 .overlay-row-yellow {
@@ -314,7 +339,11 @@ $black-score-sec: #222222;
   color: white;
   text-shadow: 2px 2px 2px #000000;
   text-align: center;
-  background: rgba(0,0,0,0.4);
+  // background: rgba(0,0,0,0.4);
+  // background-image: -webkit-linear-gradient(top, #555555 0%, #555555 50%, #444444 51%, #444444 100%);
+  background-color: #3b4d43;
+
+  // border-top: 2px solid rgba(0,0,0,0.4);
 }
 
 .overlay-score:not(:last-child) {

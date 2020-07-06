@@ -261,4 +261,10 @@ namespace :match do
     kit = IMGKit.new('http://localhost:3000/live/four_frame_summary')
     kit.to_file("tmp/#{frames.count}.png")
   end
+
+  desc 'Generate Final Score Overlay Files'
+  task generate_final_overlays: :environment do
+    kit = IMGKit.new('http://localhost:3000/live/full_game')
+    kit.to_file("tmp/game2.png")
+  end
 end
