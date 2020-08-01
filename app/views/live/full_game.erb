@@ -8,7 +8,16 @@
           <td class="overlay-row-black"><%= game.black_team.display_name.split.first %></td>
         </tr>
 
+
         <% game.frames_with_meta([game.max_frames, game.frames.count].max, false).each do |frame| %>
+          <% if frame[:number] == 3 %>
+          <tr><td>&nbsp</td></tr>
+            <tr>
+              <td></td>
+              <td class="overlay-row-yellow"><%= game.black_team.display_name.split.first %></td>
+              <td class="overlay-row-black"><%= game.yellow_team.display_name.split.first %></td>
+            </tr>
+          <% end %>
           <tr class="overlay-border-row">
             <td class="overlay-frame-<%= frame[:hammer] == 'black' ? 'yellow' : 'black' %>-slim">
               <%= frame[:number] %>
