@@ -1,6 +1,6 @@
 class TournamentRound < ApplicationRecord
   belongs_to :tournament_group
-  has_many :matches
+  has_many :matches, -> { order(:tournament_order) }
   has_and_belongs_to_many :courts
   delegate :tournament, to: :tournament_group
 
@@ -28,6 +28,17 @@ class TournamentRound < ApplicationRecord
     else
       generate_matches_canam_later_groups
     end
+  end
+
+  def bracket_meta
+    {
+      id: id,
+      number: number,
+      name: name,
+      format: format,
+      match_count: matches.count,
+      matches: matches.map(&:bracket_meta)
+    }
   end
 
   private

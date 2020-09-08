@@ -5,7 +5,7 @@ class Match < ApplicationRecord
   belongs_to :away_team, class_name: 'Team'
   belongs_to :division, optional: true
   belongs_to :court, optional: true
-  belongs_to :tournament_round, optional: true
+  belongs_to :tournament_round, optional: true # TODO: if exists, ensure unique tournament_order
   has_many :games, dependent: :nullify
 
   # TODO: Fix callback to work on updates
@@ -145,6 +145,19 @@ class Match < ApplicationRecord
     return location if location
 
     ''
+  end
+
+  def bracket_meta
+    {
+      id: id,
+      away_team_id: away_team_id,
+      home_team_id: home_team_id,
+      winning_team_id: winner ? winner.id : nil,
+      away_team_name: away_team.display_name,
+      home_team_name: home_team.display_name,
+      winning_team_name: winner ? winner.display_name : nil,
+      time: time # UTC
+    }
   end
 
   def self.recalculate_all_elo
