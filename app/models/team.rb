@@ -19,8 +19,8 @@ class Team < ApplicationRecord
     Match.where(away_team_id: id).or(Match.where(home_team_id: id))
   end
 
-  def match_count
-    count = matches.where('time <= ?', Time.now).count
+  def match_count(before_time = Time.now)
+    count = matches.where('time < ?', before_time).count
 
     return count unless starting_match_count
 
@@ -31,7 +31,7 @@ class Team < ApplicationRecord
     if team_matches
       record = { wins: 0, losses: 0 }
     else
-      record = { wins: starting_wins, losses: starting_losses }
+      record = { wins: starting_wins || 0, losses: starting_losses || 0 }
       team_matches = matches
     end
 
@@ -137,6 +137,36 @@ class Team < ApplicationRecord
     end
 
     teams
+  end
+
+  def self.export_csv
+    require 'csv'
+
+    attributes = %w[
+      ID
+      Name
+      Former_Names
+      Match_Count
+      Wins
+      Losses
+      ELO
+    ]
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      Team.order(:id).each do |t|
+        row = []
+        row << t.id
+        row << t.name
+        row << t.former_names
+        row << t.match_count
+        row << t.record[:wins]
+        row << t.record[:losses]
+        row << t.elo_cache
+        csv << row
+      end
+    end
   end
 
   def short_name=(value)

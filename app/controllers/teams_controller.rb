@@ -5,6 +5,11 @@ class TeamsController < ApplicationController
              else
                Season.last.teams.order('elo_cache DESC').map { |t| { team: t } }
              end
+
+     respond_to do |format|
+       format.html
+       format.csv { send_data Team.export_csv, filename: "teams_#{DateTime.now.strftime('%Y-%m-%d_%H-%M-%S')}.csv" }
+     end
   end
 
   def show
