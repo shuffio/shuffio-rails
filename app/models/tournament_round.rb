@@ -1,6 +1,6 @@
 class TournamentRound < ApplicationRecord
   belongs_to :tournament_group
-  has_many :matches
+  has_many :matches, -> { order(:tournament_order) }
   has_and_belongs_to_many :courts
   delegate :tournament, to: :tournament_group
 
