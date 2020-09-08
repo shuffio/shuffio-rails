@@ -30,6 +30,17 @@ class TournamentRound < ApplicationRecord
     end
   end
 
+  def bracket_meta
+    {
+      id: id,
+      number: number,
+      name: name,
+      format: format,
+      match_count: matches.count,
+      matches: matches.map(&:bracket_meta)
+    }
+  end
+
   private
 
   def generate_matches_canam_round_one(csv_data)

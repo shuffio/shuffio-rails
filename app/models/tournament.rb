@@ -7,4 +7,17 @@ class Tournament < ApplicationRecord
   def teams
     tournament_groups.map(&:teams).flatten.uniq
   end
+
+  def bracket_meta
+    {
+      id: id,
+      name: name,
+      start_time: start_time, # UTC
+      end_time: end_time, # UTC
+      uri: uri,
+      format: format,
+      description: description,
+      tournament_groups: tournament_groups.map(&:bracket_meta)
+    }
+  end
 end

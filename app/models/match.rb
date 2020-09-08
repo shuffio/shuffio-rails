@@ -147,6 +147,19 @@ class Match < ApplicationRecord
     ''
   end
 
+  def bracket_meta
+    {
+      id: id,
+      away_team_id: away_team_id,
+      home_team_id: home_team_id,
+      winning_team_id: winner ? winner.id : nil,
+      away_team_name: away_team.display_name,
+      home_team_name: home_team.display_name,
+      winning_team_name: winner ? winner.display_name : nil,
+      time: time # UTC
+    }
+  end
+
   def self.recalculate_all_elo
     # Disable logging
     old_logger = ActiveRecord::Base.logger
