@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_025753) do
+ActiveRecord::Schema.define(version: 2020_09_08_011326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_025753) do
     t.integer "max_frames", default: 8
     t.integer "max_points"
     t.boolean "allow_ties", default: false, null: false
+    t.integer "color_change_after_frame"
     t.index ["black_team_id"], name: "index_games_on_black_team_id"
     t.index ["match_id"], name: "index_games_on_match_id"
     t.index ["yellow_team_id"], name: "index_games_on_yellow_team_id"
@@ -94,6 +95,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_025753) do
     t.bigint "court_id"
     t.float "multiplier", default: 1.0, null: false
     t.bigint "tournament_round_id"
+    t.integer "tournament_order"
     t.index ["court_id"], name: "index_matches_on_court_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
     t.index ["tournament_round_id"], name: "index_matches_on_tournament_round_id"
