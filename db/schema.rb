@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_011326) do
+ActiveRecord::Schema.define(version: 2020_09_08_044534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brackets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "tournament_group_id"
+    t.json "match_data"
+    t.index ["tournament_group_id"], name: "index_brackets_on_tournament_group_id"
+    t.index ["user_id", "tournament_group_id"], name: "index_brackets_on_user_id_and_tournament_group_id", unique: true
+    t.index ["user_id"], name: "index_brackets_on_user_id"
+  end
 
   create_table "courts", force: :cascade do |t|
     t.string "name"
