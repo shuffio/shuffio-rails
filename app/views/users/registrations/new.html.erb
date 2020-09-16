@@ -3,7 +3,7 @@
     <h2>Sign up</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <%= render 'users/shared/error_messages', resource: resource %>
+    <%= render 'devise/shared/error_messages', resource: resource %>
 
       <%= link_to('<i class="fab fa-google"></i> Sign up with Google'.html_safe, user_google_oauth2_omniauth_authorize_path, class: 'btn btn-danger') %>
       or fill out the form below.

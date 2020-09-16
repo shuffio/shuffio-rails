@@ -41,6 +41,10 @@ class TournamentRound < ApplicationRecord
     }
   end
 
+  def active?
+    matches.where.not(away_score: 0, home_score: 0).any?
+  end
+
   private
 
   def generate_matches_canam_round_one(csv_data)

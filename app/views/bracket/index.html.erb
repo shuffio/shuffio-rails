@@ -1,0 +1,86 @@
+<%= stylesheet_link_tag    'bracket', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<% provide :title, '2020 Bracket Challenge' %>
+<div class="row bracket-challenge">
+  <div class="col-lg-6 offset-lg-3">
+    <header class="hero">
+    <div class="hero-wrap">
+    <p class="intro" id="intro"><%= image_tag 'Royal-Palms.png', height: '150px' %></p>
+        </br>
+        <h1 id="headline">Shufflinsanity</h1>
+        <p class="year"><i class="fa fa-star"></i>2020 Playoffs<i class="fa fa-star"></i></p>
+        <p>Forget March Madness, It's September Insanity</p>
+    </div>
+    </header>
+  </div>
+  <div class="col-lg-6 offset-lg-3">
+    <p class="font-weight-bold">Welcome to the 2020 Shufflinsanity Bracket Challenge!</p>
+    <p> 
+      Shuff.io is proud to join the Royal Palms Shuffleboard Club in hosting the first ever league bracket challenge!
+      </br>
+      16 teams will battle it out for the coveted crown of 2020 Chicago League Champion.
+      </br>
+      You can join in on all the action Monday nights on YouTube in October.
+      </br>
+      Be sure to subscribe to the <a href="https://www.youtube.com/channel/UCInSJx92B7WrL-UctI6MYDg">Royal Palms YouTube Channel</a> to be notified for each release.
+    </p>
+  </div>
+  <div class="col-lg-6 offset-lg-3">
+    <p class="font-weight-bold">What are the rules for the bracket challenge?</p>
+    <p>
+      Forget March Madness, this is September Irrationality! Pick your dream bracket and compete against the world.
+    </p>
+    <p> 
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          For each match winner guessed correctly you'll score points:
+            <ul>
+              <li>
+                1 point for Round of 16 matches
+              </li>
+              <li>
+                2 points for Round of 8 Matches
+              </li>
+              <li>
+                4 points for Semi-Final Matches
+              </li>
+              <li>
+                8 Points for the Championship Match
+              </li>
+            </ul>
+        </li>
+        <li class="list-group-item">
+          There will be two brackets, one for Chicago, and one for Brooklyn. You may enter either or both! Double your chances at winning!
+        </li>
+        <li class="list-group-item">
+          Top score gets for a bracket gets a free league season at the Royal Palms Brookyln or Chicago Club.
+        </li>
+        <li class="list-group-item">
+          You can enter your picks for the Chicago Bracket from 12am CDT (1am EDT) on September 18th 2020.
+          </br>
+          We expect the Brooklyn bracket to open up at 12am CDT (1am EDT) on October 22nd 2020
+        </li>
+        <li class="list-group-item">
+          Points will be accumulated based on the number of correct choices you make
+        </li>
+        <li class="list-group-item">
+          The folks with the highest score at the end of the bracket challenge will win a prize!
+        </li>
+      </ul>  
+    </p>
+  </div>
+  <div class="col-lg-6 offset-lg-3">
+    <% if user_signed_in? %>
+    <%= link_to "Slow down! We're not ready just yet, #{current_user.first_name || "Friend"}!", "javascript:;", class:"btn btn-primary btn-lg btn-block disabled" %>
+    <% else %>
+    <%= link_to "You just gotta sign up first, friend!", :new_user_registration, class:"btn btn-warning btn-lg btn-block active" %>
+    <% end %>
+    <div class="d-flex justify-content-center">
+      <%= link_to "Want to see what the bracket looks like so far?", :current %>
+    </div>
+  </div>
+</div>
+
+</br>
+</br>
+</br>

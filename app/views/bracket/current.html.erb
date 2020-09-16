@@ -1,0 +1,81 @@
+<%= stylesheet_link_tag    'bracket', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="bracket-challenge">
+<header class="hero">
+<div class="hero-wrap">
+ <p class="intro" id="intro"><%= image_tag 'Royal-Palms.png', height: '150px' %></p>
+    </br>
+    <h1 id="headline">One Nice Thing</h1>
+     <p class="year"><i class="fa fa-star"></i>2020 Playoffs<i class="fa fa-star"></i></p>
+     <p> Let us have this </p>
+</div>
+</header>
+
+
+<section id="bracket">
+<div class="container">
+<div class="split split-one">
+<% @tournament.tournament_groups[0].tournament_rounds.each do |tr| %>
+    <% unless tr.name == "Final" %>   
+    <div class="round blue round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
+        <div class="round-details"><%= tr.name %> <br/><span class="city">Chicago</span></div>
+        <% tr.matches.each do |match| %>
+        <ul class="matchup">
+        <li class="team team-top"><%= match.home_team.display_name %> <span class="score"><%= match.home_team.display_name == "TBD" ? "" : match.home_score %> </span></li>
+        <li class="team team-bottom"><%= match.away_team.display_name %> <span class="score"><%= match.away_team.display_name == "TBD" ? "" : match.away_score %> </span></li>
+        </ul>
+        <% end %>                                      
+    </div>  <!-- END ROUND <%= tr.number %> -->
+    <% else %>
+    <% end %>
+<% end %>       
+</div> 
+
+<div class="champion">
+    <div class="semis-l blue">
+        <div class="round-details">Finals<br/><span class="city">Chicago</span></div>     
+        <ul class ="matchup championship">
+            <li class="team team-top"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_score %></span></li>
+            <li class="team team-bottom"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_score %></span></li>
+        </ul>
+    </div>
+    <div class="final yellow">
+        <i class="fa fa-trophy"></i>
+        <div class="round-details">championship <br/><span class="city">Brookyln vs Chicago</span></div>      
+        <ul class ="matchup championship">
+        <li class="team team-top"><%= @tournament.tournament_groups[2].tournament_rounds.last.matches[0].home_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_score %></span></li>
+        <li class="team team-bottom"><%= @tournament.tournament_groups[2].tournament_rounds.last.matches[0].away_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_score %></span></li>
+        </ul>
+    </div>
+    <div class="semis-r red">       
+        <div class="round-details">Finals <br/><span class="city">Brooklyn</span></div>     
+        <ul class ="matchup championship">
+        <li class="team team-top"><%= @tournament.tournament_groups[1].tournament_rounds.last.matches[0].home_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].home_score %></span></li>
+        <li class="team team-bottom"><%= @tournament.tournament_groups[1].tournament_rounds.last.matches[0].away_team.display_name %><span class="score"><%= @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_team.display_name == "TBD" ? "" : @tournament.tournament_groups[0].tournament_rounds.last.matches[0].away_score %></span></li>
+        </ul>
+    </div>  
+</div>
+
+
+<div class="split split-two">
+
+<% @tournament.tournament_groups[1].tournament_rounds.reverse.each do |tr| %>
+    <% unless tr.name == "Final" %>   
+    <div class="round red round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
+        <div class="round-details group-2"><%= tr.name %> <br/><span class="city">Brooklyn</span></div>
+        <% tr.matches.each do |match| %>
+        <ul class="matchup">
+            <li class="team team-top"><%= match.home_team.display_name %> <span class="score"><%= match.home_team.display_name == "TBD" ? "" : match.home_score %> </span></li>
+            <li class="team team-bottom"><%= match.away_team.display_name %> <span class="score"><%= match.away_team.display_name == "TBD" ? "" : match.away_score %> </span></li>
+        </ul>
+        <% end %>                                      
+    </div>  <!-- END ROUND <%= tr.number %> -->
+    <% else %>
+    <% end %>
+<% end %>                            
+</div>
+</div>
+</section>
+</div>
+
+
