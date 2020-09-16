@@ -56,4 +56,13 @@ module ApplicationHelper
       'http://dayold.pizza'
     ]
   end
+
+  def in_frame?
+    allowed_frame_domains.each do |d|
+      next unless request.referer
+      return true if request.referer.start_with?(d)
+    end
+
+    false
+  end
 end
