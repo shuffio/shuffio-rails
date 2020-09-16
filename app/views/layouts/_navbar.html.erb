@@ -41,7 +41,7 @@
       <% elsif current_user %>
         <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'nav-link') %>
       <% else %>
-        <%= link_to('<i class="fab fa-google"></i> Sign in'.html_safe, user_google_oauth2_omniauth_authorize_path, class: 'nav-link') %>
+        <%= link_to('Sign in'.html_safe, new_user_session_path, class: 'nav-link') %>
       <% end %>
     </ul>
   </div>
