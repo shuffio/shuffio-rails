@@ -46,4 +46,14 @@ module ApplicationHelper
     else 'alert alert-dismissable'
     end
   end
+
+  def allowed_frame_domains
+    [
+      'https://www.royalpalmsshuffle.com',
+      'https://www.royalpalmsbrooklyn.com',
+      'https://www.royalpalmschicago.com',
+      'https://royalpalmschicago.squarespace.com',
+      'http://dayold.pizza'
+    ]
+  end
 end
