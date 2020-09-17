@@ -29,6 +29,9 @@ class BracketController < ApplicationController
   end
 
   def show
+    @bracket = Bracket.find(params[:id])
+    @placeholder_team_ids = ((685..700).to_a + Team.where(name: 'TBD').pluck(:id))
+    @final_match = @bracket.tournament_group.tournament_rounds.last.matches[0]
   end
 
   def update

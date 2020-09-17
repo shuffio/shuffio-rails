@@ -50,7 +50,7 @@
         <ul class ="matchup championship">
             <li class="team team-top">
             <% if @placeholder_team_ids.include? @chicago_final_match.away_team.id.to_i %>
-              <%= @chicago_final_match.home_team.display_name.truncate(15) %>
+              <%= @chicago_final_match.away_team.display_name.truncate(15) %>
             <% else %>
               <%= link_to @chicago_final_match.away_team.display_name.truncate(15), team_path(:id => @chicago_final_match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
