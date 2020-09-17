@@ -25,7 +25,7 @@ class BracketController < ApplicationController
 
   def edit
     @bracket = Bracket.find(params[:id])
-    @current_round = @bracket.tournament_group.tournament_rounds.first # TODO: programatic
+    @current_round = @bracket.next_round
   end
 
   def show
@@ -36,7 +36,7 @@ class BracketController < ApplicationController
 
   def update
     @bracket = Bracket.find(params[:id])
-    @current_round = @bracket.tournament_group.tournament_rounds.first # TODO: programatic
+    @current_round = @bracket.next_round
 
     match_selections = @bracket.match_data
 
@@ -50,7 +50,10 @@ class BracketController < ApplicationController
     end
 
     if @bracket.update(match_data: match_selections)
-      # TODO: redirect to next round
+      flash[:alert] = 'You must select a winner for all matches' if @current_round == @bracket.next_round
+      redirect_to edit_bracket_path(@bracket) and return if @bracket.next_round
+
+      flash[:notice] = 'You have successfully set your bracket. Great Luck!'
       redirect_to current_bracket_path
     else
       render 'edit'
