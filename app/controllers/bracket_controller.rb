@@ -1,6 +1,8 @@
 class BracketController < ApplicationController
   before_action :authenticate_user!, except: [:index, :current, :show]
   def index
+    @bracket = Bracket.new
+    @tournament = Tournament.last
   end
 
   def new
@@ -37,6 +39,13 @@ class BracketController < ApplicationController
     @bracket = Bracket.find(params[:id])
     @placeholder_team_ids = ((685..700).to_a + Team.where(name: 'TBD').pluck(:id))
     @final_match = @bracket.tournament_group.tournament_rounds.last.matches[0]
+
+    unless @bracket.complete?
+      flash[:error] = 'Bracket not complete'
+      redirect_to edit_bracket_path(@bracket) and return if current_user == @bracket.user
+
+      redirect_to bracket_index_path and return
+    end
   end
 
   def update
@@ -50,8 +59,6 @@ class BracketController < ApplicationController
 
     match_selections = @bracket.match_data
 
-    # TODO: ensure all were filled out
-
     params.each do |p_name, p_value|
       next unless p_name.starts_with?('match_')
 
@@ -64,7 +71,7 @@ class BracketController < ApplicationController
       redirect_to edit_bracket_path(@bracket) and return if @bracket.next_round
 
       flash[:notice] = 'You have successfully set your bracket. Great Luck!'
-      redirect_to current_bracket_path
+      redirect_to bracket_path(@bracket)
     else
       render 'edit'
     end
