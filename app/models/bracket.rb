@@ -22,6 +22,13 @@ class Bracket < ApplicationRecord
     match.winner.id == match_data[match.id.to_s]
   end
 
+  def match_points_s(match)
+    return '' unless match.winner
+    return '0' unless match_guess_correct?(match)
+
+    match.tournament_round.points.to_s
+  end
+
   def points
     points = 0
 
