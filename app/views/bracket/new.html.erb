@@ -6,15 +6,27 @@
 <% provide :title, '2020 Bracket Challenge' %>
 <div class="row bracket-challenge">
   <div class="col-lg-6 offset-lg-3">
+    <h2>Create a Bracket</h2>
 
     <% @tournament.tournament_groups.each do |tg| %>
-      <% if tg.bracket_pick_available? %>
+      <% if tg.bracket_enabled? %>
+        <% if Bracket.find_by(user: current_user, tournament_group: tg) %>
+          You can only fill out one bracket. <%= link_to 'Take a look at yours!', bracket_path(Bracket.find_by(user: current_user, tournament_group: tg)) %>
+        <% elsif tg.bracket_end_time.past? %>
+          Bracket selection has closed
+        <% elsif tg.bracket_start_time.future? %>
+          Bracket selection opens in <%= time_ago_in_words(tg.bracket_start_time) %>
+        <% end %>
         <%= form_for @bracket, url: bracket_index_path, html: { method: :post } do |f| %>
           <%= f.hidden_field :tournament_group_id, value: tg.id %>
-          <%= f.submit "Create #{tg.name}", class: 'btn btn-info' %>
+          <%= f.submit(
+            "Create #{tg.name}",
+            class: "btn btn-info #{tg.bracket_allowed?(current_user) ? '' : 'disabled' }",
+            disabled: !tg.bracket_allowed?(current_user)
+          ) %>
         <% end %>
       <% end %>
-
+      <br />
     <% end %>
   </div>
 </div>

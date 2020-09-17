@@ -16,8 +16,23 @@ class TournamentGroup < ApplicationRecord
     }
   end
 
-  def bracket_pick_available?(user: nil)
-    # return false if time isn't right
+  def bracket_enabled?
+    return false unless bracket_start_time
+    return false unless bracket_end_time
+
+    true
+  end
+
+  def bracket_pick_available?
+    return false unless bracket_enabled?
+    return false unless bracket_start_time && bracket_start_time.past?
+    return false unless bracket_end_time && bracket_end_time.future?
+
+    true
+  end
+
+  def bracket_allowed?(user = nil)
+    return false unless bracket_pick_available?
     return false if user && Bracket.find_by(user: user, tournament_group: self)
 
     true
