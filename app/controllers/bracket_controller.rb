@@ -26,7 +26,7 @@ class BracketController < ApplicationController
   def edit
     @bracket = Bracket.find(params[:id])
     unless current_user == @bracket.user
-      flash[:error] = 'You cannot update this bracket' 
+      flash[:error] = 'You cannot update this bracket'
       redirect_to bracket_index_path and return
     end
 
@@ -42,7 +42,7 @@ class BracketController < ApplicationController
   def update
     @bracket = Bracket.find(params[:id])
     unless current_user == @bracket.user
-      flash[:error] = 'You cannot update this bracket' 
+      flash[:error] = 'You cannot update this bracket'
       redirect_to bracket_index_path and return
     end
 
@@ -70,11 +70,11 @@ class BracketController < ApplicationController
     end
   end
 
-  def destroy  
+  def destroy
     @bracket = Bracket.find(params[:id])
 
     unless current_user == @bracket.user
-      flash[:error] = 'You cannot update this bracket' 
+      flash[:error] = 'You cannot update this bracket'
       redirect_to bracket_path(@bracket) and return
     end
 
