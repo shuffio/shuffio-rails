@@ -1,34 +1,24 @@
+<% if @bracket.errors.any? %>
+  <% flash.now[:error] = @bracket.errors.full_messages %>
+<% end %>
+
 <%= stylesheet_link_tag    'bracket', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% provide :title, '2020 Bracket Challenge' %>
 <div class="row bracket-challenge">
   <div class="col-lg-6 offset-lg-3">
-    <p class="font-weight-bold">Bracket Builder</p>
-    <p> 
-      Time to build your bracket!
-    </p> 
-  </div>
-    <div class="col-lg-6 offset-lg-3">
-    <p class="font-weight-bold">Round of 16</p>
-    <p> 
-      <% @tournament.tournament_groups[0].tournament_rounds[0].matches.each do |match| %>
-        <p> Pick your winner for match <%= match.id %>
-        <select class="form-control" id="exampleFormControlSelect1">
-        <option select >Make your pick!</option>
-        <option value="<%= match.home_team_id %>"> <%= match.home_team.display_name %> </option>
-        <option value="<%= match.away_team_id %>"> <%= match.away_team.display_name %> </option>
-      </select>
+
+    <% @tournament.tournament_groups.each do |tg| %>
+      <% if tg.bracket_pick_available? %>
+        <%= form_for @bracket, url: bracket_index_path, html: { method: :post } do |f| %>
+          <%= f.hidden_field :tournament_group_id, value: tg.id %>
+          <%= f.submit "Create #{tg.name}", class: 'btn btn-info' %>
+        <% end %>
       <% end %>
-    </p> 
-  </div>
-  <div class="col-lg-6 offset-lg-3">
-    <% if user_signed_in? %>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Next the round of 8!</button>
-    <% else %>
-    <button type="button" class="btn btn-warning btn-lg btn-block">You just gotta sign in first</button>
+
     <% end %>
   </div>
 </div>
 
-</br>
-</br>
-</br>
+<br />
+<br />
+<br />

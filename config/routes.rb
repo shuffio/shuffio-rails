@@ -34,9 +34,8 @@ Rails.application.routes.draw do
   post '/divisions/:id/week/:week/report', to: 'divisions#week_report', as: :division_week_report
 
   resources :faq, only: [:index]
-  resources :bracket, only: [:index, :current]
-  get 'bracket/current', to: 'bracket#current', as: :current
-  # post '/bracket/:bracket_id/group/:group_id/round/:round_id', to: 'bracket#update_match_selections', as: :update_bracket_match_selections
+  get 'bracket/current', to: 'bracket#current', as: :current_bracket
+  resources :bracket
   resources :games, only: [:update]
   resources :isa, only: [:index]
   resources :live, only: [:index, :lower_third, :four_frame_summary, :four_game, :full_game, :two_game, :summary]

@@ -55,6 +55,10 @@ class TournamentRound < ApplicationRecord
     TournamentRound.find_by(tournament_group: tournament_group, number: number - 1)
   end
 
+  def last_round?
+    tournament_group.tournament_rounds.map(&:number).max == number
+  end
+
   private
 
   def generate_matches_canam_round_one(csv_data)
