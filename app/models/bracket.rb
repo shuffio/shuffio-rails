@@ -81,6 +81,22 @@ class Bracket < ApplicationRecord
     ]
   end
 
+  def round_complete?(round)
+    round.matches.each do |m|
+      return false unless match_data.keys.include?(m.id.to_s)
+    end
+
+    true
+  end
+
+  def next_round
+    tournament_group.tournament_rounds.each do |tr|
+      return tr unless round_complete?(tr)
+    end
+
+    nil
+  end
+
   private
 
   def valid_match_data

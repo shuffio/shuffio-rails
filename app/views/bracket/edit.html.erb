@@ -7,15 +7,15 @@
 <div class="row bracket-challenge">
   <div class="col-lg-6 offset-lg-3">
     <p class="font-weight-bold">Bracket Builder</p>
-    <p> 
+    <p>
       Time to build your bracket!
-    </p> 
+    </p>
   </div>
     <div class="col-lg-6 offset-lg-3">
-    <p class="font-weight-bold"><%= @current_round.name %></p>  
-    <%= form_for(@bracket, url: bracket_path(@bracket), html: { method: :put }) do |f| %>  
+    <p class="font-weight-bold"><%= @current_round.name %></p>
+    <%= form_for(@bracket, url: bracket_path(@bracket), html: { method: :put }) do |f| %>
       <% @current_round.matches.each do |match| %>
-        <p> 
+        <p>
           <p>
             Pick your winner for <%= @bracket.potential_teams(match)[0].display_name %> vs. <%= @bracket.potential_teams(match)[1].display_name %>
           </p>
@@ -26,15 +26,15 @@
               [@bracket.potential_teams(match)[0].display_name, @bracket.potential_teams(match)[0].id],
               [@bracket.potential_teams(match)[1].display_name, @bracket.potential_teams(match)[1].id]
             ],
-            selected: '',
+            selected: @bracket.match_data[match.id.to_s] || '',
             disabled: ''
           ), {:class => 'form-control'}) %>
 
         </p>
       <% end %>
-      
+
       <%= f.submit @current_round.last_round? ? 'Submit your bracket!' : 'Onto the next round!' %>
-    <% end %>  
+    <% end %>
   </div>
 </div>
 
