@@ -15,4 +15,11 @@ class TournamentGroup < ApplicationRecord
       tournament_rounds: tournament_rounds.map(&:bracket_meta)
     }
   end
+
+  def bracket_pick_available?(user: nil)
+    # return false if time isn't right
+    return false if user && Bracket.find_by(user: user, tournament_group: self)
+
+    true
+  end
 end

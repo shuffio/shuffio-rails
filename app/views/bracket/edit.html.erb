@@ -1,0 +1,43 @@
+<% if @bracket.errors.any? %>
+  <% flash.now[:error] = @bracket.errors.full_messages %>
+<% end %>
+
+<%= stylesheet_link_tag    'bracket', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% provide :title, '2020 Bracket Challenge' %>
+<div class="row bracket-challenge">
+  <div class="col-lg-6 offset-lg-3">
+    <p class="font-weight-bold">Bracket Builder</p>
+    <p> 
+      Time to build your bracket!
+    </p> 
+  </div>
+    <div class="col-lg-6 offset-lg-3">
+    <p class="font-weight-bold"><%= @current_round.name %></p>  
+    <%= form_for(@bracket, url: bracket_path(@bracket), html: { method: :put }) do |f| %>  
+      <% @current_round.matches.each do |match| %>
+        <p> 
+          <p>
+            Pick your winner for <%= @bracket.potential_teams(match)[0].display_name %> vs. <%= @bracket.potential_teams(match)[1].display_name %>
+          </p>
+
+          <%= select_tag("match_#{match.id}", options_for_select(
+            [
+              ['Make Your Pick!', ''],
+              [@bracket.potential_teams(match)[0].display_name, @bracket.potential_teams(match)[0].id],
+              [@bracket.potential_teams(match)[1].display_name, @bracket.potential_teams(match)[1].id]
+            ],
+            selected: '',
+            disabled: ''
+          ), {:class => 'form-control'}) %>
+
+        </p>
+      <% end %>
+      
+      <%= f.submit @current_round.last_round? ? 'Submit your bracket!' : 'Onto the next round!' %>
+    <% end %>  
+  </div>
+</div>
+
+<br />
+<br />
+<br />

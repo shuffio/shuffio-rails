@@ -7,4 +7,14 @@ class ApplicationController < ActionController::Base
   def allow_iframe
     response.headers['Content-Security-Policy'] = "frame-ancestors #{helpers.allowed_frame_domains.join(' ')}"
   end
+
+  def not_found
+    raise ActionController::RoutingError, 'Not Found'
+  rescue StandardError
+    render_404
+  end
+
+  def render_404
+    render file: Rails.root.join('public/404'), status: :not_found
+  end
 end
