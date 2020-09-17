@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_044534) do
+ActiveRecord::Schema.define(version: 2020_09_17_070030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_044534) do
   create_table "tournament_groups", force: :cascade do |t|
     t.string "name"
     t.bigint "tournament_id"
+    t.datetime "bracket_start_time"
+    t.datetime "bracket_end_time"
     t.index ["tournament_id"], name: "index_tournament_groups_on_tournament_id"
   end
 

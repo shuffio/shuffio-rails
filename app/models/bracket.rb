@@ -8,6 +8,8 @@ class Bracket < ApplicationRecord
   # but this is a good comprimise for now
   # match_data is a JSON hash of { 'match_id': guessed_winning_team_id }
   validate :valid_match_data
+  validate :valid_bracket_enabled
+  validate :valid_bracket_time
 
   # TODO: validate we are currently bewteen tournament_group bracket_start and bracket_stop... and make those exist
   # TODO: tests
@@ -118,5 +120,13 @@ class Bracket < ApplicationRecord
         errors.add(:match_data, 'must have values of existing Team IDs')
       end
     end
+  end
+
+  def valid_bracket_enabled
+    errors.add(:tournament_group, 'must have bracket_start_time and bracket_end_time') unless tournament_group.bracket_enabled?
+  end
+
+  def valid_bracket_time
+    errors.add(:tournament_group, 'must have bracket_start_time and bracket_end_time within range of now') unless tournament_group.bracket_pick_available?
   end
 end
