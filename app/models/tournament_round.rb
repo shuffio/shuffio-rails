@@ -49,6 +49,12 @@ class TournamentRound < ApplicationRecord
     2**(number - 1)
   end
 
+  def previous
+    return nil if number == 1
+
+    TournamentRound.find_by(tournament_group: tournament_group, number: number - 1)
+  end
+
   private
 
   def generate_matches_canam_round_one(csv_data)

@@ -44,14 +44,33 @@ class Bracket < ApplicationRecord
     true
   end
 
-  def potential_teams(_match)
-    # TODO: we need a method to return the potential teams for a match
-    # this is based either on real teams in the first round
-    # or the user's selection in previous rounds
-    # For now return shuff it and the butts
+  def potential_teams(match)
+    # Find match in tournament_round
+    raise 'Match not in Bracket tournament_group' unless tournament_group.matches.include?(match)
+    raise 'Match missing tournament_order field' unless match.tournament_order
+
+    # If we're in the first round, this should just be that match's teams
+    return [match.away_team, match.home_team] if match.tournament_round.number == 1
+
+    # Otherwise, we need to source the user's picks from the previous round
+    last_round = match.tournament_round.previous
+
+    # Find the matches from the previous round that the winners carry over from into this match. rough math:
+    # round 2 -> round 1
+    # 1: [1, 2]
+    # 2: [3, 4]
+    # 3: [5, 6]
+    # 4: [7, 8]
+    match1 = Match.find_by(tournament_round: last_round, tournament_order: match.tournament_order * 2 - 1)
+    match2 = Match.find_by(tournament_round: last_round, tournament_order: match.tournament_order * 2)
+
+    # Ensure they've made the picks needed to determine this
+    raise 'Bracket is missing pick from previous round' unless match_data[match1.id.to_s] && match_data[match2.id.to_s]
+
+    # Return the user's picks for the winners of the previous matches
     [
-      Team.find(87),
-      Team.find(95)
+      Team.find(match_data[match1.id.to_s]),
+      Team.find(match_data[match2.id.to_s])
     ]
   end
 
@@ -61,8 +80,8 @@ class Bracket < ApplicationRecord
     errors.add(:match_data, 'must be a hash') unless match_data.is_a?(Hash)
 
     match_data.each do |match_id_s, winner_id|
-      errors.add(:match_data, 'Match IDs must be strings') unless match_id_s.class == 'String'
-      errors.add(:match_data, 'Winner IDs must be integers') unless winner_id.class == 'Integer'
+      errors.add(:match_data, 'Match IDs must be strings') unless match_id_s.class == String
+      errors.add(:match_data, 'Winner IDs must be integers') unless winner_id.class == Integer
 
       begin
         Match.find(match_id_s.to_i)
