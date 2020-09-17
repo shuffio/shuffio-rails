@@ -4,7 +4,7 @@
 <header class="hero">
 <div class="hero-wrap">
  <p class="intro" id="intro"><%= image_tag 'Royal-Palms.png', height: '150px' %></p>
-    </br>
+    <br />
     <h1 id="headline">One Nice Thing</h1>
      <p class="year"><i class="fa fa-star"></i>2020 Playoffs<i class="fa fa-star"></i></p>
      <p> Let us have this </p>
@@ -16,126 +16,125 @@
 <div class="container">
 <div class="split split-one">
 <% @tournament.tournament_groups[0].tournament_rounds.each do |tr| %>
-    <% unless tr.name == "Final" %>   
+    <% unless tr.name == "Final" %>
     <div class="round blue round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
         <div class="round-details"><%= tr.name %> <br/><span class="city">Chicago</span></div>
         <% tr.matches.each do |match| %>
         <ul class="matchup">
-        
+
         <li class="team team-top">
-        <% if !(@placeholder_team_ids.include? match.away_team.id.to_i) %>
-        <%= link_to match.away_team.display_name.truncate(15), team_path(:id => match.away_team.id.to_i) %>
+        <% if @placeholder_team_ids.include? match.away_team.id.to_i %>
+          <%= match.away_team.display_name.truncate(15) %>
         <% else %>
-        <%= match.away_team.display_name.truncate(15) %>
+          <%= link_to match.away_team.display_name.truncate(15), team_path(:id => match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? match.away_team.id.to_i) ? "" : match.away_score %> </span></li>
         <li class="team team-bottom">
-        <% if !(@placeholder_team_ids.include? match.home_team.id.to_i) %>
-        <%= link_to match.home_team.display_name.truncate(15), team_path(:id => match.home_team.id.to_i) %>           
+        <% if @placeholder_team_ids.include? match.home_team.id.to_i %>
+          <%= match.home_team.display_name.truncate(15) %>
         <% else %>
-        <%= match.home_team.display_name.truncate(15) %>
+          <%= link_to match.home_team.display_name.truncate(15), team_path(:id => match.home_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? match.home_team.id.to_i) ? "" : match.home_score %> </span></li>
         </ul>
-        <% end %>                                      
+        <% end %>
     </div>  <!-- END ROUND <%= tr.number %> -->
     <% else %>
     <% end %>
-<% end %>       
-</div> 
+<% end %>
+</div>
 
 <div class="champion">
     <div class="semis-l blue">
-        <div class="round-details">Finals<br/><span class="city">Chicago</span></div>     
+        <div class="round-details">Finals<br/><span class="city">Chicago</span></div>
         <ul class ="matchup championship">
             <li class="team team-top">
-            <% if !(@placeholder_team_ids.include? @chicago_final_match.away_team.id.to_i) %>
-            <%= link_to @chicago_final_match.away_team.display_name.truncate(15), team_path(:id => @chicago_final_match.away_team.id.to_i) %>              
+            <% if @placeholder_team_ids.include? @chicago_final_match.away_team.id.to_i %>
+              <%= @chicago_final_match.home_team.display_name.truncate(15) %>
             <% else %>
-            <%= @chicago_final_match.home_team.display_name.truncate(15) %>
+              <%= link_to @chicago_final_match.away_team.display_name.truncate(15), team_path(:id => @chicago_final_match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= (@placeholder_team_ids.include? @chicago_final_match.away_team.id.to_i) ? "" : @chicago_final_match.away_score %></span></li>
             <li class="team team-bottom">
-            <% if !(@placeholder_team_ids.include? @chicago_final_match.home_team.id.to_i) %>
-            <%= link_to @chicago_final_match.home_team.display_name.truncate(15), team_path(:id => @chicago_final_match.home_team.id.to_i) %>      
+            <% if @placeholder_team_ids.include? @chicago_final_match.home_team.id.to_i %>
+              <%= @chicago_final_match.home_team.display_name.truncate(15) %>
             <% else %>
-            <%= @chicago_final_match.home_team.display_name.truncate(15) %>
+              <%= link_to @chicago_final_match.home_team.display_name.truncate(15), team_path(:id => @chicago_final_match.home_team.id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= (@placeholder_team_ids.include? @chicago_final_match.home_team.id.to_i) ? "" : @chicago_final_match.home_score %></span></li>
         </ul>
     </div>
     <div class="final yellow">
         <i class="fa fa-trophy"></i>
-        <div class="round-details">championship <br/><span class="city">Brookyln vs Chicago</span></div>      
+        <div class="round-details">championship <br/><span class="city">Brookyln vs Chicago</span></div>
         <ul class ="matchup championship">
         <li class="team team-top">
-        <% if !(@placeholder_team_ids.include? @chi_bkl_final_match.away_team.id.to_i) %>
-        <%= link_to @chi_bkl_final_match.away_team.display_name.truncate(15), team_path(:id => @chi_bkl_final_match.away_team.id.to_i) %>      
+        <% if @placeholder_team_ids.include? @chi_bkl_final_match.away_team.id.to_i %>
+          <%= @chi_bkl_final_match.away_team.display_name.truncate(15) %>
         <% else %>
-        <%= @chi_bkl_final_match.away_team.display_name.truncate(15) %>
+          <%= link_to @chi_bkl_final_match.away_team.display_name.truncate(15), team_path(:id => @chi_bkl_final_match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? @chi_bkl_final_match.away_team.id.to_i) ? "" : @chi_bkl_final_match.away_score %></span></li>
         <li class="team team-bottom">
-        <% if !(@placeholder_team_ids.include? @chi_bkl_final_match.home_team.id.to_i) %>
-        <%= link_to @chi_bkl_final_match.home_team.display_name.truncate(15), team_path(:id => @chi_bkl_final_match.home_team.id.to_i) %>      
+        <% if @placeholder_team_ids.include? @chi_bkl_final_match.home_team.id.to_i %>
+          <%= @chi_bkl_final_match.home_team.display_name.truncate(15) %>
         <% else %>
-        <%= @chi_bkl_final_match.home_team.display_name.truncate(15) %>
+          <%= link_to @chi_bkl_final_match.home_team.display_name.truncate(15), team_path(:id => @chi_bkl_final_match.home_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? @chi_bkl_final_match.away_team.id.to_i) ? "" : @chi_bkl_final_match.home_score %></span></li>
         </ul>
     </div>
-    <div class="semis-r red">       
-        <div class="round-details">Finals <br/><span class="city">Brooklyn</span></div>     
+    <div class="semis-r red">
+        <div class="round-details">Finals <br/><span class="city">Brooklyn</span></div>
         <ul class ="matchup championship">
         <li class="team team-top">
-        <% if !(@placeholder_team_ids.include? @brooklyn_final_match.away_team.id.to_i) %><%= link_to @brooklyn_final_match.away_team.display_name.truncate(15), team_path(:id => @brooklyn_final_match.away_team.id.to_i) %>
+        <% if @placeholder_team_ids.include? @brooklyn_final_match.away_team.id.to_i %>
+          <%= @brooklyn_final_match.away_team.display_name.truncate(15) %>
         <% else %>
-        <%= @brooklyn_final_match.away_team.display_name.truncate(15) %>
+          <%= link_to @brooklyn_final_match.away_team.display_name.truncate(15), team_path(:id => @brooklyn_final_match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? @brooklyn_final_match.away_team.id.to_i) ? "" : @brooklyn_final_match.away_score %></span></li>
         <li class="team team-bottom">
-        <% if !(@placeholder_team_ids.include? @brooklyn_final_match.home_team.id.to_i) %>
-        <%= link_to @brooklyn_final_match.home_team.display_name.truncate(15), team_path(:id => @brooklyn_final_match.home_team.id.to_i) %>
+        <% if @placeholder_team_ids.include? @brooklyn_final_match.home_team.id.to_i %>
+          <%= @brooklyn_final_match.home_team.display_name.truncate(15) %>
         <% else %>
-        <%= @brooklyn_final_match.home_team.display_name.truncate(15) %>
+          <%= link_to @brooklyn_final_match.home_team.display_name.truncate(15), team_path(:id => @brooklyn_final_match.home_team.id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= (@placeholder_team_ids.include? @brooklyn_final_match.away_team.id.to_i) ? "" : @brooklyn_final_match.home_score %></span></li>
         </ul>
-    </div>  
+    </div>
 </div>
 
 
 <div class="split split-two">
 
 <% @tournament.tournament_groups[1].tournament_rounds.reverse.each do |tr| %>
-    <% unless tr.name == "Final" %>   
+    <% unless tr.name == "Final" %>
     <div class="round red round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
         <div class="round-details group-2"><%= tr.name %> <br/><span class="city">Brooklyn</span></div>
         <% tr.matches.each do |match| %>
         <ul class="matchup">
             <li class="team team-top">
-            <% if !(@placeholder_team_ids.include? match.away_team.id.to_i) %>
-            <%= link_to match.away_team.display_name.truncate(15), team_path(:id => match.away_team.id.to_i) %>
+            <% if @placeholder_team_ids.include? match.away_team.id.to_i %>
+              <%= match.away_team.display_name.truncate(15) %>
             <% else %>
-            <%= match.away_team.display_name.truncate(15) %>
+              <%= link_to match.away_team.display_name.truncate(15), team_path(:id => match.away_team.id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= (@placeholder_team_ids.include? match.away_team.id.to_i) ? "" : match.away_score %> </span></li>
             <li class="team team-bottom">
-            <% if !(@placeholder_team_ids.include? match.home_team.id.to_i) %>
-            <%= link_to match.home_team.display_name.truncate(15), team_path(:id => match.home_team.id.to_i) %>           
+            <% if @placeholder_team_ids.include? match.home_team.id.to_i %>
+              <%= match.home_team.display_name.truncate(15) %>
             <% else %>
-            <%= match.home_team.display_name.truncate(15) %>
+              <%= link_to match.home_team.display_name.truncate(15), team_path(:id => match.home_team.id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= (@placeholder_team_ids.include? match.home_team.id.to_i) ? "" : match.home_score %> </span></li>
         </ul>
-        <% end %>                                      
+        <% end %>
     </div>  <!-- END ROUND <%= tr.number %> -->
     <% else %>
     <% end %>
-<% end %>                            
+<% end %>
 </div>
 </div>
 </section>
 </div>
-
-

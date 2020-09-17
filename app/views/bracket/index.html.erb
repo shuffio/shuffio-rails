@@ -6,7 +6,7 @@
     <header class="hero">
     <div class="hero-wrap">
     <p class="intro" id="intro"><%= image_tag 'Royal-Palms.png', height: '150px' %></p>
-        </br>
+        <br />
         <h1 id="headline">Shufflinsanity</h1>
         <p class="year"><i class="fa fa-star"></i>2020 Playoffs<i class="fa fa-star"></i></p>
         <p>Forget March Madness, It's September Insanity</p>
@@ -15,14 +15,14 @@
   </div>
   <div class="col-lg-6 offset-lg-3">
     <p class="font-weight-bold">Welcome to the 2020 Shufflinsanity Bracket Challenge!</p>
-    <p> 
+    <p>
       Shuff.io is proud to join the Royal Palms Shuffleboard Club in hosting the first ever league bracket challenge!
-      </br>
+      <br />
       16 teams will battle it out for the coveted crown of 2020 Chicago League Champion.
-      </br>
+      <br />
       You can join in on all the action Monday nights on YouTube in October.
-      </br>
-      Be sure to subscribe to the <a href="https://www.youtube.com/channel/UCInSJx92B7WrL-UctI6MYDg">Royal Palms YouTube Channel</a> to be notified for each release.
+      <br />
+      Be sure to subscribe to the <%= link_to 'Royal Palms YouTube Channel', 'https://www.youtube.com/channel/UCInSJx92B7WrL-UctI6MYDg', target: :_blank %> to be notified for each release.
     </p>
   </div>
   <div class="col-lg-6 offset-lg-3">
@@ -30,7 +30,7 @@
     <p>
       Forget March Madness, this is September Irrationality! Pick your dream bracket and compete against the world.
     </p>
-    <p> 
+    <p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           For each match winner guessed correctly you'll score points:
@@ -57,7 +57,7 @@
         </li>
         <li class="list-group-item">
           You can enter your picks for the Chicago Bracket from 12am CDT (1am EDT) on September 18th 2020.
-          </br>
+          <br />
           We expect the Brooklyn bracket to open up at 12am CDT (1am EDT) on October 22nd 2020
         </li>
         <li class="list-group-item">
@@ -66,21 +66,21 @@
         <li class="list-group-item">
           The folks with the highest score at the end of the bracket challenge will win a prize!
         </li>
-      </ul>  
+      </ul>
     </p>
   </div>
   <div class="col-lg-6 offset-lg-3">
     <% if user_signed_in? %>
-    <%= link_to "Slow down! We're not ready just yet, #{current_user.first_name || "Friend"}!", "javascript:;", class:"btn btn-primary btn-lg btn-block disabled" %>
+      <%= link_to "Slow down! We're not ready just yet, #{current_user.first_name || "Friend"}!", "javascript:;", class:"btn btn-primary btn-lg btn-block disabled", target: in_frame? ? :_blank : nil %>
     <% else %>
-    <%= link_to "You just gotta sign up first, friend!", :new_user_registration, class:"btn btn-warning btn-lg btn-block active" %>
+      <%= link_to "You just gotta sign up first, friend!", :new_user_registration, class:"btn btn-warning btn-lg btn-block active", target: in_frame? ? :_blank : nil %>
     <% end %>
     <div class="d-flex justify-content-center">
-      <%= link_to "Want to see what the bracket looks like so far?", :current %>
+      <%= link_to "Want to see what the bracket looks like so far?", :current, target: in_frame? ? :_blank : nil %>
     </div>
   </div>
 </div>
 
-</br>
-</br>
-</br>
+<br />
+<br />
+<br />

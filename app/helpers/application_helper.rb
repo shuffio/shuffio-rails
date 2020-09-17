@@ -46,4 +46,23 @@ module ApplicationHelper
     else 'alert alert-dismissable'
     end
   end
+
+  def allowed_frame_domains
+    [
+      'https://www.royalpalmsshuffle.com',
+      'https://www.royalpalmsbrooklyn.com',
+      'https://www.royalpalmschicago.com',
+      'https://royalpalmschicago.squarespace.com',
+      'http://dayold.pizza'
+    ]
+  end
+
+  def in_frame?
+    allowed_frame_domains.each do |d|
+      next unless request.referer
+      return true if request.referer.start_with?(d)
+    end
+
+    false
+  end
 end
