@@ -1,4 +1,11 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: method }) do |f| %>
+  <% if need_current_password %>
+    <div class="form-group">
+      <%= f.label :current_password %><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" , class: 'form-control', placeholder: 'Changing something? Verify that password for us...' %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'moonshooter@example.com' %>
@@ -23,12 +30,15 @@
     <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control', placeholder: 'Check those typos!' %>
   </div>
 
-  <% if need_current_password %>
-    <div class="form-group">
-      <%= f.label :current_password %><br />
-      <%= f.password_field :current_password, autocomplete: "current-password" , class: 'form-control', placeholder: 'We need your current password to confirm' %>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autocomplete: "first-name" , class: 'form-control', placeholder: 'What should we call you?' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "last-name" , class: 'form-control', placeholder: "We'll only show your last initial" %>
+  </div>
 
   <div class="form-group">
     <%= f.submit "Let's Go!", class: 'btn btn-info' %>
