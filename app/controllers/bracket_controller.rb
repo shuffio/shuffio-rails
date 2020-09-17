@@ -1,5 +1,5 @@
 class BracketController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :current]
+  before_action :authenticate_user!, except: [:index, :current, :show]
   def index
   end
 
@@ -25,6 +25,11 @@ class BracketController < ApplicationController
 
   def edit
     @bracket = Bracket.find(params[:id])
+    unless current_user == @bracket.user
+      flash[:error] = 'You cannot update this bracket' 
+      redirect_to bracket_index_path and return
+    end
+
     @current_round = @bracket.next_round
   end
 
@@ -36,6 +41,11 @@ class BracketController < ApplicationController
 
   def update
     @bracket = Bracket.find(params[:id])
+    unless current_user == @bracket.user
+      flash[:error] = 'You cannot update this bracket' 
+      redirect_to bracket_index_path and return
+    end
+
     @current_round = @bracket.next_round
 
     match_selections = @bracket.match_data
@@ -58,6 +68,18 @@ class BracketController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy  
+    @bracket = Bracket.find(params[:id])
+
+    unless current_user == @bracket.user
+      flash[:error] = 'You cannot update this bracket' 
+      redirect_to bracket_path(@bracket) and return
+    end
+
+    @bracket.update(match_data: {})
+    redirect_to edit_bracket_path(@bracket)
   end
 
   def current
