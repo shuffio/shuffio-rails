@@ -1,0 +1,33 @@
+<% if user_signed_in? %>
+  <% tournament.tournament_groups.order(:id).each do |tg| %>
+    <% if tg.bracket_enabled? %>
+      <% if Bracket.find_by(user: current_user, tournament_group: tg) %>
+        <%= link_to(
+          "Take a look at your #{tg.name}!",
+          bracket_path(Bracket.find_by(user: current_user, tournament_group: tg)),
+          target: in_frame? ? :_blank : nil,
+          class: "btn btn-secondary btn-lg btn-block"
+        ) %>
+        <br />
+      <% else %>
+        <% if tg.bracket_end_time.past? %>
+          Bracket selection has closed
+        <% elsif tg.bracket_start_time.future? %>
+          Bracket selection opens in <%= time_ago_in_words(tg.bracket_start_time) %>
+        <% end %>
+        <%= form_for bracket, url: bracket_index_path, html: { method: :post }, target: in_frame? ? :_blank : nil do |f| %>
+          <%= f.hidden_field :tournament_group_id, value: tg.id %>
+          <%= f.submit(
+            "Create #{tg.name}",
+            class: "btn btn-primary btn-lg btn-block #{tg.bracket_allowed?(current_user) ? '' : 'disabled' }",
+            disabled: !tg.bracket_allowed?(current_user)
+          ) %>
+        <% end %>
+        <br />
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% else %>
+  <%= link_to 'You just gotta sign up first!', :new_user_registration, class: 'btn btn-warning btn-lg btn-block active', target: in_frame? ? :_blank : nil %>
+<% end %>
