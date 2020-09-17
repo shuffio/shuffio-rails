@@ -131,10 +131,17 @@
         </ul>
         <% end %>
     </div>  <!-- END ROUND <%= tr.number %> -->
-    <% else %>
     <% end %>
 <% end %>
 </div>
 </div>
 </section>
+<br />
+<div class="col-lg-6 offset-lg-3">
+  <div class="d-flex justify-content-center">
+    Is March Madness your thing? Before play beings, pick your dream bracket and compete against the world.
+  </div>
+  <%= render partial: 'bracket/create_buttons', locals: { bracket: @bracket, tournament: @tournament } %>
+  </div>
+</div>
 </div>

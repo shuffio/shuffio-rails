@@ -29,20 +29,21 @@
         <%= link_to 'FAQ', faq_index_path, class: 'nav-link' %>
       </li>
 
-      <% if current_user && current_user.is_admin? %>
+      <% if current_user %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Admin
+            <%= current_user.first_name ? current_user.first_name : 'Profile' %>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to('Can Am', admin_canam_index_path, class: 'dropdown-item') %>
-            <%= link_to('Teams', admin_teams_path, class: 'dropdown-item') %>
+            <% if current_user.is_admin? %>
+              <%= link_to('Can Am', admin_canam_index_path, class: 'dropdown-item') %>
+              <%= link_to('Teams', admin_teams_path, class: 'dropdown-item') %>
+            <% end %>
+            <%= link_to('Edit Profile', edit_user_registration_path, class: 'dropdown-item') %>
             <div class="dropdown-divider"></div>
             <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>
           </div>
         </li>
-      <% elsif current_user %>
-        <%= link_to('Sign out', destroy_user_session_path, method: :delete, class: 'nav-link') %>
       <% else %>
         <%= link_to('Sign in'.html_safe, new_user_session_path, class: 'nav-link') %>
       <% end %>

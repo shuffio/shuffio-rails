@@ -1,5 +1,7 @@
 class BracketController < ApplicationController
   before_action :authenticate_user!, except: [:index, :current, :show]
+  before_action :user_name!, except: [:index, :current, :show]
+
   def index
     @bracket = Bracket.new
     @tournament = Tournament.last
@@ -95,5 +97,17 @@ class BracketController < ApplicationController
     @chicago_final_match = Tournament.last.tournament_groups[0].tournament_rounds.last.matches[0]
     @brooklyn_final_match = Tournament.last.tournament_groups[1].tournament_rounds.last.matches[0]
     @chi_bkl_final_match = Tournament.last.tournament_groups[2].tournament_rounds.last.matches[0]
+    @bracket = Bracket.new
+  end
+
+  private
+
+  def user_name!
+    # binding.pry
+    return unless current_user
+    return if current_user.first_name && current_user.last_name
+
+    flash[:notice] = 'We need your name so, we can help you brag about your accomplishments!'
+    redirect_to edit_user_registration_path
   end
 end
