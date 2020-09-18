@@ -17,7 +17,7 @@
 <div class="split split-one">
 <% @bracket.tournament_group.tournament_rounds.each do |tr| %>
     <% unless tr.name == "Final" %>
-    <div class="round blue round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
+    <div class="round blue round-<%= tr.number %> current">
         <div class="round-details"><%= tr.name %></div>
         <% tr.matches.each do |match| %>
         <ul class="matchup">
@@ -45,7 +45,7 @@
 </div>
 
 <div class="champion">
-    <div class="semis-l blue">
+    <div class="semis-l blue current">
         <div class="round-details">Finals<br/></div>
         <ul class ="matchup championship">
             <li class="team team-top">
@@ -62,6 +62,19 @@
               <%= link_to @bracket.potential_teams(@final_match)[1].display_name.truncate(15), team_path(:id => @bracket.potential_teams(@final_match)[1].id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= @bracket.match_points_s(@final_match) %></span></li>
+        </ul>
+    </div>
+
+    <div class="final yellow current">
+        <i class="fa fa-trophy"></i>
+        <div class="round-details">champion pick <br/></div>
+        <ul class ="matchup championship">
+        <li class="team team-top">
+        <% if @placeholder_team_ids.include? @bracket.pick_for_match(@final_match).id.to_i %>
+          <%= @bracket.pick_for_match(@final_match).display_name.truncate(15) %>
+        <% else %>
+          <%= link_to @bracket.pick_for_match(@final_match).display_name.truncate(15), team_path(:id => @bracket.pick_for_match(@final_match).id.to_i), target: in_frame? ? :_blank : nil %>
+        <% end %>
         </ul>
     </div>
 

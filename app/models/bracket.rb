@@ -99,6 +99,14 @@ class Bracket < ApplicationRecord
     nil
   end
 
+  def pick_for_match(match)
+    raise 'Match object needed' unless match
+    raise 'Match not in Bracket tournament_group' unless tournament_group.matches.include?(match)
+    raise 'Match not in Bracket match_data' unless match_data.keys.include?(match.id.to_s)
+
+    Team.find(match_data[match.id.to_s])
+  end
+
   private
 
   def valid_match_data

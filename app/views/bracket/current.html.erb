@@ -15,7 +15,7 @@
 <section id="bracket">
 <div class="container">
 <div class="split split-one">
-<% @tournament.tournament_groups[0].tournament_rounds.each do |tr| %>
+<% @tournament.tournament_groups.order(:id)[0].tournament_rounds.each do |tr| %>
     <% unless tr.name == "Final" %>
     <div class="round blue round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
         <div class="round-details"><%= tr.name %> <br/><span class="city">Chicago</span></div>
@@ -108,7 +108,7 @@
 
 <div class="split split-two">
 
-<% @tournament.tournament_groups[1].tournament_rounds.reverse.each do |tr| %>
+<% @tournament.tournament_groups.order(:id)[1].tournament_rounds.reverse.each do |tr| %>
     <% unless tr.name == "Final" %>
     <div class="round red round-<%= tr.number %> <%= (tr.active? || tr.number == 1) ? "current" : "" %>">
         <div class="round-details group-2"><%= tr.name %> <br/><span class="city">Brooklyn</span></div>

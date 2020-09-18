@@ -39,6 +39,16 @@ class BracketController < ApplicationController
 
   def show
     @bracket = Bracket.find(params[:id])
+    unless @bracket.complete?
+      if current_user == @bracket.user
+        flash[:error] = 'You need to finish your bracket before you can view it!'
+        redirect_to edit_bracket_path(@bracket) and return
+      end
+
+      flash[:error] = 'This bracket has not been completed yet.'
+      redirect_to bracket_index_path and return
+    end
+
     @placeholder_team_ids = ((685..700).to_a + Team.where(name: 'TBD').pluck(:id))
     @final_match = @bracket.tournament_group.tournament_rounds.last.matches[0]
 
