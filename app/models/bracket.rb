@@ -107,6 +107,10 @@ class Bracket < ApplicationRecord
     Team.find(match_data[match.id.to_s])
   end
 
+  def self.completed_count
+    Bracket.count(&:complete?)
+  end
+
   private
 
   def valid_match_data
