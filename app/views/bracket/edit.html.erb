@@ -17,14 +17,14 @@
       <% @current_round.matches.each do |match| %>
         <p>
           <p>
-            Pick your winner for <%= @bracket.potential_teams(match)[0].display_name %> vs. <%= @bracket.potential_teams(match)[1].display_name %>
+            Pick your winner for <%= @bracket.potential_teams(match)[0].name %> vs. <%= @bracket.potential_teams(match)[1].name %>
           </p>
 
           <%= select_tag("match_#{match.id}", options_for_select(
             [
               ['Make Your Pick!', ''],
-              [@bracket.potential_teams(match)[0].display_name, @bracket.potential_teams(match)[0].id],
-              [@bracket.potential_teams(match)[1].display_name, @bracket.potential_teams(match)[1].id]
+              [@bracket.potential_teams(match)[0].name, @bracket.potential_teams(match)[0].id],
+              [@bracket.potential_teams(match)[1].name, @bracket.potential_teams(match)[1].id]
             ],
             selected: @bracket.match_data[match.id.to_s] || '',
             disabled: ''
