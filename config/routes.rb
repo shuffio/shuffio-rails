@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  root 'bracket#current'
+  root 'bracket#index'
 
   resources :admin, only: [:index]
 
