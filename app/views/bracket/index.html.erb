@@ -23,8 +23,8 @@
       You can join in on all the action Monday nights on YouTube in October.
       <br />
       Be sure to subscribe to the <%= link_to 'Royal Palms YouTube Channel', 'https://www.youtube.com/channel/UCInSJx92B7WrL-UctI6MYDg', target: :_blank %> to be notified for each release.
-      <br /> 
-      Want to scout your team picks? Check out the RPSC Instagram accounts for team profiles: <%= link_to '@royalpalmschicago', 'https://www.instagram.com/royalpalmschicago/', target: :_blank %> <%= link_to '@royalpalms', 'https://www.instagram.com/royalpalms/', target: :_blank %> 
+      <br />
+      Want to scout your team picks? Check out the RPSC Instagram accounts for team profiles: <%= link_to '@royalpalmschicago', 'https://www.instagram.com/royalpalmschicago/', target: :_blank %> <%= link_to '@royalpalms', 'https://www.instagram.com/royalpalms/', target: :_blank %>
     </p>
   </div>
   <div class="col-lg-6 offset-lg-3">
@@ -79,4 +79,6 @@
 
 <br />
 <br />
-<br />
+<div class="hidden-count">
+  <%= Bracket.completed_count %>
+</div>
