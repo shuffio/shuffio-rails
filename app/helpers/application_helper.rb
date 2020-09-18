@@ -53,6 +53,7 @@ module ApplicationHelper
       'https://www.royalpalmsbrooklyn.com',
       'https://www.royalpalmschicago.com',
       'https://royalpalmschicago.squarespace.com',
+      'https://royalpalmsbrooklyn.squarespace.com',
       'http://dayold.pizza'
     ]
   end
