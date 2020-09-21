@@ -111,6 +111,14 @@ class Bracket < ApplicationRecord
     Bracket.count(&:complete?)
   end
 
+  def self.any_available?
+    TournamentGroup.all.find_each do |tg|
+      return true if tg.bracket_pick_available?
+    end
+
+    false
+  end
+
   private
 
   def valid_match_data
