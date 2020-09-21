@@ -87,7 +87,7 @@
 <br />
 
     <div class="col-lg-6 offset-lg-3">
-      <% if user_signed_in? && current_user == @bracket.user %>
+      <% if user_signed_in? && current_user == @bracket.user && @bracket.tournament_group.bracket_pick_available? %>
         <%= link_to "You want to start over, #{current_user.first_name || "Friend"}?", bracket_path(@bracket), method: "delete", data: { confirm: "Are you sure? It'll be from scratch!", disable_with: "Here we go again..." }, class:"btn btn-danger btn-lg btn-block" %>
       <% end %>
     </div>
