@@ -24,16 +24,16 @@
 
         <li class="team team-top">
         <% if @placeholder_team_ids.include? @bracket.potential_teams(match)[0].id.to_i %>
-          <%= @bracket.potential_teams(match)[0].display_name.truncate(15) %>
+          <%= @bracket.potential_teams(match)[0].display_name.first(16) %>
         <% else %>
-          <%= link_to @bracket.potential_teams(match)[0].display_name.truncate(15), team_path(:id => @bracket.potential_teams(match)[0].id.to_i), target: in_frame? ? :_blank : nil %>
+          <%= link_to @bracket.potential_teams(match)[0].display_name.first(16), team_path(:id => @bracket.potential_teams(match)[0].id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= @bracket.match_points_s(match) %></span></li>
         <li class="team team-bottom">
         <% if @placeholder_team_ids.include? @bracket.potential_teams(match)[1].id.to_i %>
-          <%= @bracket.potential_teams(match)[1].display_name.truncate(15) %>
+          <%= @bracket.potential_teams(match)[1].display_name.first(16) %>
         <% else %>
-          <%= link_to @bracket.potential_teams(match)[1].display_name.truncate(15), team_path(:id => @bracket.potential_teams(match)[1].id.to_i), target: in_frame? ? :_blank : nil %>
+          <%= link_to @bracket.potential_teams(match)[1].display_name.first(16), team_path(:id => @bracket.potential_teams(match)[1].id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         <span class="score"><%= @bracket.match_points_s(match) %></span></li>
         </ul>
@@ -50,16 +50,16 @@
         <ul class ="matchup championship">
             <li class="team team-top">
             <% if @placeholder_team_ids.include? @bracket.potential_teams(@final_match)[0].id.to_i %>
-              <%= @bracket.potential_teams(@final_match)[0].display_name.truncate(15) %>
+              <%= @bracket.potential_teams(@final_match)[0].display_name.first(16) %>
             <% else %>
-              <%= link_to @bracket.potential_teams(@final_match)[0].display_name.truncate(15), team_path(:id => @bracket.potential_teams(@final_match)[0].id.to_i), target: in_frame? ? :_blank : nil %>
+              <%= link_to @bracket.potential_teams(@final_match)[0].display_name.first(16), team_path(:id => @bracket.potential_teams(@final_match)[0].id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= @bracket.match_points_s(@final_match) %></span></li>
             <li class="team team-bottom">
             <% if @placeholder_team_ids.include? @bracket.potential_teams(@final_match)[1].id.to_i %>
-              <%= @bracket.potential_teams(@final_match)[1].display_name.truncate(15) %>
+              <%= @bracket.potential_teams(@final_match)[1].display_name.first(16) %>
             <% else %>
-              <%= link_to @bracket.potential_teams(@final_match)[1].display_name.truncate(15), team_path(:id => @bracket.potential_teams(@final_match)[1].id.to_i), target: in_frame? ? :_blank : nil %>
+              <%= link_to @bracket.potential_teams(@final_match)[1].display_name.first(16), team_path(:id => @bracket.potential_teams(@final_match)[1].id.to_i), target: in_frame? ? :_blank : nil %>
             <% end %>
             <span class="score"><%= @bracket.match_points_s(@final_match) %></span></li>
         </ul>
@@ -71,9 +71,9 @@
         <ul class ="matchup championship">
         <li class="team team-top">
         <% if @placeholder_team_ids.include? @bracket.pick_for_match(@final_match).id.to_i %>
-          <%= @bracket.pick_for_match(@final_match).display_name.truncate(15) %>
+          <%= @bracket.pick_for_match(@final_match).display_name.first(16) %>
         <% else %>
-          <%= link_to @bracket.pick_for_match(@final_match).display_name.truncate(15), team_path(:id => @bracket.pick_for_match(@final_match).id.to_i), target: in_frame? ? :_blank : nil %>
+          <%= link_to @bracket.pick_for_match(@final_match).display_name.first(16), team_path(:id => @bracket.pick_for_match(@final_match).id.to_i), target: in_frame? ? :_blank : nil %>
         <% end %>
         </ul>
     </div>
