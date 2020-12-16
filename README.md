@@ -22,6 +22,14 @@ You should run the site locally to test your changes before opening up pull requ
 1. run `rake db:setup` to create your database and load seed data
 1. run `rails s` to start a local server
 
+## Running Locally in Docker
+The repo has `Dockerfile` and `docker-compose.yml` files to get started with developement quickly. When using Docker-Compose, the app directory will be mounted as a volume so that you can see changes without needing to rebuild the container.
+
+1. run `docker-compose up` to bring up services
+1. run `docker-compose exec web db:setup` to create your database and load seed data
+
+If you end up with file permission errors around the database files, check permissions on `tmp/db`.
+
 ## Deploying
 **Do not push changes directly to Heroku!**
 
