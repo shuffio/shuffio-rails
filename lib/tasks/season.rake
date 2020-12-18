@@ -88,4 +88,32 @@ namespace :season do
       puts '-----------------------'
     end
   end
+
+  desc 'Create Brooklyn Leagues and Divisions'
+  task create_brooklyn: :environment do
+    require 'csv'
+
+    brooklyn = Location.find_by(name: 'Royal Palms Brooklyn')
+
+    # Update existing Brooklyn 2020 Season
+    winter = Season.find_by(location: brooklyn, name: 'Brooklyn 2020')
+    winter.update(name: 'Winter 2020') if winter
+
+    rows = CSV.read(Rails.root.join('lib/brooklyn_divisions.csv'), headers: true)
+
+    rows.each do |r|
+      # Create Season if needed
+      season = Season.find_or_create_by(location: brooklyn, name: r['season_name']) do |s|
+        s.start_date = r['season_start_date']
+      end
+
+      # Create Division
+      Division.find_or_create_by(season: season, name: r['division_name']) do |d|
+        d.day_of_week = r['division_day_of_week'].to_i
+        d.time = r['division_time']
+        d.league_apps_site_id = r['league_apps_site_id']
+        d.league_apps_program_id = r['league_apps_program_id']
+      end
+    end
+  end
 end
