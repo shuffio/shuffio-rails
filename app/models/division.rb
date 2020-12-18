@@ -3,6 +3,8 @@ class Division < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :matches
 
+  delegate :location, to: :season
+
   def match_time_for_week(week)
     day = season.start_date
     if day_of_week
@@ -257,5 +259,12 @@ class Division < ApplicationRecord
         3.times { csv << [] }
       end
     end
+  end
+
+  def league_apps_schedule_data_uri
+    return nil if league_apps_site_id.nil?
+    return nil if league_apps_program_id.nil?
+
+    "https://public.leagueapps.io/v1/sites/#{league_apps_site_id}/programs/#{league_apps_program_id}/schedule"
   end
 end
