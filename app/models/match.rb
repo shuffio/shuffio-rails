@@ -6,7 +6,7 @@ class Match < ApplicationRecord
   belongs_to :division, optional: true
   belongs_to :court, optional: true
   belongs_to :tournament_round, optional: true # TODO: if exists, ensure unique tournament_order
-  has_many :games, dependent: :nullify
+  has_many :games, -> { order(:number) }, inverse_of: :match, dependent: :nullify
 
   # TODO: Fix callback to work on updates
   after_create :calculate_elo
@@ -160,6 +160,55 @@ class Match < ApplicationRecord
     }
   end
 
+  def create_palms_doubles_games(first_yellow_team, first_black_team)
+    throw 'first_yellow_team must be a Team from this Match' unless [away_team, home_team].include?(first_yellow_team)
+    throw 'first_black_team must be a Team from this Match' unless [away_team, home_team].include?(first_black_team)
+    throw 'first_yellow_team must not be same as first_black_team' if first_yellow_team == first_black_team
+
+    Game.create(
+      match: self,
+      number: 1,
+      yellow_team: first_yellow_team,
+      black_team: first_black_team,
+      game_type: 'palms_doubles',
+      max_frames: 8,
+      allow_ties: false,
+      frames: []
+    )
+
+    Game.create(
+      match: self,
+      number: 2,
+      yellow_team: first_black_team,
+      black_team: first_yellow_team,
+      game_type: 'palms_doubles',
+      max_frames: 8,
+      allow_ties: false,
+      frames: []
+    )
+
+    Game.create(
+      match: self,
+      number: 3,
+      yellow_team: first_yellow_team,
+      black_team: first_black_team,
+      game_type: 'palms_doubles',
+      max_frames: 4,
+      allow_ties: false,
+      frames: []
+    )
+  end
+
+  def ae_data
+    {
+      starting_yellow_team: games.first.yellow_team.name,
+      starting_black_team: games.first.black_team.name,
+      yellow_match_score: series_score_progression[0],
+      black_match_score: series_score_progression[1],
+      frames: games.map(&:frames)
+    }
+  end
+
   def self.recalculate_all_elo
     # Disable logging
     old_logger = ActiveRecord::Base.logger
@@ -171,5 +220,21 @@ class Match < ApplicationRecord
 
     # Set logging back to old level
     ActiveRecord::Base.logger = old_logger
+  end
+
+  private
+
+  def series_score_progression
+    yellow = [0]
+    black = [0]
+
+    games.each_with_index do |g, i|
+      # when i even (0, 2 / Game 1 & 3), use team series score of your own color
+      # when i odd (1 / Game 2), use team series score of your other color
+      yellow.push(g.series_score[i % 2])
+      black.push(g.series_score[(i + 1) % 2]) # swap that for black scores by increasing i by 1
+    end
+
+    [yellow, black]
   end
 end

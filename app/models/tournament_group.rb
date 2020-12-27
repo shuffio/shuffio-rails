@@ -3,6 +3,7 @@ class TournamentGroup < ApplicationRecord
   has_many :tournament_rounds, -> { order(:number) }
   has_many :matches, through: :tournament_rounds
   has_many :teams, through: :tournament_rounds
+  has_many :brackets
 
   def teams
     tournament_rounds.map(&:teams).flatten.uniq
