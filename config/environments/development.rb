@@ -71,4 +71,7 @@ Rails.application.configure do
     authentication: :plain,
     enable_starttls_auto: true
   }
+
+  # Allow web console from all RFC1918 space
+  config.web_console.whitelisted_ips = %w[10.0.0.0/8 172.16.0.0/12 192.168.0.0/24]
 end
