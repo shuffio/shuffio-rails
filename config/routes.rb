@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get 'live/two_game', to: 'live#two_game', as: :two_game
   resources :live_events, only: [:update]
   resources :matches
+  get 'matches/:id/ae_data', to: 'matches#ae_data', as: :match_ae_data
   resources :privacy, only: [:index]
   resources :royal_palms_calendar, only: [:index]
   post 'rpc_events', to: 'royal_palms_calendar#index', as: :rpc_events
