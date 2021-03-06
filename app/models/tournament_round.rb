@@ -143,7 +143,7 @@ class TournamentRound < ApplicationRecord
       retry_matches = false
 
       # Rotate the black_starters by a random number not divisible by its size
-      potential_rotations = (1..(yellow_starters.size - 1)).reject { |r| r == tournament_group.tournament_rounds.map(&:rotation) }
+      potential_rotations = (1..(yellow_starters.size - 1)).reject { |r| tournament_group.tournament_rounds.map(&:rotation).include?(r) }
       throw "Couldn't find a rotation value not already used. You need more players or try again." if potential_rotations.size.zero?
 
       self.rotation = potential_rotations.sample

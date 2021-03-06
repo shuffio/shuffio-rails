@@ -1,15 +1,15 @@
 class Admin::CanamController < Admin::BaseController
   # These aren't the best from a REST or reusability standpoint, but we'll fix it up when we have more tournament types
   def index
-    @tournament = Tournament.find_by(name: 'Can-Am 2020')
+    @tournament = Tournament.find_by(name: 'Mirror Lake 2021')
   end
 
   def player
-    @tournament = Tournament.find_by(name: 'Can-Am 2020')
+    @tournament = Tournament.find_by(name: 'Mirror Lake 2021')
   end
 
   def summary
-    @tournament = Tournament.find_by(name: 'Can-Am 2020')
+    @tournament = Tournament.find_by(name: 'Mirror Lake 2021')
   end
 
   def import
