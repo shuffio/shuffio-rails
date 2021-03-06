@@ -6,7 +6,7 @@ class TournamentGroup < ApplicationRecord
   has_many :brackets
 
   def teams
-    tournament_rounds.map(&:teams).flatten.uniq.sort_by { |t| t.name }
+    tournament_rounds.map(&:teams).flatten.uniq.sort_by(&:name)
   end
 
   def bracket_meta
