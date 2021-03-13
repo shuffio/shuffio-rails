@@ -4,16 +4,16 @@ class BracketController < ApplicationController
 
   def index
     @bracket = Bracket.new
-    @tournament = Tournament.last
+    @tournament = Tournament.find_by(name: 'Royal Palms 2020 Playoffs')
   end
 
   def new
     @bracket = Bracket.new
-    @tournament = Tournament.last
+    @tournament = Tournament.find_by(name: 'Royal Palms 2020 Playoffs')
   end
 
   def create
-    @tournament = Tournament.last
+    @tournament = Tournament.find_by(name: 'Royal Palms 2020 Playoffs')
     @bracket = Bracket.new(
       user: current_user,
       tournament_group: TournamentGroup.find(params[:bracket][:tournament_group_id]),
@@ -102,7 +102,7 @@ class BracketController < ApplicationController
   end
 
   def current
-    @tournament = Tournament.last
+    @tournament = Tournament.find_by(name: 'Royal Palms 2020 Playoffs')
     @placeholder_team_ids = ((685..700).to_a + Team.where(name: 'TBD').pluck(:id))
     @chicago_final_match = Tournament.find_by(name: 'Royal Palms 2020 Playoffs').tournament_groups[0].tournament_rounds.last.matches[0]
     @brooklyn_final_match = Tournament.find_by(name: 'Royal Palms 2020 Playoffs').tournament_groups[1].tournament_rounds.last.matches[0]
