@@ -94,7 +94,7 @@ class Division < ApplicationRecord
         row << m.time.in_time_zone('America/Chicago').strftime('%H:%M')
         row << (m.time + 1.hour).in_time_zone('America/Chicago').strftime('%H:%M')
         row << 'the royal palms shuffleboard club'
-        row << "Court #{m.location.split.last.to_i}"
+        row << m.court.name
         row << 'REGULAR_SEASON'
         row << nil
         csv << row
