@@ -156,8 +156,8 @@ namespace :stats do
             stats[yellow_team][player_number][:hammer_frames_played] += 1
             stats[black_team][player_number][:pilot_frames_played] += 1
 
-            stats[yellow_team][player_number][:hammers_won] += 1 if frame_winner(frame[0], frame[1], 'y') == 'y'
-            stats[black_team][player_number][:hammers_stolen] += 1 if frame_winner(frame[0], frame[1], 'y') == 'b'
+            stats[yellow_team][player_number][:hammers_won] += 1 if frame_winner(frame[0], frame[1], 'b') == 'y'
+            stats[black_team][player_number][:hammers_stolen] += 1 if frame_winner(frame[0], frame[1], 'b') == 'b'
 
             yellow_score = frame[0] - frame[1]
 
