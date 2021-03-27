@@ -67,7 +67,13 @@ namespace :stats do
               points_against: 0,
               point_diff: 0,
               hammers_won: 0,
-              hammers_stolen: 0
+              hammers_stolen: 0,
+              o_hammers_scored: 0,
+              o_hammers_neutral: 0,
+              o_hammers_lost: 0,
+              d_hammers_allowed: 0,
+              d_neutral_frame: 0,
+              d_hammers_stolen: 0
             }
           end
 
@@ -80,7 +86,13 @@ namespace :stats do
               points_against: 0,
               point_diff: 0,
               hammers_won: 0,
-              hammers_stolen: 0
+              hammers_stolen: 0,
+              o_hammers_scored: 0,
+              o_hammers_neutral: 0,
+              o_hammers_lost: 0,
+              d_hammers_allowed: 0,
+              d_neutral_frame: 0,
+              d_hammers_stolen: 0
             }
           end
         end
@@ -117,14 +129,27 @@ namespace :stats do
           stats[yellow_team][player_number][:point_diff] += (frame[0] - frame[1])
           stats[black_team][player_number][:point_diff] += (frame[1] - frame[0])
 
-          # yellow pilot / black hammer frames
           case pilot_color
+          # yellow pilot / black hammer frames
           when 'y'
             stats[yellow_team][player_number][:pilot_frames_played] += 1
             stats[black_team][player_number][:hammer_frames_played] += 1
 
             stats[yellow_team][player_number][:hammers_stolen] += 1 if frame_winner(frame[0], frame[1], 'y') == 'y'
             stats[black_team][player_number][:hammers_won] += 1 if frame_winner(frame[0], frame[1], 'y') == 'b'
+
+            black_score = frame[1] - frame[0]
+
+            if black_score >= 7
+              stats[black_team][player_number][:o_hammers_scored] += 1 # turns into Hammer Efficiency
+              stats[yellow_team][player_number][:d_hammers_allowed] += 1 # not used
+            elsif black_score >= 0
+              stats[black_team][player_number][:o_hammers_neutral] += 1 # not used
+              stats[yellow_team][player_number][:d_neutral_frame] += 1 # turns into Force Efficiency
+            else
+              stats[black_team][player_number][:o_hammers_lost] += 1 # turns into Steal Defence, but i believe inverse
+              stats[yellow_team][player_number][:d_hammers_stolen] += 1 # turns into Steal Efficiency
+            end
 
           # black pilot / yellow hammer frames
           when 'b'
@@ -133,6 +158,19 @@ namespace :stats do
 
             stats[yellow_team][player_number][:hammers_won] += 1 if frame_winner(frame[0], frame[1], 'y') == 'y'
             stats[black_team][player_number][:hammers_stolen] += 1 if frame_winner(frame[0], frame[1], 'y') == 'b'
+
+            yellow_score = frame[0] - frame[1]
+
+            if yellow_score >= 7
+              stats[yellow_team][player_number][:o_hammers_scored] += 1 # turns into Hammer Efficiency
+              stats[black_team][player_number][:d_hammers_allowed] += 1 # not used
+            elsif yellow_score >= 0
+              stats[yellow_team][player_number][:o_hammers_neutral] += 1 # not used
+              stats[black_team][player_number][:d_neutral_frame] += 1 # turns into Force Efficiency
+            else
+              stats[yellow_team][player_number][:o_hammers_lost] += 1 # turns into Steal Defence, but i believe inverse
+              stats[black_team][player_number][:d_hammers_stolen] += 1 # turns into Steal Efficiency
+            end
           end
         end
       end
@@ -148,7 +186,11 @@ namespace :stats do
         :point_diff_per_frame,
         :hammers_won_per_hammer_frame,
         :hammers_stolen_per_pilot_frame,
-        :shuffio_player_rating
+        :shuffio_player_rating,
+        :hammer_efficiency,
+        :steal_defense,
+        :force_efficiency,
+        :steal_efficiency
       ]
       csv << [:team, :player_number] + stats.first[1][1].keys + per_frame_headers
 
@@ -161,7 +203,11 @@ namespace :stats do
             player_stats[:point_diff].to_f / player_stats[:frames_played],
             player_stats[:hammers_won].to_f / player_stats[:hammer_frames_played],
             player_stats[:hammers_stolen].to_f / player_stats[:pilot_frames_played],
-            (100.0 * (player_stats[:hammers_won] + player_stats[:hammers_stolen]) / player_stats[:frames_played]).round
+            (100.0 * (player_stats[:hammers_won] + player_stats[:hammers_stolen]) / player_stats[:frames_played]).round,
+            player_stats[:o_hammers_scored].to_f / player_stats[:hammer_frames_played],
+            1.0 - (player_stats[:o_hammers_lost].to_f / player_stats[:hammer_frames_played]),
+            player_stats[:d_neutral_frame].to_f / player_stats[:pilot_frames_played],
+            player_stats[:d_hammers_stolen].to_f / player_stats[:pilot_frames_played]
           ]
 
           csv << [team, number] + player_stats.values + per_frame_stats
