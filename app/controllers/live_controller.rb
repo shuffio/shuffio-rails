@@ -54,4 +54,9 @@ class LiveController < ApplicationController
 
     render layout: 'live'
   end
+
+  def si
+    @game = params[:id] ? Game.find(params[:id]): LiveEvent.last.left_game
+    render layout: 'live-absolute'
+  end
 end

@@ -1,0 +1,168 @@
+body {
+  background-color: #00ff00;
+}
+
+.si {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 1920px;
+  height: 1080px;
+}
+
+.si-frame-header {
+  border-width: 2px;
+  border-color: rgb(255, 255, 255);
+  border-style: solid;
+  background-color: rgb(18, 67, 65);
+  position: absolute;
+  left: 855px;
+  top: 10px;
+  width: 206px;
+  height: 28px;
+}
+
+.si-wins-yellow {
+  font-size: 18px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  left: 5px;
+  bottom: -1px;
+}
+
+.si-wins-black {
+  font-size: 18px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  right: 5px;
+  bottom: -1px;
+}
+
+// TODO: add SVG or 2x version
+.si-hammer-yellow {
+  background-image: url(asset-path('hammer-26px.png'));
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  background-color: rgb(253, 202, 47);
+  position: absolute;
+  left: 24px;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+}
+
+.si-hammer-black {
+  background-image: url(asset-path('hammer-26px.png'));
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  background-color: rgb(70, 70, 70);
+  position: absolute;
+  right:24px;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+}
+
+.si-hammer-flip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.si-frame-number {
+  font-size: 28px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  width: 100%;
+  bottom: -6px;
+  vertical-align: middle;
+}
+
+.si-team-bg-yellow {
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(253, 202, 47);
+  position: absolute;
+  left: 510px;
+  top: 40px;
+  width: 445px;
+  height: 54px;
+  transform: skew(-20deg);
+}
+
+.si-team-bg-black {
+  border-style: solid;
+  border-width: 3px;
+  border-color: rgb(255, 255, 255);
+  background-color: rgb(70, 70, 70);
+  position: absolute;
+  right: 510px;
+  top: 40px;
+  width: 445px;
+  height: 54px;
+  transform: skew(-20deg);
+}
+
+// TODO: wrapping long names
+.si-team-name-yellow {
+  font-size: 50px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  left: 16px;
+  right: 110px;
+  bottom: -8px;
+  transform: skew(20deg);
+}
+
+.si-score-yellow {
+  font-size: 64px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  right: 24px;
+  bottom: -17px;
+  transform: skew(20deg);
+}
+
+.si-team-name-black {
+  font-size: 50px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-align: center;
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  left: 110px;
+  right: 16px;
+  bottom: -8px;
+  transform: skew(20deg);
+}
+
+.si-score-black {
+  font-size: 64px;
+  font-family: "Bebas Neue";
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.88);
+  position: absolute;
+  left: 24px;
+  bottom: -17px;
+  transform: skew(20deg);
+}
