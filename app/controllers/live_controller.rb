@@ -57,6 +57,11 @@ class LiveController < ApplicationController
 
   def si
     @game = params[:id] ? Game.find(params[:id]): LiveEvent.last.left_game
+
+    @yellow_name = params[:short_name] ? @game.yellow_team.display_name : @game.yellow_team.name
+    @black_name = params[:short_name] ? @game.black_team.display_name : @game.black_team.name
+
+
     render layout: 'live-absolute'
   end
 end
