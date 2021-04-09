@@ -55,10 +55,20 @@ class LiveController < ApplicationController
     render layout: 'live'
   end
 
+  # Helper function to determine if params are set to strings we'd consider false
+  def param_present?(param)
+    return false if param.blank?
+    return false if param == 'false'
+    return false if param == 'False'
+
+    true
+  end
+
   def si
     game = params[:id] ? Game.find(params[:id]) : LiveEvent.last.left_game
 
     @game_id = game.id
+    @side_switch = param_present?(params[:side_switch])
 
     @frame_text = game.complete? ? 'Final' : "Frame #{game.next_frame}"
 
