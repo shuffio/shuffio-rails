@@ -159,10 +159,14 @@ class Game < ApplicationRecord
   end
 
   def current_swap_yellow_score
+    return 0 unless frames && frames.any?
+
     teams_swapped? ? frames.last[1] : frames.last[0]
   end
 
   def current_swap_black_score
+    return 0 unless frames && frames.any?
+
     teams_swapped? ? frames.last[0] : frames.last[1]
   end
 
