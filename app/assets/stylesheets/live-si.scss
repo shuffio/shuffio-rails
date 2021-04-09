@@ -10,6 +10,14 @@ body {
   height: 1080px;
 }
 
+.si-yellow {
+  background-color: rgb(253, 202, 47);
+}
+
+.si-black {
+  background-color: rgb(70, 70, 70);
+}
+
 .si-frame-header {
   border-width: 2px;
   border-color: rgb(255, 255, 255);
@@ -22,7 +30,7 @@ body {
   height: 28px;
 }
 
-.si-wins-yellow {
+.si-wins-left {
   font-size: 18px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);
@@ -32,7 +40,7 @@ body {
   bottom: -1px;
 }
 
-.si-wins-black {
+.si-wins-right {
   font-size: 18px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);
@@ -43,13 +51,12 @@ body {
 }
 
 // TODO: add SVG or 2x version
-.si-hammer-yellow {
+.si-hammer-left {
   background-image: url(asset-path('hammer-26px.png'));
   border-style: solid;
   border-width: 1px;
   border-color: rgb(255, 255, 255);
   border-radius: 50%;
-  background-color: rgb(253, 202, 47);
   position: absolute;
   left: 24px;
   top: 1px;
@@ -57,27 +64,23 @@ body {
   height: 24px;
 }
 
-.si-hammer-black {
+.si-hammer-right {
   background-image: url(asset-path('hammer-26px.png'));
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgb(255, 255, 255);
-  border-radius: 50%;
-  background-color: rgb(70, 70, 70);
-  position: absolute;
-  right:24px;
-  top: 1px;
-  width: 24px;
-  height: 24px;
-}
-
-.si-hammer-flip {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  position: absolute;
+  right:24px;
+  top: 1px;
+  width: 24px;
+  height: 24px;
 }
 
 .si-frame-number {
@@ -92,11 +95,10 @@ body {
   vertical-align: middle;
 }
 
-.si-team-bg-yellow {
+.si-team-bg-left {
   border-style: solid;
   border-width: 3px;
   border-color: rgb(255, 255, 255);
-  background-color: rgb(253, 202, 47);
   position: absolute;
   left: 510px;
   top: 40px;
@@ -105,11 +107,10 @@ body {
   transform: skew(-20deg);
 }
 
-.si-team-bg-black {
+.si-team-bg-right {
   border-style: solid;
   border-width: 3px;
   border-color: rgb(255, 255, 255);
-  background-color: rgb(70, 70, 70);
   position: absolute;
   right: 510px;
   top: 40px;
@@ -118,7 +119,7 @@ body {
   transform: skew(-20deg);
 }
 
-.si-team-name-yellow {
+.si-team-name-left {
   font-size: 50px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);
@@ -133,7 +134,7 @@ body {
   transform: skew(20deg);
 }
 
-.si-score-yellow {
+.si-score-left {
   font-size: 64px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);
@@ -144,7 +145,7 @@ body {
   transform: skew(20deg);
 }
 
-.si-team-name-black {
+.si-team-name-right {
   font-size: 50px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);
@@ -159,7 +160,7 @@ body {
   transform: skew(20deg);
 }
 
-.si-score-black {
+.si-score-right {
   font-size: 64px;
   font-family: "Bebas Neue";
   color: rgb(255, 255, 255);

@@ -1,31 +1,35 @@
 <div class="si">
   <div class="si-frame-header">
-    <div class="si-wins-yellow"><%= @yellow_wins %></div>
+    <div class="si-wins-left"><%= @left_wins %></div>
 
-    <% if @yellow_hammer %>
-      <div class="si-hammer-yellow"></div>
+    <% if !@side_switch && @yellow_hammer %>
+      <div class="si-hammer-left si-yellow"></div>
+    <% elsif @side_switch && @black_hammer %>
+      <div class="si-hammer-left si-black"></div>
     <% end %>
 
     <div class="si-frame-number">
       <%= @frame_text %>
     </div>
 
-    <% if @black_hammer %>
-      <div class="si-hammer-black si-hammer-flip"></div>
+    <% if !@side_switch && @black_hammer %>
+      <div class="si-hammer-right si-black"></div>
+    <% elsif @side_switch && @yellow_hammer %>
+      <div class="si-hammer-right si-yellow"></div>
     <% end %>
 
-    <div class="si-wins-black"><%= @black_wins %></div>
+    <div class="si-wins-right"><%= @right_wins %></div>
   </div>
 
 
-  <div class="si-team-bg-yellow">
-    <div class="si-team-name-yellow"><%= @yellow_name %></div>
-    <div class="si-score-yellow"><%= @yellow_score %></div>
+  <div class="si-team-bg-left si-<%= @left_color %>">
+    <div class="si-team-name-left"><%= @left_name %></div>
+    <div class="si-score-left"><%= @left_score %></div>
   </div>
 
-  <div class="si-team-bg-black">
-    <div class="si-score-black"><%= @black_score %></div>
-    <div class="si-team-name-black"><%= @black_name %></div>
+  <div class="si-team-bg-right si-<%= @right_color %>">
+    <div class="si-score-right"><%= @right_score %></div>
+    <div class="si-team-name-right"><%= @right_name %></div>
   </div>
 </div>
 
