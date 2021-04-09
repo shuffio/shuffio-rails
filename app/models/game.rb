@@ -8,10 +8,25 @@ class Game < ApplicationRecord
   validate :frames_or_points?
   validate :valid_game_number?
   validate :points_cannot_tie?
+  validate :change_color_conflict?
 
   after_initialize :default_values
 
   # TODO: reject frames with only one score, for example [[0, 0], [8, nil]]
+
+  # Note on Games with color changes
+  # Game.frames is currently a simple array, [[8,0], [8,7], [18,7], [18,15]]
+  # the first element for each frame will always be associated with the same team
+  # this team is currently called "yellow_team", even though they will switch to black at times
+  # yellow_team should be considered starting_yellow_team
+  # so in a 4 frame game with color change every 2 frames, the data still looks like so in the database
+  # [
+  #   [starting_yellow_team_score, starting_black_team_score],
+  #   [starting_yellow_team_score, starting_black_team_score],
+  #   [starting_yellow_team_score, starting_black_team_score],
+  #   [starting_yellow_team_score, starting_black_team_score]
+  # ]
+  # changes to presentation will need to be made based on color swap
 
   def complete?
     return false unless frames # return quickly if frames is nil
@@ -39,6 +54,8 @@ class Game < ApplicationRecord
   end
 
   def next_frame
+    return 1 unless frames
+
     frames.count + 1
   end
 
@@ -88,6 +105,8 @@ class Game < ApplicationRecord
     frames_hash.last(number_frames)
   end
 
+  # the returned 'yellow' or 'black' refer only to the color that has hammer
+  # it doesn't correspond to a team in cases of color swap
   def self.hammer_for_frame(frame_number = 1, type = 'standard_singles')
     raise 'invalid frame number' unless frame_number.positive?
 
@@ -120,6 +139,35 @@ class Game < ApplicationRecord
     else
       raise 'invalid game type'
     end
+  end
+
+  # The following functions help solve presentaion issues in games where teams can change colors
+  def teams_swapped?
+    return false if complete?
+    return true if change_colors_after_frames && next_frame > change_colors_after_frames
+    return ((next_frame - 1) / change_colors_every_frames).odd? if change_colors_every_frames
+
+    false
+  end
+
+  def current_swap_yellow_team
+    teams_swapped? ? black_team : yellow_team
+  end
+
+  def current_swap_black_team
+    teams_swapped? ? yellow_team : black_team
+  end
+
+  def current_swap_yellow_score
+    teams_swapped? ? frames.last[1] : frames.last[0]
+  end
+
+  def current_swap_black_score
+    teams_swapped? ? frames.last[0] : frames.last[1]
+  end
+
+  def current_swap_series_score
+    teams_swapped? ? series_score.reverse : series_score
   end
 
   def winner
@@ -161,5 +209,9 @@ class Game < ApplicationRecord
     return if max_frames
 
     errors.add(:base, 'point games cannot tie') if max_points && allow_ties
+  end
+
+  def change_color_conflict?
+    errors.add(:base, 'cannot have both change_colors_after_frames and change_colors_every_frames') if change_colors_after_frames && change_colors_every_frames
   end
 end
