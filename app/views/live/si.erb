@@ -1,6 +1,6 @@
 <div class="si">
   <div class="si-frame-header">
-    <div class="si-wins-yellow">0</div>
+    <div class="si-wins-yellow"><%= @yellow_wins %></div>
 
     <% if @yellow_hammer %>
       <div class="si-hammer-yellow"></div>
@@ -14,7 +14,7 @@
       <div class="si-hammer-black si-hammer-flip"></div>
     <% end %>
 
-    <div class="si-wins-black">2</div>
+    <div class="si-wins-black"><%= @black_wins %></div>
   </div>
 
 

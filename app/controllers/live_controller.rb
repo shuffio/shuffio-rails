@@ -61,6 +61,10 @@ class LiveController < ApplicationController
     @game_id = game.id
 
     @frame_text = game.complete? ? 'Final' : "Frame #{game.next_frame}"
+
+    @yellow_wins = game.series_score[0]
+    @black_wins = game.series_score[1]
+
     @yellow_hammer = !game.complete? && game.next_hammer == 'yellow'
     @black_hammer = !game.complete? && game.next_hammer == 'black'
 
