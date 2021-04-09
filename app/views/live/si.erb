@@ -31,6 +31,18 @@
     <div class="si-score-right"><%= @right_score %></div>
     <div class="si-team-name-right"><%= @right_name %></div>
   </div>
+
+  <% if @show_full_score %>
+    <div class="si-full-score">
+      <% @frames.each do |f| %>
+        <div class="si-frame-row">
+          <div class="si-frame-pilot-color si-<%= f[:pilot] %>"></div>
+          <div class="si-frame-yellow-score"><%= f[:yellow_score] %></div>
+          <div class="si-frame-black-score"><%= f[:black_score] %></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <!-- <%= @game_id %> -->
