@@ -69,20 +69,24 @@ class LiveController < ApplicationController
 
     @game_id = game.id
     @side_switch = param_present?(params[:side_switch])
+    @left_color = @side_switch ? 'black' : 'yellow'
+    @right_color = @side_switch ? 'yellow' : 'black'
 
     @frame_text = game.complete? ? 'Final' : "Frame #{game.next_frame}"
 
-    @yellow_wins = game.series_score[0]
-    @black_wins = game.series_score[1]
+    @left_wins = @side_switch ? game.series_score[1] : game.series_score[0]
+    @right_wins = @side_switch ? game.series_score[0] : game.series_score[1]
 
     @yellow_hammer = !game.complete? && game.next_hammer == 'yellow'
     @black_hammer = !game.complete? && game.next_hammer == 'black'
 
-    @yellow_name = params[:short_name] ? game.yellow_team.display_name : game.yellow_team.name
-    @black_name = params[:short_name] ? game.black_team.display_name : game.black_team.name
+    yellow_name = params[:short_name] ? game.yellow_team.display_name : game.yellow_team.name
+    black_name = params[:short_name] ? game.black_team.display_name : game.black_team.name
+    @left_name = @side_switch ? black_name : yellow_name
+    @right_name = @side_switch ? yellow_name : black_name
 
-    @yellow_score = game.frames.last[0]
-    @black_score = game.frames.last[1]
+    @left_score = @side_switch ? game.frames.last[1] : game.frames.last[0]
+    @right_score = @side_switch ? game.frames.last[0] : game.frames.last[1]
 
     render layout: 'live-absolute'
   end
