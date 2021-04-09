@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   get 'live/summary', to: 'live#summary', as: :summary
   get 'live/four_game', to: 'live#four_game', as: :four_game
   get 'live/two_game', to: 'live#two_game', as: :two_game
+  get 'live/si/:id', to: 'live#si'
+  get 'live/si', to: 'live#si'
+
   resources :live_events, only: [:update]
   resources :matches
   get 'matches/:id/ae_data', to: 'matches#ae_data', as: :match_ae_data

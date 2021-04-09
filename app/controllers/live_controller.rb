@@ -54,4 +54,26 @@ class LiveController < ApplicationController
 
     render layout: 'live'
   end
+
+  def si
+    game = params[:id] ? Game.find(params[:id]) : LiveEvent.last.left_game
+
+    @game_id = game.id
+
+    @frame_text = game.complete? ? 'Final' : "Frame #{game.next_frame}"
+
+    @yellow_wins = game.series_score[0]
+    @black_wins = game.series_score[1]
+
+    @yellow_hammer = !game.complete? && game.next_hammer == 'yellow'
+    @black_hammer = !game.complete? && game.next_hammer == 'black'
+
+    @yellow_name = params[:short_name] ? game.yellow_team.display_name : game.yellow_team.name
+    @black_name = params[:short_name] ? game.black_team.display_name : game.black_team.name
+
+    @yellow_score = game.frames.last[0]
+    @black_score = game.frames.last[1]
+
+    render layout: 'live-absolute'
+  end
 end

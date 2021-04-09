@@ -1,0 +1,32 @@
+<div class="si">
+  <div class="si-frame-header">
+    <div class="si-wins-yellow"><%= @yellow_wins %></div>
+
+    <% if @yellow_hammer %>
+      <div class="si-hammer-yellow"></div>
+    <% end %>
+
+    <div class="si-frame-number">
+      <%= @frame_text %>
+    </div>
+
+    <% if @black_hammer %>
+      <div class="si-hammer-black si-hammer-flip"></div>
+    <% end %>
+
+    <div class="si-wins-black"><%= @black_wins %></div>
+  </div>
+
+
+  <div class="si-team-bg-yellow">
+    <div class="si-team-name-yellow"><%= @yellow_name %></div>
+    <div class="si-score-yellow"><%= @yellow_score %></div>
+  </div>
+
+  <div class="si-team-bg-black">
+    <div class="si-score-black"><%= @black_score %></div>
+    <div class="si-team-name-black"><%= @black_name %></div>
+  </div>
+</div>
+
+<!-- <%= @game_id %> -->
