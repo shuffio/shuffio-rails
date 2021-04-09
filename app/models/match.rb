@@ -194,6 +194,7 @@ class Match < ApplicationRecord
       black_team: first_black_team,
       game_type: 'palms_doubles',
       max_frames: 4,
+      change_colors_every_frames: 2,
       allow_ties: false,
       frames: []
     )
