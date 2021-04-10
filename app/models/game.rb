@@ -88,7 +88,6 @@ class Game < ApplicationRecord
     # input_frames.push([nil, nil]) if next_frame == 9 || next_frame == 10
     # input_frames.push([nil, nil]) if next_frame == 9 || next_frame == 10
 
-    # TODO: pad based on game boundary
     # If frames odd, pad it once
     input_frames.push([nil, nil]) if input_frames.size.odd?
 
