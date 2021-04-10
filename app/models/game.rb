@@ -9,6 +9,7 @@ class Game < ApplicationRecord
   validate :valid_game_number?
   validate :points_cannot_tie?
   validate :change_color_conflict?
+  validate :frame_filled?
 
   after_initialize :default_values
 
@@ -250,5 +251,12 @@ class Game < ApplicationRecord
 
   def change_color_conflict?
     errors.add(:base, 'cannot have both change_colors_after_frames and change_colors_every_frames') if change_colors_after_frames && change_colors_every_frames
+  end
+
+  def frame_filled?
+    last_frame = frames.last
+    return unless last_frame
+
+    errors.add(:base, 'cannot have last frame be blank') if last_frame[0].blank? || last_frame[1].blank?
   end
 end
