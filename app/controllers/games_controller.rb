@@ -25,7 +25,7 @@ class GamesController < ApplicationController
     end
 
     # reject here removes blank frames, which at least half will be from spreadsheet
-    game.update(frames: params[:frames].reject { |f| f == ['', ''] })
+    game.update(frames: params[:frames].reject { |f| f[0].blank? || f[1].blank? })
   end
 
   private
