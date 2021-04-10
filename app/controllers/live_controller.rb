@@ -95,7 +95,7 @@ class LiveController < ApplicationController
     @show_full_score = param_present?(params[:show_full_score])
     @show_full_score = false if @side_switch # These do not work in combination
 
-    @frames = game.frames_with_meta(game.max_frames || 8, false)
+    @frames = game.frames_with_meta_auto_padding
 
     render layout: 'live-absolute'
   end
