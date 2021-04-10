@@ -95,6 +95,7 @@ class Game < ApplicationRecord
     frames_hash = input_frames.map.with_index do |f, i|
       {
         number: i + 1,
+        pilot: Game.pilot_for_frame(i + 1, game_type),
         hammer: Game.hammer_for_frame(i + 1, game_type),
         yellow_score: f[0],
         black_score: f[1]
@@ -103,6 +104,30 @@ class Game < ApplicationRecord
 
     # return last X frames
     frames_hash.last(number_frames)
+  end
+
+  def frames_with_meta_auto_padding
+    input_frames = frames.dup
+    total_frames = max_frames || 8
+
+    # Add more frames in overtime or beyond our standard
+    unless complete?
+      total_frames += game_end_boundary while next_frame > total_frames
+    end
+
+    # If fewer than needed frames, pad it
+    input_frames = input_frames.fill([nil, nil], input_frames.length, total_frames - input_frames.length) if input_frames.size < total_frames
+
+    # Inject frame number and hammer
+    input_frames.map.with_index do |f, i|
+      {
+        number: i + 1,
+        pilot: Game.pilot_for_frame(i + 1, game_type),
+        hammer: Game.hammer_for_frame(i + 1, game_type),
+        yellow_score: teams_swapped? ? f[1] : f[0],
+        black_score: teams_swapped? ? f[0] : f[1]
+      }
+    end
   end
 
   # the returned 'yellow' or 'black' refer only to the color that has hammer
@@ -139,6 +164,14 @@ class Game < ApplicationRecord
     else
       raise 'invalid game type'
     end
+  end
+
+  def self.pilot_for_frame(frame_number = 1, type = 'standard_singles')
+    hammer = Game.hammer_for_frame(frame_number, type)
+    return 'yellow' if hammer == 'black'
+    return 'black' if hammer == 'yellow'
+
+    nil
   end
 
   # The following functions help solve presentaion issues in games where teams can change colors

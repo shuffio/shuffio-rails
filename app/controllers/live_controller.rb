@@ -92,6 +92,11 @@ class LiveController < ApplicationController
     @left_score = @side_switch ? game.current_swap_black_score : game.current_swap_yellow_score
     @right_score = @side_switch ? game.current_swap_yellow_score : game.current_swap_black_score
 
+    @show_full_score = param_present?(params[:show_full_score])
+    @show_full_score = false if @side_switch # These do not work in combination
+
+    @frames = game.frames_with_meta_auto_padding
+
     render layout: 'live-absolute'
   end
 end
