@@ -249,3 +249,18 @@ h3 {
 .tooltip-inner {
   white-space:pre-wrap;
 }
+
+// Fix select performance with bootstrap
+select {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+option {  
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
