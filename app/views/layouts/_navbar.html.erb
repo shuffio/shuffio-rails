@@ -34,6 +34,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <% if current_user.is_admin? %>
               <%= link_to('Can Am', admin_canam_index_path, class: 'dropdown-item') %>
+              <%= link_to('Matches', admin_matches_path, class: 'dropdown-item') %>
               <%= link_to('Teams', admin_teams_path, class: 'dropdown-item') %>
             <% end %>
             <%= link_to('Edit Profile', edit_user_registration_path, class: 'dropdown-item') %>

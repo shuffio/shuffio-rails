@@ -1,0 +1,50 @@
+<%= form_for [:admin, @match], url: url, method: method do |f| %>
+  <div class="form-group">
+    <%= f.label 'Time (in UTC):' %>
+    <%= f.datetime_select(:time, { minute_step: 15 }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Court:' %>
+    <%= f.select(:court_id, @court_select, { include_blank: true }, { class: 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Division:' %>
+    <%= f.select(:division_id, @division_select, { include_blank: true }, { class: 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Away Team:' %>
+    <%= f.select(:away_team_id, @team_select, {}, { class: 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Home Team:' %>
+    <%= f.select(:home_team_id, @team_select, {}, { class: 'form-control' }) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Away Score:' %>
+    <%= f.text_field :away_score, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Home Score:' %>
+    <%= f.text_field :home_score, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'ELO Multiplier:' %>
+    <%= f.text_field :multiplier, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label 'Comment:' %>
+    <%= f.text_field :comment, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

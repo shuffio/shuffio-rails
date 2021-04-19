@@ -1,0 +1,90 @@
+<% provide :title, '[Admin] Matches' %>
+<div class="row">
+  <div class="col-lg-10 offset-lg-1">
+
+    <%= link_to '<i class="fa fa-edit"></i> Edit Match'.html_safe, edit_admin_match_path(@match), class: 'btn btn-primary' %>
+    <%= link_to '<i class="fa fa-trash"></i> Delete Match'.html_safe, admin_match_path(@match), method: :delete, class: 'btn btn-danger' %>
+
+    <table class="table">
+      <tr>
+        <td>id</td>
+        <td colspan=2><%= @match.id %></td>
+      </tr>
+
+      <tr>
+        <td>Time</td>
+        <td colspan=2><%= @match.formatted_datetime %></td>
+      </tr>
+
+      <tr>
+        <td>Location</td>
+        <td colspan=2><%= @match.full_location %></td>
+      </tr>
+
+      <tr>
+        <td>Division</td>
+        <td colspan=2><%= @match.division ? @match.division.name : '' %></td>
+      </tr>
+
+      <tr>
+        <td>
+          Away Team<br>
+          Score / ELO Change
+        </td>
+
+        <td><%= link_to @match.away_team.name, team_path(@match.away_team.id) %></td>
+
+        <td>
+          <%= @match.away_score %>
+          <% if @match.winner && @match.winner == @match.away_team %>
+            <span class="board-elo-up pad">+<%= @match.away_new_elo - @match.away_old_elo %></span>
+          <% elsif @match.winner && @match.winner == @match.home_team %>
+            <span class="board-elo-down pad"><%= @match.away_new_elo - @match.away_old_elo %></span>
+          <% else %>
+            <span class="board-elo-sam pad">0</span>
+          <% end %>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Home Team<br>
+          Score / ELO Change
+        </td>
+
+        <td><%= link_to @match.home_team.name, team_path(@match.home_team.id) %></td>
+
+        <td>
+          <%= @match.home_score %>
+          <% if @match.winner && @match.winner == @match.home_team %>
+            <span class="board-elo-up pad">+<%= @match.home_new_elo - @match.home_old_elo %></span>
+          <% elsif @match.winner && @match.winner == @match.away_team %>
+            <span class="board-elo-down pad"><%= @match.home_new_elo - @match.home_old_elo %></span>
+          <% else %>
+            <span class="board-elo-sam pad">0</span>
+          <% end %>
+        </td>
+      </tr>
+      
+      <tr>
+        <td>ELO Multiplier</td>
+        <td colspan=2><%= @match.multiplier %></td>
+      </tr>
+
+      <tr>
+        <td>Tournament Round</td>
+        <td colspan=2><%= @match.tournament_round_id %></td>
+      </tr>
+
+      <tr>
+        <td>Tournament Order</td>
+        <td colspan=2><%= @match.tournament_order %></td>
+      </tr>
+
+      <tr>
+        <td>Comment</td>
+        <td colspan=2><%= @match.comment %></td>
+      </tr>
+    </table>
+  </div>
+</div>
