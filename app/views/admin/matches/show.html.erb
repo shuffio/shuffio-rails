@@ -1,0 +1,75 @@
+<% provide :title, '[Admin] Matches' %>
+<div class="row">
+  <div class="col-lg-10 offset-lg-1">
+
+    <table class="table">
+      <tr>
+        <td>id</td>
+        <td><%= @match.id %></td>
+      </tr>
+      <tr>
+        <td>Time</td>
+        <td><%= @match.formatted_datetime %></td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td><%= @match.full_location %></td>
+      </tr>
+      <tr>
+        <td>Division</td>
+        <td><%= @match.division ? @match.division.name : '' %></td>
+      </tr>
+      <tr>
+        <td>Away Team</td>
+        <td><%= link_to @match.away_team.name, team_path(@match.away_team.id) %></td>
+      </tr>
+      <tr>
+        <td>Home Team</td>
+        <td><%= link_to @match.home_team.name, team_path(@match.home_team.id) %></td>
+      </tr>
+      <tr>
+        <td>
+          Score<br>
+          (ELO Change)
+        </td>
+        <td>
+          Away: <%= @match.away_score %>
+          <% if @match.winner && @match.winner == @match.away_team %>
+            <span class="board-elo-up pad">+<%= @match.away_new_elo - @match.away_old_elo %></span>
+          <% elsif @match.winner && @match.winner == @match.home_team %>
+            <span class="board-elo-down pad"><%= @match.away_new_elo - @match.away_old_elo %></span>
+          <% else %>
+            <span class="board-elo-sam pad">0</span>
+          <% end %>
+          
+          <br><br>
+
+          Home: <%= @match.home_score %>
+          <% if @match.winner && @match.winner == @match.home_team %>
+            <span class="board-elo-up pad">+<%= @match.home_new_elo - @match.home_old_elo %></span>
+          <% elsif @match.winner && @match.winner == @match.away_team %>
+            <span class="board-elo-down pad"><%= @match.home_new_elo - @match.home_old_elo %></span>
+          <% else %>
+            <span class="board-elo-sam pad">0</span>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>ELO Multiplier</td>
+        <td><%= @match.multiplier %></td>
+      </tr>
+      <tr>
+        <td>Tournament Round</td>
+        <td><%= @match.tournament_round_id %></td>
+      </tr>
+      <tr>
+        <td>Tournament Order</td>
+        <td><%= @match.tournament_order %></td>
+      </tr>
+      <tr>
+        <td>comment</td>
+        <td><%= @match.comment %></td>
+      </tr>
+    </table>
+  </div>
+</div>
