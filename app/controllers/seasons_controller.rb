@@ -10,6 +10,7 @@ class SeasonsController < ApplicationController
 
     @monday_divisions = @season.divisions.where(day_of_week: 1)
     @tuesday_divisions = @season.divisions.where(day_of_week: 2)
+    @wednesday_divisions = @season.divisions.where(day_of_week: 3)
   end
 
   def show_current
@@ -19,6 +20,7 @@ class SeasonsController < ApplicationController
 
     @monday_divisions = @season.divisions.where(day_of_week: 1)
     @tuesday_divisions = @season.divisions.where(day_of_week: 2)
+    @wednesday_divisions = @season.divisions.where(day_of_week: 3)
 
     render template: 'seasons/show'
   end

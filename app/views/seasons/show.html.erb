@@ -2,6 +2,9 @@
 <h3><%= @season.name %></h3>
 
 <div class="row">
+  <% if @monday_divisions.size == 2 %>
+    <div class="col-lg-2"></div>
+  <% end %>
   <% @monday_divisions.each do |d| %>
     <div class="col-lg-4">
       <%= render partial: 'layouts/rank_board', locals: {
@@ -15,7 +18,26 @@
 </div>
 
 <div class="row">
+  <% if @tuesday_divisions.size == 2 %>
+    <div class="col-lg-2"></div>
+  <% end %>
   <% @tuesday_divisions.each do |d| %>
+    <div class="col-lg-4">
+      <%= render partial: 'layouts/rank_board', locals: {
+        title: "#{d.name} Division",
+        link: division_path(d),
+        teams: d.sorted_teams,
+        rank_widths: rank_board_width(true, true, @show_elo, @show_elo_change)
+      } %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <% if @wednesday_divisions.size == 2 %>
+    <div class="col-lg-2"></div>
+  <% end %>
+  <% @wednesday_divisions.each do |d| %>
     <div class="col-lg-4">
       <%= render partial: 'layouts/rank_board', locals: {
         title: "#{d.name} Division",
