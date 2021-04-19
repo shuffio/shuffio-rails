@@ -217,7 +217,7 @@ class Division < ApplicationRecord
         output_matches.push(Match.new(
                               time: match_time_for_week(w + 1),
                               division: self,
-                              court: court[i],
+                              court: courts[i],
                               away_team: away_teams[i],
                               home_team: home_teams[i],
                               away_score: 0,
