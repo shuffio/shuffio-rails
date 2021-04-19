@@ -172,13 +172,13 @@ class Division < ApplicationRecord
   end
 
   # Returns array of Matches, but doesn't save them
-  def setup_matches
+  def setup_matches(location = Location.find_by(name: 'Royal Palms Chicago'))
     output_matches = []
 
     # Sort teams into away and home via snake order
     s_teams = teams.order(:elo_cache)
 
-    raise 'Automatic schedule requires 16, 18, or 20 teams' unless teams.count >= 16 && teams.count <= 20 && teams.count.even?
+    raise 'Automatic schedule requires 12 teams' unless teams.count == 12
 
     away_teams = [
       s_teams[0],
@@ -186,9 +186,7 @@ class Division < ApplicationRecord
       s_teams[4],
       s_teams[7],
       s_teams[8],
-      s_teams[11],
-      s_teams[12],
-      s_teams[15]
+      s_teams[11]
     ]
     home_teams = [
       s_teams[1],
@@ -196,37 +194,30 @@ class Division < ApplicationRecord
       s_teams[5],
       s_teams[6],
       s_teams[9],
-      s_teams[10],
-      s_teams[13],
-      s_teams[14]
+      s_teams[10]
     ]
 
-    court_count = 8
-
-    if teams.count >= 18
-      away_teams.push(s_teams[16])
-      home_teams.push(s_teams[17])
-      court_count = 9
-    end
-
-    if teams.count == 20
-      away_teams.push(s_teams[19])
-      home_teams.push(s_teams[18])
-      court_count = 10
-    end
+    courts = [
+      court.find_by(location: location, name: 'Court 01'),
+      court.find_by(location: location, name: 'Court 03'),
+      court.find_by(location: location, name: 'Court 05'),
+      court.find_by(location: location, name: 'Court 06'),
+      court.find_by(location: location, name: 'Court 08'),
+      court.find_by(location: location, name: 'Court 10')
+    ]
 
     # Randomize teams
     away_teams.shuffle!
     home_teams.shuffle!
 
-    # Set up 8 weeks
-    8.times do |w|
+    # Set up 4 weeks
+    4.times do |w|
       # Set up week 1
-      court_count.times do |i|
+      courts.count.times do |i|
         output_matches.push(Match.new(
                               time: match_time_for_week(w + 1),
                               division: self,
-                              location: "Court #{format('%02d', i + 1)}",
+                              court: court[i],
                               away_team: away_teams[i],
                               home_team: home_teams[i],
                               away_score: 0,
@@ -238,8 +229,8 @@ class Division < ApplicationRecord
       away_teams.rotate!(-1)
       # Home teams decreate court # (2,1,10,9,etc)
       home_teams.rotate!(1)
-      # In week 5, home moves twice
-      home_teams.rotate!(1) if w == 3 && teams.count != 18
+      # In week 4, home moves twice
+      home_teams.rotate!(1) if w == 2
     end
 
     output_matches

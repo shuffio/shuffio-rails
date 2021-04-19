@@ -41,7 +41,7 @@ namespace :season do
   desc 'Set up Schedule for a Season'
   task schedule: :environment do
     ActiveRecord::Base.logger.level = 1
-    season = Season.find_by(name: 'Fall 2019')
+    season = Season.find_by(name: 'Chicago Mini-Season #2')
 
     abort 'Season already has matches scheduled, aborting' if season.matches.any?
 
