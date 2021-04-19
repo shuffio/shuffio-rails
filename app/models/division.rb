@@ -198,12 +198,12 @@ class Division < ApplicationRecord
     ]
 
     courts = [
-      court.find_by(location: location, name: 'Court 01'),
-      court.find_by(location: location, name: 'Court 03'),
-      court.find_by(location: location, name: 'Court 05'),
-      court.find_by(location: location, name: 'Court 06'),
-      court.find_by(location: location, name: 'Court 08'),
-      court.find_by(location: location, name: 'Court 10')
+      Court.find_by(location: location, name: 'Court 01'),
+      Court.find_by(location: location, name: 'Court 03'),
+      Court.find_by(location: location, name: 'Court 05'),
+      Court.find_by(location: location, name: 'Court 06'),
+      Court.find_by(location: location, name: 'Court 08'),
+      Court.find_by(location: location, name: 'Court 10')
     ]
 
     # Randomize teams
