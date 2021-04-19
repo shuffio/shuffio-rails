@@ -64,14 +64,20 @@ class Match < ApplicationRecord
   end
 
   def formatted_date
+    return '' unless time
+
     time.in_time_zone('America/Chicago').strftime("%b #{time.in_time_zone('America/Chicago').day.ordinalize} %Y")
   end
 
   def formatted_datetime
+    return '' unless time
+
     time.in_time_zone('America/Chicago').strftime("%b #{time.in_time_zone('America/Chicago').day.ordinalize} %Y, %-l:%M%P")
   end
 
   def formatted_time
+    return '' unless time
+
     time.in_time_zone('America/Chicago').strftime('%-l:%M%P')
   end
 

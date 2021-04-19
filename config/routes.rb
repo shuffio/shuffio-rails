@@ -19,6 +19,7 @@ Rails.application.routes.draw do
         get :summary
       end
     end
+    resources 'matches'
     resources 'seasons', only: [:show]
     resources 'teams' do
       collection do

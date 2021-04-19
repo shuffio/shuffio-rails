@@ -1,0 +1,39 @@
+<% provide :title, '[Admin] Matches' %>
+<div class="row">
+  <div class="col-lg-10 offset-lg-1">
+
+    <table class="table">
+      <tr>
+        <td>Teams</td>
+        <td>Time</td>
+        <td>Location</td>
+        <td></td>
+      </tr>
+
+      <% @matches.each do |m| %>
+        <tr>
+          <td>
+            <span class="<%= m.winner == m.away_team ? 'font-weight-bold' : '' %>">
+              <%= link_to m.away_team.name, team_path(m.away_team.id) %>
+            </span>
+
+            <br>
+
+            <span class="<%= m.winner == m.home_team ? 'font-weight-bold' : '' %>">
+              <%= link_to m.home_team.name, team_path(m.home_team.id) %>
+            </span>
+          </td>
+          <td><%= m.formatted_datetime %></td>
+          <td><%= m.full_location %></td>
+          <td>
+            <% if m.comment %>
+              <span class="pad" data-toggle="tooltip" data-placement="top" title="<%= m.comment %>">
+                <i class="fas fa-exclamation-circle"></i>
+              </span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
