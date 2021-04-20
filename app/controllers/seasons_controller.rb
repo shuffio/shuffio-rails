@@ -8,9 +8,9 @@ class SeasonsController < ApplicationController
     @show_elo = @season.latest?
     @show_elo_change = @season.latest? && @season.started?
 
-    @monday_divisions = @season.divisions.where(day_of_week: 1)
-    @tuesday_divisions = @season.divisions.where(day_of_week: 2)
-    @wednesday_divisions = @season.divisions.where(day_of_week: 3)
+    @monday_divisions = @season.divisions.where(day_of_week: 1).order(:time)
+    @tuesday_divisions = @season.divisions.where(day_of_week: 2).order(:time)
+    @wednesday_divisions = @season.divisions.where(day_of_week: 3).order(:time)
   end
 
   def show_current
@@ -18,9 +18,9 @@ class SeasonsController < ApplicationController
     @show_elo = true
     @show_elo_change = @season.latest? && @season.started?
 
-    @monday_divisions = @season.divisions.where(day_of_week: 1)
-    @tuesday_divisions = @season.divisions.where(day_of_week: 2)
-    @wednesday_divisions = @season.divisions.where(day_of_week: 3)
+    @monday_divisions = @season.divisions.where(day_of_week: 1).order(:time)
+    @tuesday_divisions = @season.divisions.where(day_of_week: 2).order(:time)
+    @wednesday_divisions = @season.divisions.where(day_of_week: 3).order(:time)
 
     render template: 'seasons/show'
   end
