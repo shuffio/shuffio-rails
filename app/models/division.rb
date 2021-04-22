@@ -5,7 +5,10 @@ class Division < ApplicationRecord
 
   def match_time_for_week(week)
     day = season.start_date
-    day += 1.day if day_of_week == 2
+    if day_of_week
+      days_diff = day_of_week - 1
+      day += days_diff.days
+    end
 
     (week - 1).times do
       day += 1.week
