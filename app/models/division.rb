@@ -304,14 +304,15 @@ class Division < ApplicationRecord
       # Skip if already imported
       next if Match.find_by(league_apps_game_id: m['gameId'])
 
-      # TODO: find similar team names
-      away_team = Team.find_or_create_by(location: location, name: m['team1']) do |t|
+      away_team = Team.find_or_create_by(location: location, param_name: Team.param_name(m['team1'])) do |t|
+        t.name = m['team1']
         t.captain = m['team1Id']
       end
 
       away_team.divisions << self unless teams.include?(away_team)
 
-      home_team = Team.find_or_create_by(location: location, name: m['team2']) do |t|
+      home_team = Team.find_or_create_by(location: location, param_name: Team.param_name(m['team2'])) do |t|
+        t.name = m['team2']
         t.captain = m['team2Id']
       end
 
