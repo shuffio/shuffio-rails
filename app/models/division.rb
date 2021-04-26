@@ -304,6 +304,9 @@ class Division < ApplicationRecord
       # Skip if already imported
       next if Match.find_by(league_apps_game_id: m['gameId'])
 
+      # Skip if both teams are TBD
+      next if m['team1'] == 'TBD' && m['team2'] == 'TBD'
+
       away_team = Team.find_or_create_by(location: location, param_name: Team.param_name(m['team1'])) do |t|
         t.name = m['team1']
         t.captain = m['team1Id']
@@ -328,8 +331,8 @@ class Division < ApplicationRecord
       Match.create!(
         away_team: away_team,
         home_team: home_team,
-        away_score: m['team1Score'],
-        home_score: m['team2Score'],
+        away_score: m['team1Score'] || 0,
+        home_score: m['team2Score'] || 0,
         division: self,
         time: time,
         court: court,
