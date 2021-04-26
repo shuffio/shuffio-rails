@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_222320) do
+ActiveRecord::Schema.define(version: 2021_04_26_001710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_222320) do
     t.float "multiplier", default: 1.0, null: false
     t.bigint "tournament_round_id"
     t.integer "tournament_order"
+    t.integer "league_apps_game_id"
     t.index ["court_id"], name: "index_matches_on_court_id"
     t.index ["division_id"], name: "index_matches_on_division_id"
     t.index ["tournament_round_id"], name: "index_matches_on_tournament_round_id"

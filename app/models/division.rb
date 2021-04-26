@@ -261,10 +261,79 @@ class Division < ApplicationRecord
     end
   end
 
-  def league_apps_schedule_data_uri
+  def league_apps_schedule_uri
     return nil if league_apps_site_id.nil?
     return nil if league_apps_program_id.nil?
 
     "https://public.leagueapps.io/v1/sites/#{league_apps_site_id}/programs/#{league_apps_program_id}/schedule"
+  end
+
+  def league_apps_matches
+    raise 'league_apps_site_id and league_apps_program_id required' if league_apps_schedule_uri.nil?
+
+    res = Faraday.get(league_apps_schedule_uri) do |req|
+      req.headers['la-api-key'] = ENV['LEAGUEAPPS_API_KEY']
+    end
+
+    raise "Failed to connect to League Apps - #{res.body}" if res.status >= 400
+
+    JSON.parse(res.body)['games']
+  end
+
+  def league_apps_teams_uri
+    return nil if league_apps_site_id.nil?
+    return nil if league_apps_program_id.nil?
+
+    "https://public.leagueapps.io/v1/sites/#{league_apps_site_id}/programs/#{league_apps_program_id}/teams"
+  end
+
+  def league_apps_teams
+    raise 'league_apps_site_id and league_apps_program_id required' if league_apps_schedule_uri.nil?
+
+    res = Faraday.get(league_apps_teams_uri) do |req|
+      req.headers['la-api-key'] = ENV['LEAGUEAPPS_API_KEY']
+    end
+
+    raise "Failed to connect to League Apps - #{res.body}" if res.status >= 400
+
+    JSON.parse(res.body)
+  end
+
+  def import_league_apps_matches
+    league_apps_matches.each do |m|
+      # Skip if already imported
+      next if Match.find_by(league_apps_game_id: m['gameId'])
+
+      # TODO: find similar team names
+      away_team = Team.find_or_create_by(location: location, name: m['team1']) do |t|
+        t.captain = m['team1Id']
+      end
+
+      away_team.divisions << self unless teams.include?(away_team)
+
+      home_team = Team.find_or_create_by(location: location, name: m['team2']) do |t|
+        t.captain = m['team2Id']
+      end
+
+      home_team.divisions << self unless teams.include?(home_team)
+
+      court_name = "Court #{('%02d' % m['subLocationName'].split(/ /)[1].to_i)}"
+      court = location.courts.find_by(name: court_name)
+
+      raise 'Could not find court' unless court
+
+      time = Time.at(m['startTime'] / 1000)
+
+      Match.create!(
+        away_team: away_team,
+        home_team: home_team,
+        away_score: m['team1Score'],
+        home_score: m['team2Score'],
+        division: self,
+        time: time,
+        court: court,
+        league_apps_game_id: m['gameId']
+      )
+    end
   end
 end
