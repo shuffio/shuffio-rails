@@ -1,6 +1,6 @@
 ![Shuff.io](app/assets/images/shuffio-logo-128px.png)
 
-[![CircleCI](https://circleci.com/gh/kevinreedy/shuffio.svg?style=svg)](https://circleci.com/gh/kevinreedy/shuffio)
+[![CircleCI](https://circleci.com/gh/recrec-io/shuffio.svg?style=svg)](https://circleci.com/gh/recrec-io/shuffio)
 
 # What is Shuff.io?
 Shuff.io is a record and stat tracking system developed for the [Royal Palms Chicago](https://www.royalpalmschicago.com/) Shuffleboard League.
