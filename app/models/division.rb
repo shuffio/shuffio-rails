@@ -340,4 +340,17 @@ class Division < ApplicationRecord
       )
     end
   end
+
+  def import_league_apps_teams
+    league_apps_teams.each do |la_t|
+      next if la_t['teamName'] == 'TBD'
+
+      new_team = Team.find_or_create_by(location: location, param_name: Team.param_name(la_t['teamName'])) do |t|
+        t.name = la_t['teamName']
+        t.captain = la_t['teamId']
+      end
+
+      new_team.divisions << self unless teams.include?(new_team)
+    end
+  end
 end
