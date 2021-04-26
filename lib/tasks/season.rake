@@ -108,12 +108,15 @@ namespace :season do
       end
 
       # Create Division
-      Division.find_or_create_by(season: season, name: r['division_name']) do |d|
+      div = Division.find_or_create_by(season: season, name: r['division_name']) do |d|
         d.day_of_week = r['division_day_of_week'].to_i
         d.time = r['division_time']
         d.league_apps_site_id = r['league_apps_site_id']
         d.league_apps_program_id = r['league_apps_program_id']
       end
+
+      # Import Matches
+      div.import_league_apps_matches
     end
   end
 end
