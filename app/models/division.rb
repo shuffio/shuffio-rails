@@ -16,7 +16,7 @@ class Division < ApplicationRecord
       day += 1.week
     end
 
-    Time.find_zone('America/Chicago').parse("#{day} #{time}")
+    Time.find_zone('America/New_York').parse("#{day} #{time}")
   end
 
   def matches_for_week(week)
@@ -95,9 +95,9 @@ class Division < ApplicationRecord
         row << nil
         row << m.home_team.name
         row << m.away_team.name
-        row << m.time.in_time_zone('America/Chicago').strftime('%-m/%-d/%Y')
-        row << m.time.in_time_zone('America/Chicago').strftime('%H:%M')
-        row << (m.time + 1.hour).in_time_zone('America/Chicago').strftime('%H:%M')
+        row << m.time.in_time_zone('America/New_York').strftime('%-m/%-d/%Y')
+        row << m.time.in_time_zone('America/New_York').strftime('%H:%M')
+        row << (m.time + 1.hour).in_time_zone('America/New_York').strftime('%H:%M')
         row << 'the royal palms shuffleboard club'
         row << m.court.name
         row << 'REGULAR_SEASON'
@@ -177,7 +177,7 @@ class Division < ApplicationRecord
   end
 
   # Returns array of Matches, but doesn't save them
-  def setup_matches(location = Location.find_by(name: 'Royal Palms Chicago'))
+  def setup_matches(location = Location.find_by(name: 'Royal Palms Brooklyn'))
     output_matches = []
 
     # Sort teams into away and home via snake order
