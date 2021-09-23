@@ -34,4 +34,19 @@ namespace :export do
 
     # TODO: final_standings
   end
+
+  desc 'Export Teams'
+  task teams: :environment do
+    # TODO: make sure no team has the same name... there were 4 de-duped in rails c
+    teams = Division.where('season_id != 9').map(&:teams).flatten(1).uniq # Season #9 was Brooklyn
+    puts teams.map { |t|
+      t.slice([
+                :id,
+                :name,
+                :former_names,
+                :image_uri,
+                :instagram_user
+              ])
+    }.to_json
+  end
 end
