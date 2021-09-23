@@ -26,8 +26,12 @@ namespace :export do
                 :day_of_week
               ]).merge(
                 start_time: d.time,
-                season_name: d.season.name
+                season_name: d.season.name,
+                visibility: 'live',
+                max_competitors: 20
               )
     }.to_json
+
+    # TODO: final_standings
   end
 end
