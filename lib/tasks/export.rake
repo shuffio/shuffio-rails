@@ -71,4 +71,22 @@ namespace :export do
               )
     }.to_json
   end
+
+  # This one gets a bit complex, so we'll taylor to the RecRec import
+  desc 'Export Registrations'
+  task registrations: :environment do
+    division_teams = []
+
+    Division.where('season_id != 9').each do |d|
+      d.teams.each do |t|
+        division_teams.push(
+          season: d.season.name,
+          division: d.name,
+          shuffio_id: t.id
+        )
+      end
+    end
+
+    puts division_teams.to_json
+  end
 end
