@@ -1,7 +1,7 @@
 namespace :export do
   desc 'Export Seasons'
   task seasons: :environment do
-    puts Season.all.map { |s|
+    puts Season.where('id != 9').map { |s|
       s.slice([
                 :name,
                 :start_date
@@ -20,7 +20,7 @@ namespace :export do
 
   desc 'Export Divisions'
   task divisions: :environment do
-    puts Division.all.map { |d|
+    puts Division.where('season_id != 9').map { |d|
       d.slice([
                 :name,
                 :day_of_week
