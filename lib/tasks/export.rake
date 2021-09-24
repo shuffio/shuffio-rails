@@ -49,4 +49,26 @@ namespace :export do
               ])
     }.to_json
   end
+
+  desc 'Export Matches'
+  task matches: :environment do
+    teams = Division.where('season_id != 9').map(&:teams).flatten(1).uniq # Season #9 was Brooklyn
+    matches = teams.map(&:matches).flatten(1).uniq
+
+    puts matches.map { |m|
+      m.slice([
+                :time,
+                :away_team_id,
+                :home_team_id,
+                :away_score,
+                :home_score,
+                :comment,
+                :multiplier
+              ]).merge(
+                season: m.division ? m.season.name : nil,
+                division: m.division ? m.division.name : nil,
+                court: m.court ? m.court.name : m.location
+              )
+    }.to_json
+  end
 end
