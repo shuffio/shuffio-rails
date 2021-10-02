@@ -23,7 +23,8 @@ namespace :export do
     puts Division.where('season_id != 9').map { |d|
       d.slice([
                 :name,
-                :day_of_week
+                :day_of_week,
+                :final_standings
               ]).merge(
                 start_time: d.time,
                 season_name: d.season.name,
@@ -31,13 +32,10 @@ namespace :export do
                 max_competitors: 20
               )
     }.to_json
-
-    # TODO: final_standings
   end
 
   desc 'Export Teams'
   task teams: :environment do
-    # TODO: make sure no team has the same name... there were 4 de-duped in rails c
     teams = Division.where('season_id != 9').map(&:teams).flatten(1).uniq # Season #9 was Brooklyn
     puts teams.map { |t|
       t.slice([
