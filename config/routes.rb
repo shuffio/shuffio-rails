@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  root 'seasons#show_current'
+  root 'root#index'
 
   resources :admin, only: [:index]
 
@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   resources :matches
   get 'matches/:id/ae_data', to: 'matches#ae_data', as: :match_ae_data
   resources :privacy, only: [:index]
+  resources :root, only: [:index]
   resources :royal_palms_calendar, only: [:index]
   post 'rpc_events', to: 'royal_palms_calendar#index', as: :rpc_events
   resources :seasons, only: [:index, :show]
