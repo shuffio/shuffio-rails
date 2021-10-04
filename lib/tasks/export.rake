@@ -1,7 +1,7 @@
 namespace :export do
   desc 'Export Seasons'
   task seasons: :environment do
-    puts Season.where('id != 9').map { |s|
+    puts Season.where('id != 9').order(:start_date).map { |s|
       s.slice([
                 :name,
                 :start_date
@@ -20,7 +20,7 @@ namespace :export do
 
   desc 'Export Divisions'
   task divisions: :environment do
-    puts Division.where('season_id != 9').map { |d|
+    puts Division.where('season_id != 9').order(:season_id, :day_of_week, :time).map { |d|
       d.slice([
                 :name,
                 :day_of_week,
@@ -51,7 +51,7 @@ namespace :export do
   desc 'Export Matches'
   task matches: :environment do
     teams = Division.where('season_id != 9').map(&:teams).flatten(1).uniq # Season #9 was Brooklyn
-    matches = teams.map(&:matches).flatten(1).uniq
+    matches = teams.map(&:matches).flatten(1).uniq.sort_by { |m| [m.time, m.id] }
 
     puts matches.map { |m|
       m.slice([
@@ -75,7 +75,7 @@ namespace :export do
   task registrations: :environment do
     division_teams = []
 
-    Division.where('season_id != 9').each do |d|
+    Division.where('season_id != 9').order(:season_id, :day_of_week, :time).each do |d|
       d.teams.each do |t|
         division_teams.push(
           season: d.season.name,
